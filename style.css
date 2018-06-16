@@ -1,0 +1,116 @@
+* {
+  position: relative;
+}
+
+a, a:hover {
+  color: #08c;
+}
+
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 1.6em;
+  width: 100%;
+}
+
+@media screen and (max-width: 360px) {
+  .autocomplete {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 360px) and (max-width: 512px) {
+  .autocomplete {
+    margin-left: 5%;
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 512px) and (max-width: 768px) {
+  .autocomplete {
+    margin-left: 10%;
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1400px) {
+  .autocomplete {
+    margin-left: 20%;
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .autocomplete {
+    margin-left: 30%;
+    width: 40%;
+  }
+}
+
+.autocomplete-items {
+  border: 1px solid #ddd;
+  border-top: none;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+
+.autocomplete-items div:hover {
+  background-color: #eee;
+}
+
+.autocomplete-active {
+  background-color: DodgerBlue !important;
+  color: white;
+}
+
+#list {
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 1024px) {
+  #list {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #list {
+    margin-left: 10%;
+    width: 80%;
+  }
+}
+
+#no-data p {
+  color: red;
+  font-size: 2em;
+}
+
+#no-data button {
+  font-size: 1.2em;
+  background-color: lightGreen;
+  border: none;
+  padding: 14px 24px;
+}
+
+#show-more button {
+	font-size: 1.2em;
+	padding: 10px 16px;
+	margin-top: 20px;
+	background: deepskyblue;
+	border: none;
+}
+
+footer {
+	margin-top: 20px;
+	text-align: center;
+	padding: 10px 15px;
+	background-color: #eee;
+	border-top: 1px solid #ddd;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
