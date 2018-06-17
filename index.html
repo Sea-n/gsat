@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>學測五選四</title>
@@ -20,13 +21,13 @@
   <link href="./style.css" rel="stylesheet">
 </head>
 <body>
-  <center><h1 id="loading">資料讀取中...</h1></center>
   <div name="main">
     <div class="autocomplete">
       <center><h1>選擇您感興趣的科系</h1></center>
       <input id="dep" placeholder="在此輸入科系..." oninput="adjust();">
       <div id="dep-list" class="autocomplete-items"></div>
     </div>
+    <center><h1 id="loading">資料讀取中...</h1></center>
     <table id="list"></table>
     <center id="no-data" style="display: none;">
       <p>無符合條件之結果</p>
@@ -48,3 +49,4 @@
   <script src="./script.js"></script>
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7"></script>
 </body>
+</html>

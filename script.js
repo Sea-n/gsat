@@ -100,7 +100,7 @@ function updateTable(val) {
     if (data[i].dep.toUpperCase().indexOf(val.toUpperCase()) !== -1) {
       var tr = document.createElement('tr');
       for (_=0; _<7; _++)
-        tr.appendChild(document.createElement('th'));
+        tr.appendChild(document.createElement('td'));
       tr.cells[0].appendChild(document.createTextNode(data[i].school));
       tr.cells[1].appendChild(document.createTextNode(data[i].dep));
       var show = true;
