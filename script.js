@@ -82,11 +82,12 @@ function updateTable(val) {
       updateTable();
     }
     if (fliter[s] === 1)
-      button.style.color = "green";
+      button.className = "ts positive basic button";
     else if (fliter[s] === -1)
-      button.style.color = "red";
+      button.className = "ts negative basic button";
     else
-      button.style.color = "";
+      button.className = "ts basic button";
+    button.style.width = "100%";
     button.appendChild(document.createTextNode(s));
     tr.cells[i+2].style.width = "10%";
     tr.cells[i+2].appendChild(button);
@@ -108,7 +109,7 @@ function updateTable(val) {
         var s = subjects[j];
         if (data[i].subjects.indexOf(s) !== -1) {
           tr.cells[j+2].appendChild(document.createTextNode("採計"));
-          tr.cells[j+2].style.background = "green";
+          tr.cells[j+2].className = "positive";
           if (fliter[s] == -1)
             show = false;
         } else {
@@ -158,10 +159,7 @@ function adjust() {
     pos = list[i].toUpperCase().indexOf(val.toUpperCase());
     if (pos !== -1) {
       b = document.createElement("div");
-      b.innerHTML = list[i].substr(0, pos);
-      b.innerHTML += "<strong>" + list[i].substr(pos, val.length) + "</strong>";
-      b.innerHTML += list[i].substr(pos + val.length);
-      b.innerHTML += "<input type='hidden' value='" + list[i] + "'>";
+      b.innerHTML += "<input type='submit' value='" + list[i] + "' class='ts bottom attached fluid button'>";
 
       b.addEventListener("click", function(e) {
         input.value = this.getElementsByTagName("input")[0].value;
@@ -228,9 +226,6 @@ function resetFliter() {
     '心理',
     '光電'
   ];
-  if (list.indexOf(input.value.toUpperCase()) === -1) {
-    input.value = recmd[Math.floor(Math.random()*recmd.length)];
-  }
   var subjects = Object.keys(fliter);
   for (var i=0; i<5; i++) {
     var s = subjects[i];

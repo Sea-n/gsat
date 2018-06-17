@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>學測五選四</title>
   <link rel="mask-icon" sizes="any" href="/logo.svg">
   <link rel="icon" type="image/png" href="/logo-192.png" sizes="192x192">
@@ -18,25 +18,30 @@
   <meta property="og:type" content="website" />
   <meta property="og:description" content="自今年開始，學測最多採計四科，來看看您心目中的科系怎麼算吧" />
   <meta property="og:site_name" content="Sean's Website" />
-  <link href="./style.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
 </head>
 <body>
-  <div name="main">
-    <div class="autocomplete">
-      <center><h1>選擇您感興趣的科系</h1></center>
-      <input id="dep" placeholder="在此輸入科系..." oninput="adjust();">
-      <div id="dep-list" class="autocomplete-items"></div>
-    </div>
-    <center><h1 id="loading">資料讀取中...</h1></center>
-    <table id="list"></table>
-    <center id="no-data" style="display: none;">
-      <p>無符合條件之結果</p>
-      <button onclick="resetFliter();">點我重置</button>
-    </center>
-    <center id="show-more" style="display: none;">
-      <button onclick="max_result *= 2; updateTable();">檢視更多結果</button>
-    </center>
+	<div id="loading" class="ts active dimmer">
+		<div class="ts loader"></div>
+	</div>
+  <div class="ts narrow container">
+  <div class="ts centered secondary segment">
+  <h1 class="ts center aligned header">選擇您感興趣的科系</h1>
+  <div class="ts focus fluid input">
+  	<input id="dep" placeholder="在此輸入科系" oninput="adjust();">
   </div>
+  <div id="dep-list"></div>
+	</div>
+  <table id="list" class="ts striped celled table"></table>
+  <div id="no-data">
+  	<h3 id="no-data" class="ts negative center aligned header">無符合條件之結果</h3>
+  	<center><button onclick="resetFliter();" class="ts massive button">點我重置</button></center>
+  </div>
+  <div id="show-more" style="display: none;">
+  	<center><button onclick="max_result *= 2; updateTable();" class="ts info button">檢視更多結果</button></center>
+  </div>
+
   <footer>
     <p>由 <a href="https://www.sean.taipei/">Sean</a> 整理、製作 | 原始碼: <a href="https://git.io/gsat">GitHub</a></p>
     <p>貼文們:
@@ -48,5 +53,6 @@
   </footer>
   <script src="./script.js"></script>
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7"></script>
+  <div>
 </body>
 </html>
