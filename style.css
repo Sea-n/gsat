@@ -72,6 +72,10 @@ input {
   margin-top: 50px;
 }
 
+td {
+	text-align: center;
+}
+
 @media screen and (max-width: 1024px) {
   #list {
     width: 100%;
