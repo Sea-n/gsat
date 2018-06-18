@@ -66,6 +66,7 @@ function updateTable(val) {
   var table = document.getElementById("list");
   table.innerHTML = "";
   var tr = document.createElement('tr');
+  tr.className = "center aligned";
   for (i=0; i<7; i++)
     tr.appendChild(document.createElement('th'));
   tr.cells[0].appendChild(document.createTextNode('學校'));
@@ -100,6 +101,7 @@ function updateTable(val) {
       break;
     if (data[i].dep.toUpperCase().indexOf(val.toUpperCase()) !== -1) {
       var tr = document.createElement('tr');
+      tr.className = "center aligned";
       for (_=0; _<7; _++)
         tr.appendChild(document.createElement('td'));
       tr.cells[0].appendChild(document.createTextNode(data[i].school));
