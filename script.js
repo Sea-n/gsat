@@ -159,7 +159,8 @@ function adjust() {
     pos = list[i].toUpperCase().indexOf(val.toUpperCase());
     if (pos !== -1) {
       b = document.createElement("div");
-      b.innerHTML += "<input type='submit' value='" + list[i] + "' class='ts bottom attached fluid button'>";
+      b.className = "ts bottom attached fluid button";
+      b.innerHTML += "<input type='submit' value='" + list[i] + "'>";
 
       b.addEventListener("click", function(e) {
         input.value = this.getElementsByTagName("input")[0].value;
@@ -200,13 +201,13 @@ function addActive(x) {
   if (currentFocus < 0)
     currentFocus = (x.length - 1);
 
-  x[currentFocus].classList.add("autocomplete-active");
+  x[currentFocus].className = "ts active bottom attached fluid button";
   updateTable(x[currentFocus].innerText);
 }
 
 function removeActive(x) {
   for (var i = 0; i < x.length; i++)
-    x[i].classList.remove("autocomplete-active");
+    x[i].className = "ts bottom attached fluid button";
 }
 
 function resetFliter() {
