@@ -95,8 +95,6 @@ function updateTable(val) {
 
   var count = 0;
   for (i = 0; i < data.length; i++) {
-    if (count >= max_result)
-      break;
     if (data[i].dep.toUpperCase().indexOf(val.toUpperCase()) !== -1) {
       var tr = document.createElement('tr');
       for (_=0; _<7; _++)
@@ -118,26 +116,32 @@ function updateTable(val) {
         }
       }
       if (show) {
-        table.appendChild(tr);
         count++;
+        if (count > max_result)
+          continue;
+        table.appendChild(tr);
       }
     }
   }
 
   if (count == 0) {
     document.getElementById('no-data').style.display = '';
+    document.getElementById('count').style.display = 'none';
   } else {
     document.getElementById('no-data').style.display = 'none';
+    document.getElementById('count').style.display = '';
   }
 
   while (max_result > default_max_result && count < max_result/2) {
     max_result /= 2;
   }
 
-  if (count >= max_result) {
+  if (count > max_result) {
     document.getElementById('show-more').style.display = '';
+    document.getElementById('count-num').innerHTML = max_result + ' / ' + count;
   } else {
     document.getElementById('show-more').style.display = 'none';
+    document.getElementById('count-num').innerHTML = count;
   }
 }
 
