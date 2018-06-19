@@ -32,19 +32,20 @@
     <table id="list"></table>
     <center id="no-data" style="display: none;">
       <p>無符合條件之結果</p>
-      <button onclick="resetFliter();">點我重置</button>
+      <button onclick="ga('send', 'event', 'Click', 'Reset', 'GSAT'); resetFliter();">點我重置</button>
     </center>
     <center id="show-more" style="display: none;">
-      <button onclick="max_result *= 2; updateTable();">檢視更多結果</button>
+      <button onclick="ga('send', 'event', 'Click', 'More', 'GSAT'); max_result *= 2; updateTable();">檢視更多結果</button>
     </center>
   </div>
   <footer>
-    <p>由 <a href="https://www.sean.taipei/">Sean 韋詠祥</a> 整理、製作 | 原始碼: <a href="https://git.io/gsat">GitHub</a></p>
+    <p>由 <a target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'GSAT');">Sean 韋詠祥</a> 整理、製作 |
+		原始碼: <a target="_blank" href="https://git.io/gsat" onclick="ga('send', 'event', 'Outgoing', 'GitHub', 'GSAT');">GitHub</a></p>
     <p>貼文們:
-      <a target="_blank" href="https://www.ptt.cc/bbs/SENIORHIGH/M.1529085042.A.CD0.html">PTT 高中板</a> |
-      <a target="_blank" href="https://www.facebook.com/Sean0604/posts/2103316103273571">Facebook</a> |
-      <a target="_blank" href="https://twitter.com/Sea_n64/status/1007815631343738880">Twitter</a> |
-      <a target="_blank" href="https://meteor.today/a/99fu5g">Meteor</a>
+      <a target="_blank" href="https://www.ptt.cc/bbs/SENIORHIGH/M.1529085042.A.CD0.html" onclick="ga('send', 'event', 'Outgoing', 'PTT', 'GSAT');">PTT 高中板</a> |
+      <a target="_blank" href="https://www.facebook.com/Sean0604/posts/2103316103273571" onclick="ga('send', 'event', 'Outgoing', 'Facebook', 'GSAT');">Facebook</a> |
+      <a target="_blank" href="https://twitter.com/Sea_n64/status/1007815631343738880" onclick="ga('send', 'event', 'Outgoing', 'Twitter', 'GSAT');">Twitter</a> |
+      <a target="_blank" href="https://meteor.today/a/99fu5g" onclick="ga('send', 'event', 'Outgoing', 'Meteor', 'GSAT');">Meteor</a>
     (歡迎推文、分享 :D)</p>
   </footer>
   <script src="./script.js"></script>

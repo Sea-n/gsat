@@ -61,7 +61,14 @@ function updateTable(val) {
       href += ";n=" + s;
   }
 
-  window.location.href = href;
+  if (href == "#q=")
+    history.pushState("", document.title, window.location.pathname);
+  else
+    window.location.hash = href;
+
+  ga('send', 'pageview', {
+   'page': location.pathname + location.search  + location.hash
+  });
 
   var table = document.getElementById("list");
   table.innerHTML = "";
