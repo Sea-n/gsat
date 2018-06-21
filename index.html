@@ -18,13 +18,33 @@
   <meta property="og:type" content="website" />
   <meta property="og:description" content="自今年開始，學測最多採計四科，來看看您心目中的科系怎麼算吧" />
   <meta property="og:site_name" content="Sean's Website" />
+	<meta property="fb:app_id" content="1654538528156949" />
   <link href="./style.css" rel="stylesheet">
 </head>
 <body>
   <div name="main">
     <div class="autocomplete">
-      <center><h1>選擇您感興趣的科系</h1></center>
-      <input id="dep" placeholder="在此輸入科系..." oninput="adjust();">
+      <center><h1>
+				選擇您感興趣的科系
+				<i class="info" onclick="ga('send', 'event', 'Click', 'Info', 'GSAT'); document.getElementById('info-outter').style.display = '';"></i>
+			</h1></center>
+			<div id="info-outter" class="info-outter" style="display: none;" onclick="ga('send', 'event', 'Click', 'Close Info Outter', 'GSAT'); document.getElementById('info-outter').style.display = 'none';">
+				<div id="info-inner" class="info-inner" onclick="event.stopPropagation()">
+					<i class="close" onclick="ga('send', 'event', 'Click', 'Close Info Button', 'GSAT'); document.getElementById('info-outter').style.display = 'none';"></i>
+					<p>介紹頁面施工中 ⚠️</p>
+					<br>
+					<p>使用方式:</p>
+					<p>點擊「國文」、「英文」等科目，將會切換過濾狀態</p>
+					<br>
+					<p>開發者： 新北清水高中韋詠祥</p>
+					<p>更多相關資訊，請見頁面底部</p>
+				</div>
+			</div>
+			<div class="inner-btn">
+	      <input id="dep" placeholder="在此輸入科系..." oninput="adjust();">
+				<i id="rand" class="rand" onclick="ga('send', 'event', 'Click', 'Rand', 'GSAT'); resetFliter(1);"></i>
+				<i id="clear" class="clear" onclick="ga('send', 'event', 'Click', 'Clear', 'GSAT'); resetFliter(2);" style="display: none;"></i>
+			</div>
       <div id="dep-list" class="autocomplete-items"></div>
     </div>
     <center><h1 id="loading">資料讀取中...</h1></center>
@@ -41,12 +61,14 @@
   <footer>
     <p>由 <a target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'GSAT');">Sean 韋詠祥</a> 整理、製作 |
 		原始碼: <a target="_blank" href="https://git.io/gsat" onclick="ga('send', 'event', 'Outgoing', 'GitHub', 'GSAT');">GitHub</a></p>
+		<p>功能建議: <a target="_blank" href="https://goo.gl/forms/0vCNxsm3t0FaMXsB2" onclick="ga('send', 'event', 'Outgoing', 'Feedback', 'GSAT');">回饋表單</a> |
+      <a target="_blank" href="mailto:gsat@sean.cat" onclick="ga('send', 'event', 'Outgoing', 'Email', 'GSAT');">E-mail</a> |
+      <a target="_blank" href="https://t.me/S_ean" onclick="ga('send', 'event', 'Outgoing', 'Telegram', 'GSAT');">Telegram</a></p>
     <p>貼文們:
       <a target="_blank" href="https://www.ptt.cc/bbs/SENIORHIGH/M.1529085042.A.CD0.html" onclick="ga('send', 'event', 'Outgoing', 'PTT', 'GSAT');">PTT 高中板</a> |
       <a target="_blank" href="https://www.facebook.com/Sean0604/posts/2103316103273571" onclick="ga('send', 'event', 'Outgoing', 'Facebook', 'GSAT');">Facebook</a> |
       <a target="_blank" href="https://twitter.com/Sea_n64/status/1007815631343738880" onclick="ga('send', 'event', 'Outgoing', 'Twitter', 'GSAT');">Twitter</a> |
-      <a target="_blank" href="https://meteor.today/a/99fu5g" onclick="ga('send', 'event', 'Outgoing', 'Meteor', 'GSAT');">Meteor</a>
-    (歡迎推文、分享 :D)</p>
+      <a target="_blank" href="https://meteor.today/a/99fu5g" onclick="ga('send', 'event', 'Outgoing', 'Meteor', 'GSAT');">Meteor</a></p>
   </footer>
   <script src="./script.js"></script>
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7"></script>

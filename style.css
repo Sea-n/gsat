@@ -14,6 +14,67 @@ input {
   width: 100%;
 }
 
+.inner-btn i {
+	position: absolute;
+  cursor: pointer;
+	right: 3%;
+	z-index: 10;
+	top: 10px;
+}
+
+i.info {
+	background-image: url(img/question.svg);
+	width: 1em;
+	height: 1em;
+	top: 0.1em;
+	position: absolute;
+  cursor: pointer;
+	margin-left: 20px;
+}
+
+i.close {
+	background-image: url(img/question.svg);
+	width: 2em;
+	height: 2em;
+	top: 1em;
+	right: 1em;
+	position: absolute;
+  cursor: pointer;
+}
+
+i.rand {
+	background-image: url(img/random.svg);
+	width: 2em;
+	height: 2em;
+}
+
+i.clear {
+	background-image: url(img/trash.svg);
+	width: 1.75em;
+	height: 2em;
+}
+
+div.info-outter {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: #000a;
+	z-index: 69;
+}
+
+div.info-inner {
+	text-align: center;
+	position: fixed;
+	top: 10%;
+	left: 10%;
+	height: 80%;
+	width: 80%;
+	background: white;
+	z-index: 87;
+}
+
 .autocomplete {
   margin-bottom: 30px;
 }

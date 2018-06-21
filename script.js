@@ -49,6 +49,17 @@ input.focus();
 function updateTable(val) {
   if (val === undefined)
     val = input.value;
+
+  var clear = document.getElementById("clear");
+  var rand = document.getElementById("rand");
+  if (val.length <= 2) {
+    clear.style.display = "none";
+    rand.style.display = "";
+  } else {
+    clear.style.display = "";
+    rand.style.display = "none";
+  }
+
   var subjects = Object.keys(fliter);
 
   var href = "#q=" + val;
@@ -222,7 +233,7 @@ function removeActive(x) {
     x[i].classList.remove("autocomplete-active");
 }
 
-function resetFliter() {
+function resetFliter(type = 0) {
   var recmd = [
     '社會',
     '管理',
@@ -239,8 +250,11 @@ function resetFliter() {
     '心理',
     '光電'
   ];
-  if (list.indexOf(input.value.toUpperCase()) === -1) {
+  if (list.indexOf(input.value.toUpperCase()) === -1 || type == 1) {
     input.value = recmd[Math.floor(Math.random()*recmd.length)];
+  }
+  if (type == 2) {
+    input.value = "";
   }
   var subjects = Object.keys(fliter);
   for (var i=0; i<5; i++) {
@@ -252,7 +266,7 @@ function resetFliter() {
 
 function parseHash() {
   if (window.location.hash.length === 0) {
-    resetFliter();
+    adjust();
     return;
   }
   var queries = decodeURIComponent(window.location.hash).substr(1).split(';');
