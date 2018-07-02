@@ -27,9 +27,9 @@ a, a:hover {
 
 .screenshot {
     width: 640px;
-    height: 360px;
     max-width: 100%;
-    max-height: 100vh;
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    margin-bottom: 30px;
 }
 
 input {
@@ -56,16 +56,6 @@ i.info {
 	position: absolute;
   cursor: pointer;
 	margin-left: 20px;
-}
-
-i.close {
-	background-image: url(img/question.svg);
-	width: 2em;
-	height: 2em;
-	top: 1em;
-	right: 1em;
-	position: absolute;
-  cursor: pointer;
 }
 
 i.rand {

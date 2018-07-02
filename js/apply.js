@@ -1,5 +1,5 @@
 var xhr = new XMLHttpRequest();
-xhr.open('GET', './list-star.tsv', false);
+xhr.open('GET', 'data/list-apply.tsv', false);
 xhr.send(null);
 var lines = xhr.response.split("\n");
 
@@ -15,8 +15,7 @@ for (var i = 0; ; i++) {
 
   obj['school'] = line[0];
   obj['dep'] = line[1];
-// 2: 第X類學群
-  obj['subjects'] = line[3].split(",");
+  obj['subjects'] = line[2].split(",");
 
   data.push(obj);
 }
@@ -101,7 +100,7 @@ function updateTable(val) {
       updateTable();
     }
     if (fliter[s] === 1)
-      button.style.color = "green";
+      button.style.color = "MediumSeaGreen";
     else if (fliter[s] === -1)
       button.style.color = "red";
     else
