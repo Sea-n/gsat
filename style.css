@@ -2,13 +2,34 @@
   position: relative;
 }
 
-nav a {
-    font-size: 1.6em;
+body {
+    top: 2em;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 87;
+    background-color: #efe;
+    padding: .3em .5em;
+}
+
+nav * {
+    padding: 0 .3em;
 }
 
 a, a:hover {
   color: #08c;
   text-decoration: none;
+}
+
+.screenshot {
+    width: 640px;
+    height: 360px;
+    max-width: 100%;
+    max-height: 100vh;
 }
 
 input {
@@ -155,9 +176,9 @@ td {
 }
 
 footer {
-	margin: 20px -10px -10px -10px;
+	margin: 20px -8px -10px -8px;
 	text-align: center;
-	padding: 5px 10px 30px 10px;
+	padding: 0 0 5px 0;
 	background-color: #eee;
 	border-top: 1px solid #ddd;
 	border-bottom-right-radius: 3px;
