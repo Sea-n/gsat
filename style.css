@@ -2,8 +2,13 @@
   position: relative;
 }
 
+nav a {
+    font-size: 1.6em;
+}
+
 a, a:hover {
   color: #08c;
+  text-decoration: none;
 }
 
 input {
@@ -52,27 +57,6 @@ i.clear {
 	background-image: url(img/trash.svg);
 	width: 1.75em;
 	height: 2em;
-}
-
-div.info-outter {
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	background: #000a;
-	z-index: 69;
-}
-
-div.info-inner {
-	text-align: center;
-	position: fixed;
-	top: 10%;
-	left: 10%;
-	height: 80%;
-	width: 80%;
-	background: white;
-	z-index: 87;
 }
 
 .autocomplete {

@@ -1,5 +1,5 @@
 var xhr = new XMLHttpRequest();
-xhr.open('GET', './list.tsv', false);
+xhr.open('GET', './list-apply.tsv', false);
 xhr.send(null);
 var lines = xhr.response.split("\n");
 
