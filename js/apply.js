@@ -124,7 +124,7 @@ function updateTable(val) {
         var s = subjects[j];
         if (data[i].subjects.indexOf(s) !== -1) {
           tr.cells[j+2].appendChild(document.createTextNode("採計"));
-          tr.cells[j+2].style.background = "green";
+          tr.cells[j+2].classList.add("adopt");
           if (fliter[s] == -1)
             show = false;
         } else {
