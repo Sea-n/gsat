@@ -119,7 +119,7 @@ function updateTable(val) {
   }
 
   if (!haveFliter) {
-    tr.cells[[3, 4, 6][Math.floor(Math.random()*3)]].firstChild.classList.add("blink");
+    tr.cells[[2, 3, 4][Math.floor(Math.random()*3)]].firstChild.classList.add("blink");
   }
 
   table.appendChild(tr);
