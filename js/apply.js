@@ -90,6 +90,7 @@ function updateTable(val) {
   tr.cells[0].style.width = "20%";
   tr.cells[1].appendChild(document.createTextNode('科系'));
   tr.cells[1].style.width = "30%";
+  var haveFliter = false;
   for (var i=0; i<5; i++) {
     var s = subjects[i];
     var button = document.createElement('button');
@@ -99,16 +100,26 @@ function updateTable(val) {
       if (fliter[s] > 1) fliter[s] = -1;
       updateTable();
     }
-    if (fliter[s] === 1)
-      button.style.color = "MediumSeaGreen";
-    else if (fliter[s] === -1)
-      button.style.color = "red";
-    else
+
+    if (fliter[s] === 0)
       button.style.color = "";
+    else {
+      haveFliter = true;
+      if (fliter[s] === 1)
+        button.style.color = "MediumSeaGreen";
+      else if (fliter[s] === -1)
+        button.style.color = "red";
+    }
+
     button.appendChild(document.createTextNode(s));
     tr.cells[i+2].style.width = "10%";
     tr.cells[i+2].appendChild(button);
   }
+
+  if (!haveFliter) {
+    tr.cells[[3, 4, 6][Math.floor(Math.random()*3)]].firstChild.classList.add("blink");
+  }
+
   table.appendChild(tr);
 
   var count = 0;

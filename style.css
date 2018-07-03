@@ -144,6 +144,20 @@ button, .group, .autocomplete-items, .adopt {
     -o-user-select: none;
 }
 
+.blink {
+    animation-duration: .7s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ff6;
+    }
+}
+
 .adopt {
     background-color: lightGreen;
 }
