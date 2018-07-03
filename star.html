@@ -43,18 +43,62 @@
         <a target="_blank" href="https://www.sean.taipei/">關於作者</a>
       </div>
     </nav>
+
+    <center><h1>
+		  您想知道的類組
+		</h1></center>
+    <div class="group">
+      <nobr>
+        <input type="checkbox" id="group1" onchange="updateGroup();" value="第一類學群" checked>
+        <label for="group1">第一類學群 (文法商)</label>
+      </nobr>
+      <nobr>
+        <input type="checkbox" id="group2" onchange="updateGroup();" value="第二類學群" checked>
+        <label for="group2">第二類學群 (理工)</label>
+      </nobr>
+      <nobr>
+        <input type="checkbox" id="group3" onchange="updateGroup();" value="第三類學群" checked>
+        <label for="group3">第三類學群 (醫、生命科學、農)</label>
+      </nobr>
+      <nobr>
+        <input type="checkbox" id="group4" onchange="updateGroup();" value="第四類學群">
+        <label for="group4">第四類學群 (音樂)</label>
+      </nobr>
+      <nobr>
+        <input type="checkbox" id="group5" onchange="updateGroup();" value="第五類學群">
+        <label for="group5">第五類學群 (美術)</label>
+      </nobr>
+      <nobr>
+        <input type="checkbox" id="group6" onchange="updateGroup();" value="第六類學群" disabled>
+        <label style="color: dimGray;"><s>第六類學群 (舞蹈)</s></label>
+      </nobr>
+      <nobr>
+        <input type="checkbox" id="group7" onchange="updateGroup();" value="第七類學群">
+        <label for="group7">第七類學群 (體育)</label>
+      </nobr>
+      <nobr>
+        <input type="checkbox" id="group8" onchange="updateGroup();" value="第八類學群">
+        <label for="group8">第八類學群 (醫學)</label>
+      </nobr>
+      <nobr>
+        <input type="checkbox" id="group0" onchange="updateGroup();" value="不分學群">
+        <label for="group0">不分學群</label>
+      </nobr>
+    </div>
+
     <div class="autocomplete">
       <center><h1>
 				選擇您感興趣的科系
         <a href="index.html" target="_blank"><i class="info" onclick="ga('send', 'event', 'Click', 'Info', 'star');"></i></a>
 			</h1></center>
 			<div class="inner-btn">
-	      <input id="dep" placeholder="在此輸入科系..." oninput="adjust();">
+	      <input type="text" id="dep" placeholder="在此輸入科系..." oninput="adjust();">
 				<i id="rand" class="rand" onclick="ga('send', 'event', 'Click', 'Rand', 'star'); resetFliter(1);"></i>
 				<i id="clear" class="clear" onclick="ga('send', 'event', 'Click', 'Clear', 'star'); resetFliter(2);" style="display: none;"></i>
 			</div>
       <div id="dep-list" class="autocomplete-items"></div>
     </div>
+
     <center><h1 id="loading">資料讀取中...</h1></center>
     <center><p id="count" style="display: none;">共 <span id="count-num">0</span> 筆結果</p></center>
     <table id="list"></table>

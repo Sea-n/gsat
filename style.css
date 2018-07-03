@@ -32,12 +32,20 @@ a, a:hover {
     margin-bottom: 30px;
 }
 
-input {
+input[type="text"] {
   border: 1px solid transparent;
   background-color: #f1f1f1;
   padding: 10px;
   font-size: 1.6em;
   width: 100%;
+}
+
+.group label {
+    margin-right: 2em;
+}
+
+input#group0[checked] {
+    color: red;
 }
 
 .inner-btn i {
@@ -128,7 +136,7 @@ i.clear {
   color: white;
 }
 
-button, .adopt {
+button, .group, .autocomplete-items, .adopt {
     user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;

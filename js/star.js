@@ -3,6 +3,7 @@ xhr.open('GET', 'data/list-star.tsv', false);
 xhr.send(null);
 var lines = xhr.response.split("\n");
 
+var groups = [];
 var data = [];
 var default_max_result = 50;
 var max_result = default_max_result;   // max count for result
@@ -15,7 +16,7 @@ for (var i = 0; ; i++) {
 
   obj['school'] = line[0];
   obj['dep'] = line[1];
-// 2: 第X類學群
+  obj['group'] = line[2];
   obj['subjects'] = line[3].split(",");
 
   data.push(obj);
@@ -43,6 +44,7 @@ var fliter = {
 
 
 var input = document.getElementById("dep");
+updateGroup();
 parseHash();   // init
 document.getElementById("loading").style.display = "none";
 input.focus();
@@ -114,6 +116,8 @@ function updateTable(val) {
 
   var count = 0;
   for (i = 0; i < data.length; i++) {
+    if (groups.indexOf(data[i].group) === -1)
+      continue;
     if (data[i].dep.toUpperCase().indexOf(val.toUpperCase()) !== -1) {
       var tr = document.createElement('tr');
       for (_=0; _<7; _++)
@@ -257,11 +261,16 @@ function resetFliter(type = 0) {
   if (type == 2) {
     input.value = "";
   }
+
   var subjects = Object.keys(fliter);
   for (var i=0; i<5; i++) {
     var s = subjects[i];
     fliter[s] = 0;
   }
+
+  for (var i=0; i<=8; i++)
+    document.getElementById("group" + i).checked = (1<=i && i<=3);
+
   adjust();
 }
 
@@ -282,4 +291,14 @@ function parseHash() {
     }
   }
   adjust();
+}
+
+function updateGroup() {
+  groups = [];
+  for (var i=0; i<=8; i++) {
+    var checkbox = document.getElementById("group" + i);
+    if (checkbox.checked)
+      groups.push(checkbox.value);
+  }
+  updateTable();
 }
