@@ -4,7 +4,7 @@ xhr.send(null);
 var lines = xhr.response.split("\n");
 
 var data = [];
-var default_max_result = 50;
+var default_max_result = 20;
 var max_result = default_max_result;   // max count for result
 
 for (var i = 0; ; i++) {
