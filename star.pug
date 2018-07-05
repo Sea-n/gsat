@@ -19,6 +19,7 @@ html
 		meta(property="og:description" content="自今年開始，學測最多採計四科，來看看您心目中的科系怎麼算吧")
 		meta(property="og:site_name" content="Sean's Website")
 		meta(property="fb:app_id" content="1654538528156949")
+		link(href="https://introjs.com/introjs.css" rel="stylesheet")
 		link(href="./tocas-ui/tocas.css" rel="stylesheet")
 		link(href="./style.css" rel="stylesheet")
 		// Google Analytics
@@ -35,7 +36,7 @@ html
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container
 				a.item(href="apply") 個人申請
-				b 繁星推薦
+				b.item 繁星推薦
 				.right.fitted.item
 					a.item(href=".") 使用教學
 					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
@@ -107,5 +108,7 @@ html
 							|  整理、製作
 					.column
 						a(href='./#suggestion') 功能建議
+		script(src="https://introjs.com/minified/intro.min.js")
+		script(src="js/common.js")
 		script(src="js/star.js")
 		script(type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7")
