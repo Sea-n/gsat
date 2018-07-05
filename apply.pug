@@ -35,10 +35,11 @@ html
 	body
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container
+				a.item(href=".") 首頁
 				b.item 個人申請
 				a.item(href="star") 繁星推薦
 				.right.fitted.item
-					a.item(href=".") 使用教學
+					a.item(href="javascript:void(0);" onclick="javascript:startIntro;") 使用教學
 					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
@@ -47,7 +48,7 @@ html
 		div.ts.container(name="main")
 			.autocomplete
 				.inner-btn
-					input#dep(type="text" placeholder="在此輸入您感興趣的科系..." oninput="adjust();")
+					input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();")
 					i#rand.rand(onclick="ga('send', 'event', 'Click', 'Rand', 'apply'); resetFliter(1);")
 					i#clear.clear(onclick="ga('send', 'event', 'Click', 'Clear', 'apply'); resetFliter(2);" style="display: none;")
 				#dep-list.autocomplete-items
@@ -80,5 +81,3 @@ html
 		script(src="js/common.js")
 		script(src="js/apply.js")
 		script(type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7")
-		script.
-			window.addEventListener('load', function(){startIntro()});

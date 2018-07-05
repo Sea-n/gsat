@@ -36,8 +36,8 @@
   </head>
   <body>
     <nav class="ts basic fluid borderless menu horizontally scrollable">
-      <div class="ts container"><b class="item">個人申請</b><a class="item" href="star">繁星推薦</a>
-        <div class="right fitted item"><a class="item" href=".">使用教學</a><a class="item" target="_blank" href="https://www.sean.taipei/">關於作者</a></div>
+      <div class="ts container"><a class="item" href=".">首頁</a><b class="item">個人申請</b><a class="item" href="star">繁星推薦</a>
+        <div class="right fitted item"><a class="item" href="javascript:void(0);" onclick="javascript:startIntro;">使用教學</a><a class="item" target="_blank" href="https://www.sean.taipei/">關於作者</a></div>
       </div>
     </nav>
     <header class="ts fluid vertically padded heading slate">
@@ -49,7 +49,7 @@
     <div class="ts container" name="main">
       <div class="autocomplete">
         <div class="inner-btn">
-          <input id="dep" type="text" placeholder="在此輸入您感興趣的科系..." oninput="adjust();"><i class="rand" id="rand" onclick="ga('send', 'event', 'Click', 'Rand', 'apply'); resetFliter(1);"></i><i class="clear" id="clear" onclick="ga('send', 'event', 'Click', 'Clear', 'apply'); resetFliter(2);" style="display: none;"></i>
+          <input id="dep" type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();"><i class="rand" id="rand" onclick="ga('send', 'event', 'Click', 'Rand', 'apply'); resetFliter(1);"></i><i class="clear" id="clear" onclick="ga('send', 'event', 'Click', 'Clear', 'apply'); resetFliter(2);" style="display: none;"></i>
         </div>
         <div class="autocomplete-items" id="dep-list"></div>
       </div>
@@ -83,6 +83,5 @@
     <script src="js/common.js"></script>
     <script src="js/apply.js"></script>
     <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7"></script>
-    <script>window.addEventListener('load', function(){startIntro()});</script>
   </body>
 </html>

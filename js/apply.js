@@ -73,10 +73,9 @@ function updateTable(val) {
     for (i = 0; i < 7; i++)
         tr.appendChild(document.createElement('th'));
     tr.cells[0].appendChild(document.createTextNode('學校'));
-    tr.cells[0].style.width = "20%";
+    tr.cells[0].classList.add("school");
     tr.cells[1].appendChild(document.createTextNode('科系'));
-    tr.cells[1].style.width = "30%";
-    var haveFliter = false;
+    tr.cells[1].classList.add("dep");
     for (var i = 0; i < 5; i++) {
         var s = subjects[i];
         var button = document.createElement('button');
@@ -88,21 +87,15 @@ function updateTable(val) {
         }
 
         button.id = s;
-        if (fliter[s] === 0) {
-            button.className = "";
-            button.classList.add("sub")
-        } else {
-            haveFliter = true;
-            if (fliter[s] === 1) {
-                button.classList.add("show", "sub")
-            } else if (fliter[s] === -1) {
-                button.classList.add("hidden", "sub")
-            }
+        if (fliter[s] === 1) {
+            button.classList.add("show");
+        } else if (fliter[s] === -1) {
+            button.classList.add("hidden");
         }
 
         button.appendChild(document.createTextNode(s));
-        tr.cells[i + 2].style.width = "10%";
         tr.cells[i + 2].appendChild(button);
+        tr.cells[i + 2].classList.add("sub");
     }
 
 

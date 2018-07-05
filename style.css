@@ -26,11 +26,11 @@ span.underline {
 }
 
 #list .positive,
-#list button.sub {
+#list th.sub button {
     text-align: center;
 }
 
-#list button.sub {
+#list th.sub button {
     padding: 2px;
     margin: -.6em;
     width: calc(100% + 1.2em);
@@ -38,15 +38,15 @@ span.underline {
     border-radius: 5px;
 }
 
-#list button.sub:hover {
+#list th.sub button:hover {
     background: #d5d5d5;
 }
 
-#list button.sub:active {
+#list th.sub button:active {
     background: #e8e8e8;
 }
 
-#list button.sub:before {
+#list th.sub button:before {
     font-family: 'Icons';
     font-style: normal;
     font-weight: normal;
@@ -54,18 +54,27 @@ span.underline {
     -moz-osx-font-smoothing: grayscale;
 }
 
-#list button.sub:before {
+#list th.sub button:before {
     content: "\f056";
 }
 
-#list button.sub.show:before {
+#list th.sub button.show:before {
     content: "\f058";
     color: MediumSeaGreen;
 }
 
-#list button.sub.hidden:before {
+#list th.sub button.hidden:before {
     content: "\f057";
     color: red;
+}
+
+#list th.school {
+    width: 20%;
+    max-width: 160px; /* 10 Char */
+}
+
+#list th.sub {
+    width: 10%;
 }
 
 @media(max-width: 768px) {
@@ -99,8 +108,10 @@ input[type="text"] {
     margin-right: 2em;
 }
 
-input#group0[checked] {
-    color: red;
+@media screen and (max-width: 420px) {
+    nav b.item {
+        display: none !important;
+    }
 }
 
 .inner-btn i {
