@@ -22,7 +22,7 @@
 [繁星推薦 - 參採科目](https://www.caac.ccu.edu.tw/star107/Classification_NextYear.php)
 
 
-## 使用腳本
+### 使用腳本
 抓取資料
 ```bash
 md pdf && cd pdf
@@ -65,3 +65,7 @@ grep 第五類學群 list-star.tsv > list-star-5.tsv
 grep 第七類學群 list-star.tsv > list-star-7.tsv
 grep 第八類學群 list-star.tsv > list-star-8.tsv
 ```
+
+### 網頁編譯
+感謝 [@gnehs](https://github.com/gnehs) 讓他這麼複雜 :new_moon_with_face:  
+```pug -P *.pug```

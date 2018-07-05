@@ -65,6 +65,7 @@ span.underline {
 
 #list button.sub.hidden:before {
     content: "\f057";
+    color: red;
 }
 
 @media(max-width: 768px) {

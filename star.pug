@@ -34,10 +34,10 @@ html
 	body
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container
-				a.item(href="apply.html") 個人申請
-				a.item.active(href="star.html") 繁星推薦
+				a.item(href="apply") 個人申請
+				b 繁星推薦
 				.right.fitted.item
-					a.item(href="/") 使用教學
+					a.item(href=".") 使用教學
 					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
@@ -47,7 +47,7 @@ html
 			center
 				h1
 					| 您想知道的類組
-			.group
+			.ts.checkbox.toggle.group
 				nobr
 					input#group1(type="checkbox" onchange="updateGroup();" value="第一類學群" checked="")
 					label(for="group1") 第一類學群 (文法商)
@@ -97,7 +97,7 @@ html
 					button.ts.primary.button(onclick="ga('send', 'event', 'Click', 'Reset', 'apply'); resetFliter();") 點我重置	
 			#show-more(style="display: none;text-align:center")
 				button.ts.secondary.button(onclick="ga('send', 'event', 'Click', 'More', 'apply'); max_result *= 2; updateTable();") 檢視更多結果
-		footer.ts.fluid.slate
+		footer.ts.fluid.slate(style='margin-top:10px')
 			.ts.container
 				.ts.grid
 					.stretched.column

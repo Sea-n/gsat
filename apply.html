@@ -35,8 +35,8 @@
   </head>
   <body>
     <nav class="ts basic fluid borderless menu horizontally scrollable">
-      <div class="ts container"><a class="item active" href="apply.html">個人申請</a><a class="item" href="star.html">繁星推薦</a>
-        <div class="right fitted item"><a class="item" href="/">使用教學</a><a class="item" target="_blank" href="https://www.sean.taipei/">關於作者</a></div>
+      <div class="ts container"><b>個人申請</b><a class="item" href="star">繁星推薦</a>
+        <div class="right fitted item"><a class="item" href=".">使用教學</a><a class="item" target="_blank" href="https://www.sean.taipei/">關於作者</a></div>
       </div>
     </nav>
     <header class="ts fluid vertically padded heading slate">
@@ -64,11 +64,11 @@
           <button class="ts primary button" onclick="ga('send', 'event', 'Click', 'Reset', 'apply'); resetFliter();">點我重置	</button>
         </div>
       </div>
-      <div id="show-more" style="display: none;text-align:center;">
+      <div id="show-more" style="display: none;text-align:center">
         <button class="ts secondary button" onclick="ga('send', 'event', 'Click', 'More', 'apply'); max_result *= 2; updateTable();">檢視更多結果</button>
       </div>
     </div>
-    <footer class="ts fluid slate">
+    <footer class="ts fluid slate" style="margin-top:10px">
       <div class="ts container">
         <div class="ts grid">
           <div class="stretched column">

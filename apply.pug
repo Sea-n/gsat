@@ -34,10 +34,10 @@ html
 	body
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container
-				a.item.active(href="apply.html") 個人申請
-				a.item(href="star.html") 繁星推薦
+				b 個人申請
+				a.item(href="star") 繁星推薦
 				.right.fitted.item
-					a.item(href="/") 使用教學
+					a.item(href=".") 使用教學
 					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
@@ -65,7 +65,7 @@ html
 					button.ts.primary.button(onclick="ga('send', 'event', 'Click', 'Reset', 'apply'); resetFliter();") 點我重置	
 			#show-more(style="display: none;text-align:center")
 				button.ts.secondary.button(onclick="ga('send', 'event', 'Click', 'More', 'apply'); max_result *= 2; updateTable();") 檢視更多結果
-		footer.ts.fluid.slate
+		footer.ts.fluid.slate(style='margin-top:10px')
 			.ts.container
 				.ts.grid
 					.stretched.column
