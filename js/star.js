@@ -179,7 +179,7 @@ function resetFliter(type = 0) {
     for (var i = 0; i <= 8; i++)
         document.getElementById("group" + i).checked = (1 <= i && i <= 3);
 
-    adjust();
+    updateGroup();
 }
 
 function updateGroup() {
