@@ -1,0 +1,111 @@
+doctype html
+html
+	head
+		meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+		title 繁星推薦 - 學測五選四
+		link(rel="mask-icon" sizes="any" href="https://www.sean.taipei/logo.svg")
+		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-192.png" sizes="192x192")
+		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-128.png" sizes="128x128")
+		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-96.png" sizes="96x96")
+		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-64.png" sizes="64x64")
+		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-32.png" sizes="32x32")
+		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-16.png" sizes="16x16")
+		meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
+		meta(name="keywords" content="學測五選四,繁星推薦")
+		meta(name="description" content="自今年開始，學測最多採計四科，來看看您心目中的科系怎麼算吧")
+		meta(property="og:title" content="學測五選四 - 繁星推薦")
+		meta(property="og:url" content="https://sean.cat/gsat/")
+		meta(property="og:type" content="website")
+		meta(property="og:description" content="自今年開始，學測最多採計四科，來看看您心目中的科系怎麼算吧")
+		meta(property="og:site_name" content="Sean's Website")
+		meta(property="fb:app_id" content="1654538528156949")
+		link(href="./tocas-ui/tocas.css" rel="stylesheet")
+		link(href="./style.css" rel="stylesheet")
+		// Google Analytics
+		script.
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)
+			},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-100002738-1', 'auto');
+			ga('send', 'pageview');
+		// End Google Analytics
+	body
+		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
+			.ts.container
+				a.item(href="apply.html") 個人申請
+				a.item.active(href="star.html") 繁星推薦
+				.right.fitted.item
+					a.item(href="/") 使用教學
+					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
+		header.ts.fluid.vertically.padded.heading.slate
+			.ts.narrow.container
+				.header 學測五選四
+				.description 繁星推薦
+		div.ts.container(name="main")
+			center
+				h1
+					| 您想知道的類組
+			.group
+				nobr
+					input#group1(type="checkbox" onchange="updateGroup();" value="第一類學群" checked="")
+					label(for="group1") 第一類學群 (文法商)
+				nobr
+					input#group2(type="checkbox" onchange="updateGroup();" value="第二類學群" checked="")
+					label(for="group2") 第二類學群 (理工)
+				nobr
+					input#group3(type="checkbox" onchange="updateGroup();" value="第三類學群" checked="")
+					label(for="group3") 第三類學群 (醫、生命科學、農)
+				nobr
+					input#group4(type="checkbox" onchange="updateGroup();" value="第四類學群")
+					label(for="group4") 第四類學群 (音樂)
+				nobr
+					input#group5(type="checkbox" onchange="updateGroup();" value="第五類學群")
+					label(for="group5") 第五類學群 (美術)
+				nobr
+					input#group6(type="checkbox" onchange="updateGroup();" value="第六類學群" disabled="")
+					label(style="color: dimGray;")
+						s 第六類學群 (舞蹈)
+				nobr
+					input#group7(type="checkbox" onchange="updateGroup();" value="第七類學群")
+					label(for="group7") 第七類學群 (體育)
+				nobr
+					input#group8(type="checkbox" onchange="updateGroup();" value="第八類學群")
+					label(for="group8") 第八類學群 (醫學)
+				nobr
+					input#group0(type="checkbox" onchange="updateGroup();" value="不分學群")
+					label(for="group0") 不分學群
+			.autocomplete
+				.inner-btn
+					input#dep(type="text" placeholder="在此輸入您感興趣的科系..." oninput="adjust();")
+					i#rand.rand(onclick="ga('send', 'event', 'Click', 'Rand', 'star'); resetFliter(1);")
+					i#clear.clear(onclick="ga('send', 'event', 'Click', 'Clear', 'star'); resetFliter(2);" style="display: none;")
+				#dep-list.autocomplete-items
+			center
+				h1#loading 資料讀取中...
+			center
+				p#count(style="display: none;")
+					| 共 
+					span#count-num 0
+					|  筆結果
+			table#list.ts.very.basic.table
+			#no-data.ts.padded.basic.slate(style="display: none;")
+				i.search.icon
+				span.header 無符合條件之結果
+				.action
+					button.ts.primary.button(onclick="ga('send', 'event', 'Click', 'Reset', 'apply'); resetFliter();") 點我重置	
+			#show-more(style="display: none;text-align:center")
+				button.ts.secondary.button(onclick="ga('send', 'event', 'Click', 'More', 'apply'); max_result *= 2; updateTable();") 檢視更多結果
+		footer.ts.fluid.slate
+			.ts.container
+				.ts.grid
+					.stretched.column
+						p
+							| 由 
+							a(target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'star');") Sean 韋詠祥
+							|  整理、製作
+					.column
+						a(href='./#suggestion') 功能建議
+		script(src="js/star.js")
+		script(type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7")
