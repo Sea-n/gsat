@@ -28,13 +28,17 @@ function updateTable(val) {
         val = input.value;
 
     var clear = document.getElementById("clear");
-    var rand = document.getElementById("rand");
-    if (val.length <= 2) {
-        clear.style.display = "none";
-        rand.style.display = "";
-    } else {
-        clear.style.display = "";
-        rand.style.display = "none";
+    if (val.length == 0) {
+        clear.classList.add("hidden1");
+        setTimeout(function () {
+            clear.classList.add("hidden2");
+        }, 500);
+    }
+    else {
+        clear.classList.remove("hidden2");
+        setTimeout(function () {
+           clear.classList.remove("hidden1");
+        }, 1);
     }
 
     var subjects = Object.keys(fliter);
@@ -144,42 +148,6 @@ function updateTable(val) {
         document.getElementById('show-more').style.display = 'none';
         document.getElementById('count-num').innerHTML = count;
     }
-}
-
-function resetFliter(type = 0) {
-    var recmd = [
-        '社會',
-        '管理',
-        '科學',
-        '文學',
-        '醫學',
-        '教育',
-        '生物',
-        '化學',
-        '電機',
-        '會計',
-        '法律',
-        '經濟',
-        '心理',
-        '光電'
-    ];
-    if (list.indexOf(input.value.toUpperCase()) === -1 || type == 1) {
-        input.value = recmd[Math.floor(Math.random() * recmd.length)];
-    }
-    if (type == 2) {
-        input.value = "";
-    }
-
-    var subjects = Object.keys(fliter);
-    for (var i = 0; i < 5; i++) {
-        var s = subjects[i];
-        fliter[s] = 0;
-    }
-
-    for (var i = 0; i <= 8; i++)
-        document.getElementById("group" + i).checked = (1 <= i && i <= 3);
-
-    updateGroup();
 }
 
 function updateGroup() {

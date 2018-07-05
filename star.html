@@ -93,7 +93,7 @@
       </div>
       <div class="autocomplete">
         <div class="inner-btn">
-          <input id="dep" type="text" placeholder="在此輸入您感興趣的科系..." oninput="adjust();"><i class="rand" id="rand" onclick="ga('send', 'event', 'Click', 'Rand', 'star'); resetFliter(1);"></i><i class="clear" id="clear" onclick="ga('send', 'event', 'Click', 'Clear', 'star'); resetFliter(2);" style="display: none;"></i>
+          <input id="dep" type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();"><i class="clear hidden1 hidden2" id="clear" onclick="input.value = ''; adjust();"></i>
         </div>
         <div class="autocomplete-items" id="dep-list"></div>
       </div>
@@ -104,13 +104,9 @@
         <p id="count" style="display: none;">共 <span id="count-num">0</span> 筆結果</p>
       </center>
       <table class="ts very basic table" id="list"></table>
-      <div class="ts padded basic slate" id="no-data" style="display: none;"><i class="search icon"></i><span class="header">無符合條件之結果</span>
-        <div class="action">
-          <button class="ts primary button" onclick="ga('send', 'event', 'Click', 'Reset', 'apply'); resetFliter();">點我重置	</button>
-        </div>
-      </div>
+      <div class="ts padded basic slate" id="no-data" style="display: none;"><i class="search icon"></i><span class="header">無符合條件之結果</span></div>
       <div id="show-more" style="display: none;text-align:center">
-        <button class="ts secondary button" onclick="ga('send', 'event', 'Click', 'More', 'apply'); max_result *= 2; updateTable();">檢視更多結果</button>
+        <button class="ts secondary button" onclick="max_result *= 2; updateTable();">檢視更多結果</button>
       </div>
     </div>
     <footer class="ts fluid slate" style="margin-top:10px">

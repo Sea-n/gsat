@@ -81,9 +81,8 @@ html
 					label(for="group0") 不分學群
 			.autocomplete
 				.inner-btn
-					input#dep(type="text" placeholder="在此輸入您感興趣的科系..." oninput="adjust();")
-					i#rand.rand(onclick="ga('send', 'event', 'Click', 'Rand', 'star'); resetFliter(1);")
-					i#clear.clear(onclick="ga('send', 'event', 'Click', 'Clear', 'star'); resetFliter(2);" style="display: none;")
+					input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();")
+					i#clear.clear.hidden1.hidden2(onclick="input.value = ''; adjust();")
 				#dep-list.autocomplete-items
 			center
 				h1#loading 資料讀取中...
@@ -96,10 +95,8 @@ html
 			#no-data.ts.padded.basic.slate(style="display: none;")
 				i.search.icon
 				span.header 無符合條件之結果
-				.action
-					button.ts.primary.button(onclick="ga('send', 'event', 'Click', 'Reset', 'apply'); resetFliter();") 點我重置	
 			#show-more(style="display: none;text-align:center")
-				button.ts.secondary.button(onclick="ga('send', 'event', 'Click', 'More', 'apply'); max_result *= 2; updateTable();") 檢視更多結果
+				button.ts.secondary.button(onclick="max_result *= 2; updateTable();") 檢視更多結果
 		footer.ts.fluid.slate(style='margin-top:10px')
 			.ts.container
 				.ts.grid

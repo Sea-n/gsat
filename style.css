@@ -123,26 +123,20 @@ input[type="text"] {
     top: 10px;
 }
 
-i.info {
-    background-image: url(img/question.svg);
-    width: 1em;
-    height: 1em;
-    top: 0.1em;
-    position: absolute;
-    cursor: pointer;
-    margin-left: 20px;
-}
-
-i.rand {
-    background-image: url(img/random.svg);
-    width: 2em;
-    height: 2em;
-}
-
 i.clear {
     background-image: url(img/trash.svg);
     width: 1.75em;
     height: 2em;
+    transition: all .5s ease-out;
+}
+
+i.hidden1 {
+    opacity: 0;
+    transition: all .5s ease-out;
+}
+
+i.hidden2 {
+    display: none;
 }
 
 .autocomplete {
