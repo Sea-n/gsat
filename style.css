@@ -106,6 +106,7 @@ input[type="text"] {
 
 .group label {
     margin-right: 2em;
+    margin-bottom: 6.9px;
 }
 
 @media screen and (max-width: 420px) {
