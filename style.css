@@ -109,6 +109,14 @@ input[type="text"] {
     margin-bottom: 6.9px;
 }
 
+nav.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
 @media screen and (max-width: 420px) {
     nav b.item {
         display: none !important;
@@ -127,7 +135,6 @@ i.clear {
     background-image: url(img/trash.svg);
     width: 1.75em;
     height: 2em;
-    transition: all .5s ease-out;
 }
 
 i.hidden1 {
