@@ -104,23 +104,29 @@ function parseHash() {
 }
 
 function startIntro(){
-  var intro = introJs();
+    var intro = introJs();
     intro.setOptions({
-      steps: [
-        {
-          element: '#dep',
-          intro: "輸入想查詢的校系",
-          position: 'bottom-middle-aligned'
-        },
-        {
-          element: '#自然',
-          intro: "點一下科目，啟用過濾器"
-        },
-        {
-          element: '#at-expanding-share-button',
-          intro: "點這分享，會包含您選擇的校系、科目"
-        }
-      ]
+        nextLabel: '下一步',
+        prevLabel: '上一步',
+        skipLabel: '跳過',
+        doneLabel: '完成',
+        hidePrev: true,
+        hideNext: true,
+        showStepNumbers: false,
+        steps: [
+            {
+                element: '#dep',
+                intro: "輸入想查詢的校系"
+            },
+            {
+                element: '#自然',
+                intro: "點一下科目，啟用過濾器"
+            },
+            {
+                element: '#at-expanding-share-button',
+                intro: "點這分享，會包含您選擇的校系、科目"
+            }
+        ]
     });
 
     intro.start();
