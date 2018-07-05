@@ -42,48 +42,7 @@ html
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
 				.header 學測五選四
-				.description 使用教學
 		.ts.container(name="main")
-			h3#data.ts.header 涵蓋資料範圍
-			p 目前 
-				a(target="_blank" href="https://www.caac.ccu.edu.tw/cacportal/index.php" onclick="ga('send', 'event', 'Outgoing', 'caac', 'GSAT');") 大學甄選委員會
-				|  公佈資料有限，但能由此初步確認各校系所採計科目
-			ul
-				li
-					a(href="apply") 個人申請
-					|  (共 1960 校系)
-				li
-					a(href="star") 繁星推薦
-					|  (共 1780 校系)
-			p 歡迎 
-				a(href="#suggestion") 提供資料
-				|  讓此工具更加完善
-			h3#usage.ts.header 使用方式
-			p 1. 輸入您心目中的校系
-			img.ts.huge.image(src="https://img.sean.taipei/2018/07/gsat-step1.png")
-			p 2. 僅需關鍵字，會自動搜尋相關校系，不需要全稱
-			img.ts.huge.image(src="https://img.sean.taipei/2018/07/gsat-step2.png")
-			p
-				| 3. 點擊「國文」、「英文」等科目，將會切換過濾狀態
-				br
-				|     預設 
-				span.underline 減號
-				|  代表不特別過濾
-				br
-				|     點擊後會變為 
-				span.underline(style="color: MediumSeaGreen;") 打勾
-				|  ，僅顯示「採計」科目
-			img.ts.huge.image(src="https://img.sean.taipei/2018/07/gsat-step3.png")
-			p
-				| 再次點擊，即轉變為
-				span.underline(style="color: red;") 打叉
-				| ，過濾掉所有採計該科的學校，適合過濾弱點科目
-			img.ts.huge.image(src="https://img.sean.taipei/2018/07/gsat-step4.png")
-			p 4. 點擊三次即恢復至預設狀態，可搭配使用，挑選最有利學校
-			img.ts.huge.image(src="https://img.sean.taipei/2018/07/gsat-step5.png")
-			p 5. 預設一次顯示 50 筆資料，可點擊按鈕查看更多結果
-			img.ts.huge.image(src="https://img.sean.taipei/2018/07/gsat-step6.png")
-			hr
 			h3#dev.ts.header 作者資訊
 			p
 				| 由 
@@ -101,18 +60,32 @@ html
 				|  開放原始碼，採 
 				a(target="_blank" href="https://github.com/Sea-n/gsat/blob/master/LICENSE" onclick="ga('send', 'event', 'Outgoing', 'MIT', 'GSAT');") MIT
 				|  授權
+			h3#data.ts.header 涵蓋資料範圍
+			p 目前 
+				a(target="_blank" href="https://www.caac.ccu.edu.tw/cacportal/index.php" onclick="ga('send', 'event', 'Outgoing', 'caac', 'GSAT');") 大學甄選委員會
+				|  公佈資料有限，但能由此初步確認各校系所採計科目
+			ul
+				li
+					a(href="apply") 個人申請
+					|  (共 1960 校系)
+				li
+					a(href="star") 繁星推薦
+					|  (共 1780 校系)
+			p 歡迎 
+				a(href="#suggestion") 提供資料
+				|  讓此工具更加完善
 			h3#suggestion.ts.header 功能建議
 			p 如有想到哪些方便的功能，還煩請多加回饋，下面有幾種途徑，可挑選方便的方式回報
 			ul
-				li
-					a(target="_blank" href="https://goo.gl/forms/0vCNxsm3t0FaMXsB2" onclick="ga('send', 'event', 'Outgoing', 'Feedback', 'GSAT');") Google 表單
-					|  - 不需登入，可匿名回報
 				li
 					a(target="_blank" href="mailto:gsat@sean.cat" onclick="ga('send', 'event', 'Outgoing', 'Email', 'GSAT');") E-mail
 					|  - 收到信件後，會儘速回覆
 				li
 					a(target="_blank" href="https://t.me/S_ean" onclick="ga('send', 'event', 'Outgoing', 'Telegram', 'GSAT');") Telegram
 					|  - 使用即時通訊軟體回報，最為方便
+				li
+					a(target="_blank" href="https://goo.gl/forms/0vCNxsm3t0FaMXsB2" onclick="ga('send', 'event', 'Outgoing', 'Feedback', 'GSAT');") Google 表單
+					|  - 不需登入，可匿名回報
 			h3#posts.ts.header 社群媒體貼文
 			p 好東西就該跟好朋友分享，這邊有幾個作者發的貼文，可供參考/分享使用
 			ul
@@ -129,4 +102,3 @@ html
 				p 由 
 					a(target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'star');") Sean 韋詠祥
 					|  整理、製作
-					
