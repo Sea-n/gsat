@@ -17,18 +17,7 @@ for (var i = 0;; i++) {
     data.push(obj);
 }
 
-var lc = {};
-for (var i = 1, len = data.length; i < len; i++) {
-    if (lc[data[i].dep] === undefined)
-        lc[data[i].dep] = 1;
-    else
-        lc[data[i].dep]++;
-}
-
-var list = Object.keys(lc).sort(function(a, b) {
-    return lc[a] < lc[b];
-});
-
+var list;
 
 updateGroup();
 parseHash();
@@ -200,5 +189,20 @@ function updateGroup() {
         if (checkbox.checked)
             groups.push(checkbox.value);
     }
-    updateTable();
+
+    var lc = {};
+    for (var i = 1, len = data.length; i < len; i++) {
+        if (groups.indexOf(data[i].group) === -1)
+            continue;
+        if (lc[data[i].dep] === undefined)
+            lc[data[i].dep] = 1;
+        else
+            lc[data[i].dep]++;
+    }
+
+    list = Object.keys(lc).sort(function(a, b) {
+        return lc[a] < lc[b];
+    });
+
+    adjust();
 }
