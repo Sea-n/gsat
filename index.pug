@@ -1,0 +1,129 @@
+doctype html
+html
+	head
+		meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+		title 學測五選四
+		link(rel="mask-icon" sizes="any" href="https://www.sean.taipei/logo.svg")
+		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-192.png" sizes="192x192")
+		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-128.png" sizes="128x128")
+		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-96.png" sizes="96x96")
+		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-64.png" sizes="64x64")
+		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-32.png" sizes="32x32")
+		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-16.png" sizes="16x16")
+		meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
+		meta(name="keywords" content="學測")
+		meta(name="description" content="自今年開始，學測最多採計四科，來看看您心目中的科系怎麼算吧")
+		meta(property="og:title" content="學測五選四")
+		meta(property="og:url" content="https://sean.cat/gsat/")
+		meta(property="og:type" content="website")
+		meta(property="og:description" content="自今年開始，學測最多採計四科，來看看您心目中的科系怎麼算吧")
+		meta(property="og:site_name" content="Sean's Website")
+		meta(property="fb:app_id" content="1654538528156949")
+		link(href="./tocas-ui/tocas.css" rel="stylesheet")
+		link(href="./style.css" rel="stylesheet")
+		// Google Analytics
+		script.
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)
+			},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-100002738-1', 'auto');
+			ga('send', 'pageview');
+		// End Google Analytics
+	body
+		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
+			.ts.container
+				a.item(href="apply.html") 個人申請
+				a.item(href="star.html") 繁星推薦
+				.right.fitted.item
+					a.item.active(href="/") 使用教學
+					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
+		header.ts.fluid.vertically.padded.heading.slate
+			.ts.narrow.container
+				.header 學測五選四
+				.description 使用教學
+		.ts.container(name="main")
+			h3#data.ts.header 涵蓋資料範圍
+			p 目前 
+				a(target="_blank" href="https://www.caac.ccu.edu.tw/cacportal/index.php" onclick="ga('send', 'event', 'Outgoing', 'caac', 'GSAT');") 大學甄選委員會
+				|  公佈資料有限，但能由此初步確認各校系所採計科目
+			ul
+				li
+					a(href="apply") 個人申請
+					|  (共 1960 校系)
+				li
+					a(href="star") 繁星推薦
+					|  (共 1780 校系)
+			p 歡迎 
+				a(href="#suggestion") 提供資料
+				|  讓此工具更加完善
+			h3#usage.ts.header 使用方式
+			p 1. 輸入您心目中的校系
+			img.ts.huge.image(src="https://i.imgur.com/ZR5yovC.png")
+			p 2. 僅需關鍵字，會自動搜尋相關校系，不需要全稱
+			img.ts.huge.image(src="https://i.imgur.com/741QLJP.png")
+			p
+				| 3. 點擊「國文」、「英文」等科目，將會切換過濾狀態
+				br
+				|     預設 
+				span.underline 減號
+				|  代表不特別過濾
+				br
+				|     點擊後會變為 
+				span.underline(style="color: MediumSeaGreen;") 打勾
+				|  ，僅顯示「採計」科目
+			img.ts.huge.image(src="https://i.imgur.com/n2YFqKS.png")
+			p 再次點擊，即轉變為打叉，過濾掉所有採計該科的學校，適合過濾弱點科目
+			img.ts.huge.image(src="https://i.imgur.com/4GUExkI.png")
+			p 4. 點擊三次即恢復至預設狀態，可搭配使用，挑選最有利學校
+			img.ts.huge.image(src="https://i.imgur.com/nIJj8wX.png")
+			p 5. 預設一次顯示 50 筆資料，可點擊按鈕查看更多結果
+			img.ts.huge.image(src="https://i.imgur.com/gzIw2Kc.png")
+			hr
+			h3#dev.ts.header 作者資訊
+			p
+				| 由 
+				u 新北清水高中
+				|  
+				a(target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'GSAT');")  韋詠祥
+				|  整理、製作
+			p
+				| 網站係採用 
+				a(target="_blank" rel="license" href="http://creativecommons.org/licenses/by/3.0/tw/" onclick="ga('send', 'event', 'Outgoing', 'cc', 'GSAT');") 創用 CC 姓名標示
+				|  條款授權
+				br
+				|     程式部分全於 
+				a(target="_blank" href="https://git.io/gsat" onclick="ga('send', 'event', 'Outgoing', 'GitHub', 'GSAT');") GitHub
+				|  開放原始碼，採 
+				a(target="_blank" href="https://github.com/Sea-n/gsat/blob/master/LICENSE" onclick="ga('send', 'event', 'Outgoing', 'MIT', 'GSAT');") MIT
+				|  授權
+			h3#suggestion.ts.header 功能建議
+			p 如有想到哪些方便的功能，還煩請多加回饋，下面有幾種途徑，可挑選方便的方式回報
+			ul
+				li
+					a(target="_blank" href="https://goo.gl/forms/0vCNxsm3t0FaMXsB2" onclick="ga('send', 'event', 'Outgoing', 'Feedback', 'GSAT');") Google 表單
+					|  - 不需登入，可匿名回報
+				li
+					a(target="_blank" href="mailto:gsat@sean.cat" onclick="ga('send', 'event', 'Outgoing', 'Email', 'GSAT');") E-mail
+					|  - 收到信件後，會儘速回覆
+				li
+					a(target="_blank" href="https://t.me/S_ean" onclick="ga('send', 'event', 'Outgoing', 'Telegram', 'GSAT');") Telegram
+					|  - 使用即時通訊軟體回報，最為方便
+			h3#posts.ts.header 社群媒體貼文
+			p 好東西就該跟好朋友分享，這邊有幾個作者發的貼文，可供參考/分享使用
+			ul
+				li
+					a(target="_blank" href="https://www.ptt.cc/bbs/SENIORHIGH/M.1529085042.A.CD0.html" onclick="ga('send', 'event', 'Outgoing', 'PTT', 'GSAT');") PTT 高中板
+				li
+					a(target="_blank" href="https://www.facebook.com/Sean0604/posts/2103316103273571" onclick="ga('send', 'event', 'Outgoing', 'Facebook', 'GSAT');") Facebook
+				li
+					a(target="_blank" href="https://twitter.com/Sea_n64/status/1007815631343738880" onclick="ga('send', 'event', 'Outgoing', 'Twitter', 'GSAT');") Twitter
+				li
+					a(target="_blank" href="https://meteor.today/a/99fu5g" onclick="ga('send', 'event', 'Outgoing', 'Meteor', 'GSAT');") Meteor
+		footer.ts.fluid.slate
+			.ts.container
+				p 由 
+					a(target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'star');") Sean 韋詠祥
+					|  整理、製作
+					

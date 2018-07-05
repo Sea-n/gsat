@@ -1,43 +1,97 @@
-* {
-  position: relative;
+header.ts.fluid.vertically.padded.heading.slate {
+    font-size: 1.7em !important;
+    color: #646464 !important;
+    padding: 1.8em 2em 3em !important;
 }
 
-body {
-    top: 2em;
+header.ts.fluid.vertically.padded.heading.slate+.ts.container {
+    margin-top: 2em !important;
 }
 
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 87;
-    background-color: #efe;
-    padding: .3em .5em;
+span.underline {
+    text-decoration: underline wavy #699;
 }
 
-nav * {
-    padding: 0 .3em;
+#list {
+    width: 100%;
 }
 
-a, a:hover {
-  color: #08c;
-  text-decoration: none;
+#list th {
+    line-height: 25px;
+    padding: .78571em .78571em;
 }
 
-.screenshot {
-    width: 640px;
-    max-width: 100%;
-    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    margin-bottom: 30px;
+#list th:first-child {
+    padding-left: 0em;
 }
+
+#list .positive,
+#list button.sub {
+    text-align: center;
+}
+
+#list button.sub {
+    padding: 2px;
+    margin: -.6em;
+    width: calc(100% + 1.2em);
+    line-height: 1.15em;
+    border-radius: 5px;
+}
+
+#list button.sub:hover {
+    background: #d5d5d5;
+}
+
+#list button.sub:active {
+    background: #e8e8e8;
+}
+
+#list button.sub:before {
+    font-family: 'Icons';
+    font-style: normal;
+    font-weight: normal;
+    display: block;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#list button.sub:before {
+    content: "\f056";
+}
+
+#list button.sub.show:before {
+    content: "\f058";
+    color: MediumSeaGreen;
+}
+
+#list button.sub.hidden:before {
+    content: "\f057";
+}
+
+@media(max-width: 768px) {
+    #list td.positive {
+        font-size: 0
+    }
+    #list td.positive:before {
+        content: "\f00c";
+        font-size: 14px;
+        line-height: 1em;
+        font-family: 'Icons';
+        font-style: normal;
+        font-weight: normal;
+        display: block;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+
+/*========================*/
 
 input[type="text"] {
-  border: 1px solid transparent;
-  background-color: #f1f1f1;
-  padding: 10px;
-  font-size: 1.6em;
-  width: 100%;
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 1.6em;
+    width: 100%;
 }
 
 .group label {
@@ -49,162 +103,89 @@ input#group0[checked] {
 }
 
 .inner-btn i {
-	position: absolute;
-  cursor: pointer;
-	right: 3%;
-	z-index: 10;
-	top: 10px;
+    position: absolute;
+    cursor: pointer;
+    right: 3%;
+    z-index: 10;
+    top: 10px;
 }
 
 i.info {
-	background-image: url(img/question.svg);
-	width: 1em;
-	height: 1em;
-	top: 0.1em;
-	position: absolute;
-  cursor: pointer;
-	margin-left: 20px;
+    background-image: url(img/question.svg);
+    width: 1em;
+    height: 1em;
+    top: 0.1em;
+    position: absolute;
+    cursor: pointer;
+    margin-left: 20px;
 }
 
 i.rand {
-	background-image: url(img/random.svg);
-	width: 2em;
-	height: 2em;
+    background-image: url(img/random.svg);
+    width: 2em;
+    height: 2em;
 }
 
 i.clear {
-	background-image: url(img/trash.svg);
-	width: 1.75em;
-	height: 2em;
+    background-image: url(img/trash.svg);
+    width: 1.75em;
+    height: 2em;
 }
 
 .autocomplete {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 @media screen and (max-width: 360px) {
-  .autocomplete {
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 360px) and (max-width: 512px) {
-  .autocomplete {
-    margin-left: 5%;
-    width: 90%;
-  }
-}
-
-@media screen and (min-width: 512px) and (max-width: 768px) {
-  .autocomplete {
-    margin-left: 10%;
-    width: 80%;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1400px) {
-  .autocomplete {
-    margin-left: 20%;
-    width: 60%;
-  }
-}
-
-@media screen and (min-width: 1400px) {
-  .autocomplete {
-    margin-left: 30%;
-    width: 40%;
-  }
-}
-
-.autocomplete-items {
-  border: 1px solid #ddd;
-  border-top: none;
-}
-
-.autocomplete-items div {
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #ddd;
-}
-
-.autocomplete-items div:hover {
-  background-color: #eee;
-}
-
-.autocomplete-active {
-  background-color: DodgerBlue !important;
-  color: white;
-}
-
-button, .group, .autocomplete-items, .adopt {
-    user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -o-user-select: none;
-}
-
-.blink {
-    animation-duration: .7s;
-    animation-name: blink;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-timing-function: ease-in;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ff6;
+    .autocomplete {
+        width: 100%;
     }
 }
 
-.adopt {
-    background-color: lightGreen;
+@media screen and (min-width: 360px) and (max-width: 512px) {
+    .autocomplete {
+        margin-left: 5%;
+        width: 90%;
+    }
 }
 
-td {
-	text-align: center;
+@media screen and (min-width: 512px) and (max-width: 768px) {
+    .autocomplete {
+        margin-left: 10%;
+        width: 80%;
+    }
 }
 
-@media screen and (max-width: 1024px) {
-  #list {
-    width: 100%;
-  }
+@media screen and (min-width: 768px) and (max-width: 1400px) {
+    .autocomplete {
+        margin-left: 20%;
+        width: 60%;
+    }
 }
 
-@media screen and (min-width: 1024px) {
-  #list {
-    margin-left: 10%;
-    width: 80%;
-  }
+@media screen and (min-width: 1400px) {
+    .autocomplete {
+        margin-left: 30%;
+        width: 40%;
+    }
 }
 
-#no-data p {
-  color: red;
-  font-size: 2em;
+.autocomplete-items {
+    border: 1px solid #ddd;
+    border-top: none;
 }
 
-#no-data button {
-  font-size: 1.2em;
-  background-color: lightGreen;
-  border: none;
-  padding: 14px 24px;
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
 }
 
-#show-more button {
-	font-size: 1.2em;
-	padding: 10px 16px;
-	margin-top: 20px;
-	background: deepskyblue;
-	border: none;
+.autocomplete-items div:hover {
+    background-color: #eee;
 }
 
-footer {
-	margin: 20px -8px -10px -8px;
-	text-align: center;
-	padding: 0 0 5px 0;
-	background-color: #eee;
-	border-top: 1px solid #ddd;
-	border-bottom-right-radius: 3px;
-	border-bottom-left-radius: 3px;
+.autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: white;
 }
