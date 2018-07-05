@@ -31,7 +31,6 @@ var list = Object.keys(lc).sort(function(a, b) {
 
 parseHash();
 document.getElementById("loading").style.display = "none";
-startIntro();
 
 function updateTable(val) {
     if (val === undefined)
