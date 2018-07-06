@@ -47,36 +47,34 @@ html
 				.header 繁星推薦
 				.description 學測五選四
 		div.ts.container(name="main")
-			center
-				h1
-					| 您想了解的類組
-			.ts.checkbox.toggle.group
-				nobr
+			h3.ts.center.aligned.header(style='margin-bottom:0') 您想了解的類組
+			.inputGroups
+				.inputGroup
 					input#group1(type="checkbox" onchange="updateGroup();" value="第一類學群" checked="")
 					label(for="group1") 第一類學群 (文法商)
-				nobr
+				.inputGroup
 					input#group2(type="checkbox" onchange="updateGroup();" value="第二類學群" checked="")
 					label(for="group2") 第二類學群 (理工)
-				nobr
+				.inputGroup
 					input#group3(type="checkbox" onchange="updateGroup();" value="第三類學群" checked="")
 					label(for="group3") 第三類學群 (醫、生命科學、農)
-				nobr
+				.inputGroup
 					input#group4(type="checkbox" onchange="updateGroup();" value="第四類學群")
 					label(for="group4") 第四類學群 (音樂)
-				nobr
+				.inputGroup
 					input#group5(type="checkbox" onchange="updateGroup();" value="第五類學群")
 					label(for="group5") 第五類學群 (美術)
-				nobr
+				.inputGroup
 					input#group6(type="checkbox" onchange="updateGroup();" value="第六類學群" disabled="")
 					label(style="color: dimGray;")
 						s 第六類學群 (舞蹈)
-				nobr
+				.inputGroup
 					input#group7(type="checkbox" onchange="updateGroup();" value="第七類學群")
 					label(for="group7") 第七類學群 (體育)
-				nobr
+				.inputGroup
 					input#group8(type="checkbox" onchange="updateGroup();" value="第八類學群")
 					label(for="group8") 第八類學群 (醫學)
-				nobr
+				.inputGroup
 					input#group0(type="checkbox" onchange="updateGroup();" value="不分學群")
 					label(for="group0") 不分學群
 			.autocomplete
@@ -84,27 +82,27 @@ html
 					input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();")
 					i#clear.clear.hidden1.hidden2(onclick="input.value = ''; adjust();")
 				#dep-list.autocomplete-items
-			center
-				h1#loading 資料讀取中...
-			center
-				p#count(style="display: none;")
-					| 共 
-					span#count-num 0
-					|  筆結果
+			h3#loading.ts.header 資料讀取中...
+			h5#count.ts.center.aligned.header(style="display: none;") 共 
+				span#count-num 0
+				|筆結果
 			table#list.ts.very.basic.table
 			#no-data.ts.padded.basic.slate(style="display: none;")
 				i.search.icon
 				span.header 無符合條件之結果
 			#show-more(style="display: none;text-align:center")
-				button.ts.secondary.button(onclick="max_result *= 2; updateTable();") 檢視更多結果
+				button.ts.secondary.basic.button(onclick="max_result *= 2; updateTable();") 檢視更多結果
 		footer.ts.fluid.slate(style='margin-top:10px')
 			.ts.container
 				.ts.grid
 					.stretched.column
-						p
-							| 由 
+						p 由 
 							a(target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'star');") Sean 韋詠祥
-							|  整理、製作
+							|  整理、製作 
+							br
+							|由 
+							a(target="_blank" href="https://gnehs.net/")  棒棒勝
+							|  設計
 					.column
 						a(href='./#suggestion') 功能建議
 		script(src="https://introjs.com/minified/intro.min.js")

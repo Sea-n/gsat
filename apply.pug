@@ -52,27 +52,27 @@ html
 					input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();")
 					i#clear.clear.hidden1.hidden2(onclick="input.value = ''; adjust();")
 				#dep-list.autocomplete-items
-			center
-				h1#loading 資料讀取中...
-			center
-				p#count(style="display: none;")
-					| 共 
-					span#count-num 0
-					|  筆結果
+			h3#loading.ts.header 資料讀取中...
+			h5#count.ts.center.aligned.header(style="display: none;") 共 
+				span#count-num 0
+				|筆結果
 			table#list.ts.very.basic.table
 			#no-data.ts.padded.basic.slate(style="display: none;")
 				i.search.icon
 				span.header 無符合條件之結果
 			#show-more(style="display: none;text-align:center")
-				button.ts.secondary.button(onclick="max_result *= 2; updateTable();") 檢視更多結果
+				button.ts.secondary.basic.button(onclick="max_result *= 2; updateTable();") 檢視更多結果
 		footer.ts.fluid.slate(style='margin-top:10px')
 			.ts.container
 				.ts.grid
 					.stretched.column
-						p
-							| 由 
+						p 由 
 							a(target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'star');") Sean 韋詠祥
-							|  整理、製作
+							|  整理、製作 
+							br
+							|由 
+							a(target="_blank" href="https://gnehs.net/")  棒棒勝
+							|  設計
 					.column
 						a(href='./#suggestion') 功能建議
 		script(src="https://introjs.com/minified/intro.min.js")
