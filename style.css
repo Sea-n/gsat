@@ -97,10 +97,15 @@ span.underline {
 
 /*========================*/
 
-.inputGroups {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+@media(min-width: 768px) {
+    .inputGroups {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .inputGroup {
+        width: calc(25% - 6px);
+    }
 }
 
 .inputGroup {
@@ -108,7 +113,7 @@ span.underline {
     display: block;
     margin: 7px 3px;
     position: relative;
-    width: calc(25% - 6px);
+    width: 100%;
     display: flex;
     align-content: center;
     flex-direction: column;
