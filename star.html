@@ -37,7 +37,8 @@
   </head>
   <body>
     <nav class="ts basic fluid borderless menu horizontally scrollable">
-      <div class="ts container"><a class="item" href=".">首頁</a><a class="item" href="apply">個人申請</a><b class="item">繁星推薦</b>
+      <div class="ts container"><a class="item" href=".">首頁</a><a class="item" href="apply">個人申請</a>
+        <div class="item"> <b>繁星推薦</b></div>
         <div class="right fitted item"><a class="item" href="javascript:void(0);" onclick="javascript:startIntro();">使用教學</a><a class="item" target="_blank" href="https://www.sean.taipei/">關於作者</a></div>
       </div>
     </nav>
@@ -48,48 +49,46 @@
       </div>
     </header>
     <div class="ts container" name="main">
-      <center>
-        <h1>您想了解的類組</h1>
-      </center>
-      <div class="ts checkbox toggle group">
-        <nobr>
+      <h3 class="ts center aligned header" style="margin-bottom:0;">您想了解的類組</h3>
+      <div class="inputGroups">
+        <div class="inputGroup">
           <input id="group1" type="checkbox" onchange="updateGroup();" value="第一類學群" checked="">
           <label for="group1">第一類學群 (文法商)</label>
-        </nobr>
-        <nobr>
+        </div>
+        <div class="inputGroup">
           <input id="group2" type="checkbox" onchange="updateGroup();" value="第二類學群" checked="">
           <label for="group2">第二類學群 (理工)</label>
-        </nobr>
-        <nobr>
+        </div>
+        <div class="inputGroup">
           <input id="group3" type="checkbox" onchange="updateGroup();" value="第三類學群" checked="">
           <label for="group3">第三類學群 (醫、生命科學、農)</label>
-        </nobr>
-        <nobr>
+        </div>
+        <div class="inputGroup">
           <input id="group4" type="checkbox" onchange="updateGroup();" value="第四類學群">
           <label for="group4">第四類學群 (音樂)</label>
-        </nobr>
-        <nobr>
+        </div>
+        <div class="inputGroup">
           <input id="group5" type="checkbox" onchange="updateGroup();" value="第五類學群">
           <label for="group5">第五類學群 (美術)</label>
-        </nobr>
-        <nobr>
+        </div>
+        <div class="inputGroup">
           <input id="group6" type="checkbox" onchange="updateGroup();" value="第六類學群" disabled="">
           <label style="color: dimGray;">
             <s>第六類學群 (舞蹈)</s>
           </label>
-        </nobr>
-        <nobr>
+        </div>
+        <div class="inputGroup">
           <input id="group7" type="checkbox" onchange="updateGroup();" value="第七類學群">
           <label for="group7">第七類學群 (體育)</label>
-        </nobr>
-        <nobr>
+        </div>
+        <div class="inputGroup">
           <input id="group8" type="checkbox" onchange="updateGroup();" value="第八類學群">
           <label for="group8">第八類學群 (醫學)</label>
-        </nobr>
-        <nobr>
+        </div>
+        <div class="inputGroup">
           <input id="group0" type="checkbox" onchange="updateGroup();" value="不分學群">
           <label for="group0">不分學群</label>
-        </nobr>
+        </div>
       </div>
       <div class="autocomplete">
         <div class="inner-btn">
@@ -97,23 +96,19 @@
         </div>
         <div class="autocomplete-items" id="dep-list"></div>
       </div>
-      <center>
-        <h1 id="loading">資料讀取中...</h1>
-      </center>
-      <center>
-        <p id="count" style="display: none;">共 <span id="count-num">0</span> 筆結果</p>
-      </center>
+      <h3 class="ts header" id="loading">資料讀取中...</h3>
+      <h5 class="ts center aligned header" id="count" style="display: none;">共 <span id="count-num">0</span>筆結果</h5>
       <table class="ts very basic table" id="list"></table>
       <div class="ts padded basic slate" id="no-data" style="display: none;"><i class="search icon"></i><span class="header">無符合條件之結果</span></div>
-      <div id="show-more" style="display: none;text-align:center">
-        <button class="ts secondary button" onclick="max_result *= 2; updateTable();">檢視更多結果</button>
+      <div id="show-more" style="display: none;text-align:center;">
+        <button class="ts secondary basic button" onclick="max_result *= 2; updateTable();">檢視更多結果</button>
       </div>
     </div>
-    <footer class="ts fluid slate" style="margin-top:10px">
+    <footer class="ts fluid slate" style="margin-top:10px;">
       <div class="ts container">
         <div class="ts grid">
           <div class="stretched column">
-            <p>由 <a target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'star');">Sean 韋詠祥</a> 整理、製作</p>
+            <p>由 <a target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'star');">Sean 韋詠祥</a> 整理、製作 <br>由 <a target="_blank" href="https://gnehs.net/"> 棒棒勝</a> 設計</p>
           </div>
           <div class="column"><a href="./#suggestion">功能建議</a></div>
         </div>

@@ -34,7 +34,8 @@ html
 	body
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container
-				b.item 首頁
+				.item 
+					b 首頁
 				a.item(href="apply") 個人申請
 				a.item(href="star") 繁星推薦
 				.right.fitted.item
@@ -42,6 +43,7 @@ html
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
 				.header 學測五選四
+				.description 自今年開始，學測最多採計四科，來看看您心目中的科系怎麼算吧
 		.ts.container(name="main")
 			h3#dev.ts.header 作者資訊
 			p
@@ -50,6 +52,12 @@ html
 				|  
 				a(target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'GSAT');")  韋詠祥
 				|  整理、製作
+			p
+				| 由 
+				u 吃飽太閒ㄉ
+				|  
+				a(target="_blank" href="https://gnehs.net/")  棒棒勝
+				|  設計
 			p
 				| 網站係採用 
 				a(target="_blank" rel="license" href="http://creativecommons.org/licenses/by/3.0/tw/" onclick="ga('send', 'event', 'Outgoing', 'cc', 'GSAT');") 創用 CC 姓名標示
@@ -101,4 +109,9 @@ html
 			.ts.container
 				p 由 
 					a(target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'star');") Sean 韋詠祥
-					|  整理、製作
+					|  整理、製作 
+					br
+					|由 
+					a(target="_blank" href="https://gnehs.net/")  棒棒勝
+					|  設計
+					
