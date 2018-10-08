@@ -110,7 +110,7 @@ function updateTable(val) {
             for (j = 0; j < subjects.length; j++) {
                 var s = subjects[j];
                 if (data[i].subjects.indexOf(s) !== -1) {
-                    tr.cells[j + 2].appendChild(document.createTextNode("採計"));
+                    tr.cells[j + 2].appendChild(document.createTextNode("參採"));
                     tr.cells[j + 2].classList.add("positive");
                     if (fliter[s] == -1)
                         show = false;
