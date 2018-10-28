@@ -37,7 +37,7 @@
     <nav class="ts basic fluid borderless menu horizontally scrollable">
       <div class="ts container">
         <div class="item"><b>首頁</b></div><a class="item" href="apply">個人申請</a><a class="item" href="star">繁星推薦</a>
-        <div class="right fitted item"><a class="item" target="_blank" href="https://www.sean.taipei/">關於作者</a></div>
+        <div class="right fitted item"><b class="item" style="background-color: #FF0000B3; color: white; border-radius: 0 0 3px 3px;">學測倒數&nbsp;<span id="countdown">87</span>&nbsp;天</b><a class="item" target="_blank" href="https://www.sean.taipei/">關於作者</a></div>
       </div>
     </nav>
     <header class="ts fluid vertically padded heading slate">
@@ -65,9 +65,9 @@
       <h3 class="ts header" id="suggestion">功能建議</h3>
       <p>如有想到哪些實用的功能，還煩請多加回饋，下面有幾種途徑，可挑選喜歡的方式回報</p>
       <ul>
+        <li><a target="_blank" href="https://goo.gl/forms/0vCNxsm3t0FaMXsB2" onclick="ga('send', 'event', 'Outgoing', 'Feedback', 'GSAT');">Google 表單</a> - 作者本人將親自閱讀每則回饋</li>
         <li><a target="_blank" href="mailto:gsat@sean.cat" onclick="ga('send', 'event', 'Outgoing', 'Email', 'GSAT');">E-mail</a> - 收到信件後，會儘速回覆</li>
         <li><a target="_blank" href="https://t.me/S_ean" onclick="ga('send', 'event', 'Outgoing', 'Telegram', 'GSAT');">Telegram</a> - 使用即時通訊軟體回報，最為方便</li>
-        <li><a target="_blank" href="https://goo.gl/forms/0vCNxsm3t0FaMXsB2" onclick="ga('send', 'event', 'Outgoing', 'Feedback', 'GSAT');">Google 表單</a> - 不需登入，可匿名回報</li>
       </ul>
       <h3 class="ts header" id="posts">社群媒體貼文</h3>
       <p>好東西就該跟好朋友分享，這邊有幾個作者發的貼文，可供參考/分享使用</p>
@@ -83,5 +83,10 @@
         <p>由 <a target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'star');">Sean 韋詠祥</a> 整理、製作<br>由 <a target="_blank" href="https://gnehs.net/">棒棒勝</a> 設計</p>
       </div>
     </footer>
+    <script>
+      window.onload = () => {
+      	document.getElementById("countdown").innerHTML = Math.ceil((1548360000000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+      }
+    </script>
   </body>
 </html>

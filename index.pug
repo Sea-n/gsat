@@ -39,6 +39,10 @@ html
 				a.item(href="apply") 個人申請
 				a.item(href="star") 繁星推薦
 				.right.fitted.item
+					b.item(style="background-color: #FF0000B3; color: white; border-radius: 0 0 3px 3px;")
+						| 學測倒數&nbsp;
+						span#countdown 87
+						| &nbsp;天
 					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
@@ -86,14 +90,14 @@ html
 			p 如有想到哪些實用的功能，還煩請多加回饋，下面有幾種途徑，可挑選喜歡的方式回報
 			ul
 				li
+					a(target="_blank" href="https://goo.gl/forms/0vCNxsm3t0FaMXsB2" onclick="ga('send', 'event', 'Outgoing', 'Feedback', 'GSAT');") Google 表單
+					|  - 作者本人將親自閱讀每則回饋
+				li
 					a(target="_blank" href="mailto:gsat@sean.cat" onclick="ga('send', 'event', 'Outgoing', 'Email', 'GSAT');") E-mail
 					|  - 收到信件後，會儘速回覆
 				li
 					a(target="_blank" href="https://t.me/S_ean" onclick="ga('send', 'event', 'Outgoing', 'Telegram', 'GSAT');") Telegram
 					|  - 使用即時通訊軟體回報，最為方便
-				li
-					a(target="_blank" href="https://goo.gl/forms/0vCNxsm3t0FaMXsB2" onclick="ga('send', 'event', 'Outgoing', 'Feedback', 'GSAT');") Google 表單
-					|  - 不需登入，可匿名回報
 			h3#posts.ts.header 社群媒體貼文
 			p 好東西就該跟好朋友分享，這邊有幾個作者發的貼文，可供參考/分享使用
 			ul
@@ -114,4 +118,7 @@ html
 					| 由 
 					a(target="_blank" href="https://gnehs.net/") 棒棒勝
 					|  設計
-					
+		script.
+			window.onload = () => {
+				document.getElementById("countdown").innerHTML = Math.ceil((1548360000000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+			}
