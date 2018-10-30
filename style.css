@@ -232,8 +232,14 @@ nav.fixed {
     z-index: 10;
 }
 
-@media screen and (max-width: 420px) {
-    nav b.item {
+@media screen and (max-width: 450px) {
+    nav b.item.hide1 {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    nav b.item.hide2 {
         display: none !important;
     }
 }

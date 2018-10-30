@@ -37,12 +37,14 @@ html
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container
 				a.item(href=".") 首頁
-				.item
-					b 個人申請
+				b.item.hide1 個人申請
 				a.item(href="star") 繁星推薦
 				.right.fitted.item
+					b.item.hide2(style="background-color: #FF0000B3; color: white; border-radius: 0 0 3px 3px;")
+						| 學測倒數&nbsp;
+						span#countdown 87
+						| &nbsp;天
 					a.item(href="javascript:void(0);" onclick="javascript:startIntro();") 使用教學
-					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
 				.header 個人申請

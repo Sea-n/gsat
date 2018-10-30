@@ -144,3 +144,7 @@ function startIntro(){
 
     intro.start();
 }
+
+window.onload = () => {
+	document.getElementById("countdown").innerHTML = Math.ceil((1548360000000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+}
