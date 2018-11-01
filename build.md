@@ -39,3 +39,4 @@ done < school-star
 npm install pug-cli -g
 pug -P *.pug
 ```
+> 也可用 [Prepros](https://prepros.io/) 好朋友，自動幫你編譯還附送 Live Reload，夭壽讚
