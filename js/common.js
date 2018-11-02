@@ -222,8 +222,6 @@ function updateTable(val) {
                     if (fliter[s] == -1)
                         show = false;
 
-                    tr.cells[j + 2].appendChild(document.createTextNode(data[i][s]));
-
                     if (data[i][s][1] == '標') {
                         tr.cells[j + 2].classList.add("mark");
 
@@ -250,6 +248,8 @@ function updateTable(val) {
 
                     if (data[i][s] == '採計')
                         tr.cells[j + 2].classList.add("info");
+
+                    tr.cells[j + 2].appendChild(document.createTextNode(data[i][s]));
                 }
             }
             if (show) {
