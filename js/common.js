@@ -1,9 +1,9 @@
 
-var groups = []; // star only
 var data = [];
 var default_max_result = 20;
 var max_result = default_max_result; // max count for result
 var currentFocus;
+var school = {};
 
 var fliter = {
     "國文": 0,
@@ -116,6 +116,172 @@ function parseHash() {
     adjust();
 }
 
+function updateTable(val) {
+    if (val === undefined)
+        val = input.value;
+
+    var clear = document.getElementById("clear");
+    if (val.length == 0) {
+        clear.classList.add("hidden1");
+        setTimeout(function () {
+            clear.classList.add("hidden2");
+        }, 500);
+    }
+    else {
+        clear.classList.remove("hidden2");
+        setTimeout(function () {
+           clear.classList.remove("hidden1");
+        }, 1);
+    }
+
+    var subjects = Object.keys(fliter);
+
+    var href = "#q=" + val;
+
+    for (var i = 0; i < 5; i++) {
+        var s = subjects[i];
+        if (fliter[s] === 1)
+            href += ";y=" + s;
+        else if (fliter[s] === -1)
+            href += ";n=" + s;
+    }
+
+    if (href == "#q=")
+        history.pushState("", document.title, window.location.pathname);
+    else
+        window.location.hash = href;
+
+    ga('send', 'pageview', {
+        'page': location.pathname + location.search + location.hash
+    });
+
+    var table = document.getElementById("list");
+    table.innerHTML = "";
+    var tr = document.createElement('tr');
+    for (i = 0; i < 8; i++)
+        tr.appendChild(document.createElement('th'));
+    tr.cells[0].appendChild(document.createTextNode('學校'));
+    tr.cells[0].classList.add("school");
+    tr.cells[1].appendChild(document.createTextNode('科系'));
+    tr.cells[1].classList.add("dep");
+    tr.cells[7].appendChild(document.createTextNode('編號'));
+    tr.cells[7].classList.add("id");
+
+    for (var i = 0; i < 5; i++) {
+        var s = subjects[i];
+        var button = document.createElement('button');
+        button.onclick = function(e) {
+            var s = e.target.innerText;
+            fliter[s]++;
+            if (fliter[s] > 1) fliter[s] = -1;
+            updateTable();
+        }
+
+        button.id = s;
+        if (fliter[s] === 1) {
+            button.classList.add("show");
+        } else if (fliter[s] === -1) {
+            button.classList.add("hidden");
+        }
+
+        button.appendChild(document.createTextNode(s));
+        tr.cells[i + 2].appendChild(button);
+        tr.cells[i + 2].classList.add("sub");
+    }
+
+
+    table.appendChild(tr);
+
+    var count = 0;
+    for (i = 0; i < data.length; i++) {
+        if (data[i].name.toUpperCase().indexOf(val.toUpperCase()) !== -1) {
+            var tr = document.createElement('tr');
+            for (_ = 0; _ < 8; _++)
+                tr.appendChild(document.createElement('td'));
+            tr.cells[0].appendChild(document.createTextNode(data[i].school));
+            tr.cells[1].appendChild(document.createTextNode(data[i].name));
+
+            var link = document.createElement('a');
+            link.text = data[i].id;
+            if (data[i].id.length == 6)
+                link.href = 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_' + data[i].id + '.htm';
+            else
+                link.href = 'https://www.cac.edu.tw/star108/system/108ColQry_forstar_5d3o9a/html/108_' + data[i].id + '.htm';
+            link.target = '_blank';
+            link.classList.add('id');
+            tr.cells[7].appendChild(link);
+
+            var show = true;
+            for (j = 0; j < subjects.length; j++) {
+                var s = subjects[j];
+                if (data[i][s] == '--') {
+                    if (fliter[s] === 1) {
+                        show = false;
+                    }
+                } else {
+                    if (fliter[s] == -1)
+                        show = false;
+
+                    tr.cells[j + 2].appendChild(document.createTextNode(data[i][s]));
+
+                    if (data[i][s][1] == '標') {
+                        tr.cells[j + 2].classList.add("mark");
+
+                        if (data[i][s] == '頂標')
+                            tr.cells[j + 2].classList.add("best");
+                        if (data[i][s] == '前標')
+                            tr.cells[j + 2].classList.add("good");
+                        if (data[i][s] == '均標')
+                            tr.cells[j + 2].classList.add("average");
+                        if (data[i][s] == '後標')
+                            tr.cells[j + 2].classList.add("bad");
+                        if (data[i][s] == '底標')
+                            tr.cells[j + 2].classList.add("worst");
+                    }
+
+                    if (data[i][s].match(/^\d+$/))
+                        data[i][s] = "x" + data[i][s];
+
+                    if (data[i][s][0] == 'x')
+                        tr.cells[j + 2].classList.add("primary");
+
+                    if (data[i][s][0] == '*')
+                        data[i][s] = '採計';
+
+                    if (data[i][s] == '採計')
+                        tr.cells[j + 2].classList.add("info");
+                }
+            }
+            if (show) {
+                count++;
+                if (count <= max_result)
+                    table.appendChild(tr);
+            }
+        }
+    }
+
+    if (count == 0) {
+        document.getElementById('no-data').style.display = '';
+        document.getElementById('count').style.display = 'none';
+    } else {
+        document.getElementById('no-data').style.display = 'none';
+        document.getElementById('count').style.display = '';
+    }
+
+    while (max_result > default_max_result && count < max_result / 2) {
+        max_result /= 2;
+    }
+
+    if (count > max_result) {
+        document.getElementById('show-more').style.display = '';
+        document.getElementById('count-num').innerHTML = max_result + ' / ' + count;
+    } else {
+        document.getElementById('show-more').style.display = 'none';
+        document.getElementById('count-num').innerHTML = count;
+    }
+}
+
+
 function startIntro(){
     var intro = introJs();
     intro.setOptions({
@@ -146,5 +312,17 @@ function startIntro(){
 }
 
 window.onload = () => {
-	document.getElementById("countdown").innerHTML = Math.ceil((1548360000000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+    document.getElementById("countdown").innerHTML = Math.ceil((1548360000000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
 }
+
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'data/school', false);
+xhr.send(null);
+var lines = xhr.response.split('\n');
+
+for (var i=0; i<lines.length; i++) {
+    var line = lines[i].split(' ');
+    school[line[0]] = line[1];
+}
+

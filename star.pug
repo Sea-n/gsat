@@ -50,36 +50,6 @@ html
 				.header 繁星推薦
 				.description 學測五選四
 		div.ts.container(name="main")
-			h3.ts.center.aligned.header(style='margin-bottom:0') 想了解的類組
-			.inputGroups
-				.inputGroup
-					input#group1(type="checkbox" onchange="updateGroup();" value="第一類學群" checked="")
-					label(for="group1") 第一類學群 (文法商)
-				.inputGroup
-					input#group2(type="checkbox" onchange="updateGroup();" value="第二類學群" checked="")
-					label(for="group2") 第二類學群 (理工)
-				.inputGroup
-					input#group3(type="checkbox" onchange="updateGroup();" value="第三類學群" checked="")
-					label(for="group3") 第三類學群 (醫、生命科學、農)
-				.inputGroup
-					input#group4(type="checkbox" onchange="updateGroup();" value="第四類學群")
-					label(for="group4") 第四類學群 (音樂)
-				.inputGroup
-					input#group5(type="checkbox" onchange="updateGroup();" value="第五類學群")
-					label(for="group5") 第五類學群 (美術)
-				.inputGroup
-					input#group6(type="checkbox" onchange="updateGroup();" value="第六類學群" disabled="")
-					label(style="color: dimGray;")
-						s 第六類學群 (舞蹈)
-				.inputGroup
-					input#group7(type="checkbox" onchange="updateGroup();" value="第七類學群")
-					label(for="group7") 第七類學群 (體育)
-				.inputGroup
-					input#group8(type="checkbox" onchange="updateGroup();" value="第八類學群")
-					label(for="group8") 第八類學群 (醫學)
-				.inputGroup
-					input#group0(type="checkbox" onchange="updateGroup();" value="不分學群")
-					label(for="group0") 不分學群
 			.autocomplete
 				.inner-btn
 					input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();")

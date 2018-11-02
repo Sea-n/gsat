@@ -1,176 +1,21 @@
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'data/list-star.tsv', false);
+xhr.open('GET', 'data/data-star', false);
 xhr.send(null);
-var lines = xhr.response.split("\n");
+var data = JSON.parse(xhr.response);
 
-for (var i = 0;; i++) {
-    var obj = {};
-    var line = lines[i].split('\t');
-    if (line[2] === undefined)
-        break;
+var lc = {};
+for (var i = 0, len = data.length; i < len; i++) {
+	data[i].school = school[data[i].id.substr(0, 3)];
 
-    obj['school'] = line[0];
-    obj['dep'] = line[1];
-    obj['group'] = line[2];
-    obj['subjects'] = line[3].split(",");
-
-    data.push(obj);
+    if (lc[data[i].name] === undefined)
+        lc[data[i].name] = 1;
+    else
+        lc[data[i].name]++;
 }
 
-var list;
+var list = Object.keys(lc).sort(function(a, b) {
+    return lc[a] < lc[b];
+});
 
-updateGroup();
 parseHash();
 document.getElementById("loading").style.display = "none";
-
-function updateTable(val) {
-    if (val === undefined)
-        val = input.value;
-
-    var clear = document.getElementById("clear");
-    if (val.length == 0) {
-        clear.classList.add("hidden1");
-        setTimeout(function () {
-            clear.classList.add("hidden2");
-        }, 500);
-    }
-    else {
-        clear.classList.remove("hidden2");
-        setTimeout(function () {
-           clear.classList.remove("hidden1");
-        }, 1);
-    }
-
-    var subjects = Object.keys(fliter);
-
-    var href = "#q=" + val;
-
-    for (var i = 0; i < 5; i++) {
-        var s = subjects[i];
-        if (fliter[s] === 1)
-            href += ";y=" + s;
-        else if (fliter[s] === -1)
-            href += ";n=" + s;
-    }
-
-    if (href == "#q=")
-        history.pushState("", document.title, window.location.pathname);
-    else
-        window.location.hash = href;
-
-    ga('send', 'pageview', {
-        'page': location.pathname + location.search + location.hash
-    });
-
-    var table = document.getElementById("list");
-    table.innerHTML = "";
-    var tr = document.createElement('tr');
-    for (i = 0; i < 7; i++)
-        tr.appendChild(document.createElement('th'));
-    tr.cells[0].appendChild(document.createTextNode('學校'));
-    tr.cells[0].classList.add("school");
-    tr.cells[1].appendChild(document.createTextNode('科系'));
-    tr.cells[1].classList.add("dep");
-
-    for (var i = 0; i < 5; i++) {
-        var s = subjects[i];
-        var button = document.createElement('button');
-        button.onclick = function(e) {
-            var s = e.target.innerText;
-            fliter[s]++;
-            if (fliter[s] > 1) fliter[s] = -1;
-            updateTable();
-        }
-
-        button.id = s;
-        if (fliter[s] === 1) {
-            button.classList.add("show");
-        } else if (fliter[s] === -1) {
-            button.classList.add("hidden");
-        }
-
-        button.appendChild(document.createTextNode(s));
-        tr.cells[i + 2].appendChild(button);
-        tr.cells[i + 2].classList.add("sub");
-    }
-
-    table.appendChild(tr);
-
-    var count = 0;
-    for (i = 0; i < data.length; i++) {
-        if (groups.indexOf(data[i].group) === -1)
-            continue;
-        if (data[i].dep.toUpperCase().indexOf(val.toUpperCase()) !== -1) {
-            var tr = document.createElement('tr');
-            for (_ = 0; _ < 7; _++)
-                tr.appendChild(document.createElement('td'));
-            tr.cells[0].appendChild(document.createTextNode(data[i].school));
-            tr.cells[1].appendChild(document.createTextNode(data[i].dep));
-            var show = true;
-            for (j = 0; j < subjects.length; j++) {
-                var s = subjects[j];
-                if (data[i].subjects.indexOf(s) !== -1) {
-                    tr.cells[j + 2].appendChild(document.createTextNode("參採"));
-                    tr.cells[j + 2].classList.add("positive");
-                    if (fliter[s] == -1)
-                        show = false;
-                } else {
-                    if (fliter[s] === 1) {
-                        show = false;
-                    }
-                }
-            }
-            if (show) {
-                count++;
-                if (count > max_result)
-                    continue;
-                table.appendChild(tr);
-            }
-        }
-    }
-
-    if (count == 0) {
-        document.getElementById('no-data').style.display = '';
-        document.getElementById('count').style.display = 'none';
-    } else {
-        document.getElementById('no-data').style.display = 'none';
-        document.getElementById('count').style.display = '';
-    }
-
-    while (max_result > default_max_result && count < max_result / 2) {
-        max_result /= 2;
-    }
-
-    if (count > max_result) {
-        document.getElementById('show-more').style.display = '';
-        document.getElementById('count-num').innerHTML = max_result + ' / ' + count;
-    } else {
-        document.getElementById('show-more').style.display = 'none';
-        document.getElementById('count-num').innerHTML = count;
-    }
-}
-
-function updateGroup() {
-    groups = [];
-    for (var i = 0; i <= 8; i++) {
-        var checkbox = document.getElementById("group" + i);
-        if (checkbox.checked)
-            groups.push(checkbox.value);
-    }
-
-    var lc = {};
-    for (var i = 1, len = data.length; i < len; i++) {
-        if (groups.indexOf(data[i].group) === -1)
-            continue;
-        if (lc[data[i].dep] === undefined)
-            lc[data[i].dep] = 1;
-        else
-            lc[data[i].dep]++;
-    }
-
-    list = Object.keys(lc).sort(function(a, b) {
-        return lc[a] < lc[b];
-    });
-
-    adjust();
-}

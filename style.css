@@ -25,9 +25,38 @@ span.underline {
     padding-left: 0em;
 }
 
-#list .positive,
-#list th.sub button {
+#list .positive, /* tmp */
+#list .mark,
+#list .primary,
+#list .info,
+#list th.sub button,
+#list id {
     text-align: center;
+}
+
+#list .mark.best {
+    color: hsl(180, 100%, 25%);
+    background-color: hsl(160, 100%, 87%);
+}
+
+#list .mark.good {
+    color: hsl(100, 100%, 25%);
+    background-color: hsl(120, 100%, 90%);
+}
+
+#list .mark.average {
+    color: black;
+    background-color: hsl(80, 100%, 94%);
+}
+
+#list .mark.bad {
+    color: hsl(0, 0%, 40%);
+    background-color: hsl(15, 100%, 90%);
+}
+
+#list .mark.worst {
+    color: hsl(0, 100%, 50%);
+    background-color: hsl(0, 100%, 92%);
 }
 
 #list th.sub button {
@@ -77,6 +106,30 @@ span.underline {
 #list th.sub {
     width: 10%;
 }
+
+#list td.id {
+    font-size: smaller;
+    text-align: center;
+}
+
+@media screen and (max-width: 540px) {
+    #list .id {
+        display: none;
+    }
+
+    #list th.sub {
+        width: 8%;
+    }
+
+    #list .mark {
+        font-size: 0;
+    }
+
+    #list .mark:first-letter {
+        font-size: 14px;
+    }
+}
+
 
 @media(max-width: 768px) {
     #list td.positive {

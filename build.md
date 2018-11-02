@@ -1,3 +1,6 @@
+<!--
+過時簡章
+
 # 取得資料
 ```bash
 md pdf && cd pdf
@@ -31,9 +34,8 @@ while read n s; do
   awk -F, '{print "'$s'" "\t" $2 "\t" $3 "\t" $4}' csv/star-$n.csv |sed 's/ ; /,/g' >> list-star.tsv
 done < school-star
 ```
+-->
 
-
-# 網頁編譯
 感謝 [@gnehs](https://github.com/gnehs) 讓他這麼複雜 :new_moon_with_face:  
 ```bash
 npm install pug-cli -g
