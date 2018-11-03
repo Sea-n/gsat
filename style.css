@@ -25,38 +25,54 @@ span.underline {
     padding-left: 0em;
 }
 
-#list .positive, /* tmp */
 #list .mark,
-#list .primary,
-#list .info,
+#list .multiple,
+#list .weighted,
 #list th.sub button,
-#list id {
+#list .id {
     text-align: center;
 }
 
-#list .mark.best {
+#list .best,
+.mark.best {
     color: hsl(180, 100%, 25%);
     background-color: hsl(160, 100%, 87%);
 }
 
-#list .mark.good {
+#list .good,
+.mark.good {
     color: hsl(100, 100%, 25%);
     background-color: hsl(120, 100%, 90%);
 }
 
-#list .mark.average {
+#list .average,
+.mark.average {
     color: black;
     background-color: hsl(80, 100%, 94%);
 }
 
-#list .mark.bad {
+#list .bad,
+.mark.bad {
     color: hsl(0, 0%, 40%);
     background-color: hsl(15, 100%, 90%);
 }
 
-#list .mark.worst {
+#list .worst,
+.mark.worst {
     color: hsl(0, 100%, 50%);
     background-color: hsl(0, 100%, 92%);
+}
+
+#list .multiple,
+.mark.multiple {
+    color: hsl(270, 100%, 25%);
+    background-color: hsl(300, 100%, 96%);
+}
+
+#list .weighted,
+.mark.weighted {
+    color: hsl(200, 100%, 25%);
+    background-color: hsl(180, 100%, 94%);
 }
 
 #list th.sub button {
@@ -109,7 +125,6 @@ span.underline {
 
 #list td.id {
     font-size: smaller;
-    text-align: center;
 }
 
 @media screen and (max-width: 540px) {
@@ -130,128 +145,6 @@ span.underline {
     }
 }
 
-
-@media(max-width: 768px) {
-    #list td.positive {
-        font-size: 0
-    }
-    #list td.positive:before {
-        content: "\f00c";
-        font-size: 14px;
-        line-height: 1em;
-        font-family: 'Icons';
-        font-style: normal;
-        font-weight: normal;
-        display: block;
-        -moz-osx-font-smoothing: grayscale;
-    }
-}
-
-
-/*========================*/
-
-.inputGroup {
-    background-color: #fff;
-    display: block;
-    margin: 7px 3px;
-    position: relative;
-    width: 100%;
-    display: flex;
-    align-content: center;
-    flex-direction: column;
-    height: 32px;
-}
-
-@media(min-width: 768px) {
-    .inputGroups {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-    .inputGroup {
-        width: calc(25% - 6px);
-    }
-}
-
-.inputGroup label {
-    padding: 0 30px;
-    line-height: 32px;
-    width: 100%;
-    display: block;
-    text-align: left;
-    color: #3C454C;
-    cursor: pointer;
-    position: relative;
-    z-index: 2;
-    transition: color 200ms ease-in;
-    overflow: hidden;
-    border-radius: 3px;
-}
-
-.inputGroup label:before {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    content: '';
-    background-color: #f1f1f1;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale3d(1, 1, 1);
-    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0;
-    z-index: -1;
-}
-
-.inputGroup label:after {
-    width: 32px;
-    height: 32px;
-    content: '';
-    border: 2px solid #D1D7DC;
-    background-color: #fff;
-    background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
-    background-repeat: no-repeat;
-    background-position: 5px 4px;
-    border-radius: 50%;
-    z-index: 2;
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    -webkit-transform: translateY(-50%) scale(.7);
-    transform: translateY(-50%) scale(.7);
-    cursor: pointer;
-    transition: all 200ms ease-in;
-}
-
-.inputGroup input:checked~label {
-    color: #3C454C;
-}
-
-.inputGroup input:checked~label:before {
-    -webkit-transform: translate(-50%, -50%) scale3d(56, 56, 1);
-    transform: translate(-50%, -50%) scale3d(56, 56, 1);
-    opacity: 1;
-}
-
-.inputGroup input:checked~label:after {
-    background-color: #54E0C7;
-    border-color: #54E0C7;
-}
-
-.inputGroup input {
-    width: 32px;
-    height: 32px;
-    order: 1;
-    z-index: 2;
-    position: absolute;
-    right: 30px;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    cursor: pointer;
-    visibility: hidden;
-}
-
 .form {
     padding: 0 16px;
     max-width: 550px;
@@ -270,11 +163,6 @@ input[type="text"] {
     padding: 10px;
     font-size: 1.6em;
     width: 100%;
-}
-
-.group label {
-    margin-right: 2em;
-    margin-bottom: 6.9px;
 }
 
 nav.fixed {

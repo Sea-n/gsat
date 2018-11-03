@@ -210,6 +210,7 @@ function updateTable(val) {
             link.target = '_blank';
             link.classList.add('id');
             tr.cells[7].appendChild(link);
+            tr.cells[7].classList.add("id");
 
             var show = true;
             for (j = 0; j < subjects.length; j++) {
@@ -219,9 +220,6 @@ function updateTable(val) {
                         show = false;
                     }
                 } else {
-                    if (fliter[s] == -1)
-                        show = false;
-
                     if (data[i][s][1] == '標') {
                         tr.cells[j + 2].classList.add("mark");
 
@@ -237,17 +235,21 @@ function updateTable(val) {
                             tr.cells[j + 2].classList.add("worst");
                     }
 
-                    if (data[i][s].match(/^\d+$/))
+                    if (data[i][s].match(/^\d/))
                         data[i][s] = "x" + data[i][s];
 
                     if (data[i][s][0] == 'x')
-                        tr.cells[j + 2].classList.add("primary");
+                        tr.cells[j + 2].classList.add("multiple");
 
                     if (data[i][s][0] == '*')
                         data[i][s] = '採計';
 
                     if (data[i][s] == '採計')
-                        tr.cells[j + 2].classList.add("info");
+                        tr.cells[j + 2].classList.add("weighted");
+                    else
+                        if (fliter[s] == -1)
+                            show = false;
+
 
                     tr.cells[j + 2].appendChild(document.createTextNode(data[i][s]));
                 }
