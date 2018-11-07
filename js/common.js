@@ -221,8 +221,6 @@ function updateTable(val) {
                     }
                 } else {
                     if (data[i][s][1] == '標') {
-                        tr.cells[j + 2].classList.add("mark");
-
                         if (data[i][s] == '頂標')
                             tr.cells[j + 2].classList.add("best");
                         if (data[i][s] == '前標')
@@ -240,15 +238,18 @@ function updateTable(val) {
 
                     if (data[i][s][0] == 'x')
                         tr.cells[j + 2].classList.add("multiple");
+                    else
+                        tr.cells[j + 2].classList.add("mark"); // Add mark for all cells expect of x3
 
                     if (data[i][s][0] == '*')
                         data[i][s] = '採計';
 
                     if (data[i][s] == '採計')
                         tr.cells[j + 2].classList.add("weighted");
-                    else
+                    else {
                         if (fliter[s] == -1)
                             show = false;
+                    }
 
 
                     tr.cells[j + 2].appendChild(document.createTextNode(data[i][s]));

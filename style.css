@@ -114,28 +114,49 @@ span.underline {
 }
 
 #list th.school {
-    width: 20%;
     max-width: 160px;
     /* 10 Char */
 }
 
 #list th.sub {
-    width: 10%;
+    width: 50px;
 }
 
 #list td.id {
     font-size: smaller;
+    width: 50px;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 330px) {
+	header.ts.fluid.vertically.padded.heading.slate {
+		    padding-left: 1em !important;
+		    padding-right: 1em !important;
+	}
+}
+
+@media screen and (max-width: 375px) {
+    #list th.sub {
+        width: 23px;
+    }
+
+	#list .multiple {
+		font-size: 10px;
+	}
+}
+
+@media screen and (min-width: 375px) and (max-width: 640px) {
+    #list th.sub {
+        width: 38px;
+    }
+}
+
+@media screen and (max-width: 520px) {
     #list .id {
         display: none;
     }
+}
 
-    #list th.sub {
-        width: 8%;
-    }
-
+@media screen and (max-width: 640px) {
     #list .mark {
         font-size: 0;
     }
