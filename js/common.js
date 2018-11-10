@@ -316,6 +316,10 @@ function startIntro(){
 
 window.onload = () => {
     document.getElementById("countdown").innerHTML = Math.ceil((1548360000000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+
+    var cd = document.getElementById("cd1124")
+	if (cd)
+		cd.innerHTML = Math.ceil((1543003200000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
 }
 
 
