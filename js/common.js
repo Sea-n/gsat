@@ -318,8 +318,17 @@ window.onload = () => {
     document.getElementById("countdown").innerHTML = Math.ceil((1548360000000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
 
     var cd = document.getElementById("cd1124")
-	if (cd)
-		cd.innerHTML = Math.ceil((1543003200000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+	if (cd) {
+		var end = new Date("Nov 24, 2019 16:00:00 UTC+8").getTime();
+		setInterval(() => {
+			var now = new Date().getTime();
+			var dist = (end - now) / 1000;
+			var hr = Math.floor((dist % (60 * 60 * 24)) / (60 * 60));
+			var min = Math.floor((dist % (60 * 60) / 60));
+			var sec = Math.floor(dist % 60);
+			cd.innerHTML = hr + ":" + min + ":" + sec;
+		}, 500);
+	}
 }
 
 
