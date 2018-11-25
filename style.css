@@ -229,43 +229,39 @@ i.hidden2 {
     display: none;
 }
 
-#vote .image {
-	max-width: calc(100% - 185px);
-}
-
 .autocomplete {
     margin-bottom: 30px;
 }
 
 @media screen and (max-width: 360px) {
-    .autocomplete, #vote {
+    .autocomplete {
         width: 100%;
     }
 }
 
 @media screen and (min-width: 360px) and (max-width: 512px) {
-    .autocomplete, #vote {
+    .autocomplete {
         margin-left: 5%;
         width: 90%;
     }
 }
 
 @media screen and (min-width: 512px) and (max-width: 768px) {
-    .autocomplete, #vote {
+    .autocomplete {
         margin-left: 10%;
         width: 80%;
     }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1400px) {
-    .autocomplete, #vote {
+    .autocomplete {
         margin-left: 20%;
         width: 60%;
     }
 }
 
 @media screen and (min-width: 1400px) {
-    .autocomplete, #vote {
+    .autocomplete {
         margin-left: 30%;
         width: 40%;
     }
