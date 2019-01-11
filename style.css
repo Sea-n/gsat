@@ -28,7 +28,7 @@ span.underline {
 #list .mark,
 #list .multiple,
 #list .weighted,
-#list th.sub button,
+#list th.sub,
 #fliter th,
 #fliter td,
 #list .id {
@@ -129,6 +129,24 @@ span.underline {
     color: red;
 }
 
+#list .favorites {
+	margin: -0.6em 0 -0.6em 0;
+	font-size: 1.6em;
+}
+
+#list .favorited:before {
+	content: "⭐️";
+}
+
+#list .not-fav:before {
+	content: "★";
+	color: lightGray;
+}
+
+#list .not-fav:hover::before {
+	color: darkGray;
+}
+
 #list th.school {
     max-width: 160px;
     /* 10 Char */
@@ -172,14 +190,21 @@ span.underline {
     }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 639px) {
+	th.sub,
     #list .mark {
         font-size: 0;
     }
 
+	th.sub button, /* exception */
+	th.sub:first-letter,
     #list .mark:first-letter {
         font-size: 14px;
     }
+
+	#list .favorites {
+		display: none;
+	}
 }
 
 .form {

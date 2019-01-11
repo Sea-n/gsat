@@ -22,6 +22,11 @@ Object.keys(fliter).forEach(function(k) {
 	};
 });
 
+var fav = JSON.parse(localStorage.getItem("favorites"));
+
+if (!localStorage.getItem("favorites"))
+	fav = [];
+
 
 /* Parse School Name */
 var xhr = new XMLHttpRequest();
@@ -128,13 +133,28 @@ window.onload = () => {
 			button.onclick = (e) => {
 				t = e.target;
 				d = t.dataset;
-				t.classList.remove("show", "hidden");
 				if (fliter[ d.subject ][ d.mark ] == 1) {
-					fliter[ d.subject ][ d.mark ] = 0;
-					t.classList.add("hidden");
+					if (t.parentNode.previousSibling.firstElementChild &&
+						t.parentNode.previousSibling.firstElementChild.classList.contains("show"))
+						t = t.parentNode.previousSibling.firstElementChild;
+					do {
+						t.classList.remove("show", "hidden");
+						t.classList.add("hidden");
+						d = t.dataset;
+						fliter[ d.subject ][ d.mark ] = 0;
+					} while (t = t.parentNode.previousSibling.firstElementChild);
 				} else {
-					fliter[ d.subject ][ d.mark ] = 1;
+					t.classList.remove("show", "hidden");
 					t.classList.add("show");
+					d = t.dataset;
+					fliter[ d.subject ][ d.mark ] = 1;
+					while (t.parentNode.nextSibling != undefined) {
+						t = t.parentNode.nextSibling.firstElementChild;
+						t.classList.remove("show", "hidden");
+						t.classList.add("show");
+						d = t.dataset;
+						fliter[ d.subject ][ d.mark ] = 1;
+					}
 				}
 				adjust();
 			}
@@ -229,19 +249,20 @@ function updateTable(val) {
 	var table = document.getElementById("list");
 	table.innerHTML = "";
 	var tr = document.createElement('tr');
-	for (i = 0; i < 8; i++)
+	for (i = 0; i < 9; i++)
 		tr.appendChild(document.createElement('th'));
-	tr.cells[0].appendChild(document.createTextNode('學校'));
-	tr.cells[0].classList.add("school");
-	tr.cells[1].appendChild(document.createTextNode('科系'));
-	tr.cells[1].classList.add("dep");
+	tr.cells[0].classList.add("favorites");
+	tr.cells[1].appendChild(document.createTextNode('學校'));
+	tr.cells[1].classList.add("school");
+	tr.cells[2].appendChild(document.createTextNode('科系'));
+	tr.cells[2].classList.add("dep");
 	for (var i = 0; i < 5; i++) {
-		tr.cells[i+2].appendChild(document.createTextNode(subjects[i]));
-		tr.cells[i+2].classList.add("sub");
+		tr.cells[i + 3].appendChild(document.createTextNode(subjects[i]));
+		tr.cells[i + 3].classList.add("sub");
 	}
 
-	tr.cells[7].appendChild(document.createTextNode('編號'));
-	tr.cells[7].classList.add("id");
+	tr.cells[8].appendChild(document.createTextNode('編號'));
+	tr.cells[8].classList.add("id");
 
 	table.appendChild(tr);
 
@@ -249,21 +270,44 @@ function updateTable(val) {
 	for (i = 0; i < data.length; i++) {
 		if (data[i].name.toUpperCase().indexOf(val.toUpperCase()) !== -1) {
 			var tr = document.createElement('tr');
-			for (_ = 0; _ < 8; _++)
+			id = data[i].id;
+			tr.dataset.id = id;
+
+			for (_ = 0; _ < 9; _++)
 				tr.appendChild(document.createElement('td'));
-			tr.cells[0].appendChild(document.createTextNode(data[i].school));
-			tr.cells[1].appendChild(document.createTextNode(data[i].name));
+
+			tr.cells[0].classList.add("favorites");
+			var button = document.createElement('button');
+			button.onclick = function(e) {
+				t = e.target;
+				id = t.parentNode.parentNode.dataset.id;
+				index = fav.indexOf(id);
+				t.classList.remove("not-fav", "favorited");
+				if (index == -1) {
+					fav.push(id);
+					t.classList.add("favorited");
+				} else {
+					fav[index] = 0; // remove
+					t.classList.add("not-fav");
+				}
+				localStorage.setItem("favorites", JSON.stringify(fav)); // save
+			}
+			button.classList.add(fav.includes(id) ? "favorited" : "not-fav");
+			tr.cells[0].appendChild(button);
+
+			tr.cells[1].appendChild(document.createTextNode(data[i].school));
+			tr.cells[2].appendChild(document.createTextNode(data[i].name));
 
 			var link = document.createElement('a');
-			link.text = data[i].id;
-			if (data[i].id.length == 6)
-				link.href = 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_' + data[i].id + '.htm';
+			link.text = id;
+			if (id.length == 6)
+				link.href = 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_' + id + '.htm';
 			else
-				link.href = 'https://www.cac.edu.tw/star108/system/108ColQry_forstar_5d3o9a/html/108_' + data[i].id + '.htm';
+				link.href = 'https://www.cac.edu.tw/star108/system/108ColQry_forstar_5d3o9a/html/108_' + id + '.htm';
 			link.target = '_blank';
 			link.classList.add('id');
-			tr.cells[7].appendChild(link);
-			tr.cells[7].classList.add("id");
+			tr.cells[8].appendChild(link);
+			tr.cells[8].classList.add("id");
 
 			var show = true;
 			for (j = 0; j < subjects.length; j++) {
@@ -274,27 +318,27 @@ function updateTable(val) {
 							show = false;
 
 						if (data[i][s] == '頂標')
-							tr.cells[j + 2].classList.add("best");
+							tr.cells[j + 3].classList.add("best");
 						if (data[i][s] == '前標')
-							tr.cells[j + 2].classList.add("good");
+							tr.cells[j + 3].classList.add("good");
 						if (data[i][s] == '均標')
-							tr.cells[j + 2].classList.add("average");
+							tr.cells[j + 3].classList.add("average");
 						if (data[i][s] == '後標')
-							tr.cells[j + 2].classList.add("bad");
+							tr.cells[j + 3].classList.add("bad");
 						if (data[i][s] == '底標')
-							tr.cells[j + 2].classList.add("worst");
+							tr.cells[j + 3].classList.add("worst");
 					}
 
 					if (data[i][s][0] == 'x')
-						tr.cells[j + 2].classList.add("multiple");
+						tr.cells[j + 3].classList.add("multiple");
 					else
-						tr.cells[j + 2].classList.add("mark"); // Add mark for all cells expect of x3
+						tr.cells[j + 3].classList.add("mark"); // Add mark for all cells expect of x3
 
 					if (data[i][s] == '採計')
-						tr.cells[j + 2].classList.add("weighted");
+						tr.cells[j + 3].classList.add("weighted");
 
 
-					tr.cells[j + 2].appendChild(document.createTextNode(data[i][s]));
+					tr.cells[j + 3].appendChild(document.createTextNode(data[i][s]));
 				}
 			}
 			if (show) {
@@ -342,7 +386,7 @@ function startIntro(){
 				intro: "輸入想查詢的校系"
 			},
 			{
-				element: '#自然',
+				element: '#fliter',
 				intro: "點一下科目，啟用過濾器"
 			},
 			{
