@@ -29,6 +29,8 @@ span.underline {
 #list .multiple,
 #list .weighted,
 #list th.sub button,
+#fliter th,
+#fliter td,
 #list .id {
     text-align: center;
 }
@@ -83,15 +85,26 @@ span.underline {
     border-radius: 5px;
 }
 
-#list th.sub button:hover {
+#fliter td button {
+    padding: 2px;
+    margin: -.6em;
+    width: calc(100% + 1.2em);
+    line-height: 1.15em;
+    border-radius: 5px;
+}
+
+#list th.sub button:hover,
+#fliter td button:hover {
     background: #e8e8e8;
 }
 
-#list th.sub button:active {
+#list th.sub button:active,
+#fliter td button:active {
     background: #d5d5d5;
 }
 
-#list th.sub button:before {
+#list th.sub button:before,
+#fliter td button:before {
     font-family: 'Icons';
     font-style: normal;
     font-weight: normal;
@@ -99,16 +112,19 @@ span.underline {
     -moz-osx-font-smoothing: grayscale;
 }
 
-#list th.sub button:before {
+#list th.sub button:before,
+#fliter td button:before {
     content: "\f056";
 }
 
-#list th.sub button.show:before {
+#list th.sub button.show:before,
+#fliter td button.show:before {
     content: "\f058";
     color: MediumSeaGreen;
 }
 
-#list th.sub button.hidden:before {
+#list th.sub button.hidden:before,
+#fliter td button.hidden:before {
     content: "\f057";
     color: red;
 }
@@ -234,12 +250,17 @@ i.hidden2 {
 }
 
 @media screen and (max-width: 360px) {
+	#fliter,
     .autocomplete {
         width: 100%;
     }
 }
 
 @media screen and (min-width: 360px) and (max-width: 512px) {
+    #fliter {
+        margin-left: 2%;
+        width: 96%;
+    }
     .autocomplete {
         margin-left: 5%;
         width: 90%;
@@ -247,6 +268,10 @@ i.hidden2 {
 }
 
 @media screen and (min-width: 512px) and (max-width: 768px) {
+    #fliter {
+        margin-left: 5%;
+        width: 90%;
+    }
     .autocomplete {
         margin-left: 10%;
         width: 80%;
@@ -254,6 +279,10 @@ i.hidden2 {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1400px) {
+    #fliter {
+        margin-left: 10%;
+        width: 80%;
+    }
     .autocomplete {
         margin-left: 20%;
         width: 60%;
@@ -261,6 +290,10 @@ i.hidden2 {
 }
 
 @media screen and (min-width: 1400px) {
+    #fliter {
+        margin-left: 15%;
+        width: 70%;
+    }
     .autocomplete {
         margin-left: 30%;
         width: 40%;

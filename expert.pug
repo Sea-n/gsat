@@ -2,7 +2,7 @@ doctype html
 html
 	head
 		meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
-		title 繁星推薦 - 學測五選四
+		title 個人申請 (Expert Mode) - 學測五選四
 		link(rel="mask-icon" sizes="any" href="https://www.sean.taipei/logo.svg")
 		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-192.png" sizes="192x192")
 		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-128.png" sizes="128x128")
@@ -11,12 +11,12 @@ html
 		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-32.png" sizes="32x32")
 		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-16.png" sizes="16x16")
 		meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
-		meta(name="keywords" content="學測五選四,繁星推薦")
-		meta(name="description" content="自今年開始，繁星推薦最多參採四科，來看看您心目中的科系用了何種組合，學測該將準備心力放在哪些考科最有利")
-		meta(property="og:title" content="學測五選四 - 繁星推薦")
-		meta(property="og:url" content="https://sean.cat/gsat/star")
+		meta(name="keywords" content="學測五選四,個人申請")
+		meta(name="description" content="自今年開始，個人申請最多參採四科，來看看您心目中的科系用了何種組合，學測該將準備心力放在哪些考科最有利")
+		meta(property="og:title" content="學測五選四 - 個人申請 (Expert Mode)")
+		meta(property="og:url" content="https://sean.cat/gsat/apply")
 		meta(property="og:type" content="website")
-		meta(property="og:description" content="自今年開始，繁星推薦最多參採四科，來看看您心目中的科系用了何種組合，學測該將準備心力放在哪些考科最有利")
+		meta(property="og:description" content="自今年開始，個人申請最多參採四科，來看看您心目中的科系用了何種組合，學測該將準備心力放在哪些考科最有利")
 		meta(property="og:site_name" content="Sean's Website")
 		meta(property="fb:app_id" content="1654538528156949")
 		link(href="https://introjs.com/introjs.css" rel="stylesheet")
@@ -38,7 +38,7 @@ html
 			.ts.container
 				a.item(href=".") 首頁
 				a.item(href="apply") 個人申請
-				b.item.hide1 繁星推薦
+				a.item.hide1(href="star") 繁星推薦
 				.right.fitted.item
 					b.item.hide2(style="background-color: #FF0000B3; color: white; border-radius: 0 0 3px 3px;")
 						| 學測倒數&nbsp;
@@ -47,14 +47,16 @@ html
 					a.item(href="javascript:void(0);" onclick="javascript:startIntro();") 使用教學
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
-				.header 繁星推薦
-				.description 學測五選四
+				.header 專家模式
+					sup （Beta）
+				.description 個人申請 - 學測五選四
 		div.ts.container(name="main")
 			.autocomplete
 				.inner-btn
 					input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();")
 					i#clear.clear.hidden1.hidden2(onclick="input.value = ''; adjust();")
 				#dep-list.autocomplete-items
+			table#fliter.ts.very.basic.table
 			h3#loading.ts.header 資料讀取中...
 			h5#count.ts.center.aligned.header(style="display: none;") 共&nbsp;
 				span#count-num 0
@@ -74,11 +76,11 @@ html
 							|  整理、製作
 							br
 							| 由 
-							a(target="_blank" href="https://gnehs.net/")  棒棒勝
+							a(target="_blank" href="https://gnehs.net/") 棒棒勝
 							|  設計
 					.column
 						a(href='./#suggestion') 功能建議
 		script(src="https://introjs.com/minified/intro.min.js")
-		script(src="js/star.js")
-		script(src="js/common.js")
+		script(src="js/apply.js")
+		script(src="js/expert.js")
 		script(type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7")

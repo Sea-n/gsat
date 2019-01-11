@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>個人申請 - 學測五選四</title>
+    <title>個人申請 (Expert Mode) - 學測五選四</title>
     <link rel="mask-icon" sizes="any" href="https://www.sean.taipei/logo.svg">
     <link rel="icon" type="image/png" href="https://www.sean.taipei/logo-192.png" sizes="192x192">
     <link rel="icon" type="image/png" href="https://www.sean.taipei/logo-128.png" sizes="128x128">
@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="keywords" content="學測五選四,個人申請">
     <meta name="description" content="自今年開始，個人申請最多參採四科，來看看您心目中的科系用了何種組合，學測該將準備心力放在哪些考科最有利">
-    <meta property="og:title" content="學測五選四 - 個人申請">
+    <meta property="og:title" content="學測五選四 - 個人申請 (Expert Mode)">
     <meta property="og:url" content="https://sean.cat/gsat/apply">
     <meta property="og:type" content="website">
     <meta property="og:description" content="自今年開始，個人申請最多參採四科，來看看您心目中的科系用了何種組合，學測該將準備心力放在哪些考科最有利">
@@ -37,14 +37,14 @@
   </head>
   <body>
     <nav class="ts basic fluid borderless menu horizontally scrollable">
-      <div class="ts container"><a class="item" href=".">首頁</a><b class="item hide1">個人申請</b><a class="item" href="star">繁星推薦</a>
+      <div class="ts container"><a class="item" href=".">首頁</a><a class="item" href="apply">個人申請</a><a class="item hide1" href="star">繁星推薦</a>
         <div class="right fitted item"><b class="item hide2" style="background-color: #FF0000B3; color: white; border-radius: 0 0 3px 3px;">學測倒數&nbsp;<span id="countdown">87</span>&nbsp;天</b><a class="item" href="javascript:void(0);" onclick="javascript:startIntro();">使用教學</a></div>
       </div>
     </nav>
     <header class="ts fluid vertically padded heading slate">
       <div class="ts narrow container">
-        <div class="header">個人申請</div>
-        <div class="description">學測五選四</div>
+        <div class="header">專家模式<sup>（Beta）</sup></div>
+        <div class="description">個人申請 - 學測五選四</div>
       </div>
     </header>
     <div class="ts container" name="main">
@@ -54,6 +54,7 @@
         </div>
         <div class="autocomplete-items" id="dep-list"></div>
       </div>
+      <table class="ts very basic table" id="fliter"></table>
       <h3 class="ts header" id="loading">資料讀取中...</h3>
       <h5 class="ts center aligned header" id="count" style="display: none;">共&nbsp;<span id="count-num">0</span>&nbsp;筆結果</h5>
       <table class="ts very basic table" id="list"></table>
@@ -74,7 +75,7 @@
     </footer>
     <script src="https://introjs.com/minified/intro.min.js"></script>
     <script src="js/apply.js"></script>
-    <script src="js/common.js"></script>
+    <script src="js/expert.js"></script>
     <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7"></script>
   </body>
 </html>

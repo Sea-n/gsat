@@ -2,14 +2,25 @@
 var default_max_result = 20;
 var max_result = default_max_result; // max count for result
 
+/* Initialize Fliters */
 var fliter = {
-	"國文": 0,
-	"英文": 0,
-	"數學": 0,
-	"社會": 0,
-	"自然": 0
+	"國文": [],
+	"英文": [],
+	"數學": [],
+	"社會": [],
+	"自然": []
 };
 var subjects = Object.keys(fliter);
+
+Object.keys(fliter).forEach(function(k) {
+	fliter[k] = {
+		"頂標": 1,
+		"前標": 1,
+		"均標": 1,
+		"後標": 1,
+		"底標": 1,
+	};
+});
 
 
 /* Parse School Name */
@@ -50,7 +61,7 @@ var list = Object.keys(lc).sort(function(a, b) {
 
 /* Loaded */
 var input = document.getElementById("dep");
-parseHash();
+adjust();
 document.getElementById("loading").style.display = "none";
 
 
@@ -87,9 +98,50 @@ window.addEventListener("scroll", function () {
 	}
 });
 
-/* Countdown */
 window.onload = () => {
+	/* Countdown */
 	document.getElementById("countdown").innerHTML = Math.ceil((1548360000000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+
+	/* Initialize Fliter */
+	var table = document.getElementById("fliter");
+	table.innerHTML = "";
+	var tr = document.createElement('tr');
+	for (i = 0; i < 6; i++)
+		tr.appendChild(document.createElement('th'));
+	tr.cells[0].appendChild(document.createTextNode('科目'));
+	Object.keys(fliter["國文"]).map(function(k, i) {
+		tr.cells[i + 1].appendChild(document.createTextNode(k));
+	});
+	table.appendChild(tr);
+
+	Object.keys(fliter).map(function(k, i) {
+		var tr = document.createElement('tr');
+		tr.appendChild(document.createElement('th'));
+		tr.cells[0].appendChild(document.createTextNode(k));
+		for (i = 1; i < 6; i++)
+			tr.appendChild(document.createElement('td'));
+		Object.keys(fliter[k]).map(function(K, I) {
+			button = document.createElement('button');
+			button.dataset.subject = k;
+			button.dataset.mark = K;
+			button.classList.add("show");
+			button.onclick = (e) => {
+				t = e.target;
+				d = t.dataset;
+				t.classList.remove("show", "hidden");
+				if (fliter[ d.subject ][ d.mark ] == 1) {
+					fliter[ d.subject ][ d.mark ] = 0;
+					t.classList.add("hidden");
+				} else {
+					fliter[ d.subject ][ d.mark ] = 1;
+					t.classList.add("show");
+				}
+				adjust();
+			}
+			tr.cells[I + 1].appendChild(button);
+		});
+		table.appendChild(tr);
+	});
 }
 
 /* Functions */
@@ -145,25 +197,6 @@ function removeActive(x) {
 		x[i].classList.remove("autocomplete-active");
 }
 
-function parseHash() {
-	if (window.location.hash.length === 0) {
-		adjust();
-		return;
-	}
-	var queries = decodeURIComponent(window.location.hash).substr(1).split(';');
-	for (var i = 0; i < queries.length; i++) {
-		var query = queries[i].split('=', 2);
-		if (query[0] === 'q') {
-			input.value = query[1];
-		} else if (query[0] === 'y') {
-			fliter[query[1]] = 1;
-		} else if (query[0] === 'n') {
-			fliter[query[1]] = -1;
-		}
-	}
-	adjust();
-}
-
 function updateTable(val) {
 	if (val === undefined)
 		val = input.value;
@@ -184,14 +217,6 @@ function updateTable(val) {
 
 	var href = "#q=" + val;
 
-	for (var i = 0; i < 5; i++) {
-		var s = subjects[i];
-		if (fliter[s] === 1)
-			href += ";y=" + s;
-		else if (fliter[s] === -1)
-			href += ";n=" + s;
-	}
-
 	if (href == "#q=")
 		history.pushState("", document.title, window.location.pathname);
 	else
@@ -210,27 +235,9 @@ function updateTable(val) {
 	tr.cells[0].classList.add("school");
 	tr.cells[1].appendChild(document.createTextNode('科系'));
 	tr.cells[1].classList.add("dep");
-
 	for (var i = 0; i < 5; i++) {
-		var s = subjects[i];
-		var button = document.createElement('button');
-		button.onclick = function(e) {
-			var s = e.target.innerText;
-			fliter[s]++;
-			if (fliter[s] > 1) fliter[s] = -1;
-			updateTable();
-		}
-
-		button.id = s;
-		if (fliter[s] === 1) {
-			button.classList.add("show");
-		} else if (fliter[s] === -1) {
-			button.classList.add("hidden");
-		}
-
-		button.appendChild(document.createTextNode(s));
-		tr.cells[i + 2].appendChild(button);
-		tr.cells[i + 2].classList.add("sub");
+		tr.cells[i+2].appendChild(document.createTextNode(subjects[i]));
+		tr.cells[i+2].classList.add("sub");
 	}
 
 	tr.cells[7].appendChild(document.createTextNode('編號'));
@@ -261,14 +268,11 @@ function updateTable(val) {
 			var show = true;
 			for (j = 0; j < subjects.length; j++) {
 				var s = subjects[j];
-				if (data[i][s] == '--') {
-					if (fliter[s] === 1) {
-						show = false;
-					}
-				} else {
-					if (fliter[s] == -1)
-						show = false;
+				if (data[i][s] != '--') {
 					if (data[i][s][1] == '標') {
+						if (fliter[s][ data[i][s]  ] === 0)
+							show = false;
+
 						if (data[i][s] == '頂標')
 							tr.cells[j + 2].classList.add("best");
 						if (data[i][s] == '前標')
