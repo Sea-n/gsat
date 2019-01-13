@@ -55,7 +55,11 @@ html
 					input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();")
 					i#clear.clear.hidden1.hidden2(onclick="input.value = ''; adjust();")
 				#dep-list.autocomplete-items
-			h3#loading.ts.header 資料讀取中...
+			#loading
+				h3.ts.header 資料讀取中...
+				.description
+					| 如無法載入請嘗試使用 
+					a(href="star-static") 靜態版
 			h5#count.ts.center.aligned.header(style="display: none;") 共&nbsp;
 				span#count-num 0
 				| &nbsp;筆結果

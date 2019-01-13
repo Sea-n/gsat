@@ -236,7 +236,7 @@ nav.fixed {
 }
 
 @media screen and (max-width: 450px) {
-    nav b.item.hide1 {
+    nav .item.hide1 {
         display: none !important;
     }
 }
