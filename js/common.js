@@ -94,7 +94,7 @@ window.addEventListener("scroll", function () {
 
 window.onload = () => {
 	/* Countdown */
-	document.getElementById("countdown").innerHTML = Math.ceil((1548360000000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+	document.getElementById("countdown").innerHTML = Math.ceil((1551038400000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
 }
 
 /* Functions */

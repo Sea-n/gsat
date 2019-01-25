@@ -235,16 +235,22 @@ nav.fixed {
     z-index: 10;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 320px) {
     nav .item.hide1 {
         display: none !important;
     }
 }
 
-@media screen and (max-width: 350px) {
-    nav b.item.hide2 {
+@media screen and (max-width: 480px) {
+    nav b.item.cd {
         display: none !important;
     }
+}
+
+.cd {
+	background-color: #fd4;
+	color: #04f !important;
+	border-radius: 0 0 3px 3px !important;
 }
 
 .inner-btn i {

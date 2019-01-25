@@ -39,10 +39,10 @@ html
 				a.item(href="apply") 個人申請
 				a.item(href="star") 繁星推薦
 				.right.fitted.item
-					b.item.hide2(style="background-color: #FF0000B3; color: white; border-radius: 0 0 3px 3px;")
-						| 學測倒數&nbsp;
+					b.item.cd
+						| 倒數&nbsp;
 						span#countdown 87
-						| &nbsp;天
+						| &nbsp;天公佈成績
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
 				h1.header 學測五選四
@@ -156,5 +156,5 @@ html
 					|  設計
 		script.
 			window.onload = () => {
-				document.getElementById("countdown").innerHTML = Math.ceil((1548360000000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+				document.getElementById("countdown").innerHTML = Math.ceil((1551038400000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
 			}
