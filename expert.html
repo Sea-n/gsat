@@ -22,6 +22,7 @@
     <link href="https://introjs.com/introjs.css" rel="stylesheet">
     <link href="introjs-modern.css" rel="stylesheet">
     <link href="/assets/css/tocas-ui/tocas.css" rel="stylesheet">
+    <link href="//cdn.rawgit.com/gnehs/Tocas-UI-Xiaoan/master/ts.xiaoan.min.css" rel="stylesheet">
     <link href="./style.css" rel="stylesheet">
     <!-- Google Analytics-->
     <script>
@@ -53,6 +54,9 @@
           <input id="dep" type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();"><i class="clear hidden1 hidden2" id="clear" onclick="input.value = ''; adjust();"></i>
         </div>
         <div class="autocomplete-items" id="dep-list"></div>
+      </div>
+      <div id="stone" style="display: none;"><img class="ts poyon" src="https://sitcon.org/2017/favicon.ico">
+        <p style="display: inline-block;">小石看到你正在查詢資訊相關科系<br>不妨來 <a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'Search', 'SITCON');">SITCON 學生計算機年會</a> 看看吧owo</p>
       </div>
       <table class="ts very basic table" id="fliter"></table>
       <h3 class="ts header" id="loading">資料讀取中...</h3>

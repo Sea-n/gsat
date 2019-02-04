@@ -22,6 +22,7 @@ html
 		link(href="https://introjs.com/introjs.css" rel="stylesheet")
 		link(href="introjs-modern.css" rel="stylesheet")
 		link(href="/assets/css/tocas-ui/tocas.css" rel="stylesheet")
+		link(href="//cdn.rawgit.com/gnehs/Tocas-UI-Xiaoan/master/ts.xiaoan.min.css" rel="stylesheet")
 		link(href="./style.css" rel="stylesheet")
 		// Google Analytics
 		script.
@@ -55,6 +56,13 @@ html
 					input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();")
 					i#clear.clear.hidden1.hidden2(onclick="input.value = ''; adjust();")
 				#dep-list.autocomplete-items
+			#stone(style="display: none;")
+				img.ts.poyon(src="https://sitcon.org/2017/favicon.ico")
+				p(style="display: inline-block;") 小石看到你正在查詢資訊相關科系
+					br
+					| 不妨來 
+					a(target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'Search', 'SITCON');") SITCON 學生計算機年會
+					|  看看吧owo
 			#loading
 				h3.ts.header 資料讀取中...
 				.description

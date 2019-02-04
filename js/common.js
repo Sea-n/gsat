@@ -187,6 +187,11 @@ function updateTable(val) {
 		}, 1);
 	}
 
+	if (/資訊|APCS/i.test(val))
+		document.getElementById('stone').style.display = '';
+	else
+		document.getElementById('stone').style.display = 'none';
+
 	var href = "#q=" + val;
 
 	for (var i = 0; i < 5; i++) {
@@ -334,6 +339,7 @@ function updateTable(val) {
 	if (count == 0) {
 		document.getElementById('no-data').style.display = '';
 		document.getElementById('count').style.display = 'none';
+		document.getElementById('stone').style.display = 'none';
 	} else {
 		document.getElementById('no-data').style.display = 'none';
 		document.getElementById('count').style.display = '';
