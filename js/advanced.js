@@ -2,51 +2,68 @@
 var default_max_result = 20;
 var max_result = default_max_result; // max count for result
 
-var fliter = {
+/* Initialize Fliters */
+var fliterGsat = {
+	"國文": [],
+	"英文": [],
+	"數學": [],
+	"社會": [],
+	"自然": []
+};
+var fliterAdv = {
 	"國文": 0,
 	"英文": 0,
-	"數學": 0,
-	"社會": 0,
-	"自然": 0
+	"數甲": 0,
+	"數乙": 0,
+	"物理": 0,
+	"化學": 0,
+	"生物": 0,
+	"歷史": 0,
+	"地理": 0,
+	"公民": 0
 };
-var subjects = Object.keys(fliter);
+var subjectsGsat = Object.keys(fliterGsat);
+var subjectsAdv = Object.keys(fliterAdv);
+
+Object.keys(fliterGsat).forEach(function(k) {
+	fliterGsat[k] = {
+		"頂": 1,
+		"前": 1,
+		"均": 1,
+		"後": 1,
+		"底": 1,
+	};
+});
 
 
 var fav = [];
-if (localStorage.getItem("favorites"))
-	fav = JSON.parse(localStorage.getItem("favorites"));
+if (localStorage.getItem("favoritesAdv"))
+	fav = JSON.parse(localStorage.getItem("favoritesAdv"));
 
 
-/* Parse School Name */
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'data/school', false);
+xhr.open('GET', 'data/data-advanced', false);
 xhr.send(null);
 var lines = xhr.response.split('\n');
 
-var school = {};
-for (var i=0; i<lines.length; i++) {
-	var line = lines[i].split(' ');
-	school[line[0]] = line[1];
-}
-
-/* Sort -nr */
+var data = [];
 var lc = {};
-for (var i = 0, len = data.length; i < len; i++) {
-	data[i].school = school[data[i].id.substr(0, 3)];
+for (var i=0; i<lines.length; i++) {
+	var line = lines[i].split('\t');
+	datum = {
+		id: line[0],
+		gsat: line[1].split(""),
+		advanced: line[2].split(""),
+		school: line[3],
+		name: line[4]
+	};
 
-	if (lc[data[i].name] === undefined)
-		lc[data[i].name] = 1;
+	if (lc[datum.name] === undefined)
+		lc[datum.name] = 1;
 	else
-		lc[data[i].name]++;
+		lc[datum.name]++;
 
-	for (j = 0; j < subjects.length; j++) {
-		var s = subjects[j];
-		if (data[i][s].match(/^\d/))
-			data[i][s] = "x" + data[i][s];
-
-		if (data[i][s][0] == '*')
-			data[i][s] = '採計';
-	}
+	data.push(datum);
 }
 
 var list = Object.keys(lc).sort(function(a, b) {
@@ -55,7 +72,7 @@ var list = Object.keys(lc).sort(function(a, b) {
 
 /* Loaded */
 var input = document.getElementById("dep");
-parseHash();
+adjust();
 document.getElementById("loading").style.display = "none";
 
 
@@ -94,7 +111,63 @@ window.addEventListener("scroll", function () {
 
 window.onload = () => {
 	/* Countdown */
-	document.getElementById("countdown").innerHTML = Math.ceil((1551038400000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+	document.getElementById("countdown").innerHTML = Math.ceil((1561924800000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+
+	/* Initialize Fliter */
+	var table = document.getElementById("fliter");
+	table.innerHTML = "";
+	var tr = document.createElement('tr');
+	for (i = 0; i < 6; i++)
+		tr.appendChild(document.createElement('th'));
+	tr.cells[0].appendChild(document.createTextNode('科目'));
+	Object.keys(fliterGsat["國文"]).map(function(k, i) {
+		tr.cells[i + 1].appendChild(document.createTextNode(k + "標"));
+	});
+	table.appendChild(tr);
+
+	Object.keys(fliterGsat).map(function(k, i) {
+		var tr = document.createElement('tr');
+		tr.appendChild(document.createElement('th'));
+		tr.cells[0].appendChild(document.createTextNode(k));
+		for (i = 1; i < 6; i++)
+			tr.appendChild(document.createElement('td'));
+		Object.keys(fliterGsat[k]).map(function(K, I) {
+			button = document.createElement('button');
+			button.dataset.subject = k;
+			button.dataset.mark = K;
+			button.classList.add("show");
+			button.onclick = (e) => {
+				t = e.target;
+				d = t.dataset;
+				if (fliterGsat[ d.subject ][ d.mark ] == 1) {
+					if (t.parentNode.previousSibling.firstElementChild &&
+						t.parentNode.previousSibling.firstElementChild.classList.contains("show"))
+						t = t.parentNode.previousSibling.firstElementChild;
+					do {
+						t.classList.remove("show", "hidden");
+						t.classList.add("hidden");
+						d = t.dataset;
+						fliterGsat[ d.subject ][ d.mark ] = 0;
+					} while (t = t.parentNode.previousSibling.firstElementChild);
+				} else {
+					t.classList.remove("show", "hidden");
+					t.classList.add("show");
+					d = t.dataset;
+					fliterGsat[ d.subject ][ d.mark ] = 1;
+					while (t.parentNode.nextSibling != undefined) {
+						t = t.parentNode.nextSibling.firstElementChild;
+						t.classList.remove("show", "hidden");
+						t.classList.add("show");
+						d = t.dataset;
+						fliterGsat[ d.subject ][ d.mark ] = 1;
+					}
+				}
+				adjust();
+			}
+			tr.cells[I + 1].appendChild(button);
+		});
+		table.appendChild(tr);
+	});
 }
 
 /* Functions */
@@ -150,25 +223,6 @@ function removeActive(x) {
 		x[i].classList.remove("autocomplete-active");
 }
 
-function parseHash() {
-	if (window.location.hash.length === 0) {
-		adjust();
-		return;
-	}
-	var queries = decodeURIComponent(window.location.hash).substr(1).split(';');
-	for (var i = 0; i < queries.length; i++) {
-		var query = queries[i].split('=', 2);
-		if (query[0] === 'q') {
-			input.value = query[1];
-		} else if (query[0] === 'y') {
-			fliter[query[1]] = 1;
-		} else if (query[0] === 'n') {
-			fliter[query[1]] = -1;
-		}
-	}
-	adjust();
-}
-
 function updateTable(val) {
 	if (val === undefined)
 		val = input.value;
@@ -194,14 +248,6 @@ function updateTable(val) {
 
 	var href = "#q=" + val;
 
-	for (var i = 0; i < 5; i++) {
-		var s = subjects[i];
-		if (fliter[s] === 1)
-			href += ";y=" + s;
-		else if (fliter[s] === -1)
-			href += ";n=" + s;
-	}
-
 	if (href == "#q=")
 		history.pushState("", document.title, window.location.pathname);
 	else
@@ -214,29 +260,28 @@ function updateTable(val) {
 	var table = document.getElementById("list");
 	table.innerHTML = "";
 	var tr = document.createElement('tr');
-	for (i = 0; i < 9; i++)
+	for (i = 0; i < 14; i++)
 		tr.appendChild(document.createElement('th'));
-
 	tr.cells[0].classList.add("favorites");
 	tr.cells[1].appendChild(document.createTextNode('學校'));
 	tr.cells[1].classList.add("school");
 	tr.cells[2].appendChild(document.createTextNode('科系'));
 	tr.cells[2].classList.add("dep");
-
-	for (var i = 0; i < 5; i++) {
-		var s = subjects[i];
+	for (var i = 0; i < 10; i++) {
+		var s = subjectsAdv[i];
 		var button = document.createElement('button');
 		button.onclick = function(e) {
 			var s = e.target.innerText;
-			fliter[s]++;
-			if (fliter[s] > 1) fliter[s] = -1;
+			fliterAdv[s]++;
+			if (fliterAdv[s] > 1) fliterAdv[s] = -1;
 			updateTable();
 		}
 
 		button.id = s;
-		if (fliter[s] === 1) {
+		if (fliterAdv[s] === 1) {
 			button.classList.add("show");
-		} else if (fliter[s] === -1) {
+
+		} else if (fliterAdv[s] === -1) {
 			button.classList.add("hidden");
 		}
 
@@ -245,8 +290,8 @@ function updateTable(val) {
 		tr.cells[i + 3].classList.add("sub");
 	}
 
-	tr.cells[8].appendChild(document.createTextNode('編號'));
-	tr.cells[8].classList.add("id");
+	tr.cells[13].appendChild(document.createTextNode('編號'));
+	tr.cells[13].classList.add("id");
 
 	table.appendChild(tr);
 
@@ -257,7 +302,7 @@ function updateTable(val) {
 			id = data[i].id;
 			tr.dataset.id = id;
 
-			for (_ = 0; _ < 9; _++)
+			for (_ = 0; _ < 14; _++)
 				tr.appendChild(document.createElement('td'));
 
 			tr.cells[0].classList.add("favorites");
@@ -274,7 +319,7 @@ function updateTable(val) {
 					fav[index] = 0; // remove
 					t.classList.add("not-fav");
 				}
-				localStorage.setItem("favorites", JSON.stringify(fav)); // save
+				localStorage.setItem("favoritesAdv", JSON.stringify(fav)); // save
 			}
 			button.classList.add(fav.includes(id) ? "favorited" : "not-fav");
 			tr.cells[0].appendChild(button);
@@ -284,49 +329,29 @@ function updateTable(val) {
 
 			var link = document.createElement('a');
 			link.text = id;
-			if (id.length == 6)
-				link.href = 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_' + id + '.htm';
-			else
-				link.href = 'https://www.cac.edu.tw/star108/system/108ColQry_forstar_5d3o9a/html/108_' + id + '.htm';
+			link.href = 'https://campus4.ncku.edu.tw/uac/cross_search/dept_info/' + id + '.htm';
 			link.target = '_blank';
 			link.classList.add('id');
-			tr.cells[8].appendChild(link);
-			tr.cells[8].classList.add("id");
+			tr.cells[13].appendChild(link);
+			tr.cells[13].classList.add("id");
 
 			var show = true;
-			for (j = 0; j < subjects.length; j++) {
-				var s = subjects[j];
-				if (data[i][s] == '--') {
-					if (fliter[s] === 1) {
+			for (j = 0; j < subjectsAdv.length; j++) {
+				var s = subjectsAdv[j];
+				if (data[i].advanced[j] == 'O') {
+					if (fliterAdv[s] === -1)
 						show = false;
-					}
+					tr.cells[j + 3].appendChild(document.createTextNode(s));
+					tr.cells[j + 3].classList.add("mark" + j);
 				} else {
-					if (fliter[s] == -1)
+					if (fliterAdv[s] === 1)
 						show = false;
-					if (data[i][s][1] == '標') {
-						if (data[i][s] == '頂標')
-							tr.cells[j + 3].classList.add("best");
-						if (data[i][s] == '前標')
-							tr.cells[j + 3].classList.add("good");
-						if (data[i][s] == '均標')
-							tr.cells[j + 3].classList.add("average");
-						if (data[i][s] == '後標')
-							tr.cells[j + 3].classList.add("bad");
-						if (data[i][s] == '底標')
-							tr.cells[j + 3].classList.add("worst");
-					}
-
-					if (data[i][s][0] == 'x')
-						tr.cells[j + 3].classList.add("multiple");
-					else
-						tr.cells[j + 3].classList.add("mark"); // Add mark for all cells expect of x3
-
-					if (data[i][s] == '採計')
-						tr.cells[j + 3].classList.add("weighted");
-
-
-					tr.cells[j + 3].appendChild(document.createTextNode(data[i][s]));
 				}
+			}
+			for (j = 0; j < subjectsGsat.length; j++) {
+				var s = subjectsGsat[j];
+				if (fliterGsat[s][ data[i].gsat[j] ] == false)
+					show = false;
 			}
 			if (show) {
 				count++;
@@ -374,7 +399,7 @@ function startIntro(){
 				intro: "輸入想查詢的校系"
 			},
 			{
-				element: '#自然',
+				element: '#fliter',
 				intro: "點一下科目，啟用過濾器"
 			},
 			{

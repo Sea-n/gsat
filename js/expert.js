@@ -22,10 +22,10 @@ Object.keys(fliter).forEach(function(k) {
 	};
 });
 
-var fav = JSON.parse(localStorage.getItem("favorites"));
 
-if (!localStorage.getItem("favorites"))
-	fav = [];
+var fav = [];
+if (localStorage.getItem("favorites"))
+	fav = JSON.parse(localStorage.getItem("favorites"));
 
 
 /* Parse School Name */
