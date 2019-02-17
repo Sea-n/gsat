@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>個人申請 - 學測五選四</title>
+    <meta name="keywords" content="學測五選四,個人申請">
+    <meta name="description" content="自今年開始，個人申請最多參採四科，來看看您心目中的科系用了何種組合，學測該將準備心力放在哪些考科最有利">
+    <meta property="og:url" content="https://sean.cat/gsat/apply">
+    <meta property="og:title" content="學測五選四 - 個人申請">
+    <meta property="og:description" content="自今年開始，個人申請最多參採四科，來看看您心目中的科系用了何種組合，學測該將準備心力放在哪些考科最有利">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="mask-icon" sizes="any" href="https://www.sean.taipei/logo.svg">
     <link rel="icon" type="image/png" href="https://www.sean.taipei/logo-192.png" sizes="192x192">
     <link rel="icon" type="image/png" href="https://www.sean.taipei/logo-128.png" sizes="128x128">
@@ -11,12 +16,7 @@
     <link rel="icon" type="image/png" href="https://www.sean.taipei/logo-32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="https://www.sean.taipei/logo-16.png" sizes="16x16">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="keywords" content="學測五選四,個人申請">
-    <meta name="description" content="自今年開始，個人申請最多參採四科，來看看您心目中的科系用了何種組合，學測該將準備心力放在哪些考科最有利">
-    <meta property="og:title" content="學測五選四 - 個人申請">
-    <meta property="og:url" content="https://sean.cat/gsat/apply">
     <meta property="og:type" content="website">
-    <meta property="og:description" content="自今年開始，個人申請最多參採四科，來看看您心目中的科系用了何種組合，學測該將準備心力放在哪些考科最有利">
     <meta property="og:site_name" content="Sean's Website">
     <meta property="fb:app_id" content="1654538528156949">
     <link href="https://introjs.com/introjs.css" rel="stylesheet">
@@ -38,7 +38,7 @@
   </head>
   <body>
     <nav class="ts basic fluid borderless menu horizontally scrollable">
-      <div class="ts container"><a class="item" href=".">首頁</a><b class="item hide1">個人申請</b><a class="item" href="star">繁星推薦</a>
+      <div class="ts container"><a class="item" href=".">首頁</a><b class="item active hide1">個人申請</b><a class="item hide1" href="star">繁星推薦</a><a class="item hide1" href="advanced">指考分發</a>
         <div class="right fitted item"><b class="item cd">倒數&nbsp;<span id="countdown">87</span>&nbsp;天公佈成績</b><a class="item" href="javascript:void(0);" onclick="javascript:startIntro();">使用教學</a></div>
       </div>
     </nav>
@@ -55,13 +55,11 @@
         </div>
         <div class="autocomplete-items" id="dep-list"></div>
       </div>
-      <div id="stone" style="display: none;"><img class="ts poyon" src="https://sitcon.org/2017/favicon.ico">
-        <p style="display: inline-block;">小石看到你正在查詢資訊相關科系<br>不妨來 <a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'Search', 'SITCON');">SITCON 學生計算機年會</a> 看看吧owo</p>
+      <div id="stone" style="display: none;"><a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Stone');"><img class="ts poyon" src="https://sitcon.org/2017/favicon.ico"></a>
+        <p style="display: inline-block;">小石看到你正在查詢資訊相關科系<br>不妨來 <a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Textlink');">SITCON 學生計算機年會</a> 看看吧owo</p>
       </div>
-      <div id="loading">
-        <h3 class="ts header">資料讀取中...</h3>
-        <div class="description">如無法載入請嘗試使用 <a href="apply-static">靜態版</a></div>
-      </div>
+      <table class="ts very basic table" id="fliter"></table>
+      <h3 class="ts header" id="loading">資料讀取中...</h3>
       <h5 class="ts center aligned header" id="count" style="display: none;">共&nbsp;<span id="count-num">0</span>&nbsp;筆結果</h5>
       <table class="ts very basic table" id="list"></table>
       <div class="ts padded basic slate" id="no-data" style="display: none;"><i class="search icon"></i><span class="header">無符合條件之結果</span></div>
@@ -80,8 +78,8 @@
       </div>
     </footer>
     <script src="https://introjs.com/minified/intro.min.js"></script>
+    <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7"></script>
     <script src="js/apply.js"></script>
     <script src="js/common.js"></script>
-    <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7"></script>
   </body>
 </html>

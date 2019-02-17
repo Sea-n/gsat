@@ -1,46 +1,21 @@
 doctype html
 html
 	head
-		meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
 		title 指考分發 - 學測五選四
-		link(rel="mask-icon" sizes="any" href="https://www.sean.taipei/logo.svg")
-		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-192.png" sizes="192x192")
-		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-128.png" sizes="128x128")
-		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-96.png" sizes="96x96")
-		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-64.png" sizes="64x64")
-		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-32.png" sizes="32x32")
-		link(rel="icon" type="image/png" href="https://www.sean.taipei/logo-16.png" sizes="16x16")
-		meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
 		meta(name="keywords" content="學測五選四,指考分發")
 		meta(name="description" content="假如您做好了指考的心理準備，來看看您心目中的科系採計了哪些科目，將力氣放在正確的考科上")
 		meta(property="og:title" content="學測五選四 - 指考分發")
 		meta(property="og:url" content="https://sean.cat/gsat/advanced")
-		meta(property="og:type" content="website")
 		meta(property="og:description" content="假如您做好了指考的心理準備，來看看您心目中的科系採計了哪些科目，將力氣放在正確的考科上")
-		meta(property="og:site_name" content="Sean's Website")
-		meta(property="fb:app_id" content="1654538528156949")
-		link(href="https://introjs.com/introjs.css" rel="stylesheet")
-		link(href="introjs-modern.css" rel="stylesheet")
-		link(href="/assets/css/tocas-ui/tocas.css" rel="stylesheet")
-		link(href="//cdn.rawgit.com/gnehs/Tocas-UI-Xiaoan/master/ts.xiaoan.min.css" rel="stylesheet")
-		link(href="./style.css" rel="stylesheet")
+		include includes/head.pug
 		link(href="./style.advanced.css" rel="stylesheet")
-		// Google Analytics
-		script.
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)
-			},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-			ga('create', 'UA-100002738-1', 'auto');
-			ga('send', 'pageview');
-		// End Google Analytics
 	body
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container
 				a.item(href=".") 首頁
-				a.item(href="apply") 個人申請
+				a.item.hide1(href="apply") 個人申請
 				a.item.hide1(href="star") 繁星推薦
+				b.item.hide1.active 指考分發
 				.right.fitted.item
 					b.item.cd
 						| 指考倒數&nbsp;
@@ -49,8 +24,8 @@ html
 					a.item(href="javascript:void(0);" onclick="javascript:startIntro();") 使用教學
 		section.placeholder
 			.placeholder-message
-				p 指考共有十個科目，不適合小手機查詢，請打開電腦使用，或將手機畫面打橫著用
-				p 抱歉造成您的不便，Sean 在這邊感謝您的使用
+				p 指考共有十個科目，不適合小手機查詢，請以電腦開啟此頁面，或將手機畫面打橫著用
+				p 抱歉造成您的不便，Sean 在這邊感謝您的體諒
 				br
 				a(href=".") 回到首頁
 		header.ts.fluid.vertically.padded.heading.slate
@@ -58,42 +33,6 @@ html
 				.header 指考分發
 				.description 學測五選四
 		div.ts.container(name="main")
-			.autocomplete
-				.inner-btn
-					input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();")
-					i#clear.clear.hidden1.hidden2(onclick="input.value = ''; adjust();")
-				#dep-list.autocomplete-items
-			#stone(style="display: none;")
-				img.ts.poyon(src="https://sitcon.org/2017/favicon.ico")
-				p(style="display: inline-block;") 小石看到你正在查詢資訊相關科系
-					br
-					| 不妨來 
-					a(target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'Search', 'SITCON');") SITCON 學生計算機年會
-					|  看看吧owo
-			table#fliter.ts.very.basic.table
-			h3#loading.ts.header 資料讀取中...
-			h5#count.ts.center.aligned.header(style="display: none;") 共&nbsp;
-				span#count-num 0
-				| &nbsp;筆結果
-			table#list.ts.very.basic.table
-			#no-data.ts.padded.basic.slate(style="display: none;")
-				i.search.icon
-				span.header 無符合條件之結果
-			#show-more(style="display: none;text-align:center")
-				button.ts.secondary.basic.button(onclick="max_result *= 2; updateTable();") 檢視更多結果
-		footer.ts.fluid.slate(style='margin-top:10px')
-			.ts.container
-				.ts.grid
-					.stretched.column
-						p 由 
-							a(target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'GSAT');") Sean 韋詠祥
-							|  整理、製作
-							br
-							| 由 
-							a(target="_blank" href="https://gnehs.net/") 棒棒勝
-							|  設計
-					.column
-						a(href='./#suggestion') 功能建議
-		script(src="https://introjs.com/minified/intro.min.js")
+			include includes/search.pug
+		include includes/footer.pug
 		script(src="js/advanced.js")
-		script(type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7")

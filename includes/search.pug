@@ -1,0 +1,27 @@
+.autocomplete
+	.inner-btn
+		input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();")
+		i#clear.clear.hidden1.hidden2(onclick="input.value = ''; adjust();")
+	#dep-list.autocomplete-items
+#stone(style="display: none;")
+	a(target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Stone');")
+		img.ts.poyon(src="https://sitcon.org/2017/favicon.ico")
+	p(style="display: inline-block;")
+		| 小石看到你正在查詢資訊相關科系
+		br
+		| 不妨來 
+		a(target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Textlink');") SITCON 學生計算機年會
+		|  看看吧owo
+
+table#fliter.ts.very.basic.table
+
+h3#loading.ts.header 資料讀取中...
+h5#count.ts.center.aligned.header(style="display: none;") 共&nbsp;
+	span#count-num 0
+	| &nbsp;筆結果
+table#list.ts.very.basic.table
+#no-data.ts.padded.basic.slate(style="display: none;")
+	i.search.icon
+	span.header 無符合條件之結果
+#show-more(style="display: none;text-align:center")
+	button.ts.secondary.basic.button(onclick="max_result *= 2; updateTable();") 檢視更多結果

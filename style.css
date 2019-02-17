@@ -235,14 +235,14 @@ nav.fixed {
     z-index: 10;
 }
 
-@media screen and (max-width: 320px) {
-    nav .item.hide1 {
+@media screen and (max-width: 479px) {
+    nav .hide0 {
         display: none !important;
     }
 }
 
-@media screen and (max-width: 480px) {
-    nav b.item.cd {
+@media screen and (max-width: 559px) {
+    nav .hide1 {
         display: none !important;
     }
 }
