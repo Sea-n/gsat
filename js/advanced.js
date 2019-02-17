@@ -400,7 +400,7 @@ function startIntro(){
 				intro: "輸入想查詢的校系"
 			},
 			{
-				element: '#fliter',
+				element: '#數甲',
 				intro: "點一下科目，啟用過濾器"
 			},
 			{
