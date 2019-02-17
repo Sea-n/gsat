@@ -2,6 +2,15 @@
 var default_max_result = 20;
 var max_result = default_max_result; // max count for result
 
+/* Initialize Fliters */
+var fliterGsat = {
+	"國文": [],
+	"英文": [],
+	"數學": [],
+	"社會": [],
+	"自然": []
+}
+
 var fliter = {
 	"國文": 0,
 	"英文": 0,
@@ -11,6 +20,15 @@ var fliter = {
 };
 var subjects = Object.keys(fliter);
 
+subjects.forEach(function(k) {
+	fliterGsat[k] = {
+		"頂標": 1,
+		"前標": 1,
+		"均標": 1,
+		"後標": 1,
+		"底標": 1,
+	};
+});
 
 var fav = [];
 if (localStorage.getItem("favorites"))
@@ -95,6 +113,62 @@ window.addEventListener("scroll", function () {
 window.onload = () => {
 	/* Countdown */
 	document.getElementById("countdown").innerHTML = Math.ceil((1551038400000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+
+	/* Initialize Fliter */
+	var table = document.getElementById("fliter");
+	table.innerHTML = "";
+	var tr = document.createElement('tr');
+	for (i = 0; i < 6; i++)
+		tr.appendChild(document.createElement('th'));
+	tr.cells[0].appendChild(document.createTextNode('科目'));
+	Object.keys(fliterGsat["國文"]).map(function(k, i) {
+		tr.cells[i + 1].appendChild(document.createTextNode(k));
+	});
+	table.appendChild(tr);
+
+	Object.keys(fliterGsat).map(function(k, i) {
+		var tr = document.createElement('tr');
+		tr.appendChild(document.createElement('th'));
+		tr.cells[0].appendChild(document.createTextNode(k));
+		for (i = 1; i < 6; i++)
+			tr.appendChild(document.createElement('td'));
+		Object.keys(fliterGsat[k]).map(function(K, I) {
+			button = document.createElement('button');
+			button.dataset.subject = k;
+			button.dataset.mark = K;
+			button.classList.add("show");
+			button.onclick = (e) => {
+				t = e.target;
+				d = t.dataset;
+				if (fliterGsat[ d.subject ][ d.mark ] == 1) {
+					if (t.parentNode.previousSibling.firstElementChild &&
+						t.parentNode.previousSibling.firstElementChild.classList.contains("show"))
+						t = t.parentNode.previousSibling.firstElementChild;
+					do {
+						t.classList.remove("show", "hidden");
+						t.classList.add("hidden");
+						d = t.dataset;
+						fliterGsat[ d.subject ][ d.mark ] = 0;
+					} while (t = t.parentNode.previousSibling.firstElementChild);
+				} else {
+					t.classList.remove("show", "hidden");
+					t.classList.add("show");
+					d = t.dataset;
+					fliterGsat[ d.subject ][ d.mark ] = 1;
+					while (t.parentNode.nextSibling != undefined) {
+						t = t.parentNode.nextSibling.firstElementChild;
+						t.classList.remove("show", "hidden");
+						t.classList.add("show");
+						d = t.dataset;
+						fliterGsat[ d.subject ][ d.mark ] = 1;
+					}
+				}
+				adjust();
+			}
+			tr.cells[I + 1].appendChild(button);
+		});
+		table.appendChild(tr);
+	});
 }
 
 /* Functions */
@@ -304,6 +378,9 @@ function updateTable(val) {
 					if (fliter[s] == -1)
 						show = false;
 					if (data[i][s][1] == '標') {
+						if (fliterGsat[s][ data[i][s] ] === 0)
+							show = false;
+
 						if (data[i][s] == '頂標')
 							tr.cells[j + 3].classList.add("best");
 						if (data[i][s] == '前標')
