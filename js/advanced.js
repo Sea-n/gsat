@@ -53,7 +53,7 @@ for (var i=0; i<lines.length; i++) {
 	datum = {
 		id: line[0],
 		gsat: line[1].split(""),
-		advanced: line[2].split(""),
+		advanced: line[2].split(" "),
 		school: line[3],
 		name: line[4]
 	};
@@ -329,7 +329,7 @@ function updateTable(val) {
 
 			var link = document.createElement('a');
 			link.text = id;
-			link.href = 'https://campus4.ncku.edu.tw/uac/cross_search/dept_info/' + id + '.htm';
+			link.href = 'https://campus4.ncku.edu.tw/uac/cross_search/dept_info/' + id + '.html';
 			link.target = '_blank';
 			link.classList.add('id');
 			tr.cells[13].appendChild(link);
@@ -338,11 +338,12 @@ function updateTable(val) {
 			var show = true;
 			for (j = 0; j < subjectsAdv.length; j++) {
 				var s = subjectsAdv[j];
-				if (data[i].advanced[j] == 'O') {
+				if (data[i].advanced[j] != '0.00') {
 					if (fliterAdv[s] === -1)
 						show = false;
-					tr.cells[j + 3].appendChild(document.createTextNode(s));
+					tr.cells[j + 3].appendChild(document.createTextNode('x' + data[i].advanced[j]));
 					tr.cells[j + 3].classList.add("mark" + j);
+					tr.cells[j + 3].classList.add("x" + data[i].advanced[j].replace('.', '-'));
 				} else {
 					if (fliterAdv[s] === 1)
 						show = false;

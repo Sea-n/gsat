@@ -32,58 +32,36 @@ section.placeholder {
 }
 
 @media screen and (max-width: 991px) {
-    #list .id,
+	#list .id,
 	#list .favorites {
-        display: none;
-    }
+		display: none;
+	}
 }
 
-#list .mark0 {
-    color: hsl(0, 100%, 25%);
-    background-color: hsl(0, 100%, 92%);
+.mark0 { --hue: 0; }
+.mark1 { --hue: 20; }
+.mark2 { --hue: 50; }
+.mark3 { --hue: 70; }
+.mark4 { --hue: 120; }
+.mark5 { --hue: 160; }
+.mark6 { --hue: 200; }
+.mark7 { --hue: 240; }
+.mark8 { --hue: 280; }
+.mark9 { --hue: 320; }
+
+#list .x1-00 {
+	color: hsl(var(--hue), 100%, 25%);
+	background-color: hsl(var(--hue), 100%, 92%);
 }
 
-#list .mark1 {
-    color: hsl(20, 100%, 25%);
-    background-color: hsl(20, 100%, 92%);
+#list .x1-25,
+#list .x1-50,
+#list .x1-75 {
+	color: hsl(var(--hue), 100%, 25%);
+	background-color: hsl(var(--hue), 100%, 87%);
 }
 
-#list .mark2 {
-    color: hsl(50, 100%, 25%);
-    background-color: hsl(50, 100%, 92%);
-}
-
-#list .mark3 {
-    color: hsl(70, 100%, 25%);
-    background-color: hsl(70, 100%, 92%);
-}
-
-#list .mark4 {
-    color: hsl(120, 100%, 25%);
-    background-color: hsl(120, 100%, 92%);
-}
-
-#list .mark5 {
-    color: hsl(160, 100%, 25%);
-    background-color: hsl(160, 100%, 92%);
-}
-
-#list .mark6 {
-    color: hsl(200, 100%, 25%);
-    background-color: hsl(200, 100%, 92%);
-}
-
-#list .mark7 {
-    color: hsl(240, 100%, 25%);
-    background-color: hsl(240, 100%, 92%);
-}
-
-#list .mark8 {
-    color: hsl(280, 100%, 25%);
-    background-color: hsl(280, 100%, 92%);
-}
-
-#list .mark9 {
-    color: hsl(320, 100%, 25%);
-    background-color: hsl(320, 100%, 92%);
+#list .x2-00 {
+	color: hsl(var(--hue), 100%, 25%);
+	background-color: hsl(var(--hue), 100%, 82%);
 }

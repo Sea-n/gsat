@@ -1,7 +1,7 @@
 #!/bin/bash
 id=${1/.html/}
 file=`iconv -f big5 -t utf-8 $id.html`
-title=`echo $file |grep -oP '<title>\K[^<]+(?=<)'`
+title=`echo $file |grep -oP '<title>\K[^<]+(?=<)' |sed 's/ \- /\t/'`
 
 echo -en "$id\t"
 
@@ -16,14 +16,13 @@ done
 
 echo -ne "\t"
 
-subjects=("國" "英" "甲" "乙" "物" "化" "生" "史" "地" "公")
+subjects=("國" "英" "甲" "乙" "理" "化" "生" "史" "地" "公")
 for subj in ${subjects[@]}; do
-	echo $file |grep -P "$subj[^<>]+ x [^<>]+<br>" > /dev/null
-	if [[ $? -eq 0 ]]; then
-		echo -n O
-	else
-		echo -n X
+	weight=`echo $file |grep -oP ">[^<>]*$subj[^<>]+ x \K\d\.\d\d(?=<br>)"`
+	if [[ $? -ne 0 ]]; then
+		weight="0.00"
 	fi
+	echo -n "$weight "
 done
 
 echo -e "\t$title"
