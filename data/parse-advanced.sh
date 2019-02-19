@@ -16,8 +16,9 @@ done
 
 echo -ne "\t"
 
-subjects=("國" "英" "甲" "乙" "理" "化" "生" "史" "地" "公")
-for subj in ${subjects[@]}; do
+subjects=("國_文" "英_文" "數_甲" "數_乙" "物_理" "化_學" "生_物" "歷_史" "地_理" "公_民")
+for s in ${subjects[@]}; do
+	subj=${s/_/[^<>]*}
 	weight=`echo $file |grep -oP ">[^<>]*$subj[^<>]+ x \K\d\.\d\d(?=<br>)"`
 	if [[ $? -ne 0 ]]; then
 		weight="0.00"
