@@ -16,6 +16,14 @@ span.underline {
     width: 100%;
 }
 
+#list .fixed-header {
+	z-index: 10;
+	background-color: white;
+	position: fixed;
+	top: 40px;
+	display: none;
+}
+
 #list th {
     line-height: 25px;
     padding: .78571em .78571em;
@@ -147,11 +155,6 @@ span.underline {
 	color: darkGray;
 }
 
-#list th.school {
-    max-width: 160px;
-    /* 10 Char */
-}
-
 #list th.sub {
     width: 50px;
 }
@@ -252,8 +255,8 @@ nav .item {
 }
 
 .cd {
-	background-color: #fd4;
-	color: #04f !important;
+	background-color: #FF0000B3;
+	color: white !important;
 }
 
 .inner-btn i {

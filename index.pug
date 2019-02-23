@@ -20,8 +20,8 @@ html
 				.right.fitted.item.hide0
 					b.item.cd
 						| 倒數&nbsp;
-						span#countdown 87
-						| &nbsp;天公佈成績
+						span#countdown 3:14:15
+						| &nbsp;公佈成績
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
 				h1.header 學測五選四
@@ -138,5 +138,18 @@ html
 					|  設計
 		script.
 			window.onload = () => {
-				document.getElementById("countdown").innerHTML = Math.ceil((1551038400000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+				setInterval(() => {
+					var diff = Math.ceil((1551047400000 - new Date().getTime()) / 1000);
+					if (diff < 0)
+						diff = 0;
+					var hour = Math.ceil(diff / 60 / 60);
+					var min = Math.ceil(diff / 60) % 60;
+					if (min < 10)
+						min = "0" + min;
+					var sec = diff % 60;
+					if (sec < 10)
+						sec = "0" + sec;
+					var cd = hour + ":" + min + ":" + sec;
+					document.getElementById("countdown").innerHTML = cd;
+				}, 1000);
 			}

@@ -108,11 +108,33 @@ window.addEventListener("scroll", function () {
 		nav.classList.remove("fixed");
 		body.style.top = "0px";
 	}
+
+	/* Fixed Table Header */
+	var table = document.getElementById("list");
+	var y = table.getBoundingClientRect().y;
+	var th = table.firstChild;
+	if (y < 40)
+		th.style.display = "initial";
+	else
+		th.style.display = "none";
 });
 
 window.onload = () => {
 	/* Countdown */
-	document.getElementById("countdown").innerHTML = Math.ceil((1551038400000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
+	setInterval(() => {
+		var diff = Math.ceil((1551047400000 - new Date().getTime()) / 1000);
+		if (diff < 0)
+			diff = 0;
+		var hour = Math.ceil(diff / 60 / 60);
+		var min = Math.ceil(diff / 60) % 60;
+		if (min < 10)
+			min = "0" + min;
+		var sec = diff % 60;
+		if (sec < 10)
+			sec = "0" + sec;
+		var cd = hour + ":" + min + ":" + sec;
+		document.getElementById("countdown").innerHTML = cd;
+	}, 1000);
 
 	/* Initialize Fliter */
 	var table = document.getElementById("fliter");
@@ -287,42 +309,45 @@ function updateTable(val) {
 
 	var table = document.getElementById("list");
 	table.innerHTML = "";
-	var tr = document.createElement('tr');
-	for (i = 0; i < 9; i++)
-		tr.appendChild(document.createElement('th'));
 
-	tr.cells[0].classList.add("favorites");
-	tr.cells[1].appendChild(document.createTextNode('學校'));
-	tr.cells[1].classList.add("school");
-	tr.cells[2].appendChild(document.createTextNode('科系'));
-	tr.cells[2].classList.add("dep");
+	for (var k = 0; k < 2; k++) { // fixed header and ordinary header
+		var tr = document.createElement('tr');
+		for (var i = 0; i < 9; i++)
+			tr.appendChild(document.createElement('th'));
 
-	for (var i = 0; i < 5; i++) {
-		var s = subjects[i];
-		var button = document.createElement('button');
-		button.onclick = function(e) {
-			var s = e.target.innerText;
-			fliter[s]++;
-			if (fliter[s] > 1) fliter[s] = -1;
-			updateTable();
+		tr.cells[0].classList.add("favorites");
+		tr.cells[1].appendChild(document.createTextNode('學校'));
+		tr.cells[1].classList.add("school");
+		tr.cells[2].appendChild(document.createTextNode('科系'));
+		tr.cells[2].classList.add("dep");
+
+		for (var i = 0; i < 5; i++) {
+			var s = subjects[i];
+			var button = document.createElement('button');
+			button.onclick = function(e) {
+				var s = e.target.innerText;
+				fliter[s]++;
+				if (fliter[s] > 1) fliter[s] = -1;
+				updateTable();
+			}
+
+			button.id = s;
+			if (fliter[s] === 1) {
+				button.classList.add("show");
+			} else if (fliter[s] === -1) {
+				button.classList.add("hidden");
+			}
+
+			button.appendChild(document.createTextNode(s));
+			tr.cells[i + 3].appendChild(button);
+			tr.cells[i + 3].classList.add("sub");
 		}
 
-		button.id = s;
-		if (fliter[s] === 1) {
-			button.classList.add("show");
-		} else if (fliter[s] === -1) {
-			button.classList.add("hidden");
-		}
+		tr.cells[8].appendChild(document.createTextNode('編號'));
+		tr.cells[8].classList.add("id");
 
-		button.appendChild(document.createTextNode(s));
-		tr.cells[i + 3].appendChild(button);
-		tr.cells[i + 3].classList.add("sub");
+		table.appendChild(tr);
 	}
-
-	tr.cells[8].appendChild(document.createTextNode('編號'));
-	tr.cells[8].classList.add("id");
-
-	table.appendChild(tr);
 
 	var count = 0;
 	for (i = 0; i < data.length; i++) {
@@ -412,6 +437,15 @@ function updateTable(val) {
 			}
 		}
 	}
+
+	// TODO: Adjust when resize window, show more
+	/* Adjust Fixed Header Width */
+	var fH = table.childNodes[0];
+	fH.classList.add("fixed-header")
+	var oH = table.childNodes[1];
+	oH.classList.add("ordinary-header")
+	for (i = 0; i < fH.childElementCount; i++)
+		fH.childNodes[i].style.width = oH.childNodes[i].getBoundingClientRect().width + "px";
 
 	if (count == 0) {
 		document.getElementById('no-data').style.display = '';

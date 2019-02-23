@@ -107,6 +107,15 @@ window.addEventListener("scroll", function () {
 		nav.classList.remove("fixed");
 		body.style.top = "0px";
 	}
+
+	/* Fixed Table Header */
+	var table = document.getElementById("list");
+	var y = table.getBoundingClientRect().y;
+	var th = table.firstChild;
+	if (y < 40)
+		th.style.display = "initial";
+	else
+		th.style.display = "none";
 });
 
 window.onload = () => {
@@ -259,41 +268,44 @@ function updateTable(val) {
 
 	var table = document.getElementById("list");
 	table.innerHTML = "";
-	var tr = document.createElement('tr');
-	for (i = 0; i < 14; i++)
-		tr.appendChild(document.createElement('th'));
-	tr.cells[0].classList.add("favorites");
-	tr.cells[1].appendChild(document.createTextNode('學校'));
-	tr.cells[1].classList.add("school");
-	tr.cells[2].appendChild(document.createTextNode('科系'));
-	tr.cells[2].classList.add("dep");
-	for (var i = 0; i < 10; i++) {
-		var s = subjectsAdv[i];
-		var button = document.createElement('button');
-		button.onclick = function(e) {
-			var s = e.target.innerText;
-			fliterAdv[s]++;
-			if (fliterAdv[s] > 1) fliterAdv[s] = -1;
-			updateTable();
+
+	for (var k = 0; k < 2; k++) { // fixed header and ordinary header
+		var tr = document.createElement('tr');
+		for (i = 0; i < 14; i++)
+			tr.appendChild(document.createElement('th'));
+		tr.cells[0].classList.add("favorites");
+		tr.cells[1].appendChild(document.createTextNode('學校'));
+		tr.cells[1].classList.add("school");
+		tr.cells[2].appendChild(document.createTextNode('科系'));
+		tr.cells[2].classList.add("dep");
+		for (var i = 0; i < 10; i++) {
+			var s = subjectsAdv[i];
+			var button = document.createElement('button');
+			button.onclick = function(e) {
+				var s = e.target.innerText;
+				fliterAdv[s]++;
+				if (fliterAdv[s] > 1) fliterAdv[s] = -1;
+				updateTable();
+			}
+
+			button.id = s;
+			if (fliterAdv[s] === 1) {
+				button.classList.add("show");
+
+			} else if (fliterAdv[s] === -1) {
+				button.classList.add("hidden");
+			}
+
+			button.appendChild(document.createTextNode(s));
+			tr.cells[i + 3].appendChild(button);
+			tr.cells[i + 3].classList.add("sub");
 		}
 
-		button.id = s;
-		if (fliterAdv[s] === 1) {
-			button.classList.add("show");
+		tr.cells[13].appendChild(document.createTextNode('編號'));
+		tr.cells[13].classList.add("id");
 
-		} else if (fliterAdv[s] === -1) {
-			button.classList.add("hidden");
-		}
-
-		button.appendChild(document.createTextNode(s));
-		tr.cells[i + 3].appendChild(button);
-		tr.cells[i + 3].classList.add("sub");
+		table.appendChild(tr);
 	}
-
-	tr.cells[13].appendChild(document.createTextNode('編號'));
-	tr.cells[13].classList.add("id");
-
-	table.appendChild(tr);
 
 	var count = 0;
 	for (i = 0; i < data.length; i++) {
@@ -361,6 +373,14 @@ function updateTable(val) {
 			}
 		}
 	}
+
+	/* Adjust Fixed Header Width */
+	var fH = table.childNodes[0];
+	fH.classList.add("fixed-header")
+	var oH = table.childNodes[1];
+	oH.classList.add("ordinary-header")
+	for (i = 0; i < fH.childElementCount; i++)
+		fH.childNodes[i].style.width = oH.childNodes[i].getBoundingClientRect().width + "px";
 
 	if (count == 0) {
 		document.getElementById('no-data').style.display = '';
