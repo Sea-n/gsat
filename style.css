@@ -254,11 +254,6 @@ nav .item {
 	border-radius: 0 0 3px 3px !important;
 }
 
-.cd {
-	background-color: #FF0000B3;
-	color: white !important;
-}
-
 .inner-btn i {
     position: absolute;
     cursor: pointer;

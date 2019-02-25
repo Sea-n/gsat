@@ -120,23 +120,11 @@ window.addEventListener("scroll", function () {
 });
 
 window.onload = () => {
-	/* Countdown */
-	setInterval(() => {
-		var diff = Math.ceil((1551047400000 - new Date().getTime()) / 1000);
-		if (diff < 0)
-			diff = 0;
-		var hour = Math.ceil(diff / 60 / 60);
-		var min = Math.ceil(diff / 60) % 60;
-		if (min < 10)
-			min = "0" + min;
-		var sec = diff % 60;
-		if (sec < 10)
-			sec = "0" + sec;
-		var cd = hour + ":" + min + ":" + sec;
-		document.getElementById("countdown").innerHTML = cd;
-	}, 1000);
+	initFilter();
+}
 
-	/* Initialize Filter */
+/* Functions */
+function initFilter() {
 	var table = document.getElementById("filter");
 	table.innerHTML = "";
 	var tr = document.createElement('tr');
