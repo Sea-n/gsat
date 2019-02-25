@@ -2,15 +2,15 @@
 var default_max_result = 20;
 var max_result = default_max_result; // max count for result
 
-/* Initialize Fliters */
-var fliterGsat = {
+/* Initialize Filters */
+var filterGsat = {
 	"國文": [],
 	"英文": [],
 	"數學": [],
 	"社會": [],
 	"自然": []
 };
-var fliterAdv = {
+var filterAdv = {
 	"國文": 0,
 	"英文": 0,
 	"數甲": 0,
@@ -22,11 +22,11 @@ var fliterAdv = {
 	"地理": 0,
 	"公民": 0
 };
-var subjectsGsat = Object.keys(fliterGsat);
-var subjectsAdv = Object.keys(fliterAdv);
+var subjectsGsat = Object.keys(filterGsat);
+var subjectsAdv = Object.keys(filterAdv);
 
-Object.keys(fliterGsat).forEach(function(k) {
-	fliterGsat[k] = {
+Object.keys(filterGsat).forEach(function(k) {
+	filterGsat[k] = {
 		"頂": 1,
 		"前": 1,
 		"均": 1,
@@ -122,25 +122,25 @@ window.onload = () => {
 	/* Countdown */
 	document.getElementById("countdown").innerHTML = Math.ceil((1561924800000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
 
-	/* Initialize Fliter */
-	var table = document.getElementById("fliter");
+	/* Initialize Filter */
+	var table = document.getElementById("filter");
 	table.innerHTML = "";
 	var tr = document.createElement('tr');
 	for (i = 0; i < 6; i++)
 		tr.appendChild(document.createElement('th'));
 	tr.cells[0].appendChild(document.createTextNode('科目'));
-	Object.keys(fliterGsat["國文"]).map(function(k, i) {
+	Object.keys(filterGsat["國文"]).map(function(k, i) {
 		tr.cells[i + 1].appendChild(document.createTextNode(k + "標"));
 	});
 	table.appendChild(tr);
 
-	Object.keys(fliterGsat).map(function(k, i) {
+	Object.keys(filterGsat).map(function(k, i) {
 		var tr = document.createElement('tr');
 		tr.appendChild(document.createElement('th'));
 		tr.cells[0].appendChild(document.createTextNode(k));
 		for (i = 1; i < 6; i++)
 			tr.appendChild(document.createElement('td'));
-		Object.keys(fliterGsat[k]).map(function(K, I) {
+		Object.keys(filterGsat[k]).map(function(K, I) {
 			button = document.createElement('button');
 			button.dataset.subject = k;
 			button.dataset.mark = K;
@@ -148,7 +148,7 @@ window.onload = () => {
 			button.onclick = (e) => {
 				t = e.target;
 				d = t.dataset;
-				if (fliterGsat[ d.subject ][ d.mark ] == 1) {
+				if (filterGsat[ d.subject ][ d.mark ] == 1) {
 					if (t.parentNode.previousSibling.firstElementChild &&
 						t.parentNode.previousSibling.firstElementChild.classList.contains("show"))
 						t = t.parentNode.previousSibling.firstElementChild;
@@ -156,19 +156,19 @@ window.onload = () => {
 						t.classList.remove("show", "hidden");
 						t.classList.add("hidden");
 						d = t.dataset;
-						fliterGsat[ d.subject ][ d.mark ] = 0;
+						filterGsat[ d.subject ][ d.mark ] = 0;
 					} while (t = t.parentNode.previousSibling.firstElementChild);
 				} else {
 					t.classList.remove("show", "hidden");
 					t.classList.add("show");
 					d = t.dataset;
-					fliterGsat[ d.subject ][ d.mark ] = 1;
+					filterGsat[ d.subject ][ d.mark ] = 1;
 					while (t.parentNode.nextSibling != undefined) {
 						t = t.parentNode.nextSibling.firstElementChild;
 						t.classList.remove("show", "hidden");
 						t.classList.add("show");
 						d = t.dataset;
-						fliterGsat[ d.subject ][ d.mark ] = 1;
+						filterGsat[ d.subject ][ d.mark ] = 1;
 					}
 				}
 				adjust();
@@ -283,16 +283,16 @@ function updateTable(val) {
 			var button = document.createElement('button');
 			button.onclick = function(e) {
 				var s = e.target.innerText;
-				fliterAdv[s]++;
-				if (fliterAdv[s] > 1) fliterAdv[s] = -1;
+				filterAdv[s]++;
+				if (filterAdv[s] > 1) filterAdv[s] = -1;
 				updateTable();
 			}
 
 			button.id = s;
-			if (fliterAdv[s] === 1) {
+			if (filterAdv[s] === 1) {
 				button.classList.add("show");
 
-			} else if (fliterAdv[s] === -1) {
+			} else if (filterAdv[s] === -1) {
 				button.classList.add("hidden");
 			}
 
@@ -351,19 +351,19 @@ function updateTable(val) {
 			for (j = 0; j < subjectsAdv.length; j++) {
 				var s = subjectsAdv[j];
 				if (data[i].advanced[j] != '0.00') {
-					if (fliterAdv[s] === -1)
+					if (filterAdv[s] === -1)
 						show = false;
 					tr.cells[j + 3].appendChild(document.createTextNode('x' + data[i].advanced[j]));
 					tr.cells[j + 3].classList.add("mark" + j);
 					tr.cells[j + 3].classList.add("x" + data[i].advanced[j].replace('.', '-'));
 				} else {
-					if (fliterAdv[s] === 1)
+					if (filterAdv[s] === 1)
 						show = false;
 				}
 			}
 			for (j = 0; j < subjectsGsat.length; j++) {
 				var s = subjectsGsat[j];
-				if (fliterGsat[s][ data[i].gsat[j] ] == false)
+				if (filterGsat[s][ data[i].gsat[j] ] == false)
 					show = false;
 			}
 			if (show) {

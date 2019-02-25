@@ -2,8 +2,8 @@
 var default_max_result = 20;
 var max_result = default_max_result; // max count for result
 
-/* Initialize Fliters */
-var fliterGsat = {
+/* Initialize Filters */
+var filterGsat = {
 	"國文": [],
 	"英文": [],
 	"數學": [],
@@ -11,17 +11,17 @@ var fliterGsat = {
 	"自然": []
 }
 
-var fliter = {
+var filter = {
 	"國文": 0,
 	"英文": 0,
 	"數學": 0,
 	"社會": 0,
 	"自然": 0
 };
-var subjects = Object.keys(fliter);
+var subjects = Object.keys(filter);
 
 subjects.forEach(function(k) {
-	fliterGsat[k] = {
+	filterGsat[k] = {
 		"頂標": 1,
 		"前標": 1,
 		"均標": 1,
@@ -136,25 +136,25 @@ window.onload = () => {
 		document.getElementById("countdown").innerHTML = cd;
 	}, 1000);
 
-	/* Initialize Fliter */
-	var table = document.getElementById("fliter");
+	/* Initialize Filter */
+	var table = document.getElementById("filter");
 	table.innerHTML = "";
 	var tr = document.createElement('tr');
 	for (i = 0; i < 6; i++)
 		tr.appendChild(document.createElement('th'));
 	tr.cells[0].appendChild(document.createTextNode('科目'));
-	Object.keys(fliterGsat["國文"]).map(function(k, i) {
+	Object.keys(filterGsat["國文"]).map(function(k, i) {
 		tr.cells[i + 1].appendChild(document.createTextNode(k));
 	});
 	table.appendChild(tr);
 
-	Object.keys(fliterGsat).map(function(k, i) {
+	Object.keys(filterGsat).map(function(k, i) {
 		var tr = document.createElement('tr');
 		tr.appendChild(document.createElement('th'));
 		tr.cells[0].appendChild(document.createTextNode(k));
 		for (i = 1; i < 6; i++)
 			tr.appendChild(document.createElement('td'));
-		Object.keys(fliterGsat[k]).map(function(K, I) {
+		Object.keys(filterGsat[k]).map(function(K, I) {
 			button = document.createElement('button');
 			button.dataset.subject = k;
 			button.dataset.mark = K;
@@ -162,7 +162,7 @@ window.onload = () => {
 			button.onclick = (e) => {
 				t = e.target;
 				d = t.dataset;
-				if (fliterGsat[ d.subject ][ d.mark ] == 1) {
+				if (filterGsat[ d.subject ][ d.mark ] == 1) {
 					if (t.parentNode.previousSibling.firstElementChild &&
 						t.parentNode.previousSibling.firstElementChild.classList.contains("show"))
 						t = t.parentNode.previousSibling.firstElementChild;
@@ -170,19 +170,19 @@ window.onload = () => {
 						t.classList.remove("show", "hidden");
 						t.classList.add("hidden");
 						d = t.dataset;
-						fliterGsat[ d.subject ][ d.mark ] = 0;
+						filterGsat[ d.subject ][ d.mark ] = 0;
 					} while (t = t.parentNode.previousSibling.firstElementChild);
 				} else {
 					t.classList.remove("show", "hidden");
 					t.classList.add("show");
 					d = t.dataset;
-					fliterGsat[ d.subject ][ d.mark ] = 1;
+					filterGsat[ d.subject ][ d.mark ] = 1;
 					while (t.parentNode.nextSibling != undefined) {
 						t = t.parentNode.nextSibling.firstElementChild;
 						t.classList.remove("show", "hidden");
 						t.classList.add("show");
 						d = t.dataset;
-						fliterGsat[ d.subject ][ d.mark ] = 1;
+						filterGsat[ d.subject ][ d.mark ] = 1;
 					}
 				}
 				adjust();
@@ -257,9 +257,9 @@ function parseHash() {
 		if (query[0] === 'q') {
 			input.value = query[1];
 		} else if (query[0] === 'y') {
-			fliter[query[1]] = 1;
+			filter[query[1]] = 1;
 		} else if (query[0] === 'n') {
-			fliter[query[1]] = -1;
+			filter[query[1]] = -1;
 		}
 	}
 	adjust();
@@ -292,9 +292,9 @@ function updateTable(val) {
 
 	for (var i = 0; i < 5; i++) {
 		var s = subjects[i];
-		if (fliter[s] === 1)
+		if (filter[s] === 1)
 			href += ";y=" + s;
-		else if (fliter[s] === -1)
+		else if (filter[s] === -1)
 			href += ";n=" + s;
 	}
 
@@ -326,15 +326,15 @@ function updateTable(val) {
 			var button = document.createElement('button');
 			button.onclick = function(e) {
 				var s = e.target.innerText;
-				fliter[s]++;
-				if (fliter[s] > 1) fliter[s] = -1;
+				filter[s]++;
+				if (filter[s] > 1) filter[s] = -1;
 				updateTable();
 			}
 
 			button.id = s;
-			if (fliter[s] === 1) {
+			if (filter[s] === 1) {
 				button.classList.add("show");
-			} else if (fliter[s] === -1) {
+			} else if (filter[s] === -1) {
 				button.classList.add("hidden");
 			}
 
@@ -396,14 +396,14 @@ function updateTable(val) {
 			for (j = 0; j < subjects.length; j++) {
 				var s = subjects[j];
 				if (data[i][s] == '--') {
-					if (fliter[s] === 1) {
+					if (filter[s] === 1) {
 						show = false;
 					}
 				} else {
-					if (fliter[s] == -1)
+					if (filter[s] == -1)
 						show = false;
 					if (data[i][s][1] == '標') {
-						if (fliterGsat[s][ data[i][s] ] === 0)
+						if (filterGsat[s][ data[i][s] ] === 0)
 							show = false;
 
 						if (data[i][s] == '頂標')

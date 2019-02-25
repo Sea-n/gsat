@@ -37,8 +37,8 @@ span.underline {
 #list .multiple,
 #list .weighted,
 #list th.sub,
-.fliter th,
-.fliter td,
+.filter th,
+.filter td,
 #list .id {
     text-align: center;
 }
@@ -93,7 +93,7 @@ span.underline {
     border-radius: 5px;
 }
 
-.fliter td button {
+.filter td button {
     padding: 2px;
     margin: -.6em;
     width: calc(100% + 1.2em);
@@ -102,17 +102,17 @@ span.underline {
 }
 
 #list th.sub button:hover,
-.fliter td button:hover {
+.filter td button:hover {
     background: #e8e8e8;
 }
 
 #list th.sub button:active,
-.fliter td button:active {
+.filter td button:active {
     background: #d5d5d5;
 }
 
 #list th.sub button:before,
-.fliter td button:before {
+.filter td button:before {
     font-family: 'Icons';
     font-style: normal;
     font-weight: normal;
@@ -121,18 +121,18 @@ span.underline {
 }
 
 #list th.sub button:before,
-.fliter td button:before {
+.filter td button:before {
     content: "\f056";
 }
 
 #list th.sub button.show:before,
-.fliter td button.show:before {
+.filter td button.show:before {
     content: "\f058";
     color: MediumSeaGreen;
 }
 
 #list th.sub button.hidden:before,
-.fliter td button.hidden:before {
+.filter td button.hidden:before {
     content: "\f057";
     color: red;
 }
@@ -287,7 +287,7 @@ i.hidden2 {
 }
 
 @media screen and (max-width: 360px) {
-	.fliter,
+	.filter,
 	#stone,
     .autocomplete {
         width: 100%;
@@ -295,7 +295,7 @@ i.hidden2 {
 }
 
 @media screen and (min-width: 360px) and (max-width: 512px) {
-    .fliter {
+    .filter {
         margin-left: 2%;
         width: 96%;
     }
@@ -307,7 +307,7 @@ i.hidden2 {
 }
 
 @media screen and (min-width: 512px) and (max-width: 768px) {
-    .fliter {
+    .filter {
         margin-left: 5%;
         width: 90%;
     }
@@ -319,7 +319,7 @@ i.hidden2 {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1400px) {
-    .fliter {
+    .filter {
         margin-left: 10%;
         width: 80%;
     }
@@ -331,7 +331,7 @@ i.hidden2 {
 }
 
 @media screen and (min-width: 1400px) {
-    .fliter {
+    .filter {
         margin-left: 15%;
         width: 70%;
     }
