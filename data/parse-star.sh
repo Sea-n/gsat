@@ -1,18 +1,27 @@
 #!/bin/bash
 
-id=$1
+file=$1
 
-file=star-$id
+id=${file/108_/}
+id=${id/.htm/}
 
-name=`head -n78 $file |tail -n1 |grep -oP 'br>\K.*?(?=<)'`
+echo -ne "$id\t"
 
-json="{\"id\":\"$id\", \"name\":\"$name\""
+for s in "國文" "英文" "數學" "社會" "自然"; do
+	mark=`grep -A1 ">$s<" $file |tail -n1 |grep -oP '>\K.*?(?=標<)'`
+	if [ $? -ne 0 ]; then
+		mark="無"
+	fi
+	echo -n $mark
+done
+
+echo -ne "\t"
 
 for s in "國文" "英文" "數學" "社會" "自然"; do
 	mark=`grep -A1 ">$s<" $file |tail -n1 |grep -oP '>\K.*?(?=<)'`
-	json+=", \"$s\":\"$mark\""
+	echo -n "$mark "
 done
 
-json+="},"
+echo -ne "\t`head -n78 $file |tail -n1 |grep -oP '<b>\K[^<>]*(?=<br>)'`"
 
-echo $json >> star-data
+echo -e "\t`head -n78 $file |tail -n1 |grep -oP '<br>\K[^<>]*(?=<)'`"

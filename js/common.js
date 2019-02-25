@@ -11,65 +11,37 @@ var filterGsat = {
 	"自然": []
 }
 
-var filter = {
-	"國文": 0,
-	"英文": 0,
-	"數學": 0,
-	"社會": 0,
-	"自然": 0
-};
-var subjects = Object.keys(filter);
-
-subjects.forEach(function(k) {
+var subjectsGsat = Object.keys(filterGsat);
+subjectsGsat.forEach(function(k) {
 	filterGsat[k] = {
-		"頂標": 1,
-		"前標": 1,
-		"均標": 1,
-		"後標": 1,
-		"底標": 1,
+		"頂": 1,
+		"前": 1,
+		"均": 1,
+		"後": 1,
+		"底": 1,
 	};
 });
 
-var fav = [];
-if (localStorage.getItem("favorites"))
-	fav = JSON.parse(localStorage.getItem("favorites"));
+/* Backward Compatibility before 25 Feb 2019 */
+if (localStorage.getItem("favorites")) {
+	old = JSON.parse(localStorage.getItem("favorites"));
+	localStorage.removeItem("favorites");
 
-
-/* Parse School Name */
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'data/school', false);
-xhr.send(null);
-var lines = xhr.response.split('\n');
-
-var school = {};
-for (var i=0; i<lines.length; i++) {
-	var line = lines[i].split(' ');
-	school[line[0]] = line[1];
-}
-
-/* Sort -nr */
-var lc = {};
-for (var i = 0, len = data.length; i < len; i++) {
-	data[i].school = school[data[i].id.substr(0, 3)];
-
-	if (lc[data[i].name] === undefined)
-		lc[data[i].name] = 1;
-	else
-		lc[data[i].name]++;
-
-	for (j = 0; j < subjects.length; j++) {
-		var s = subjects[j];
-		if (data[i][s].match(/^\d/))
-			data[i][s] = "x" + data[i][s];
-
-		if (data[i][s][0] == '*')
-			data[i][s] = '採計';
+	var apply = [];
+	var star = [];
+	for (var i = 0; i < old.length; i++) {
+		if (old[i].length == 6)
+			apply.push(old[i])
+		if (old[i].length == 5)
+			star.push(old[i])
 	}
+	localStorage.setItem("favoritesApply", JSON.stringify(apply));
+	localStorage.setItem("favoritesStar", JSON.stringify(star));
 }
 
-var list = Object.keys(lc).sort(function(a, b) {
-	return lc[a] < lc[b];
-});
+var fav = [];
+if (localStorage.getItem(favStorageName))
+	fav = JSON.parse(localStorage.getItem(favStorageName));
 
 /* Loaded */
 var input = document.getElementById("dep");
@@ -95,6 +67,8 @@ input.addEventListener("keydown", function(e) {
 			x[currentFocus].click();
 	}
 });
+
+initFilter();
 
 /* Header */
 window.addEventListener("scroll", function () {
@@ -123,10 +97,6 @@ window.addEventListener("resize", () => {
 	adjustTableHeader();
 })
 
-window.onload = () => {
-	initFilter();
-}
-
 /* Functions */
 function initFilter() {
 	var table = document.getElementById("filter");
@@ -136,7 +106,7 @@ function initFilter() {
 		tr.appendChild(document.createElement('th'));
 	tr.cells[0].appendChild(document.createTextNode('科目'));
 	Object.keys(filterGsat["國文"]).map(function(k, i) {
-		tr.cells[i + 1].appendChild(document.createTextNode(k));
+		tr.cells[i + 1].appendChild(document.createTextNode(k + "標"));
 	});
 	table.appendChild(tr);
 
@@ -248,9 +218,9 @@ function parseHash() {
 		if (query[0] === 'q') {
 			input.value = query[1];
 		} else if (query[0] === 'y') {
-			filter[query[1]] = 1;
+			filterAdv[query[1]] = 1;
 		} else if (query[0] === 'n') {
-			filter[query[1]] = -1;
+			filterAdv[query[1]] = -1;
 		}
 	}
 	adjust();
@@ -280,12 +250,14 @@ function updateTable(search) {
 		document.getElementById('stone').style.display = 'none';
 
 	var href = "#q=" + search;
+	if (search == "")
+		href = "";
 
 	for (var i = 0; i < 5; i++) {
-		var s = subjects[i];
-		if (filter[s] === 1)
+		var s = subjectsAdv[i];
+		if (filterAdv[s] === 1)
 			href += ";y=" + s;
-		else if (filter[s] === -1)
+		else if (filterAdv[s] === -1)
 			href += ";n=" + s;
 	}
 
@@ -303,7 +275,7 @@ function updateTable(search) {
 
 	for (var k = 0; k < 2; k++) { // fixed header and ordinary header
 		var tr = document.createElement('tr');
-		for (var i = 0; i < 9; i++)
+		for (var i = 0; i < subjectsAdv.length + 4; i++)
 			tr.appendChild(document.createElement('th'));
 
 		tr.cells[0].classList.add("favorites");
@@ -312,20 +284,20 @@ function updateTable(search) {
 		tr.cells[2].appendChild(document.createTextNode('科系'));
 		tr.cells[2].classList.add("dep");
 
-		for (var i = 0; i < 5; i++) {
-			var s = subjects[i];
+		for (var i = 0; i < subjectsAdv.length; i++) {
+			var s = subjectsAdv[i];
 			var button = document.createElement('button');
 			button.onclick = function(e) {
 				var s = e.target.innerText;
-				filter[s]++;
-				if (filter[s] > 1) filter[s] = -1;
+				filterAdv[s]++;
+				if (filterAdv[s] > 1) filterAdv[s] = -1;
 				updateTable();
 			}
 
 			button.id = s;
-			if (filter[s] === 1) {
+			if (filterAdv[s] === 1) {
 				button.classList.add("show");
-			} else if (filter[s] === -1) {
+			} else if (filterAdv[s] === -1) {
 				button.classList.add("hidden");
 			}
 
@@ -334,8 +306,8 @@ function updateTable(search) {
 			tr.cells[i + 3].classList.add("sub");
 		}
 
-		tr.cells[8].appendChild(document.createTextNode('編號'));
-		tr.cells[8].classList.add("id");
+		tr.cells[subjectsAdv.length + 3].appendChild(document.createTextNode('編號'));
+		tr.cells[subjectsAdv.length + 3].classList.add("id");
 
 		table.appendChild(tr);
 	}
@@ -357,7 +329,7 @@ function showFilterDepartments(table, search) {
 			id = data[idx].id;
 			tr.dataset.id = id;
 
-			for (_ = 0; _ < 9; _++)
+			for (_ = 0; _ < subjectsAdv.length + 4; _++)
 				tr.appendChild(document.createElement('td'));
 
 			tr.cells[0].classList.add("favorites");
@@ -374,7 +346,7 @@ function showFilterDepartments(table, search) {
 					fav[index] = 0; // remove
 					t.classList.add("not-fav");
 				}
-				localStorage.setItem("favorites", JSON.stringify(fav)); // save
+				localStorage.setItem(favStorageName, JSON.stringify(fav)); // save
 			}
 			button.classList.add(showFav ? "favorited" : "not-fav"); // determined by getDepartmentFilterStatus
 			tr.cells[0].appendChild(button);
@@ -384,19 +356,19 @@ function showFilterDepartments(table, search) {
 
 			var link = document.createElement('a');
 			link.text = id;
-			if (id.length == 6) // Apply
-				link.href = 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_' + id + '.htm';
-			else // Star
-				link.href = 'https://www.cac.edu.tw/star108/system/108ColQry_forstar_5d3o9a/html/108_' + id + '.htm';
+			link.href = getDetailLink(id);
 			link.target = '_blank';
 			link.classList.add('id');
-			tr.cells[8].appendChild(link);
-			tr.cells[8].classList.add("id");
+			tr.cells[subjectsAdv.length + 3].appendChild(link);
+			tr.cells[subjectsAdv.length + 3].classList.add("id");
 
-			for (var k = 0; k < subjects.length; k++) {
-				var s = subjects[k];
+			for (var k = 0; k < subjectsAdv.length; k++) {
+				var s = subjectsAdv[k];
 
 				if (data[idx][s] == "--")
+					continue;
+
+				if (data[idx][s] == "x0.00")
 					continue;
 
 				if (data[idx][s][1] == '標') {
@@ -415,10 +387,13 @@ function showFilterDepartments(table, search) {
 						tr.cells[k + 3].classList.add("worst");
 				}
 
-				if (data[idx][s][0] == 'x')
+				if (/x\d\.\d\d/.test(data[idx][s])) {
+					tr.cells[k + 3].classList.add("mark" + k);
+					tr.cells[k + 3].classList.add(data[idx][s].replace('.', '-'));
+				} else if (/x\d+/.test(data[idx][s]))
 					tr.cells[k + 3].classList.add("multiple");
 				else
-					tr.cells[k + 3].classList.add("mark"); // Add mark for all cells expect of x3
+					tr.cells[k + 3].classList.add("mark");
 
 				if (data[idx][s] == '採計')
 					tr.cells[k + 3].classList.add("weighted");
@@ -473,13 +448,13 @@ function getDepartmentFilterStatus(idx, search, isFav) {
 	if (fav.includes(id) != isFav)
 		return false;
 
-	for (var k = 0; k < subjects.length; k++) {
-		var s = subjects[k];
+	for (var k = 0; k < subjectsAdv.length; k++) {
+		var s = subjectsAdv[k];
 		if (data[idx][s] == '--') {
-			if (filter[s] === 1)
+			if (filterAdv[s] === 1)
 				return false;
 		} else {
-			if (filter[s] == -1)
+			if (filterAdv[s] == -1)
 				return false;
 
 			if (data[idx][s][1] == '標') {
@@ -508,7 +483,7 @@ function startIntro(){
 				intro: "輸入想查詢的校系"
 			},
 			{
-				element: '#自然',
+				element: '#英文',
 				intro: "點一下科目，啟用過濾器"
 			},
 			{
