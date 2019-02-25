@@ -42,5 +42,5 @@ var list = Object.keys(lc).sort(function(a, b) {
 });
 
 function getDetailLink(id) {
-	return 'https://www.cac.edu.tw/star108/system/108ColQry_forstar_5d3o9ahtml/108_' + id + '.htm';
+	return 'https://www.cac.edu.tw/star108/system/108ColQry_forstar_5d3o9a/html/108_' + id + '.htm';
 }

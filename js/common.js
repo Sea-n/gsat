@@ -2,6 +2,28 @@
 var default_max_result = 20;
 var max_result = default_max_result; // max count for result
 
+var fGsat = {
+	"國文": 6,
+	"英文": 6,
+	"數學": 6,
+	"社會": 6,
+	"自然": 6,
+}
+if (localStorage.getItem("gsatMarks"))
+	fGsat = JSON.parse(localStorage.getItem("gsatMarks"));
+
+var fG = document.getElementById("filterGsat").children;
+
+for (var k = 0; k < 5; k++) {
+	var fGm = fG[k].getElementsByClassName("menu")[0];
+	for (var i = 0; i < 6; i++) {
+		fGm.children[i].onclick = (e) => {
+			console.log(e);
+		}
+	}
+}
+
+
 /* Initialize Filters */
 var filterGsat = {
 	"國文": [],
@@ -83,14 +105,7 @@ window.addEventListener("scroll", function () {
 		body.style.top = "0px";
 	}
 
-	/* Fixed Table Header */
-	var table = document.getElementById("list");
-	var y = table.getBoundingClientRect().y;
-	var th = table.firstChild;
-	if (y < 40)
-		th.style.display = "initial";
-	else
-		th.style.display = "none";
+	adjustTableHeader();
 });
 
 window.addEventListener("resize", () => {
@@ -372,9 +387,6 @@ function showFilterDepartments(table, search) {
 					continue;
 
 				if (data[idx][s][1] == '標') {
-					if (filterGsat[s][ data[idx][s] ] === 0)
-						show = false;
-
 					if (data[idx][s] == '頂標')
 						tr.cells[k + 3].classList.add("best");
 					if (data[idx][s] == '前標')
@@ -438,6 +450,12 @@ function adjustTableHeader() {
 	oH.classList.add("ordinary-header")
 	for (i = 0; i < fH.childElementCount; i++)
 		fH.childNodes[i].style.width = oH.childNodes[i].getBoundingClientRect().width + "px";
+
+	var y = table.getBoundingClientRect().y;
+	if (y < 40)
+		fH.style.display = "initial";
+	else
+		fH.style.display = "none";
 }
 
 function getDepartmentFilterStatus(idx, search, isFav) {
@@ -450,7 +468,7 @@ function getDepartmentFilterStatus(idx, search, isFav) {
 
 	for (var k = 0; k < subjectsAdv.length; k++) {
 		var s = subjectsAdv[k];
-		if (data[idx][s] == '--') {
+		if (data[idx][s] == '--' || data[idx][s] == 'x0.00') {
 			if (filterAdv[s] === 1)
 				return false;
 		} else {
@@ -458,7 +476,7 @@ function getDepartmentFilterStatus(idx, search, isFav) {
 				return false;
 
 			if (data[idx][s][1] == '標') {
-				if (filterGsat[s][ data[idx][s] ] === 0)
+				if (filterGsat[s][ data[idx][s][0] ] === 0)
 					return false;
 			}
 		}

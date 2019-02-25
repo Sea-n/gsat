@@ -23,7 +23,7 @@
     <link href="introjs-modern.css" rel="stylesheet">
     <link href="/assets/css/tocas-ui/tocas.css" rel="stylesheet">
     <link href="//cdn.rawgit.com/gnehs/Tocas-UI-Xiaoan/master/ts.xiaoan.min.css" rel="stylesheet">
-    <link href="./style.css" rel="stylesheet">
+    <link href="./style.css?v=0225" rel="stylesheet">
     <!-- Google Analytics-->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -61,6 +61,58 @@
       <details class="ts accordion filter" open>
         <summary><i class="icon dropdown"></i>學測級分篩選</summary>
         <table class="ts very basic table" id="filter"></table>
+        <div id="filterGsat">
+          <div class="ts dropdown labeled icon button"><i class="book icon"></i><span class="text">國文</span>
+                    <div class="menu">
+                      <div class="item best mark" data-mark="5">頂標</div>
+                      <div class="item good mark" data-mark="4">前標</div>
+                      <div class="item average mark" data-mark="3">均標</div>
+                      <div class="item bad mark" data-mark="2">後標</div>
+                      <div class="item worst mark" data-mark="1">底標</div>
+                      <div class="item" data-mark="0">未選考</div>
+                    </div>
+          </div>
+          <div class="ts dropdown labeled icon button"><i class="globe icon"></i><span class="text">英文</span>
+                    <div class="menu">
+                      <div class="item best mark" data-mark="5">頂標</div>
+                      <div class="item good mark" data-mark="4">前標</div>
+                      <div class="item average mark" data-mark="3">均標</div>
+                      <div class="item bad mark" data-mark="2">後標</div>
+                      <div class="item worst mark" data-mark="1">底標</div>
+                      <div class="item" data-mark="0">未選考</div>
+                    </div>
+          </div>
+          <div class="ts dropdown labeled icon button"><i class="calculator icon"></i><span class="text">數學</span>
+                    <div class="menu">
+                      <div class="item best mark" data-mark="5">頂標</div>
+                      <div class="item good mark" data-mark="4">前標</div>
+                      <div class="item average mark" data-mark="3">均標</div>
+                      <div class="item bad mark" data-mark="2">後標</div>
+                      <div class="item worst mark" data-mark="1">底標</div>
+                      <div class="item" data-mark="0">未選考</div>
+                    </div>
+          </div>
+          <div class="ts dropdown labeled icon button"><i class="newspaper icon"></i><span class="text">社會</span>
+                    <div class="menu">
+                      <div class="item best mark" data-mark="5">頂標</div>
+                      <div class="item good mark" data-mark="4">前標</div>
+                      <div class="item average mark" data-mark="3">均標</div>
+                      <div class="item bad mark" data-mark="2">後標</div>
+                      <div class="item worst mark" data-mark="1">底標</div>
+                      <div class="item" data-mark="0">未選考</div>
+                    </div>
+          </div>
+          <div class="ts dropdown labeled icon button"><i class="idea icon"></i><span class="text">自然</span>
+                    <div class="menu">
+                      <div class="item best mark" data-mark="5">頂標</div>
+                      <div class="item good mark" data-mark="4">前標</div>
+                      <div class="item average mark" data-mark="3">均標</div>
+                      <div class="item bad mark" data-mark="2">後標</div>
+                      <div class="item worst mark" data-mark="1">底標</div>
+                      <div class="item" data-mark="0">未選考</div>
+                    </div>
+          </div>
+        </div>
       </details>
       <h3 class="ts header" id="loading">資料讀取中...</h3>
       <h5 class="ts center aligned header" id="count" style="display: none;">共&nbsp;<span id="count-num">0</span>&nbsp;筆結果</h5>
@@ -80,9 +132,11 @@
         </div>
       </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
     <script src="https://introjs.com/minified/intro.min.js"></script>
     <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7"></script>
-    <script src="js/star.js"></script>
-    <script src="js/common.js"></script>
+    <script>ts('.ts.dropdown:not(.basic)').dropdown();</script>
+    <script src="js/star.js?v=022501"></script>
+    <script src="js/common.js?v=0225"></script>
   </body>
 </html>
