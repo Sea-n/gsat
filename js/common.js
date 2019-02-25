@@ -119,6 +119,10 @@ window.addEventListener("scroll", function () {
 		th.style.display = "none";
 });
 
+window.addEventListener("resize", () => {
+	adjustTableHeader();
+})
+
 window.onload = () => {
 	initFilter();
 }
@@ -181,10 +185,9 @@ function initFilter() {
 	});
 }
 
-/* Functions */
 function adjust() {
 	var a, b, i;
-	var val = input.value;
+	var search = input.value;
 	currentFocus = -1;
 
 	a = document.getElementById('dep-list');
@@ -194,13 +197,13 @@ function adjust() {
 	for (i = 0; i < list.length; i++) {
 		if (count >= 5)
 			break;
-		pos = list[i].toUpperCase().indexOf(val.toUpperCase());
+		pos = list[i].toUpperCase().indexOf(search.toUpperCase());
 		if (pos !== -1) {
 			b = document.createElement("div");
 			b.id = "sug" + count;
 			b.innerHTML = list[i].substr(0, pos);
-			b.innerHTML += "<strong>" + list[i].substr(pos, val.length) + "</strong>";
-			b.innerHTML += list[i].substr(pos + val.length);
+			b.innerHTML += "<strong>" + list[i].substr(pos, search.length) + "</strong>";
+			b.innerHTML += list[i].substr(pos + search.length);
 			b.innerHTML += "<input type='hidden' value='" + list[i] + "'>";
 
 			b.addEventListener("click", function(e) {
@@ -253,12 +256,12 @@ function parseHash() {
 	adjust();
 }
 
-function updateTable(val) {
-	if (val === undefined)
-		val = input.value;
+function updateTable(search) {
+	if (search === undefined)
+		search = input.value;
 
 	var clear = document.getElementById("clear");
-	if (val.length == 0) {
+	if (search.length == 0) {
 		clear.classList.add("hidden1");
 		setTimeout(function () {
 			clear.classList.add("hidden2");
@@ -271,12 +274,12 @@ function updateTable(val) {
 		}, 1);
 	}
 
-	if (/資訊|APCS/i.test(val))
+	if (/資訊|APCS/i.test(search))
 		document.getElementById('stone').style.display = '';
 	else
 		document.getElementById('stone').style.display = 'none';
 
-	var href = "#q=" + val;
+	var href = "#q=" + search;
 
 	for (var i = 0; i < 5; i++) {
 		var s = subjects[i];
@@ -337,11 +340,21 @@ function updateTable(val) {
 		table.appendChild(tr);
 	}
 
+	showFilterDepartments(table, search);
+
+	adjustTableHeader();
+}
+
+function showFilterDepartments(table, search) {
 	var count = 0;
-	for (i = 0; i < data.length; i++) {
-		if (data[i].name.toUpperCase().indexOf(val.toUpperCase()) !== -1) {
+
+	for (var showFav = 1; showFav >= 0; showFav--) { // show favorites = {true, false}
+		for (var idx = 0; idx < data.length; idx++) {
+			if (!getDepartmentFilterStatus(idx, search, showFav))
+				continue;
+
 			var tr = document.createElement('tr');
-			id = data[i].id;
+			id = data[idx].id;
 			tr.dataset.id = id;
 
 			for (_ = 0; _ < 9; _++)
@@ -363,77 +376,62 @@ function updateTable(val) {
 				}
 				localStorage.setItem("favorites", JSON.stringify(fav)); // save
 			}
-			button.classList.add(fav.includes(id) ? "favorited" : "not-fav");
+			button.classList.add(showFav ? "favorited" : "not-fav"); // determined by getDepartmentFilterStatus
 			tr.cells[0].appendChild(button);
 
-			tr.cells[1].appendChild(document.createTextNode(data[i].school));
-			tr.cells[2].appendChild(document.createTextNode(data[i].name));
+			tr.cells[1].appendChild(document.createTextNode(data[idx].school));
+			tr.cells[2].appendChild(document.createTextNode(data[idx].name));
 
 			var link = document.createElement('a');
 			link.text = id;
-			if (id.length == 6)
+			if (id.length == 6) // Apply
 				link.href = 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_' + id + '.htm';
-			else
+			else // Star
 				link.href = 'https://www.cac.edu.tw/star108/system/108ColQry_forstar_5d3o9a/html/108_' + id + '.htm';
 			link.target = '_blank';
 			link.classList.add('id');
 			tr.cells[8].appendChild(link);
 			tr.cells[8].classList.add("id");
 
-			var show = true;
-			for (j = 0; j < subjects.length; j++) {
-				var s = subjects[j];
-				if (data[i][s] == '--') {
-					if (filter[s] === 1) {
+			for (var k = 0; k < subjects.length; k++) {
+				var s = subjects[k];
+
+				if (data[idx][s] == "--")
+					continue;
+
+				if (data[idx][s][1] == '標') {
+					if (filterGsat[s][ data[idx][s] ] === 0)
 						show = false;
-					}
-				} else {
-					if (filter[s] == -1)
-						show = false;
-					if (data[i][s][1] == '標') {
-						if (filterGsat[s][ data[i][s] ] === 0)
-							show = false;
 
-						if (data[i][s] == '頂標')
-							tr.cells[j + 3].classList.add("best");
-						if (data[i][s] == '前標')
-							tr.cells[j + 3].classList.add("good");
-						if (data[i][s] == '均標')
-							tr.cells[j + 3].classList.add("average");
-						if (data[i][s] == '後標')
-							tr.cells[j + 3].classList.add("bad");
-						if (data[i][s] == '底標')
-							tr.cells[j + 3].classList.add("worst");
-					}
-
-					if (data[i][s][0] == 'x')
-						tr.cells[j + 3].classList.add("multiple");
-					else
-						tr.cells[j + 3].classList.add("mark"); // Add mark for all cells expect of x3
-
-					if (data[i][s] == '採計')
-						tr.cells[j + 3].classList.add("weighted");
-
-
-					tr.cells[j + 3].appendChild(document.createTextNode(data[i][s]));
+					if (data[idx][s] == '頂標')
+						tr.cells[k + 3].classList.add("best");
+					if (data[idx][s] == '前標')
+						tr.cells[k + 3].classList.add("good");
+					if (data[idx][s] == '均標')
+						tr.cells[k + 3].classList.add("average");
+					if (data[idx][s] == '後標')
+						tr.cells[k + 3].classList.add("bad");
+					if (data[idx][s] == '底標')
+						tr.cells[k + 3].classList.add("worst");
 				}
+
+				if (data[idx][s][0] == 'x')
+					tr.cells[k + 3].classList.add("multiple");
+				else
+					tr.cells[k + 3].classList.add("mark"); // Add mark for all cells expect of x3
+
+				if (data[idx][s] == '採計')
+					tr.cells[k + 3].classList.add("weighted");
+
+
+				tr.cells[k + 3].appendChild(document.createTextNode(data[idx][s]));
 			}
-			if (show) {
-				count++;
-				if (count <= max_result)
-					table.appendChild(tr);
-			}
+
+			count++;
+			if (count <= max_result)
+				table.appendChild(tr);
 		}
 	}
-
-	// TODO: Adjust when resize window, show more
-	/* Adjust Fixed Header Width */
-	var fH = table.childNodes[0];
-	fH.classList.add("fixed-header")
-	var oH = table.childNodes[1];
-	oH.classList.add("ordinary-header")
-	for (i = 0; i < fH.childElementCount; i++)
-		fH.childNodes[i].style.width = oH.childNodes[i].getBoundingClientRect().width + "px";
 
 	if (count == 0) {
 		document.getElementById('no-data').style.display = '';
@@ -455,6 +453,43 @@ function updateTable(val) {
 		document.getElementById('show-more').style.display = 'none';
 		document.getElementById('count-num').innerHTML = count;
 	}
+}
+
+function adjustTableHeader() {
+	var table = document.getElementById("list");
+	var fH = table.childNodes[0];
+	fH.classList.add("fixed-header")
+	var oH = table.childNodes[1];
+	oH.classList.add("ordinary-header")
+	for (i = 0; i < fH.childElementCount; i++)
+		fH.childNodes[i].style.width = oH.childNodes[i].getBoundingClientRect().width + "px";
+}
+
+function getDepartmentFilterStatus(idx, search, isFav) {
+	if (data[idx].name.toUpperCase().indexOf(search.toUpperCase()) === -1)
+		return false;
+
+	id = data[idx].id;
+	if (fav.includes(id) != isFav)
+		return false;
+
+	for (var k = 0; k < subjects.length; k++) {
+		var s = subjects[k];
+		if (data[idx][s] == '--') {
+			if (filter[s] === 1)
+				return false;
+		} else {
+			if (filter[s] == -1)
+				return false;
+
+			if (data[idx][s][1] == '標') {
+				if (filterGsat[s][ data[idx][s] ] === 0)
+					return false;
+			}
+		}
+	}
+
+	return true;
 }
 
 function startIntro(){
