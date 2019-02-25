@@ -466,6 +466,13 @@ function getDepartmentFilterStatus(idx, search, isFav) {
 	if (fav.includes(id) != isFav)
 		return false;
 
+	for (var k = 0; k < subjectsGsat.length; k++) {
+		var s = subjectsGsat[k];
+
+		if (filterGsat[s][ data[idx].gsat[k] ] == 0)
+			return false;
+	}
+
 	for (var k = 0; k < subjectsAdv.length; k++) {
 		var s = subjectsAdv[k];
 		if (data[idx][s] == '--' || data[idx][s] == 'x0.00') {
@@ -474,11 +481,6 @@ function getDepartmentFilterStatus(idx, search, isFav) {
 		} else {
 			if (filterAdv[s] == -1)
 				return false;
-
-			if (data[idx][s][1] == '標') {
-				if (filterGsat[s][ data[idx][s][0] ] === 0)
-					return false;
-			}
 		}
 	}
 
