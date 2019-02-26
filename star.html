@@ -49,6 +49,62 @@
       </div>
     </header>
     <div class="ts container" name="main">
+      <details class="ts accordion filter">
+        <summary><i class="icon dropdown"></i>學測級分篩選</summary>
+        <table class="ts very basic table" id="filter"></table>
+        <div id="filterGsat">
+          <div class="ts dropdown labeled icon button"><i class="book icon"></i><span class="text">國文</span>
+                    <div class="menu">
+                      <div class="item best mark" data-subject="國文" data-mark="5">頂標</div>
+                      <div class="item good mark" data-subject="國文" data-mark="4">前標</div>
+                      <div class="item average mark" data-subject="國文" data-mark="3">均標</div>
+                      <div class="item bad mark" data-subject="國文" data-mark="2">後標</div>
+                      <div class="item worst mark" data-subject="國文" data-mark="1">底標</div>
+                      <div class="item" data-subject="國文" data-mark="0">未選考</div>
+                    </div>
+          </div>
+          <div class="ts dropdown labeled icon button"><i class="globe icon"></i><span class="text">英文</span>
+                    <div class="menu">
+                      <div class="item best mark" data-subject="英文" data-mark="5">頂標</div>
+                      <div class="item good mark" data-subject="英文" data-mark="4">前標</div>
+                      <div class="item average mark" data-subject="英文" data-mark="3">均標</div>
+                      <div class="item bad mark" data-subject="英文" data-mark="2">後標</div>
+                      <div class="item worst mark" data-subject="英文" data-mark="1">底標</div>
+                      <div class="item" data-subject="英文" data-mark="0">未選考</div>
+                    </div>
+          </div>
+          <div class="ts dropdown labeled icon button"><i class="calculator icon"></i><span class="text">數學</span>
+                    <div class="menu">
+                      <div class="item best mark" data-subject="數學" data-mark="5">頂標</div>
+                      <div class="item good mark" data-subject="數學" data-mark="4">前標</div>
+                      <div class="item average mark" data-subject="數學" data-mark="3">均標</div>
+                      <div class="item bad mark" data-subject="數學" data-mark="2">後標</div>
+                      <div class="item worst mark" data-subject="數學" data-mark="1">底標</div>
+                      <div class="item" data-subject="數學" data-mark="0">未選考</div>
+                    </div>
+          </div>
+          <div class="ts dropdown labeled icon button"><i class="newspaper icon"></i><span class="text">社會</span>
+                    <div class="menu">
+                      <div class="item best mark" data-subject="社會" data-mark="5">頂標</div>
+                      <div class="item good mark" data-subject="社會" data-mark="4">前標</div>
+                      <div class="item average mark" data-subject="社會" data-mark="3">均標</div>
+                      <div class="item bad mark" data-subject="社會" data-mark="2">後標</div>
+                      <div class="item worst mark" data-subject="社會" data-mark="1">底標</div>
+                      <div class="item" data-subject="社會" data-mark="0">未選考</div>
+                    </div>
+          </div>
+          <div class="ts dropdown labeled icon button"><i class="idea icon"></i><span class="text">自然</span>
+                    <div class="menu">
+                      <div class="item best mark" data-subject="自然" data-mark="5">頂標</div>
+                      <div class="item good mark" data-subject="自然" data-mark="4">前標</div>
+                      <div class="item average mark" data-subject="自然" data-mark="3">均標</div>
+                      <div class="item bad mark" data-subject="自然" data-mark="2">後標</div>
+                      <div class="item worst mark" data-subject="自然" data-mark="1">底標</div>
+                      <div class="item" data-subject="自然" data-mark="0">未選考</div>
+                    </div>
+          </div>
+        </div><br>
+      </details>
       <div class="autocomplete">
         <div class="inner-btn">
           <input id="dep" type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();"><i class="clear hidden1 hidden2" id="clear" onclick="input.value = ''; adjust();"></i>
@@ -58,62 +114,6 @@
       <div id="stone" style="display: none;"><a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Stone');"><img class="ts poyon" src="https://sitcon.org/2017/favicon.ico"></a>
         <p style="display: inline-block;">小石看到你正在查詢資訊相關科系<br>不妨來 <a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Textlink');">SITCON 學生計算機年會</a> 看看吧owo</p>
       </div>
-      <details class="ts accordion filter" open>
-        <summary><i class="icon dropdown"></i>學測級分篩選</summary>
-        <table class="ts very basic table" id="filter"></table>
-        <div id="filterGsat">
-          <div class="ts dropdown labeled icon button"><i class="book icon"></i><span class="text">國文</span>
-                    <div class="menu">
-                      <div class="item best mark" data-mark="5">頂標</div>
-                      <div class="item good mark" data-mark="4">前標</div>
-                      <div class="item average mark" data-mark="3">均標</div>
-                      <div class="item bad mark" data-mark="2">後標</div>
-                      <div class="item worst mark" data-mark="1">底標</div>
-                      <div class="item" data-mark="0">未選考</div>
-                    </div>
-          </div>
-          <div class="ts dropdown labeled icon button"><i class="globe icon"></i><span class="text">英文</span>
-                    <div class="menu">
-                      <div class="item best mark" data-mark="5">頂標</div>
-                      <div class="item good mark" data-mark="4">前標</div>
-                      <div class="item average mark" data-mark="3">均標</div>
-                      <div class="item bad mark" data-mark="2">後標</div>
-                      <div class="item worst mark" data-mark="1">底標</div>
-                      <div class="item" data-mark="0">未選考</div>
-                    </div>
-          </div>
-          <div class="ts dropdown labeled icon button"><i class="calculator icon"></i><span class="text">數學</span>
-                    <div class="menu">
-                      <div class="item best mark" data-mark="5">頂標</div>
-                      <div class="item good mark" data-mark="4">前標</div>
-                      <div class="item average mark" data-mark="3">均標</div>
-                      <div class="item bad mark" data-mark="2">後標</div>
-                      <div class="item worst mark" data-mark="1">底標</div>
-                      <div class="item" data-mark="0">未選考</div>
-                    </div>
-          </div>
-          <div class="ts dropdown labeled icon button"><i class="newspaper icon"></i><span class="text">社會</span>
-                    <div class="menu">
-                      <div class="item best mark" data-mark="5">頂標</div>
-                      <div class="item good mark" data-mark="4">前標</div>
-                      <div class="item average mark" data-mark="3">均標</div>
-                      <div class="item bad mark" data-mark="2">後標</div>
-                      <div class="item worst mark" data-mark="1">底標</div>
-                      <div class="item" data-mark="0">未選考</div>
-                    </div>
-          </div>
-          <div class="ts dropdown labeled icon button"><i class="idea icon"></i><span class="text">自然</span>
-                    <div class="menu">
-                      <div class="item best mark" data-mark="5">頂標</div>
-                      <div class="item good mark" data-mark="4">前標</div>
-                      <div class="item average mark" data-mark="3">均標</div>
-                      <div class="item bad mark" data-mark="2">後標</div>
-                      <div class="item worst mark" data-mark="1">底標</div>
-                      <div class="item" data-mark="0">未選考</div>
-                    </div>
-          </div>
-        </div>
-      </details>
       <h3 class="ts header" id="loading">資料讀取中...</h3>
       <h5 class="ts center aligned header" id="count" style="display: none;">共&nbsp;<span id="count-num">0</span>&nbsp;筆結果</h5>
       <table class="ts very basic table" id="list"></table>
@@ -136,7 +136,7 @@
     <script src="https://introjs.com/minified/intro.min.js"></script>
     <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7"></script>
     <script>ts('.ts.dropdown:not(.basic)').dropdown();</script>
-    <script src="js/star.js?v=022501"></script>
-    <script src="js/common.js?v=0225"></script>
+    <script src="js/star.js?v=0226"></script>
+    <script src="js/common.js?v=0226"></script>
   </body>
 </html>

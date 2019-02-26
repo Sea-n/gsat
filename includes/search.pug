@@ -1,3 +1,41 @@
+details.ts.accordion.filter
+	summary
+		i.icon.dropdown
+		| 學測級分篩選
+	table#filter.ts.very.basic.table
+
+	mixin marks(subj)
+		span.text= subj
+		.menu
+			.item.best.mark(data-subject=subj data-mark="5") 頂標
+			.item.good.mark(data-subject=subj data-mark="4") 前標
+			.item.average.mark(data-subject=subj data-mark="3") 均標
+			.item.bad.mark(data-subject=subj data-mark="2") 後標
+			.item.worst.mark(data-subject=subj data-mark="1") 底標
+			.item(data-subject=subj data-mark="0") 未選考
+
+	#filterGsat
+		.ts.dropdown.labeled.icon.button
+			i.book.icon
+			+marks("國文")
+
+		.ts.dropdown.labeled.icon.button
+			i.globe.icon
+			+marks("英文")
+
+		.ts.dropdown.labeled.icon.button
+			i.calculator.icon
+			+marks("數學")
+
+		.ts.dropdown.labeled.icon.button
+			i.newspaper.icon
+			+marks("社會")
+
+		.ts.dropdown.labeled.icon.button
+			i.idea.icon
+			+marks("自然")
+	br
+
 .autocomplete
 	.inner-btn
 		input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();")
@@ -12,47 +50,6 @@
 		| 不妨來 
 		a(target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Textlink');") SITCON 學生計算機年會
 		|  看看吧owo
-
-details.ts.accordion.filter(open)
-	summary
-		i.icon.dropdown
-		| 學測級分篩選
-	table#filter.ts.very.basic.table
-
-	mixin marks(subj)
-		.menu
-			.item.best.mark(data-subject=subj data-mark="5") 頂標
-			.item.good.mark(data-subject=subj data-mark="4") 前標
-			.item.average.mark(data-subject=subj data-mark="3") 均標
-			.item.bad.mark(data-subject=subj data-mark="2") 後標
-			.item.worst.mark(data-subject=subj data-mark="1") 底標
-			.item(data-subject=subj data-mark="0") 未選考
-
-	#filterGsat
-		.ts.dropdown.labeled.icon.button
-			i.book.icon
-			span.text 國文
-			+marks
-
-		.ts.dropdown.labeled.icon.button
-			i.globe.icon
-			span.text 英文
-			+marks
-
-		.ts.dropdown.labeled.icon.button
-			i.calculator.icon
-			span.text 數學
-			+marks
-
-		.ts.dropdown.labeled.icon.button
-			i.newspaper.icon
-			span.text 社會
-			+marks
-
-		.ts.dropdown.labeled.icon.button
-			i.idea.icon
-			span.text 自然
-			+marks
 
 h3#loading.ts.header 資料讀取中...
 h5#count.ts.center.aligned.header(style="display: none;") 共&nbsp;

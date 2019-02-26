@@ -2,47 +2,24 @@
 var default_max_result = 20;
 var max_result = default_max_result; // max count for result
 
-var fGsat = {
+
+/* GSAT Filters */
+var markLables = [ "未選考", "底標", "後標", "均標", "前標", "頂標", "未設定" ];
+var markClasses = [ "negative", "info", "info", "primary", "positive", "positive", "" ];
+var filterGsat = {
 	"國文": 6,
 	"英文": 6,
 	"數學": 6,
 	"社會": 6,
 	"自然": 6,
 }
-if (localStorage.getItem("gsatMarks"))
-	fGsat = JSON.parse(localStorage.getItem("gsatMarks"));
-
-var fG = document.getElementById("filterGsat").children;
-
-for (var k = 0; k < 5; k++) {
-	var fGm = fG[k].getElementsByClassName("menu")[0];
-	for (var i = 0; i < 6; i++) {
-		fGm.children[i].onclick = (e) => {
-			console.log(e);
-		}
-	}
-}
-
-
-/* Initialize Filters */
-var filterGsat = {
-	"國文": [],
-	"英文": [],
-	"數學": [],
-	"社會": [],
-	"自然": []
-}
-
 var subjectsGsat = Object.keys(filterGsat);
-subjectsGsat.forEach(function(k) {
-	filterGsat[k] = {
-		"頂": 1,
-		"前": 1,
-		"均": 1,
-		"後": 1,
-		"底": 1,
-	};
-});
+
+if (localStorage.getItem("gsatMarks"))
+	filterGsat = JSON.parse(localStorage.getItem("gsatMarks"));
+
+initGsatFilter();
+
 
 /* Backward Compatibility before 25 Feb 2019 */
 if (localStorage.getItem("favorites")) {
@@ -68,6 +45,7 @@ if (localStorage.getItem(favStorageName))
 /* Loaded */
 var input = document.getElementById("dep");
 parseHash();
+adjustGsatFilter();
 document.getElementById("loading").style.display = "none";
 
 
@@ -90,8 +68,6 @@ input.addEventListener("keydown", function(e) {
 	}
 });
 
-initFilter();
-
 /* Header */
 window.addEventListener("scroll", function () {
 	var nav = document.getElementsByTagName("nav")[0];
@@ -113,63 +89,6 @@ window.addEventListener("resize", () => {
 })
 
 /* Functions */
-function initFilter() {
-	var table = document.getElementById("filter");
-	table.innerHTML = "";
-	var tr = document.createElement('tr');
-	for (i = 0; i < 6; i++)
-		tr.appendChild(document.createElement('th'));
-	tr.cells[0].appendChild(document.createTextNode('科目'));
-	Object.keys(filterGsat["國文"]).map(function(k, i) {
-		tr.cells[i + 1].appendChild(document.createTextNode(k + "標"));
-	});
-	table.appendChild(tr);
-
-	Object.keys(filterGsat).map(function(k, i) {
-		var tr = document.createElement('tr');
-		tr.appendChild(document.createElement('th'));
-		tr.cells[0].appendChild(document.createTextNode(k));
-		for (i = 1; i < 6; i++)
-			tr.appendChild(document.createElement('td'));
-		Object.keys(filterGsat[k]).map(function(K, I) {
-			button = document.createElement('button');
-			button.dataset.subject = k;
-			button.dataset.mark = K;
-			button.classList.add("show");
-			button.onclick = (e) => {
-				t = e.target;
-				d = t.dataset;
-				if (filterGsat[ d.subject ][ d.mark ] == 1) {
-					if (t.parentNode.previousSibling.firstElementChild &&
-						t.parentNode.previousSibling.firstElementChild.classList.contains("show"))
-						t = t.parentNode.previousSibling.firstElementChild;
-					do {
-						t.classList.remove("show", "hidden");
-						t.classList.add("hidden");
-						d = t.dataset;
-						filterGsat[ d.subject ][ d.mark ] = 0;
-					} while (t = t.parentNode.previousSibling.firstElementChild);
-				} else {
-					t.classList.remove("show", "hidden");
-					t.classList.add("show");
-					d = t.dataset;
-					filterGsat[ d.subject ][ d.mark ] = 1;
-					while (t.parentNode.nextSibling != undefined) {
-						t = t.parentNode.nextSibling.firstElementChild;
-						t.classList.remove("show", "hidden");
-						t.classList.add("show");
-						d = t.dataset;
-						filterGsat[ d.subject ][ d.mark ] = 1;
-					}
-				}
-				adjust();
-			}
-			tr.cells[I + 1].appendChild(button);
-		});
-		table.appendChild(tr);
-	});
-}
-
 function adjust() {
 	var a, b, i;
 	var search = input.value;
@@ -239,6 +158,51 @@ function parseHash() {
 		}
 	}
 	adjust();
+}
+
+function initGsatFilter() {
+	var allFilled = true;
+	var fG = document.getElementById("filterGsat").children;
+	for (var k = 0; k < 5; k++) {
+		var s = subjectsGsat[k];
+		if (filterGsat[s] == 6)
+			allFilled = false;
+
+		var fGm = fG[k].getElementsByClassName("menu")[0];
+		for (var i = 0; i < 6; i++) {
+			fGm.children[i].onclick = (e) => {
+				var t = e.target;
+				var d = t.dataset;
+				var m = parseInt(d.mark);
+				if (m == filterGsat[ d.subject ])
+					m = 6; // reset
+				filterGsat[ d.subject ] = m;
+				adjustGsatFilter();
+			}
+		}
+	}
+
+	if (!allFilled)
+		document.getElementsByClassName("filter")[0].open = true;
+}
+
+function adjustGsatFilter() {
+	var fG = document.getElementById("filterGsat").children;
+
+	for (var k = 0; k < 5; k++) {
+		var s = subjectsGsat[k];
+		var fGb = fG[k];
+		var fGt = fGb.getElementsByClassName("text")[0];
+		fGb.classList.remove("negative", "info", "primary", "positive")
+		if (filterGsat[s] == 6) {
+			fGt.innerText = s;
+		} else {
+			fGb.classList.add(markClasses[ filterGsat[s] ]);
+			fGt.innerText = markLables[ filterGsat[s] ];
+		}
+	}
+	localStorage.setItem("gsatMarks", JSON.stringify(filterGsat));
+	updateTable();
 }
 
 function updateTable(search) {
@@ -469,8 +433,18 @@ function getDepartmentFilterStatus(idx, search, isFav) {
 	for (var k = 0; k < subjectsGsat.length; k++) {
 		var s = subjectsGsat[k];
 
-		if (filterGsat[s][ data[idx].gsat[k] ] == 0)
-			return false;
+		switch (data[idx].gsat[k]) {
+			case "頂":
+				if (filterGsat[s] == 4) return false;
+			case "前":
+				if (filterGsat[s] == 3) return false;
+			case "均":
+				if (filterGsat[s] == 2) return false;
+			case "後":
+				if (filterGsat[s] == 1) return false;
+			case "底":
+				if (filterGsat[s] == 0) return false;
+		}
 	}
 
 	for (var k = 0; k < subjectsAdv.length; k++) {
@@ -485,6 +459,74 @@ function getDepartmentFilterStatus(idx, search, isFav) {
 	}
 
 	return true;
+}
+
+window.onGoogleYoloLoad = (googleyolo) => {
+	console.log(googleyolo);
+}
+
+/*
+const retrievePromise = googleyolo.retrieve({
+	supportedAuthMethods: [
+		"https://accounts.google.com",
+//		"googleyolo://id-and-password"
+	],
+	supportedIdTokenProviders: [{
+		uri: "https://accounts.google.com",
+		clientId: "956286706085-euk5bqo0ricl4ns1obve4p51q1ajjocd.apps.googleusercontent.com"
+	}]
+});
+
+retrievePromise.then((credential) => {
+	console.log(credential);
+	if (credential.password) {
+		signInWithEmailAndPassword(credential.id, credential.password);
+	} else {
+		useGoogleIdTokenForAuth(credential.idToken);
+	}
+});
+*/
+
+// /*
+const hintPromise = googleyolo.hint({
+	supportedAuthMethods: [
+		"https://accounts.google.com"
+	],
+	supportedIdTokenProviders: [{
+		uri: "https://accounts.google.com",
+		clientId: "956286706085-euk5bqo0ricl4ns1obve4p51q1ajjocd.apps.googleusercontent.com"
+	}],
+	context: "signUp"
+});
+
+
+hintPromise.then((credential) => {
+	console.log(credential);
+	if (credential.idToken) {
+		console.log(credential.idToken);
+		useGoogleIdTokenForAuth(credential.idToken);
+	}
+});
+// */
+
+
+function saveConfig() {
+	var config = {
+		"favoritesApply": localStorage.getItem("favoritesApply"),
+		"favoritesStar": localStorage.getItem("favoritesStar"),
+		"favoritesAdv": localStorage.getItem("favoritesAdv"),
+		"gsatMarks": localStorage.getItem("gsatMarks")
+	};
+	var json = JSON.stringify(config);
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "sync/save.php");
+	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.send(json);
+}
+
+function restoreConfig() {
+
 }
 
 function startIntro(){

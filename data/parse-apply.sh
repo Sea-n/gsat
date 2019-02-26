@@ -18,6 +18,12 @@ done
 echo -ne "\t"
 
 for s in "國文" "英文" "數學" "社會" "自然"; do
+	mark=`grep -A3 ">$s<" $file |tail -n1 |grep -oP '>\K[^<]*標(?=<)'`
+	if [ $? -eq 0 ]; then
+		echo -n "$mark "
+		continue
+	fi
+
 	multiple=`grep -A6 ">$s<" $file |tail -n1 |grep -oP '>\K.*?(?=<)'`
 	if [ "$multiple" != "--" ]; then
 		echo -n "x$multiple "
@@ -30,11 +36,7 @@ for s in "國文" "英文" "數學" "社會" "自然"; do
 		continue
 	fi
 
-	mark=`grep -A3 ">$s<" $file |tail -n1 |grep -oP '>\K[^<]*(?=<)'`
-	if [ $? -ne 0 ]; then
-		echo -n "-- "
-	fi
-	echo -n "$mark "
+	echo -n "-- "
 done
 
 echo -ne "\t`head -n10 $file |tail -n1 |grep -oP '>\K[^<>]+(?=<)'`"
