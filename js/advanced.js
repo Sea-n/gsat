@@ -16,7 +16,7 @@ var subjectsAdv = Object.keys(filterAdv);
 
 
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'data/data-advanced', false);
+xhr.open('GET', 'data/data-advanced?v=0227', false);
 xhr.send(null);
 var lines = xhr.response.split('\n');
 

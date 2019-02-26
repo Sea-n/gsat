@@ -10,7 +10,7 @@ var filterAdv = {
 var subjectsAdv = Object.keys(filterAdv);
 
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'data/data-star', false);
+xhr.open('GET', 'data/data-star?v=0227', false);
 xhr.send(null);
 var lines = xhr.response.split('\n');
 
