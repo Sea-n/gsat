@@ -458,11 +458,11 @@ function getDepartmentFilterStatus(idx, search, isFav) {
 	return true;
 }
 
+/*
 window.onGoogleYoloLoad = (googleyolo) => {
 	console.log(googleyolo);
 }
 
-/*
 const retrievePromise = googleyolo.retrieve({
 	supportedAuthMethods: [
 		"https://accounts.google.com",
@@ -482,9 +482,7 @@ retrievePromise.then((credential) => {
 		useGoogleIdTokenForAuth(credential.idToken);
 	}
 });
-*/
 
-// /*
 const hintPromise = googleyolo.hint({
 	supportedAuthMethods: [
 		"https://accounts.google.com"
@@ -504,7 +502,7 @@ hintPromise.then((credential) => {
 		useGoogleIdTokenForAuth(credential.idToken);
 	}
 });
-// */
+*/
 
 
 function saveConfig() {
