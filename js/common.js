@@ -181,9 +181,6 @@ function initGsatFilter() {
 			}
 		}
 	}
-
-	if (!allFilled)
-		document.getElementsByClassName("filter")[0].open = true;
 }
 
 function adjustGsatFilter() {
