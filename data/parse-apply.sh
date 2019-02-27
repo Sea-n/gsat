@@ -41,4 +41,4 @@ done
 
 echo -ne "\t`head -n10 $file |tail -n1 |grep -oP '>\K[^<>]+(?=<)'`"
 
-echo -e "\t`head -n11 $file |tail -n1 |grep -oP ' \K *[^<>]+(?=<)'`"
+echo -e "\t`head -n11 $file |tail -n1 |grep -oP ' +\K[^<>]+(?=<)' |sed 's# *(#（#' |sed 's#)#）#'`"

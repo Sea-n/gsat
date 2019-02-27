@@ -1,40 +1,34 @@
-details.ts.accordion.filter
-	summary
-		i.icon.dropdown
-		| 學測級分篩選
-	table#filter.ts.very.basic.table
+mixin marks(subj)
+	span.text= subj
+	.menu
+		.item.best.mark(data-subject=subj data-mark="5") 頂標
+		.item.good.mark(data-subject=subj data-mark="4") 前標
+		.item.average.mark(data-subject=subj data-mark="3") 均標
+		.item.bad.mark(data-subject=subj data-mark="2") 後標
+		.item.worst.mark(data-subject=subj data-mark="1") 底標
+		.item(data-subject=subj data-mark="0") 未選考
 
-	mixin marks(subj)
-		span.text= subj
-		.menu
-			.item.best.mark(data-subject=subj data-mark="5") 頂標
-			.item.good.mark(data-subject=subj data-mark="4") 前標
-			.item.average.mark(data-subject=subj data-mark="3") 均標
-			.item.bad.mark(data-subject=subj data-mark="2") 後標
-			.item.worst.mark(data-subject=subj data-mark="1") 底標
-			.item(data-subject=subj data-mark="0") 未選考
+#filterGsat
+	.ts.dropdown.labeled.icon.button
+		i.book.icon
+		+marks("國文")
 
-	#filterGsat
-		.ts.dropdown.labeled.icon.button
-			i.book.icon
-			+marks("國文")
+	.ts.dropdown.labeled.icon.button
+		i.globe.icon
+		+marks("英文")
 
-		.ts.dropdown.labeled.icon.button
-			i.globe.icon
-			+marks("英文")
+	.ts.dropdown.labeled.icon.button
+		i.calculator.icon
+		+marks("數學")
 
-		.ts.dropdown.labeled.icon.button
-			i.calculator.icon
-			+marks("數學")
+	.ts.dropdown.labeled.icon.button
+		i.newspaper.icon
+		+marks("社會")
 
-		.ts.dropdown.labeled.icon.button
-			i.newspaper.icon
-			+marks("社會")
-
-		.ts.dropdown.labeled.icon.button
-			i.idea.icon
-			+marks("自然")
-	br
+	.ts.dropdown.labeled.icon.button
+		i.idea.icon
+		+marks("自然")
+br
 
 .autocomplete
 	.inner-btn
