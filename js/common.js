@@ -161,12 +161,9 @@ function parseHash() {
 }
 
 function initGsatFilter() {
-	var allFilled = true;
 	var fG = document.getElementById("filterGsat").children;
 	for (var k = 0; k < 5; k++) {
 		var s = subjectsGsat[k];
-		if (filterGsat[s] == 6)
-			allFilled = false;
 
 		var fGm = fG[k].getElementsByClassName("menu")[0];
 		for (var i = 0; i < 6; i++) {
@@ -195,7 +192,7 @@ function adjustGsatFilter() {
 			fGt.innerText = s;
 		} else {
 			fGb.classList.add(markClasses[ filterGsat[s] ]);
-			fGt.innerText = markLables[ filterGsat[s] ];
+			fGt.innerText = s + ": " + markLables[ filterGsat[s] ];
 		}
 	}
 	localStorage.setItem("gsatMarks", JSON.stringify(filterGsat));
@@ -220,7 +217,7 @@ function updateTable(search) {
 		}, 1);
 	}
 
-	if (/資訊|APCS/i.test(search))
+	if (/資訊|APCS|電機/i.test(search))
 		document.getElementById('stone').style.display = '';
 	else
 		document.getElementById('stone').style.display = 'none';
