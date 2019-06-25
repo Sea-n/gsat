@@ -16,16 +16,4 @@
   <loc>https://sean.cat/gsat/advanced</loc>
   <priority>0.87</priority>
 </url>
-<url>
-  <loc>https://sean.cat/gsat/apply-static</loc>
-  <priority>0.69</priority>
-</url>
-<url>
-  <loc>https://sean.cat/gsat/star-static</loc>
-  <priority>0.69</priority>
-</url>
-<url>
-  <loc>https://sean.cat/gsat/advanced-static</loc>
-  <priority>0.69</priority>
-</url>
 </urlset>

@@ -10,6 +10,32 @@ html
 		meta(property="og:image" content="https://img.sean.taipei/2019/02/gsat.jpg")
 		link(href="sitemap.xml" rel="sitemap")
 		include includes/head.pug
+		script(type="application/ld+json").
+			{
+				"@context": "http://schema.org",
+				"@type": "BreadcrumbList",
+				"itemListElement": [
+					{
+						"@type": "ListItem",
+						"position": 1,
+						"item": {
+							"@type":"WebPage",
+							"@id": "https://sean.cat/",
+							"url":"https://sean.cat/",
+							"name": "Sean's Website"
+						}
+					}, {
+						"@type": "ListItem",
+						"position": 2,
+						"item": {
+							"@type":"WebPage",
+							"@id": "https://sean.cat/gsat/",
+							"url":"https://sean.cat/gsat/",
+							"name": "學測五選四"
+						}
+					}
+				]
+			}
 	body
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container

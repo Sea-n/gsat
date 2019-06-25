@@ -266,7 +266,7 @@ i.hidden2 {
 }
 
 @media screen and (max-width: 360px) {
-	#filterGsat,
+	.filter,
 	#stone,
     .autocomplete {
         width: 100%;
@@ -274,7 +274,7 @@ i.hidden2 {
 }
 
 @media screen and (min-width: 360px) and (max-width: 512px) {
-    #filterGsat,
+    .filter,
 	#stone,
     .autocomplete {
         margin-left: 5%;
@@ -283,7 +283,7 @@ i.hidden2 {
 }
 
 @media screen and (min-width: 512px) and (max-width: 768px) {
-    #filterGsat,
+    .filter,
 	#stone,
     .autocomplete {
         margin-left: 10%;
@@ -292,7 +292,7 @@ i.hidden2 {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1400px) {
-    #filterGsat,
+    .filter,
 	#stone,
     .autocomplete {
         margin-left: 20%;
@@ -301,7 +301,7 @@ i.hidden2 {
 }
 
 @media screen and (min-width: 1400px) {
-    #filterGsat,
+    .filter,
 	#stone,
     .autocomplete {
         margin-left: 30%;

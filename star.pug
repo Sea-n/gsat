@@ -9,6 +9,41 @@ html
 		meta(property="og:description" content="自今年開始，繁星推薦最多參採四科，來看看您心目中的科系用了何種組合，學測該將準備心力放在哪些考科最有利")
 		meta(property="og:image" content="https://img.sean.taipei/2019/02/gsat.jpg")
 		include includes/head.pug
+		script(type="application/ld+json").
+			{
+				"@context": "http://schema.org",
+				"@type": "BreadcrumbList",
+				"itemListElement": [
+					{
+						"@type": "ListItem",
+						"position": 1,
+						"item": {
+							"@type":"WebPage",
+							"@id": "https://sean.cat/",
+							"url":"https://sean.cat/",
+							"name": "Sean's Website"
+						}
+					}, {
+						"@type": "ListItem",
+						"position": 2,
+						"item": {
+							"@type":"WebPage",
+							"@id": "https://sean.cat/gsat/",
+							"url":"https://sean.cat/gsat/",
+							"name": "學測五選四"
+						}
+					}, {
+						"@type": "ListItem",
+						"position": 3,
+						"item": {
+							"@type":"WebPage",
+							"@id": "https://sean.cat/gsat/star",
+							"url":"https://sean.cat/gsat/star",
+							"name": "繁星推薦"
+						}
+					}
+				]
+			}
 	body
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container
@@ -17,7 +52,7 @@ html
 				b.item.active.hide1 繁星推薦
 				a.item.hide1(href="advanced") 指考分發
 				.right.fitted.item
-					a.item(href="javascript:void(0);" onclick="javascript:startIntro();") 使用教學
+					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
 				h1.header 繁星推薦

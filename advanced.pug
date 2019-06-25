@@ -10,6 +10,41 @@ html
 		meta(property="og:image" content="https://img.sean.taipei/2019/02/gsat-advanced.jpg")
 		include includes/head.pug
 		link(href="./style.advanced.css" rel="stylesheet")
+		script(type="application/ld+json").
+			{
+				"@context": "http://schema.org",
+				"@type": "BreadcrumbList",
+				"itemListElement": [
+					{
+						"@type": "ListItem",
+						"position": 1,
+						"item": {
+							"@type":"WebPage",
+							"@id": "https://sean.cat/",
+							"url":"https://sean.cat/",
+							"name": "Sean's Website"
+						}
+					}, {
+						"@type": "ListItem",
+						"position": 2,
+						"item": {
+							"@type":"WebPage",
+							"@id": "https://sean.cat/gsat/",
+							"url":"https://sean.cat/gsat/",
+							"name": "學測五選四"
+						}
+					}, {
+						"@type": "ListItem",
+						"position": 3,
+						"item": {
+							"@type":"WebPage",
+							"@id": "https://sean.cat/gsat/advanced",
+							"url":"https://sean.cat/gsat/advanced",
+							"name": "指考分發"
+						}
+					}
+				]
+			}
 	body
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container
@@ -22,7 +57,6 @@ html
 						| 指考倒數&nbsp;
 						span#countdown 87
 						| &nbsp;天
-					a.item(href="javascript:void(0);" onclick="javascript:startIntro();") 使用教學
 		section.placeholder
 			.placeholder-message
 				p 指考共有十個科目，不適合小手機查詢，請以電腦開啟此頁面，或將手機畫面打橫著用

@@ -1,5 +1,7 @@
 /* default varibles */
 var default_max_result = 20;
+if (/bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent))
+	default_max_result = 4096;
 var max_result = default_max_result; // max count for result
 
 
@@ -519,33 +521,4 @@ function saveConfig() {
 
 function restoreConfig() {
 
-}
-
-function startIntro(){
-	var intro = introJs();
-	intro.setOptions({
-		nextLabel: '下一步',
-		prevLabel: '上一步',
-		skipLabel: '跳過',
-		doneLabel: '完成',
-		hidePrev: true,
-		hideNext: true,
-		showStepNumbers: false,
-		steps: [
-			{
-				element: '#dep',
-				intro: "輸入想查詢的校系"
-			},
-			{
-				element: '#英文',
-				intro: "點一下科目，啟用過濾器"
-			},
-			{
-				element: '#at-expanding-share-button',
-				intro: "點這分享，會包含您選擇的校系、科目"
-			}
-		]
-	});
-
-	intro.start();
 }
