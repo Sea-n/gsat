@@ -1,7 +1,10 @@
+if (/googlebot|bingbot|yandex|baiduspider|twitterbot|facebookexternalhit|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest\/0\.|pinterestbot|slackbot|vkShare|W3C_Validator/i.test(navigator.userAgent)) {
+	document.getElementById("loading").style.display = "none";
+	throw new Error('Use static page for Search Engines');
+}
+
 /* default varibles */
 var default_max_result = 20;
-if (/bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent))
-	default_max_result = 4096;
 var max_result = default_max_result; // max count for result
 
 
