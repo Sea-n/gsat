@@ -20,6 +20,8 @@ var filterGsat = {
 }
 var subjectsGsat = Object.keys(filterGsat);
 
+const CJK = new RegExp('[a-zA-Z\u2e80-\u2eff\u2f00-\u2fdf\u3040-\u309f\u30a0-\u30fa\u30fc-\u30ff\u3100-\u312f\u3200-\u32ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]'); // from pangu, CJK + Alphabet
+
 if (localStorage.getItem("gsatMarks"))
 	filterGsat = JSON.parse(localStorage.getItem("gsatMarks"));
 
@@ -299,87 +301,89 @@ function showFilterDepartments(table, search) {
 	var count = 0;
 
 	for (var showFav = 1; showFav >= 0; showFav--) { // show favorites = {true, false}
-		for (var idx = 0; idx < data.length; idx++) {
-			if (!getDepartmentFilterStatus(idx, search, showFav))
-				continue;
-
-			var tr = document.createElement('tr');
-			id = data[idx].id;
-			tr.dataset.id = id;
-
-			for (_ = 0; _ < subjectsAdv.length + 4; _++)
-				tr.appendChild(document.createElement('td'));
-
-			tr.cells[0].classList.add("favorites");
-			var button = document.createElement('button');
-			button.onclick = function(e) {
-				t = e.target;
-				id = t.parentNode.parentNode.dataset.id;
-				index = fav.indexOf(id);
-				t.classList.remove("not-fav", "favorited");
-				if (index == -1) {
-					fav.push(id);
-					t.classList.add("favorited");
-				} else {
-					fav[index] = 0; // remove
-					t.classList.add("not-fav");
-				}
-				localStorage.setItem(favStorageName, JSON.stringify(fav)); // save
-			}
-			button.classList.add(showFav ? "favorited" : "not-fav"); // determined by getDepartmentFilterStatus
-			tr.cells[0].appendChild(button);
-
-			tr.cells[1].appendChild(document.createTextNode(data[idx].school));
-			tr.cells[2].appendChild(document.createTextNode(data[idx].name));
-
-			var link = document.createElement('a');
-			link.text = id;
-			link.href = getDetailLink(id);
-			link.target = '_blank';
-			link.classList.add('id');
-			tr.cells[subjectsAdv.length + 3].appendChild(link);
-			tr.cells[subjectsAdv.length + 3].classList.add("id");
-
-			for (var k = 0; k < subjectsAdv.length; k++) {
-				var s = subjectsAdv[k];
-
-				if (data[idx][s] == "--")
+		for (var fuzz = 0; fuzz <= 1; fuzz++) { // fuzz search = {false, true}
+			for (var idx = 0; idx < data.length; idx++) {
+				if (!getDepartmentFilterStatus(idx, search, showFav, fuzz))
 					continue;
 
-				if (data[idx][s] == "x0.00")
-					continue;
+				var tr = document.createElement('tr');
+				id = data[idx].id;
+				tr.dataset.id = id;
 
-				if (data[idx][s][1] == '標') {
-					if (data[idx][s] == '頂標')
-						tr.cells[k + 3].classList.add("best");
-					if (data[idx][s] == '前標')
-						tr.cells[k + 3].classList.add("good");
-					if (data[idx][s] == '均標')
-						tr.cells[k + 3].classList.add("average");
-					if (data[idx][s] == '後標')
-						tr.cells[k + 3].classList.add("bad");
-					if (data[idx][s] == '底標')
-						tr.cells[k + 3].classList.add("worst");
+				for (_ = 0; _ < subjectsAdv.length + 4; _++)
+					tr.appendChild(document.createElement('td'));
+
+				tr.cells[0].classList.add("favorites");
+				var button = document.createElement('button');
+				button.onclick = function(e) {
+					t = e.target;
+					id = t.parentNode.parentNode.dataset.id;
+					index = fav.indexOf(id);
+					t.classList.remove("not-fav", "favorited");
+					if (index == -1) {
+						fav.push(id);
+						t.classList.add("favorited");
+					} else {
+						fav[index] = 0; // remove
+						t.classList.add("not-fav");
+					}
+					localStorage.setItem(favStorageName, JSON.stringify(fav)); // save
+				}
+				button.classList.add(showFav ? "favorited" : "not-fav"); // determined by getDepartmentFilterStatus
+				tr.cells[0].appendChild(button);
+
+				tr.cells[1].appendChild(document.createTextNode(data[idx].school));
+				tr.cells[2].appendChild(document.createTextNode(data[idx].name));
+
+				var link = document.createElement('a');
+				link.text = id;
+				link.href = getDetailLink(id);
+				link.target = '_blank';
+				link.classList.add('id');
+				tr.cells[subjectsAdv.length + 3].appendChild(link);
+				tr.cells[subjectsAdv.length + 3].classList.add("id");
+
+				for (var k = 0; k < subjectsAdv.length; k++) {
+					var s = subjectsAdv[k];
+
+					if (data[idx][s] == "--")
+						continue;
+
+					if (data[idx][s] == "x0.00")
+						continue;
+
+					if (data[idx][s][1] == '標') {
+						if (data[idx][s] == '頂標')
+							tr.cells[k + 3].classList.add("best");
+						if (data[idx][s] == '前標')
+							tr.cells[k + 3].classList.add("good");
+						if (data[idx][s] == '均標')
+							tr.cells[k + 3].classList.add("average");
+						if (data[idx][s] == '後標')
+							tr.cells[k + 3].classList.add("bad");
+						if (data[idx][s] == '底標')
+							tr.cells[k + 3].classList.add("worst");
+					}
+
+					if (/x\d\.\d\d/.test(data[idx][s])) {
+						tr.cells[k + 3].classList.add("mark" + k);
+						tr.cells[k + 3].classList.add(data[idx][s].replace('.', '-'));
+					} else if (/x\d+/.test(data[idx][s]))
+						tr.cells[k + 3].classList.add("multiple");
+					else
+						tr.cells[k + 3].classList.add("mark");
+
+					if (data[idx][s] == '採計')
+						tr.cells[k + 3].classList.add("weighted");
+
+
+					tr.cells[k + 3].appendChild(document.createTextNode(data[idx][s]));
 				}
 
-				if (/x\d\.\d\d/.test(data[idx][s])) {
-					tr.cells[k + 3].classList.add("mark" + k);
-					tr.cells[k + 3].classList.add(data[idx][s].replace('.', '-'));
-				} else if (/x\d+/.test(data[idx][s]))
-					tr.cells[k + 3].classList.add("multiple");
-				else
-					tr.cells[k + 3].classList.add("mark");
-
-				if (data[idx][s] == '採計')
-					tr.cells[k + 3].classList.add("weighted");
-
-
-				tr.cells[k + 3].appendChild(document.createTextNode(data[idx][s]));
+				count++;
+				if (count <= max_result)
+					table.appendChild(tr);
 			}
-
-			count++;
-			if (count <= max_result)
-				table.appendChild(tr);
 		}
 	}
 
@@ -421,9 +425,22 @@ function adjustTableHeader() {
 		fH.style.display = "none";
 }
 
-function getDepartmentFilterStatus(idx, search, isFav) {
-	if (data[idx].name.toUpperCase().indexOf(search.toUpperCase()) === -1)
-		return false;
+function getDepartmentFilterStatus(idx, search, isFav, fuzz) {
+	search = search.toUpperCase();
+	if (data[idx].name.toUpperCase().indexOf(search) === -1) {
+		if (fuzz) {
+			ori = search;
+			search = ori[0];
+			for (var i=1; i<ori.length; i++) {
+				if (CJK.test(ori[i-1]) && CJK.test(ori[i]))
+					search += ".*";
+				search += ori[i];
+			}
+			if (!data[idx].name.toUpperCase().match(search))
+				return false; // fuzz search still fail
+		} else
+			return false; // no fuzz search
+	}
 
 	id = data[idx].id;
 	if (fav.includes(id) != isFav)
