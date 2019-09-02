@@ -427,20 +427,21 @@ function adjustTableHeader() {
 
 function getDepartmentFilterStatus(idx, search, isFav, fuzz) {
 	search = search.toUpperCase();
-	if (data[idx].name.toUpperCase().indexOf(search) === -1) {
-		if (fuzz) {
-			ori = search;
-			search = ori[0];
-			for (var i=1; i<ori.length; i++) {
-				if (CJK.test(ori[i-1]) && CJK.test(ori[i]))
-					search += ".*";
-				search += ori[i];
-			}
-			if (!data[idx].name.toUpperCase().match(search))
-				return false; // fuzz search still fail
-		} else
-			return false; // no fuzz search
-	}
+	if (data[idx].name.toUpperCase().indexOf(search) !== -1) { // exactly match
+		if (fuzz)
+			return false;
+	} else if (fuzz) { // try fuzz mode
+		ori = search;
+		search = ori[0];
+		for (var i=1; i<ori.length; i++) {
+			if (CJK.test(ori[i-1]) && CJK.test(ori[i]))
+				search += ".*";
+			search += ori[i];
+		}
+		if (!data[idx].name.toUpperCase().match(search))
+			return false; // fuzz search still fail
+	} else
+		return false; // not matched
 
 	id = data[idx].id;
 	if (fav.includes(id) != isFav)
