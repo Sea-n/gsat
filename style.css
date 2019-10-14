@@ -126,17 +126,22 @@ span.underline {
 	font-size: 1.6em;
 }
 
-#list .favorited:before {
-	content: "⭐️";
+#list .favorited {
+	background-image: url("img/star-on.png");
+	height: 1em;
+	width: 1em;
+	background-size: cover;
 }
 
-#list .not-fav:before {
-	content: "★";
-	color: lightGray;
+#list .not-fav {
+	background-image: url("img/star-off.png");
+	height: 1em;
+	width: 1em;
+	background-size: cover;
 }
 
-#list .not-fav:hover::before {
-	color: darkGray;
+#list .not-fav:hover {
+	background-image: url("img/star-off-hover.png");
 }
 
 #list th.sub {
