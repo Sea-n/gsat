@@ -25,6 +25,8 @@ const CJK = new RegExp('[a-zA-Z\u2e80-\u2eff\u2f00-\u2fdf\u3040-\u309f\u30a0-\u3
 if (localStorage.getItem("gsatMarks"))
 	filterGsat = JSON.parse(localStorage.getItem("gsatMarks"));
 
+var favsKey = "favs" + gsatYear + gsatType; // e.g. favs108apply
+
 initGsatFilter();
 
 
@@ -526,20 +528,25 @@ hintPromise.then((credential) => {
 
 
 function saveConfig() {
-	var config = {
-		"favoritesApply": localStorage.getItem("favoritesApply"),
-		"favoritesStar": localStorage.getItem("favoritesStar"),
-		"favoritesAdv": localStorage.getItem("favoritesAdv"),
-		"gsatMarks": localStorage.getItem("gsatMarks")
-	};
-	var json = JSON.stringify(config);
+	var data = new FormData();
+	data.append("type", gsatYear + gsatType);
+	data.append("favs", localStorage.getItem(favsKey));
 
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "sync/save.php");
-	xhr.setRequestHeader("Content-type", "application/json");
-	xhr.send(json);
+	xhr.open("POST", "sync/save", false);
+	xhr.send(data);
+	var resp = JSON.parse(xhr.response);
+	console.log(resp);
 }
 
-function restoreConfig() {
+function restoreConfig(key) {
+	var data = new FormData();
+	data.append("key", key);
 
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", "sync/restore", false);
+	xhr.send(data);
+	var resp = JSON.parse(xhr.response);
+	favs = resp.favs;
+	localStorage.setItem("favoritesApply", JSON.stringify(favsKey));
 }

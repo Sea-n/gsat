@@ -1,4 +1,6 @@
 var favStorageName = "favoritesApply";
+var gsatYear = "108";
+var gsatType = "apply";
 
 var filterAdv = {
 	"國文": 0,
