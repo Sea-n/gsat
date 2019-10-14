@@ -48,11 +48,6 @@ var list = Object.keys(lc).sort(function(a, b) {
 });
 
 
-window.onload = () => {
-	/* Countdown */
-	document.getElementById("countdown").innerHTML = Math.ceil((1561924800000 - new Date().getTime()) / 1000 / 60 / 60 / 24);
-}
-
 function getDetailLink(id) {
 	return 'https://campus4.ncku.edu.tw/uac/cross_search/dept_info/' + id + '.html';
 }
