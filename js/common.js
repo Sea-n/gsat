@@ -37,7 +37,7 @@ var list = Object.keys(lc).sort(function(a, b) {
 
 
 
-
+/* Search Engine Robot */
 if (/googlebot|bingbot|yandex|baiduspider|twitterbot|facebookexternalhit|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest\/0\.|pinterestbot|slackbot|vkShare|W3C_Validator/i.test(navigator.userAgent)) {
 	document.getElementById("loading").style.display = "none";
 	throw new Error('Use static page for Search Engines');
@@ -103,6 +103,7 @@ if (localStorage.getItem("favoritesAdv")) {
 	});
 	localStorage.setItem("favs108advanced", JSON.stringify(favs));
 }
+/* End: Backward Compatibility */
 
 var fav = [];
 if (localStorage.getItem(favStorageName))
@@ -134,7 +135,7 @@ input.addEventListener("keydown", function(e) {
 	}
 });
 
-/* Header */
+/* Table Header */
 window.addEventListener("scroll", function () {
 	var nav = document.getElementsByTagName("nav")[0];
 	var body = document.getElementsByTagName("body")[0];
@@ -232,13 +233,11 @@ function initGsatFilter() {
 		var s = subjectsGsat[k];
 
 		var fGm = fG[k].getElementsByClassName("menu")[0];
-		for (var i = 0; i < 6; i++) {
+		for (var i = 0; i <= 6; i++) {
 			fGm.children[i].onclick = (e) => {
 				var t = e.target;
 				var d = t.dataset;
 				var m = parseInt(d.mark);
-				if (m == filterGsat[ d.subject ])
-					m = 6; // reset
 				filterGsat[ d.subject ] = m;
 				adjustGsatFilter();
 			}
