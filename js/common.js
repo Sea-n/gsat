@@ -1,3 +1,43 @@
+var gsatYear = "108";
+var subjectsAdv = Object.keys(filterAdv);
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'data/' + gsatYear + '/' + gsatType, false);
+xhr.send(null);
+var lines = xhr.response.split('\n');
+
+var data = [];
+var lc = {};
+for (var i=0; i<lines.length; i++) {
+	if (lines[i].length == 0)
+		continue;
+	var line = lines[i].split('\t');
+	datum = {
+		id: line[0],
+		gsat: line[1].split(""),
+		school: line[3],
+		name: line[4]
+	};
+
+	var adv = line[2].split(" ");
+	for (var k = 0; k < subjectsAdv.length; k++)
+		datum[ subjectsAdv[k] ] = adv[k];
+
+	if (lc[datum.name] === undefined)
+		lc[datum.name] = 1;
+	else
+		lc[datum.name]++;
+
+	data.push(datum);
+}
+
+var list = Object.keys(lc).sort(function(a, b) {
+	return lc[a] < lc[b];
+});
+
+
+
+
 if (/googlebot|bingbot|yandex|baiduspider|twitterbot|facebookexternalhit|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest\/0\.|pinterestbot|slackbot|vkShare|W3C_Validator/i.test(navigator.userAgent)) {
 	document.getElementById("loading").style.display = "none";
 	throw new Error('Use static page for Search Engines');
@@ -25,7 +65,6 @@ const CJK = new RegExp('[a-zA-Z\u2e80-\u2eff\u2f00-\u2fdf\u3040-\u309f\u30a0-\u3
 if (localStorage.getItem("gsatMarks"))
 	filterGsat = JSON.parse(localStorage.getItem("gsatMarks"));
 
-var gsatYear = "108";
 var favStorageName = "favs" + gsatYear + gsatType; // e.g. favs108apply
 
 initGsatFilter();
@@ -62,7 +101,7 @@ if (localStorage.getItem("favoritesAdv")) {
 	var favs = old.filter((val, idx, arr) => {
 		return val !== 0;
 	});
-	localStorage.setItem("favs108adv", JSON.stringify(favs));
+	localStorage.setItem("favs108advanced", JSON.stringify(favs));
 }
 
 var fav = [];
