@@ -28,11 +28,11 @@ $type = $_POST['type'];
 if (!in_array($type, [
 	'108apply',
 	'108star',
-	'108adv',
+	'108advanced',
 ]))
 	exit(json_encode([
 		'ok' => false,
-		'msg' => 'Type not recognized.'
+		'msg' => "Type $type not recognized."
 	]));
 
 
@@ -51,17 +51,14 @@ if ($data === null)
 
 $favs = [];
 foreach ($data as $item) {
-	if ($item === 0)
-		continue;
-	if (!preg_match('#\d{4,7}#', $item))
+	if (!is_string($item) || !preg_match('#\d{5,6}#', $item))
 		exit(json_encode([
 			'ok' => false,
 			'msg' => "Invalid fav $item."
 		]));
-	if (!in_array($item, $favs))
-		$favs[] = $item;
 }
 sort($favs);
+$favs = array_unique($favs);
 
 $count = count($favs);
 if ($count === 0)

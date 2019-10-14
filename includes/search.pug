@@ -37,8 +37,8 @@ details.ts.accordion.filter
 
 .autocomplete
 	.inner-btn
-		input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjust();")
-		i#clear.clear.hidden1.hidden2(onclick="input.value = ''; adjust();")
+		input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjustSuggestion();")
+		i#clear.clear.hidden1.hidden2(onclick="input.value = ''; adjustSuggestion();")
 	#dep-list.autocomplete-items
 #stone(style="display: none;")
 	a(target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Stone');")

@@ -1,6 +1,33 @@
-var gsatYear = "108";
-var subjectsAdv = Object.keys(filterAdv);
+/* Search Engine Robot */
+if (/googlebot|bingbot|yandex|baiduspider|twitterbot|facebookexternalhit|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest\/0\.|pinterestbot|slackbot|vkShare|W3C_Validator/i.test(navigator.userAgent)) {
+	document.getElementById("loading").style.display = "none";
+	throw new Error('Use static page for Search Engines');
+}
 
+
+/* Default Varibles */
+var default_max_result = 20;
+var max_result = default_max_result; // max count for result
+
+
+/* GSAT Filters */
+var gsatYear = "108";
+var markLables = [ "未選考", "底標", "後標", "均標", "前標", "頂標", "未設定" ];
+var markClasses = [ "negative", "info", "info", "primary", "positive", "positive", "" ];
+var filterGsat = {
+	"國文": 6,
+	"英文": 6,
+	"數學": 6,
+	"社會": 6,
+	"自然": 6,
+}
+var subjectsAdv = Object.keys(filterAdv);
+var subjectsGsat = Object.keys(filterGsat);
+
+const CJK = new RegExp('[a-zA-Z\u2e80-\u2eff\u2f00-\u2fdf\u3040-\u309f\u30a0-\u30fa\u30fc-\u30ff\u3100-\u312f\u3200-\u32ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]'); // from pangu, CJK + Alphabet
+
+
+/* Get Table Data */
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'data/' + gsatYear + '/' + gsatType, false);
 xhr.send(null);
@@ -31,43 +58,15 @@ for (var i=0; i<lines.length; i++) {
 	data.push(datum);
 }
 
-var list = Object.keys(lc).sort(function(a, b) {
+/* Count Frequency */
+var suggestionList = Object.keys(lc).sort(function(a, b) {
 	return lc[a] < lc[b];
 });
 
 
 
-/* Search Engine Robot */
-if (/googlebot|bingbot|yandex|baiduspider|twitterbot|facebookexternalhit|rogerbot|linkedinbot|embedly|quora link preview|showyoubot|outbrain|pinterest\/0\.|pinterestbot|slackbot|vkShare|W3C_Validator/i.test(navigator.userAgent)) {
-	document.getElementById("loading").style.display = "none";
-	throw new Error('Use static page for Search Engines');
-}
-
-/* default varibles */
-var default_max_result = 20;
-var max_result = default_max_result; // max count for result
-
-
-/* GSAT Filters */
-var markLables = [ "未選考", "底標", "後標", "均標", "前標", "頂標", "未設定" ];
-var markClasses = [ "negative", "info", "info", "primary", "positive", "positive", "" ];
-var filterGsat = {
-	"國文": 6,
-	"英文": 6,
-	"數學": 6,
-	"社會": 6,
-	"自然": 6,
-}
-var subjectsGsat = Object.keys(filterGsat);
-
-const CJK = new RegExp('[a-zA-Z\u2e80-\u2eff\u2f00-\u2fdf\u3040-\u309f\u30a0-\u30fa\u30fc-\u30ff\u3100-\u312f\u3200-\u32ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]'); // from pangu, CJK + Alphabet
-
 if (localStorage.getItem("gsatMarks"))
 	filterGsat = JSON.parse(localStorage.getItem("gsatMarks"));
-
-var favStorageName = "favs" + gsatYear + gsatType; // e.g. favs108apply
-
-initGsatFilter();
 
 
 /* Backward Compatibility before 13 Oct 2019 */
@@ -105,9 +104,14 @@ if (localStorage.getItem("favoritesAdv")) {
 }
 /* End: Backward Compatibility */
 
-var fav = [];
+
+var favStorageName = "favs" + gsatYear + gsatType; // e.g. favs108apply
+
+initGsatFilter();
+
+var favs = [];
 if (localStorage.getItem(favStorageName))
-	fav = JSON.parse(localStorage.getItem(favStorageName));
+	favs = JSON.parse(localStorage.getItem(favStorageName));
 
 /* Loaded */
 var input = document.getElementById("dep");
@@ -115,25 +119,6 @@ parseHash();
 adjustGsatFilter();
 document.getElementById("loading").style.display = "none";
 
-
-/* Suggest List */
-var currentFocus;
-input.addEventListener("keydown", function(e) {
-	var x = document.getElementById("dep-list");
-	if (x)
-		x = x.getElementsByTagName("div");
-	if (e.keyCode == 40) { // Down
-		currentFocus++;
-		addActive(x);
-	} else if (e.keyCode == 38) { // Up
-		currentFocus--;
-		addActive(x);
-	} else if (e.keyCode == 13 || e.keyCode == 32) { // Enter || Space
-		e.preventDefault();
-		if (x && currentFocus > -1)
-			x[currentFocus].click();
-	}
-});
 
 /* Table Header */
 window.addEventListener("scroll", function () {
@@ -155,31 +140,72 @@ window.addEventListener("resize", () => {
 	adjustTableHeader();
 })
 
-/* Functions */
-function adjust() {
+
+
+/* Suggest List */
+var currentFocus;
+input.addEventListener("keydown", function(e) {
+	var x = document.getElementById("dep-list");
+	if (x)
+		x = x.getElementsByTagName("div");
+	if (e.keyCode == 40) { // Down
+		currentFocus++;
+		addActive(x);
+	} else if (e.keyCode == 38) { // Up
+		currentFocus--;
+		addActive(x);
+	} else if (e.keyCode == 13 || e.keyCode == 32) { // Enter || Space
+		e.preventDefault();
+		if (x && currentFocus > -1)
+			x[currentFocus].click();
+	}
+});
+
+function adjustSuggestion() {
 	var a, b, i;
-	var search = input.value;
+	var search = input.value.toUpperCase();
 	currentFocus = -1;
 
 	a = document.getElementById('dep-list');
 	a.innerHTML = '';
 
 	var count = 0;
-	for (i = 0; i < list.length; i++) {
-		if (count >= 5)
-			break;
-		pos = list[i].toUpperCase().indexOf(search.toUpperCase());
-		if (pos !== -1) {
+	for (var fuzz = 0; fuzz <= 1; fuzz++) { // fuzz search = {false, true}
+		for (i = 0; i < suggestionList.length; i++) {
+			if (count >= 5)
+				break;
+
+			var item = suggestionList[i].toUpperCase();
+			pos = item.indexOf(search);
+			if (pos !== -1) { // exactly match
+				if (fuzz)
+					continue;
+			} else if (fuzz) { // try fuzz mode
+				var fs = search[0];
+				for (var k=1; k<search.length; k++) {
+					if (CJK.test(search[k-1]) && CJK.test(search[k]))
+						fs += ".*";
+					fs += search[k];
+				}
+				if (!item.match(fs))
+					continue; // fuzz search still fail
+			} else
+				continue; // not matched
+
 			b = document.createElement("div");
 			b.id = "sug" + count;
-			b.innerHTML = list[i].substr(0, pos);
-			b.innerHTML += "<strong>" + list[i].substr(pos, search.length) + "</strong>";
-			b.innerHTML += list[i].substr(pos + search.length);
-			b.innerHTML += "<input type='hidden' value='" + list[i] + "'>";
+			if (fuzz == 0) {
+				b.innerHTML = suggestionList[i].substr(0, pos);
+				b.innerHTML += "<strong>" + suggestionList[i].substr(pos, search.length) + "</strong>";
+				b.innerHTML += suggestionList[i].substr(pos + search.length);
+			} else {
+				b.innerHTML = suggestionList[i];
+			}
+			b.innerHTML += "<input type='hidden' value='" + suggestionList[i] + "'>";
 
 			b.addEventListener("click", function(e) {
 				input.value = this.getElementsByTagName("input")[0].value;
-				adjust();
+				adjustSuggestion();
 			});
 
 			a.appendChild(b);
@@ -208,9 +234,10 @@ function removeActive(x) {
 		x[i].classList.remove("autocomplete-active");
 }
 
+/* Initial Page */
 function parseHash() {
 	if (window.location.hash.length === 0) {
-		adjust();
+		adjustSuggestion();
 		return;
 	}
 	var queries = decodeURIComponent(window.location.hash).substr(1).split(';');
@@ -224,7 +251,7 @@ function parseHash() {
 			filterAdv[query[1]] = -1;
 		}
 	}
-	adjust();
+	adjustSuggestion();
 }
 
 function initGsatFilter() {
@@ -376,17 +403,17 @@ function showFilterDepartments(table, search) {
 				button.onclick = function(e) {
 					t = e.target;
 					id = t.parentNode.parentNode.dataset.id;
-					index = fav.indexOf(id);
+					index = favs.indexOf(id);
 					t.classList.remove("not-fav", "favorited");
 					if (index == -1) {
-						fav.push(id);
-						fav.sort();
+						favs.push(id);
+						favs.sort();
 						t.classList.add("favorited");
 					} else {
-						fav.splice(index, 1);
+						favs.splice(index, 1);
 						t.classList.add("not-fav");
 					}
-					localStorage.setItem(favStorageName, JSON.stringify(fav)); // save
+					localStorage.setItem(favStorageName, JSON.stringify(favs)); // save
 				}
 				button.classList.add(showFav ? "favorited" : "not-fav"); // determined by getDepartmentFilterStatus
 				tr.cells[0].appendChild(button);
@@ -503,7 +530,7 @@ function getDepartmentFilterStatus(idx, search, isFav, fuzz) {
 		return false; // not matched
 
 	id = data[idx].id;
-	if (fav.includes(id) != isFav)
+	if (favs.includes(id) != isFav)
 		return false;
 
 	for (var k = 0; k < subjectsGsat.length; k++) {
@@ -537,53 +564,7 @@ function getDepartmentFilterStatus(idx, search, isFav, fuzz) {
 	return true;
 }
 
-/*
-window.onGoogleYoloLoad = (googleyolo) => {
-	console.log(googleyolo);
-}
-
-const retrievePromise = googleyolo.retrieve({
-	supportedAuthMethods: [
-		"https://accounts.google.com",
-//		"googleyolo://id-and-password"
-	],
-	supportedIdTokenProviders: [{
-		uri: "https://accounts.google.com",
-		clientId: "956286706085-euk5bqo0ricl4ns1obve4p51q1ajjocd.apps.googleusercontent.com"
-	}]
-});
-
-retrievePromise.then((credential) => {
-	console.log(credential);
-	if (credential.password) {
-		signInWithEmailAndPassword(credential.id, credential.password);
-	} else {
-		useGoogleIdTokenForAuth(credential.idToken);
-	}
-});
-
-const hintPromise = googleyolo.hint({
-	supportedAuthMethods: [
-		"https://accounts.google.com"
-	],
-	supportedIdTokenProviders: [{
-		uri: "https://accounts.google.com",
-		clientId: "956286706085-euk5bqo0ricl4ns1obve4p51q1ajjocd.apps.googleusercontent.com"
-	}],
-	context: "signUp"
-});
-
-
-hintPromise.then((credential) => {
-	console.log(credential);
-	if (credential.idToken) {
-		console.log(credential.idToken);
-		useGoogleIdTokenForAuth(credential.idToken);
-	}
-});
-*/
-
-
+/* Sync Config */
 function saveConfig() {
 	var data = new FormData();
 	data.append("type", gsatYear + gsatType);
@@ -605,5 +586,6 @@ function restoreConfig(key) {
 	xhr.send(data);
 	var resp = JSON.parse(xhr.response);
 	favs = resp.favs;
-	localStorage.setItem("favoritesApply", JSON.stringify(favStorageName));
+	localStorage.setItem(favStorageName, JSON.stringify(favStorageName));
+	updateTable();
 }

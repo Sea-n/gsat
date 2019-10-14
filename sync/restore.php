@@ -5,7 +5,7 @@ $key = $_POST['key'];
 if (!preg_match("#^[A-Za-z0-9_]{5,32}\-[0-9]+[a-z]+\-[0-9a-f]{3,}$#", $key))
 	exit(json_encode([
 		'ok' => false,
-		'msg' => 'Key invalid.'
+		'msg' => "Key $key invalid."
 	]));
 
 [$username, $type, $hash] = explode('-', $key, 3);
@@ -14,11 +14,11 @@ if (!preg_match("#^[A-Za-z0-9_]{5,32}\-[0-9]+[a-z]+\-[0-9a-f]{3,}$#", $key))
 if (!in_array($type, [
 	'108apply',
 	'108star',
-	'108adv',
+	'108advanced',
 ]))
 	exit(json_encode([
 		'ok' => false,
-		'msg' => 'Type not recognized.'
+		'msg' => "Type $type not recognized."
 	]));
 
 /* Check user */
