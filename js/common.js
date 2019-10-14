@@ -113,6 +113,11 @@ var favs = [];
 if (localStorage.getItem(favStorageName))
 	favs = JSON.parse(localStorage.getItem(favStorageName));
 
+if (!(favs instanceof Array)) {
+	console.error("Unknown type of favs:", favs);
+	favs = [];
+}
+
 /* Loaded */
 var input = document.getElementById("dep");
 parseHash();
@@ -586,6 +591,6 @@ function restoreConfig(key) {
 	xhr.send(data);
 	var resp = JSON.parse(xhr.response);
 	favs = resp.favs;
-	localStorage.setItem(favStorageName, JSON.stringify(favStorageName));
+	localStorage.setItem(favStorageName, JSON.stringify(favs));
 	updateTable();
 }

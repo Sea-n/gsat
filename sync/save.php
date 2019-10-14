@@ -49,16 +49,21 @@ if ($data === null)
 		'msg' => 'Favs is not a valid JSON.'
 	]));
 
-$favs = [];
 foreach ($data as $item) {
-	if (!is_string($item) || !preg_match('#\d{5,6}#', $item))
+	if (!is_string($item))
 		exit(json_encode([
 			'ok' => false,
-			'msg' => "Invalid fav $item."
+			'msg' => "Not string fav $item."
+		]));
+
+	if (!preg_match('#\d{5,6}#', $item))
+		exit(json_encode([
+			'ok' => false,
+			'msg' => "Fav $item format invalid."
 		]));
 }
-sort($favs);
-$favs = array_unique($favs);
+sort($data);
+$favs = array_unique($data);
 
 $count = count($favs);
 if ($count === 0)
