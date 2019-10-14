@@ -1,5 +1,3 @@
-var favStorageName = "favoritesAdv";
-var gsatYear = "108";
 var gsatType = "advanced";
 
 var filterAdv = {

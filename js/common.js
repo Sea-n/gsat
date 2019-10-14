@@ -25,26 +25,44 @@ const CJK = new RegExp('[a-zA-Z\u2e80-\u2eff\u2f00-\u2fdf\u3040-\u309f\u30a0-\u3
 if (localStorage.getItem("gsatMarks"))
 	filterGsat = JSON.parse(localStorage.getItem("gsatMarks"));
 
-var favsKey = "favs" + gsatYear + gsatType; // e.g. favs108apply
+var gsatYear = "108";
+var favStorageName = "favs" + gsatYear + gsatType; // e.g. favs108apply
 
 initGsatFilter();
 
 
-/* Backward Compatibility before 25 Feb 2019 */
-if (localStorage.getItem("favorites")) {
-	old = JSON.parse(localStorage.getItem("favorites"));
-	localStorage.removeItem("favorites");
+/* Backward Compatibility before 13 Oct 2019 */
+if (localStorage.getItem("favoritesApply")) {
+	old = JSON.parse(localStorage.getItem("favoritesApply"));
+	localStorage.removeItem("favoritesApply");
 
-	var apply = [];
-	var star = [];
-	for (var i = 0; i < old.length; i++) {
-		if (old[i].length == 6)
-			apply.push(old[i])
-		if (old[i].length == 5)
-			star.push(old[i])
-	}
-	localStorage.setItem("favoritesApply", JSON.stringify(apply));
-	localStorage.setItem("favoritesStar", JSON.stringify(star));
+	old.sort();
+	var favs = old.filter((val, idx, arr) => {
+		return val !== 0;
+	});
+	localStorage.setItem("favs108apply", JSON.stringify(favs));
+}
+
+if (localStorage.getItem("favoritesStar")) {
+	old = JSON.parse(localStorage.getItem("favoritesStar"));
+	localStorage.removeItem("favoritesStar");
+
+	old.sort();
+	var favs = old.filter((val, idx, arr) => {
+		return val !== 0;
+	});
+	localStorage.setItem("favs108star", JSON.stringify(favs));
+}
+
+if (localStorage.getItem("favoritesAdv")) {
+	old = JSON.parse(localStorage.getItem("favoritesAdv"));
+	localStorage.removeItem("favoritesAdv");
+
+	old.sort();
+	var favs = old.filter((val, idx, arr) => {
+		return val !== 0;
+	});
+	localStorage.setItem("favs108adv", JSON.stringify(favs));
 }
 
 var fav = [];
@@ -324,9 +342,10 @@ function showFilterDepartments(table, search) {
 					t.classList.remove("not-fav", "favorited");
 					if (index == -1) {
 						fav.push(id);
+						fav.sort();
 						t.classList.add("favorited");
 					} else {
-						fav[index] = 0; // remove
+						fav.splice(index, 1);
 						t.classList.add("not-fav");
 					}
 					localStorage.setItem(favStorageName, JSON.stringify(fav)); // save
@@ -530,7 +549,7 @@ hintPromise.then((credential) => {
 function saveConfig() {
 	var data = new FormData();
 	data.append("type", gsatYear + gsatType);
-	data.append("favs", localStorage.getItem(favsKey));
+	data.append("favs", localStorage.getItem(favStorageName));
 
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "sync/save", false);
@@ -548,5 +567,5 @@ function restoreConfig(key) {
 	xhr.send(data);
 	var resp = JSON.parse(xhr.response);
 	favs = resp.favs;
-	localStorage.setItem("favoritesApply", JSON.stringify(favsKey));
+	localStorage.setItem("favoritesApply", JSON.stringify(favStorageName));
 }
