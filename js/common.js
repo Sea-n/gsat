@@ -119,7 +119,6 @@ if (!(favs instanceof Array)) {
 }
 
 /* Loaded */
-var input = document.getElementById("dep");
 parseHash();
 adjustGsatFilter();
 document.getElementById("loading").style.display = "none";
@@ -149,19 +148,21 @@ window.addEventListener("resize", () => {
 
 /* Suggest List */
 var currentFocus;
-input.addEventListener("keydown", function(e) {
-	var x = document.getElementById("dep-list");
-	if (x)
-		x = x.getElementsByTagName("div");
-	if (e.keyCode == 40) { // Down
-		currentFocus++;
-		addActive(x);
-	} else if (e.keyCode == 38) { // Up
-		currentFocus--;
-		addActive(x);
-	} else if (e.keyCode == 13 || e.keyCode == 32) { // Enter || Space
-		e.preventDefault();
-		if (x && currentFocus > -1)
-			x[currentFocus].click();
-	}
-});
+if (input !== null) {
+	input.addEventListener("keydown", function(e) {
+		var x = document.getElementById("dep-list");
+		if (x)
+			x = x.getElementsByTagName("div");
+		if (e.keyCode == 40) { // Down
+			currentFocus++;
+			addActive(x);
+		} else if (e.keyCode == 38) { // Up
+			currentFocus--;
+			addActive(x);
+		} else if (e.keyCode == 13 || e.keyCode == 32) { // Enter || Space
+			e.preventDefault();
+			if (x && currentFocus > -1)
+				x[currentFocus].click();
+		}
+	});
+}

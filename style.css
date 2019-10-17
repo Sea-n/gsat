@@ -153,9 +153,12 @@ span.underline {
 	width: 140px;
 }
 
+#list th.id {
+	width: 52px;
+}
+
 #list td.id {
 	font-size: smaller;
-	width: 50px;
 }
 
 @media screen and (max-width: 330px) {

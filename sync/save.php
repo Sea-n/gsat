@@ -17,6 +17,24 @@ try {
 
 
 /* Check Input */
+if (!isset($_POST['year']))
+	exit(json_encode([
+		'ok' => false,
+		'msg' => 'No Data Year.'
+	]));
+
+$year = $_POST['year'];
+
+if (!in_array($year, [
+	'108',
+	'109'
+]))
+	exit(json_encode([
+		'ok' => false,
+		'msg' => "Year $year not recognized."
+	]));
+
+
 if (!isset($_POST['type']))
 	exit(json_encode([
 		'ok' => false,
@@ -26,9 +44,9 @@ if (!isset($_POST['type']))
 $type = $_POST['type'];
 
 if (!in_array($type, [
-	'108apply',
-	'108star',
-	'108advanced',
+	'apply',
+	'star',
+	'advanced',
 ]))
 	exit(json_encode([
 		'ok' => false,
@@ -72,7 +90,18 @@ if ($count === 0)
 		'msg' => "No fav after clean."
 	]));
 
-$json = json_encode($favs, JSON_PRETTY_PRINT);
+$name = $tg_user['first_name'];
+if (isset($tg_user['last_name']))
+	$name .= " " . $tg_user['last_name'];
+
+$json = json_encode([
+	'name' => $name,
+	'username' => $username,
+	'photo_url' => $tg_user['photo_url'] ?? '',
+	'year' => $year,
+	'type' => $type,
+	'favs' => $favs
+], JSON_PRETTY_PRINT);
 
 
 /* Check user directory */
@@ -86,12 +115,12 @@ $hash = substr(sha1($type . $json), 0, 4);
 
 
 /* Save file */
-$file = "$dir/$type-$hash.json";
+$file = "$dir/$year$type-$hash.json";
 if (file_exists($file))
 	exit(json_encode([
 		'ok' => true,
 		'count' => $count,
-		'key' => "$username-$type-$hash",
+		'key' => "$username-$year$type-$hash",
 		'msg' => 'Data exists.'
 	]));
 
@@ -103,5 +132,5 @@ file_put_contents("$dir/index.tsv", "$time\t$type\t$hash\t$count\n", FILE_APPEND
 echo json_encode([
 	'ok' => true,
 	'count' => $count,
-	'key' => "$username-$type-$hash",
+	'key' => "$username-$year$type-$hash",
 ], JSON_PRETTY_PRINT);

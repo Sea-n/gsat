@@ -82,6 +82,7 @@ echo <<<EOF
 <table class="ts very basic table">
 <tr class="ordinary-header">
 <th>日期</th>
+<th>年份</th>
 <th>類型</th>
 <th>連結</th>
 <th>紀錄數量</th>
@@ -100,9 +101,9 @@ foreach ($list as $item) {
 	$time = date("Y/m/d H:i", $time);
 	
 	$types = [
-		"108apply" => "108 年個人申請",
-		"108star" => "108 年繁星推薦",
-		"108advanced" => "108 年指考分發",
+		"apply" => "108 年個人申請",
+		"star" => "108 年繁星推薦",
+		"advanced" => "108 年指考分發",
 	];
 	if (array_key_exists($type, $types))
 		$type = $types[$type];
@@ -110,8 +111,9 @@ foreach ($list as $item) {
 	echo <<<EOF
 <tr>
 <td>$time</td>
+<td>$year 學年度</td>
 <td>$type</td>
-<td><a href="diff?key=$key" target="_blank">$hash</a></td>
+<td><a href="../share?key=$key" target="_blank">$hash</a></td>
 <td>$count</td>
 </tr>
 EOF;

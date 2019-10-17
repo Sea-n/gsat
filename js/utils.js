@@ -1,4 +1,12 @@
+var input = document.getElementById("dep");
+
 function adjustSuggestion() {
+	if (input === null) {
+		console.warn("input is undefined.");
+		updateTable();
+		return;
+	}
+
 	var a, b, i;
 	var search = input.value.toUpperCase();
 	currentFocus = -1;
@@ -73,6 +81,11 @@ function removeActive(x) {
 
 /* Initial Page */
 function parseHash() {
+	if (input === null) {
+		console.warn("input is undefined.");
+		return;
+	}
+
 	if (window.location.hash.length === 0) {
 		adjustSuggestion();
 		return;
@@ -92,7 +105,14 @@ function parseHash() {
 }
 
 function initGsatFilter() {
-	var fG = document.getElementById("filterGsat").children;
+	var fG = document.getElementById("filterGsat");
+	if (fG === null) {
+		console.warn("filterGsat is undefined.");
+		return;
+	}
+
+	fG = fG.children;
+
 	for (var k = 0; k < 5; k++) {
 		var s = subjectsGsat[k];
 
@@ -110,7 +130,14 @@ function initGsatFilter() {
 }
 
 function adjustGsatFilter() {
-	var fG = document.getElementById("filterGsat").children;
+	var fG = document.getElementById("filterGsat");
+	if (fG === null) {
+		console.warn("filterGsat is undefined.");
+		updateTable();
+		return;
+	}
+
+	fG = fG.children;
 
 	for (var k = 0; k < 5; k++) {
 		var s = subjectsGsat[k];
@@ -129,27 +156,36 @@ function adjustGsatFilter() {
 }
 
 function updateTable(search) {
-	if (search === undefined)
-		search = input.value;
+	if (search === undefined) {
+		if (input !== null)
+			search = input.value;
+		else
+			search = '';
+	}
 
 	var clear = document.getElementById("clear");
-	if (search.length == 0) {
-		clear.classList.add("hidden1");
-		setTimeout(function () {
-			clear.classList.add("hidden2");
-		}, 500);
-	}
-	else {
-		clear.classList.remove("hidden2");
-		setTimeout(function () {
-		   clear.classList.remove("hidden1");
-		}, 1);
+	if (clear !== null) {
+		if (search.length == 0) {
+			clear.classList.add("hidden1");
+			setTimeout(function () {
+				clear.classList.add("hidden2");
+			}, 500);
+		}
+		else {
+			clear.classList.remove("hidden2");
+			setTimeout(function () {
+			   clear.classList.remove("hidden1");
+			}, 1);
+		}
 	}
 
-	if (/資訊|APCS|電機/i.test(search))
-		document.getElementById('stone').style.display = '';
-	else
-		document.getElementById('stone').style.display = 'none';
+	var stone = document.getElementById('stone');
+	if (stone !== null) {
+		if (/資訊|APCS|電機/i.test(search))
+			stone.style.display = '';
+		else
+			stone.style.display = 'none';
+	}
 
 	var href = "#q=" + search;
 	if (search == "")
@@ -223,6 +259,9 @@ function showFilterDepartments(table, search) {
 	var count = 0;
 
 	for (var showFav = 1; showFav >= 0; showFav--) { // show favorites = {true, false}
+		if (!showFav && typeof sharedKey !== "undefined")
+			continue;
+
 		for (var fuzz = 0; fuzz <= 1; fuzz++) { // fuzz search = {false, true}
 			for (var idx = 0; idx < data.length; idx++) {
 				if (!getDepartmentFilterStatus(idx, search, showFav, fuzz))
@@ -312,8 +351,10 @@ function showFilterDepartments(table, search) {
 
 	if (count == 0) {
 		document.getElementById('no-data').style.display = '';
-		document.getElementById('count').style.display = 'none';
-		document.getElementById('stone').style.display = 'none';
+
+		var stone = document.getElementById('stone');
+		if (stone !== null)
+			stone.style.display = 'none';
 	} else {
 		document.getElementById('no-data').style.display = 'none';
 		document.getElementById('count').style.display = '';
@@ -404,7 +445,8 @@ function getDepartmentFilterStatus(idx, search, isFav, fuzz) {
 /* Sync Config */
 function saveConfig() {
 	var data = new FormData();
-	data.append("type", gsatYear + gsatType);
+	data.append("year", gsatYear);
+	data.append("type", gsatType);
 	data.append("favs", localStorage.getItem(favStorageName));
 
 	var xhr = new XMLHttpRequest();
@@ -422,7 +464,9 @@ function loadConfig(key) {
 	xhr.open("POST", "sync/load", false);
 	xhr.send(data);
 	var resp = JSON.parse(xhr.response);
-	favs = resp.favs;
-	localStorage.setItem(favStorageName, JSON.stringify(favs));
-	updateTable();
+
+	if (!resp.ok)
+		console.error(resp.msg);
+
+	return resp.data;
 }

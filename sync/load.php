@@ -41,9 +41,9 @@ if (!file_exists($file))
 
 /* Load File */
 $json = file_get_contents($file);
-$favs = json_decode($json, true);
+$data = json_decode($json, true);
 
 echo json_encode([
 	'ok' => true,
-	'favs' => $favs
+	'data' => $data
 ], JSON_PRETTY_PRINT);
