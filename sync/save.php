@@ -82,7 +82,7 @@ $dir = "storage/$username";
 if (!file_exists($dir))
 	mkdir($dir);
 
-$hash = substr(sha1($type . $json), 0, 3);
+$hash = substr(sha1($type . $json), 0, 4);
 
 
 /* Save file */
