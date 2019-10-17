@@ -124,6 +124,7 @@ span.underline {
 #list .favorites {
 	margin: -0.6em 0 -0.6em 0;
 	font-size: 1.6em;
+    width: 25px;
 }
 
 #list .favorited {
@@ -148,6 +149,10 @@ span.underline {
     width: 50px;
 }
 
+#list th.school {
+    width: 140px;
+}
+
 #list td.id {
     font-size: smaller;
     width: 50px;
@@ -165,6 +170,10 @@ span.underline {
         width: 23px;
     }
 
+    #list th.school {
+        width: 50px;
+    }
+
 	#list .multiple {
 		font-size: 10px;
 	}
@@ -173,6 +182,10 @@ span.underline {
 @media screen and (min-width: 375px) and (max-width: 640px) {
     #list th.sub {
         width: 38px;
+    }
+
+    #list th.school {
+        width: 80px;
     }
 }
 
