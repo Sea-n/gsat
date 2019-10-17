@@ -582,12 +582,12 @@ function saveConfig() {
 	console.log(resp);
 }
 
-function restoreConfig(key) {
+function loadConfig(key) {
 	var data = new FormData();
 	data.append("key", key);
 
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "sync/restore", false);
+	xhr.open("POST", "sync/load", false);
 	xhr.send(data);
 	var resp = JSON.parse(xhr.response);
 	favs = resp.favs;
