@@ -265,7 +265,7 @@ function initGsatFilter() {
 		var s = subjectsGsat[k];
 
 		var fGm = fG[k].getElementsByClassName("menu")[0];
-		for (var i = 0; i <= 6; i++) {
+		for (var i = 0; i < 7; i++) {
 			fGm.children[i].onclick = (e) => {
 				var t = e.target;
 				var d = t.dataset;
