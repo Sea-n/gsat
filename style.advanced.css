@@ -25,17 +25,33 @@ section.placeholder {
 }
 
 @media (max-width: 991px) and (orientation: portrait),
-(max-width: 639px) and (orientation: landscape) {
+(max-width: 677px) and (orientation: landscape) {
 	section.placeholder {
 		display: flex;
 	}
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 991px)  and (min-width: 770px) {
 	#list .id,
 	#list .favorites {
 		display: none;
 	}
+
+	#list th.school {
+		width: 80px;
+	}
+}
+
+@media screen and (max-width: 770px) {
+	#list .id,
+	#list .favorites {
+		display: none;
+	}
+
+	#list th.school {
+		width: 50px;
+	}
+
 }
 
 .mark0 { --hue: 0; }
