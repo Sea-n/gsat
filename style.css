@@ -31,6 +31,7 @@ span.underline {
 	position: fixed;
 	top: 40px;
 	display: none;
+	height: 45px;
 }
 
 #list th {
@@ -139,17 +140,22 @@ span.underline {
 }
 
 #list > tr {
-    height: 70px;
+	height: 70px;
 }
 
 #list .favorites {
 	margin: -0.6em 0 -0.6em 0;
 	font-size: 1.6em;
 	width: 40px;
-    position: relative;
+	position: relative;
 }
 
 #list .favorited {
+	margin: 0 auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	background-image: url("img/star-on.png");
 	height: 1em;
 	width: 1em;
@@ -157,11 +163,11 @@ span.underline {
 }
 
 #list .not-fav {
-    margin: 0 auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	margin: 0 auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	background-image: url("img/star-off.png");
 	height: 1em;
 	width: 1em;
