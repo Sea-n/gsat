@@ -138,10 +138,15 @@ span.underline {
 	color: red;
 }
 
+#list > tr {
+    height: 70px;
+}
+
 #list .favorites {
 	margin: -0.6em 0 -0.6em 0;
 	font-size: 1.6em;
-	width: 25px;
+	width: 40px;
+    position: relative;
 }
 
 #list .favorited {
@@ -152,6 +157,11 @@ span.underline {
 }
 
 #list .not-fav {
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 	background-image: url("img/star-off.png");
 	height: 1em;
 	width: 1em;
