@@ -198,11 +198,7 @@ function updateTable(search) {
 		else if (filterAdv[s] === -1)
 			href += ";n=" + s;
 	}
-
-	if (href == "#q=")
-		history.pushState("", document.title, window.location.pathname);
-	else
-		window.location.hash = href;
+    history.pushState("", document.title, window.location.pathname+href);
 
 	ga('send', 'pageview', {
 		'page': location.pathname + location.search + location.hash
