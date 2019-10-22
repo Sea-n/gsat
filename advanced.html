@@ -90,6 +90,7 @@
       </div>
     </header>
     <div class="ts container" name="main">
+      <center style="color: red;">注意：此為今年初 108 學年度資料，109 學年度資料請參見 <a href="apply109">個人申請</a>、<a href="star109">繁星推薦</a> 頁面</center>
       <details class="ts accordion filter">
         <summary><i class="icon dropdown"></i>學測級分篩選</summary>
         <div id="filterGsat">
@@ -164,11 +165,13 @@
         <p>自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 109 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利</p>
         <p>本站為您整理了個人申請、繁星推薦、指考分發的參採科目，讓您在五選四的時代快速得到簡章重點</p>
       </div>
-      <h5 class="ts center aligned header" id="count" style="display: none;">共&nbsp;<span id="count-num">0</span>&nbsp;筆結果</h5>
-      <center style="color: red;">注意：此為今年初 108 學年度資料，109 學年度資料請參見 <a href="apply109">個人申請</a>、<a href="star109">繁星推薦</a> 頁面</center>
+      <center id="count" style="display: none;">
+        <h5 class="ts header">共&nbsp;<span id="count-num">0</span>&nbsp;筆結果</h5>
+        <button class="ts primary basic button" id="share" onclick="saveConfig();">分享我的最愛給朋友</button>
+      </center>
       <table class="ts very basic table" id="list"></table>
       <div class="ts padded basic slate" id="no-data" style="display: none;"><i class="search icon"></i><span class="header">無符合條件之結果</span></div>
-      <div id="show-more" style="display: none;text-align:center">
+      <div id="show-more" style="display: none;">
         <button class="ts secondary basic button" onclick="max_result *= 2; updateTable();">檢視更多結果</button>
       </div>
     </div>

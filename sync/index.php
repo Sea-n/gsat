@@ -12,7 +12,7 @@ try {
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>同步資料 - 學測五選四</title>
+	<title>我的分享 - 學測五選四</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 	<link href="https://www.sean.taipei/assets/css/tocas-ui/tocas.css" rel="stylesheet">
 	<link href="//cdn.rawgit.com/gnehs/Tocas-UI-Xiaoan/master/ts.xiaoan.min.css" rel="stylesheet">
@@ -38,8 +38,8 @@ try {
 	</nav>
 	<header class="ts fluid vertically padded heading slate">
 		<div class="ts narrow container">
-			<h1 class="header">同步資料</h1>
-			<div class="description">讓您跨平台同步「我的最愛」，也能即時分享給老師、同學們</div>
+			<h1 class="header">我的分享</h1>
+			<div class="description">讓您跨平台分享「我的最愛」，也能即時分享給老師、同學們</div>
 		</div>
 	</header>
 	<div class="ts container" name="main">
@@ -94,16 +94,16 @@ $list = explode("\n", $list);
 $list = array_reverse($list);
 
 foreach ($list as $item) {
-	[$time, $type, $hash, $count] = explode("\t", $item, 4);
+	[$time, $year, $type, $hash, $count] = explode("\t", $item, 5);
 
-	$key = "$username-$type-$hash"; // Before change type to human text
+	$key = "$username-$year$type-$hash"; // Before change type to human text
 
 	$time = date("Y/m/d H:i", $time);
 	
 	$types = [
-		"apply" => "108 年個人申請",
-		"star" => "108 年繁星推薦",
-		"advanced" => "108 年指考分發",
+		"apply" => "個人申請",
+		"star" => "繁星推薦",
+		"advanced" => "指考分發",
 	];
 	if (array_key_exists($type, $types))
 		$type = $types[$type];

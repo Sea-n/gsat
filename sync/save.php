@@ -8,10 +8,10 @@ try {
 
 	$tg_user = checkTelegramAuthorization($auth_data);
 } catch (Exception $e) {
-	header('Location: ./');
 	exit(json_encode([
 		'ok' => false,
-		'msg' => $e->getMessage()
+		'redirect' => "sync/",
+		'error' => $e->getMessage()
 	]));
 }
 
@@ -20,7 +20,7 @@ try {
 if (!isset($_POST['year']))
 	exit(json_encode([
 		'ok' => false,
-		'msg' => 'No Data Year.'
+		'error' => 'No Data Year.'
 	]));
 
 $year = $_POST['year'];
@@ -31,14 +31,14 @@ if (!in_array($year, [
 ]))
 	exit(json_encode([
 		'ok' => false,
-		'msg' => "Year $year not recognized."
+		'error' => "Year $year not recognized."
 	]));
 
 
 if (!isset($_POST['type']))
 	exit(json_encode([
 		'ok' => false,
-		'msg' => 'No Data Type.'
+		'error' => 'No Data Type.'
 	]));
 
 $type = $_POST['type'];
@@ -50,34 +50,34 @@ if (!in_array($type, [
 ]))
 	exit(json_encode([
 		'ok' => false,
-		'msg' => "Type $type not recognized."
+		'error' => "Type $type not recognized."
 	]));
 
 
 if (!isset($_POST['favs']))
 	exit(json_encode([
 		'ok' => false,
-		'msg' => 'No favs.'
+		'error' => 'No favs.'
 	]));
 
 $data = json_decode($_POST['favs']);
 if ($data === null)
 	exit(json_encode([
 		'ok' => false,
-		'msg' => 'Favs is not a valid JSON.'
+		'error' => 'Favs is not a valid JSON.'
 	]));
 
 foreach ($data as $item) {
 	if (!is_string($item))
 		exit(json_encode([
 			'ok' => false,
-			'msg' => "Not string fav $item."
+			'error' => "Not string fav $item."
 		]));
 
 	if (!preg_match('#\d{5,6}#', $item))
 		exit(json_encode([
 			'ok' => false,
-			'msg' => "Fav $item format invalid."
+			'error' => "Fav $item format invalid."
 		]));
 }
 sort($data);
@@ -87,7 +87,7 @@ $count = count($favs);
 if ($count === 0)
 	exit(json_encode([
 		'ok' => false,
-		'msg' => "No fav after clean."
+		'error' => "您尚未將任何校系新增至我的最愛喔！"
 	]));
 
 $name = $tg_user['first_name'];
@@ -116,21 +116,24 @@ $hash = substr(sha1($type . $json), 0, 4);
 
 /* Save file */
 $file = "$dir/$year$type-$hash.json";
+$key = "$username-$year$type-$hash";
 if (file_exists($file))
 	exit(json_encode([
 		'ok' => true,
 		'count' => $count,
-		'key' => "$username-$year$type-$hash",
+		'key' => $key,
+		'redirect' => "share?key=$key",
 		'msg' => 'Data exists.'
 	]));
 
 file_put_contents($file, $json);
 
 $time = time();
-file_put_contents("$dir/index.tsv", "$time\t$type\t$hash\t$count\n", FILE_APPEND);
+file_put_contents("$dir/index.tsv", "$time\t$year\t$type\t$hash\t$count\n", FILE_APPEND);
 
 echo json_encode([
 	'ok' => true,
 	'count' => $count,
-	'key' => "$username-$year$type-$hash",
+	'key' => $key,
+	'redirect' => "share?key=$key",
 ], JSON_PRETTY_PRINT);

@@ -444,6 +444,8 @@ function getDepartmentFilterStatus(idx, search, isFav, fuzz) {
 
 /* Sync Config */
 function saveConfig() {
+	var btn = document.getElementById("share");
+	btn.textContent = "上傳中...";
 	var data = new FormData();
 	data.append("year", gsatYear);
 	data.append("type", gsatType);
@@ -453,7 +455,12 @@ function saveConfig() {
 	xhr.open("POST", "sync/save", false);
 	xhr.send(data);
 	var resp = JSON.parse(xhr.response);
+
 	console.log(resp);
+	if (resp.error)
+		alert(resp.error);
+	if (resp.redirect)
+		location.href = resp.redirect;
 }
 
 function loadConfig(key) {

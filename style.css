@@ -50,6 +50,14 @@ span.underline {
 	text-align: center;
 }
 
+#count h5 {
+	display: inline-block;
+}
+
+#show-more {
+	text-align: center;
+}
+
 #list .best,
 .mark.best {
 	color: hsl(180, 100%, 25%);
@@ -219,7 +227,8 @@ span.underline {
 		font-size: 14px;
 	}
 
-	#list .favorites {
+	#list .favorites,
+	#share {
 		display: none;
 	}
 }
