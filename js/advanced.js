@@ -1,4 +1,5 @@
 var gsatType = "advanced";
+var gsatYear = "108";
 
 var filterAdv = {
 	"國文": 0,

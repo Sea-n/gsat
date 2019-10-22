@@ -1,5 +1,5 @@
 var gsatType = "apply";
-var gsatYear = "108";
+var gsatYear = "109";
 
 var filterAdv = {
 	"國文": 0,
@@ -10,5 +10,5 @@ var filterAdv = {
 };
 
 function getDetailLink(id) {
-	return 'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_' + id + '.htm';
+	return 'https://sean.cat/gsat/';
 }

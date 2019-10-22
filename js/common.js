@@ -11,7 +11,6 @@ var max_result = default_max_result; // max count for result
 
 
 /* GSAT Filters */
-var gsatYear = "108";
 var markLables = [ "未選考", "底標", "後標", "均標", "前標", "頂標", "未設定" ];
 var markClasses = [ "negative", "info", "info", "primary", "positive", "positive", "" ];
 var filterGsat = {
