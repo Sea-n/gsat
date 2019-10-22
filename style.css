@@ -25,13 +25,17 @@ span.underline {
 	width: 100%;
 }
 
+#list .ordinary-header {
+	height: auto;
+}
+
 #list .fixed-header {
 	z-index: 20;
 	background-color: white;
 	position: fixed;
 	top: 40px;
 	display: none;
-	height: 45px;
+	height: auto;
 }
 
 #list th {
