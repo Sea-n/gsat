@@ -1,11 +1,11 @@
 doctype html
 html
 	head
-		title 繁星推薦 109 學年度 - 學測五選四
-		meta(name="keywords" content="學測五選四,繁星推薦,109 學年度,學測五選三")
+		title 繁星推薦 - 學測五選四
+		meta(name="keywords" content="學測五選四,繁星推薦,108 學年度,學測五選三")
 		meta(name="description" content="自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 109 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利")
-		meta(property="og:title" content="學測五選四 - 繁星推薦 109 學年度")
-		meta(property="og:url" content="https://sean.cat/gsat/star")
+		meta(property="og:title" content="學測五選四 - 繁星推薦")
+		meta(property="og:url" content="https://sean.cat/gsat/star108")
 		meta(property="og:description" content="自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 109 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利")
 		meta(property="og:image" content="https://img.sean.taipei/2019/02/gsat.jpg")
 		include includes/head.pug
@@ -46,39 +46,35 @@ html
 						"position": 4,
 						"item": {
 							"@type":"WebPage",
-							"@id": "https://sean.cat/gsat/star109",
-							"url":"https://sean.cat/gsat/star109",
-							"name": "109 學年度"
+							"@id": "https://sean.cat/gsat/star108",
+							"url":"https://sean.cat/gsat/star108",
+							"name": "108 學年度"
 						}
 					}
 				]
 			}
-		style .id { display: none; }
 	body
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container
 				a.item(href=".") 首頁
-				a.item.hide1(href="apply109") 個人申請
+				a.item.hide1(href="apply108") 個人申請
 				a.item.active.hide1(href="star") 繁星推薦
+				a.item.hide1(href="advanced108") 指考分發
 				.right.fitted.item
-					b.item.cd
-						| 學測倒數&nbsp;
-						span#countdown 87
-						| &nbsp天
+					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
-				h1.header
-					| 繁星推薦 
-					sup Preview
-				.description 學測五選四 109 學年度
+				h1.header 繁星推薦
+				.description 學測五選四 108 學年度
 		div.ts.container(name="main")
+			- var old = true
 			include includes/search.pug
 		include includes/footer.pug
 		script.
 			var gsatType = "star";
-			var gsatYear = "109";
+			var gsatYear = "108";
 			function getDetailLink(id) {
-				return 'https://sean.cat/gsat';
+				return 'https://www.cac.edu.tw/star108/system/108ColQry_forstar_5d3o9a/html/108_' + id + '.htm';
 			}
 		script(src="js/utils.js?v=1018")
 		script(src="js/common.js?v=1022")

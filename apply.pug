@@ -58,9 +58,50 @@ html
 				h1.header 個人申請
 				.description 學測五選四
 		div.ts.container(name="main")
-			- var old = true
-			include includes/search.pug
+			h3.ts.header#year109 109 學年度
+			big 請 
+				a(href="apply109") 點我打開
+				|  最新資料頁面
+			p 目前僅有校系參採科目簡表，尚無詳細簡章
+			p 大考中心預計於 11/1 週五釋出詳細簡章
+			i 資料日期：2019/10/22
+			h3.ts.header#year108 108 學年度
+			big 請 
+				a(href="apply108") 點我打開
+				|  歷史資料頁面
+			p 今年已考上大一的這屆使用，可作為參考
+			i 資料日期：2019/02/25
+			h3#faq.ts.header 常見問題
+			h4 Q1: 各科系的 
+				span.mark.best 頂標
+				| 、
+				span.mark.weighted 採計
+				| 、
+				span.mark.multiple x3
+				|  是什麼意思？
+			p
+				span.mark.best 頂標
+				| 、
+				span.mark.good 前標
+				| 、
+				span.mark.average 均標
+				| 、
+				span.mark.bad 後標
+				| 、
+				span.mark.worst 底標
+				|  分別代表第一階段的檢定，是申請時
+				b 必須
+				| 達到的門檻
+			p
+				span.mark.multiple x3
+				|  則代表第一階段的篩選倍率，假設招生名額為 20 人，則依級分排序，取該科前 60 名進入下一階段篩選
+			p 到了第二階段才參採，則顯示為 
+				span.mark.weighted 採計
+				| ，將會綜合其他科目、備審資料、口試面談等成績，可以看 Q4 點開詳細資料，了解加權比重。
+			h4 Q2: 我看到社會就頭痛，可以過濾掉嗎
+			p 這就是此工具的主要功能
+			p 只要在「社會」的按鈕點兩下，變成紅色 ❌ 後，就會過濾掉參採此科的學校囉
+			h4 Q3: 怎麼知道哪些科系會檢定英聽呢？
+			p 108 學年度僅 3% 科系檢定英聽，故為了介面簡潔，未將此列入本工具篩選條件
+			p 打開詳細資料後，就知道檢定哪級了哦
 		include includes/footer.pug
-		script(src="js/utils.js?v=1018")
-		script(src="js/apply.js?v=1014")
-		script(src="js/common.js?v=1014")

@@ -37,9 +37,18 @@ html
 						"position": 3,
 						"item": {
 							"@type":"WebPage",
+							"@id": "https://sean.cat/gsat/apply",
+							"url":"https://sean.cat/gsat/apply",
+							"name": "個人申請"
+						}
+					}, {
+						"@type": "ListItem",
+						"position": 4,
+						"item": {
+							"@type":"WebPage",
 							"@id": "https://sean.cat/gsat/apply109",
 							"url":"https://sean.cat/gsat/apply109",
-							"name": "個人申請 109 學年度"
+							"name": "109 學年度"
 						}
 					}
 				]
@@ -49,7 +58,7 @@ html
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container
 				a.item(href=".") 首頁
-				b.item.active.hide1 個人申請
+				a.item.active.hide1(href="apply") 個人申請
 				a.item.hide1(href="star109") 繁星推薦
 				.right.fitted.item
 					b.item.cd
@@ -65,6 +74,11 @@ html
 		div.ts.container(name="main")
 			include includes/search.pug
 		include includes/footer.pug
+		script.
+			var gsatType = "apply";
+			var gsatYear = "109";
+			function getDetailLink(id) {
+				return 'https://sean.cat/gsat';
+			}
 		script(src="js/utils.js?v=1018")
-		script(src="js/apply109.js?v=1022")
 		script(src="js/common.js?v=1022")

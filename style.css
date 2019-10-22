@@ -243,7 +243,7 @@ span.underline {
 }
 
 div[name=main] {
-	padding-bottom: 110px;
+	padding-bottom: 130px;
 }
 
 footer {
@@ -387,4 +387,65 @@ i.hidden2 {
 .cd {
 	background-color: #FF0000B3;
 	color: white !important;
+}
+
+section.placeholder {
+	display: none;
+	position: fixed;
+	top: 40px;
+	height: 100vh;
+	width: 100vw;
+	background-color: #F7F7F7;
+	justify-content: center;
+	align-item: center;
+	z-index: 12345;
+}
+
+.placeholder-message {
+	width: 470px;
+	font-size: 18px;
+	line-height: 26px;
+	text-align: center;
+	margin: 60px 12px;
+	color: #777;
+}
+
+@media (max-width: 991px) and (orientation: portrait),
+(max-width: 677px) and (orientation: landscape) {
+	section.placeholder {
+		display: flex;
+	}
+}
+
+.mark0 { --hue: 0; }
+.mark1 { --hue: 20; }
+.mark2 { --hue: 50; }
+.mark3 { --hue: 70; }
+.mark4 { --hue: 120; }
+.mark5 { --hue: 160; }
+.mark6 { --hue: 200; }
+.mark7 { --hue: 240; }
+.mark8 { --hue: 280; }
+.mark9 { --hue: 320; }
+
+.mark.x1-00,
+#list .x1-00 {
+	color: hsl(var(--hue), 100%, 25%);
+	background-color: hsl(var(--hue), 100%, 92%);
+}
+
+.mark.x1-25,
+.mark.x1-50,
+.mark.x1-75,
+#list .x1-25,
+#list .x1-50,
+#list .x1-75 {
+	color: hsl(var(--hue), 100%, 25%);
+	background-color: hsl(var(--hue), 100%, 87%);
+}
+
+.mark.x2-00,
+#list .x2-00 {
+	color: hsl(var(--hue), 100%, 25%);
+	background-color: hsl(var(--hue), 100%, 82%);
 }

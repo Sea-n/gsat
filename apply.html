@@ -83,90 +83,24 @@
       </div>
     </header>
     <div class="ts container" name="main">
-      <center style="color: red;">注意：此為今年初 108 學年度資料，109 學年度資料請參見 <a href="apply109">個人申請</a>、<a href="star109">繁星推薦</a> 頁面</center>
-      <details class="ts accordion filter">
-        <summary><i class="icon dropdown"></i>學測級分篩選</summary>
-        <div id="filterGsat">
-          <div class="ts dropdown labeled icon button"><i class="book icon"></i><span class="text">國文</span>
-                  <div class="menu">
-                    <div class="item best mark" data-subject="國文" data-mark="5">頂標</div>
-                    <div class="item good mark" data-subject="國文" data-mark="4">前標</div>
-                    <div class="item average mark" data-subject="國文" data-mark="3">均標</div>
-                    <div class="item bad mark" data-subject="國文" data-mark="2">後標</div>
-                    <div class="item worst mark" data-subject="國文" data-mark="1">底標</div>
-                    <div class="item" data-subject="國文" data-mark="0">未選考</div>
-                    <div class="item" data-subject="國文" data-mark="6">清除</div>
-                  </div>
-          </div>
-          <div class="ts dropdown labeled icon button"><i class="globe icon"></i><span class="text">英文</span>
-                  <div class="menu">
-                    <div class="item best mark" data-subject="英文" data-mark="5">頂標</div>
-                    <div class="item good mark" data-subject="英文" data-mark="4">前標</div>
-                    <div class="item average mark" data-subject="英文" data-mark="3">均標</div>
-                    <div class="item bad mark" data-subject="英文" data-mark="2">後標</div>
-                    <div class="item worst mark" data-subject="英文" data-mark="1">底標</div>
-                    <div class="item" data-subject="英文" data-mark="0">未選考</div>
-                    <div class="item" data-subject="英文" data-mark="6">清除</div>
-                  </div>
-          </div>
-          <div class="ts dropdown labeled icon button"><i class="calculator icon"></i><span class="text">數學</span>
-                  <div class="menu">
-                    <div class="item best mark" data-subject="數學" data-mark="5">頂標</div>
-                    <div class="item good mark" data-subject="數學" data-mark="4">前標</div>
-                    <div class="item average mark" data-subject="數學" data-mark="3">均標</div>
-                    <div class="item bad mark" data-subject="數學" data-mark="2">後標</div>
-                    <div class="item worst mark" data-subject="數學" data-mark="1">底標</div>
-                    <div class="item" data-subject="數學" data-mark="0">未選考</div>
-                    <div class="item" data-subject="數學" data-mark="6">清除</div>
-                  </div>
-          </div>
-          <div class="ts dropdown labeled icon button"><i class="newspaper icon"></i><span class="text">社會</span>
-                  <div class="menu">
-                    <div class="item best mark" data-subject="社會" data-mark="5">頂標</div>
-                    <div class="item good mark" data-subject="社會" data-mark="4">前標</div>
-                    <div class="item average mark" data-subject="社會" data-mark="3">均標</div>
-                    <div class="item bad mark" data-subject="社會" data-mark="2">後標</div>
-                    <div class="item worst mark" data-subject="社會" data-mark="1">底標</div>
-                    <div class="item" data-subject="社會" data-mark="0">未選考</div>
-                    <div class="item" data-subject="社會" data-mark="6">清除</div>
-                  </div>
-          </div>
-          <div class="ts dropdown labeled icon button"><i class="idea icon"></i><span class="text">自然</span>
-                  <div class="menu">
-                    <div class="item best mark" data-subject="自然" data-mark="5">頂標</div>
-                    <div class="item good mark" data-subject="自然" data-mark="4">前標</div>
-                    <div class="item average mark" data-subject="自然" data-mark="3">均標</div>
-                    <div class="item bad mark" data-subject="自然" data-mark="2">後標</div>
-                    <div class="item worst mark" data-subject="自然" data-mark="1">底標</div>
-                    <div class="item" data-subject="自然" data-mark="0">未選考</div>
-                    <div class="item" data-subject="自然" data-mark="6">清除</div>
-                  </div>
-          </div>
-        </div><br>
-      </details>
-      <div class="autocomplete">
-        <div class="inner-btn">
-          <input id="dep" type="text" placeholder="輸入您感興趣的科系..." oninput="adjustSuggestion();"><i class="clear hidden1 hidden2" id="clear" onclick="input.value = ''; adjustSuggestion();"></i>
-        </div>
-        <div class="autocomplete-items" id="dep-list"></div>
-      </div>
-      <div id="stone" style="display: none;"><a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Stone');"><img class="ts poyon" src="https://sitcon.org/2017/favicon.ico"></a>
-        <p style="display: inline-block;">小石看到你正在查詢資訊相關科系<br>不妨來 <a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Textlink');">SITCON 學生計算機年會</a> 看看吧owo</p>
-      </div>
-      <div id="loading">
-        <h3 class="ts header">資料讀取中...</h3>
-        <p>自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 109 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利</p>
-        <p>本站為您整理了個人申請、繁星推薦、指考分發的參採科目，讓您在五選四的時代快速得到簡章重點</p>
-      </div>
-      <center id="count" style="display: none;">
-        <h5 class="ts header">共&nbsp;<span id="count-num">0</span>&nbsp;筆結果</h5>
-        <button class="ts primary basic button" id="share" onclick="saveConfig();">分享我的最愛給朋友</button>
-      </center>
-      <table class="ts very basic table" id="list"></table>
-      <div class="ts padded basic slate" id="no-data" style="display: none;"><i class="search icon"></i><span class="header">無符合條件之結果</span></div>
-      <div id="show-more" style="display: none;">
-        <button class="ts secondary basic button" onclick="max_result *= 2; updateTable();">檢視更多結果</button>
-      </div>
+      <h3 class="ts header" id="year109">109 學年度</h3>
+      <big>請 <a href="apply109">點我打開</a> 最新資料頁面</big>
+      <p>目前僅有校系參採科目簡表，尚無詳細簡章</p>
+      <p>大考中心預計於 11/1 週五釋出詳細簡章</p><i>資料日期：2019/10/22</i>
+      <h3 class="ts header" id="year108">108 學年度</h3>
+      <big>請 <a href="apply108">點我打開</a> 歷史資料頁面</big>
+      <p>今年已考上大一的這屆使用，可作為參考</p><i>資料日期：2019/02/25</i>
+      <h3 class="ts header" id="faq">常見問題</h3>
+      <h4>Q1: 各科系的 <span class="mark best">頂標</span>、<span class="mark weighted">採計</span>、<span class="mark multiple">x3</span> 是什麼意思？</h4>
+      <p><span class="mark best">頂標</span>、<span class="mark good">前標</span>、<span class="mark average">均標</span>、<span class="mark bad">後標</span>、<span class="mark worst">底標</span> 分別代表第一階段的檢定，是申請時<b>必須</b>達到的門檻</p>
+      <p><span class="mark multiple">x3</span> 則代表第一階段的篩選倍率，假設招生名額為 20 人，則依級分排序，取該科前 60 名進入下一階段篩選</p>
+      <p>到了第二階段才參採，則顯示為 <span class="mark weighted">採計</span>，將會綜合其他科目、備審資料、口試面談等成績，可以看 Q4 點開詳細資料，了解加權比重。</p>
+      <h4>Q2: 我看到社會就頭痛，可以過濾掉嗎</h4>
+      <p>這就是此工具的主要功能</p>
+      <p>只要在「社會」的按鈕點兩下，變成紅色 ❌ 後，就會過濾掉參採此科的學校囉</p>
+      <h4>Q3: 怎麼知道哪些科系會檢定英聽呢？</h4>
+      <p>108 學年度僅 3% 科系檢定英聽，故為了介面簡潔，未將此列入本工具篩選條件</p>
+      <p>打開詳細資料後，就知道檢定哪級了哦</p>
     </div>
     <footer class="ts fluid slate" style="margin-top:10px">
       <div class="ts container">
@@ -181,8 +115,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
     <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7"></script>
     <script>ts('.ts.dropdown:not(.basic)').dropdown();</script>
-    <script src="js/utils.js?v=1018"></script>
-    <script src="js/apply.js?v=1014"></script>
-    <script src="js/common.js?v=1014"></script>
   </body>
 </html>

@@ -77,12 +77,6 @@
         <div class="right fitted item"><a class="item" target="_blank" href="https://www.sean.taipei/">關於作者</a></div>
       </div>
     </nav>
-    <section class="placeholder">
-      <div class="placeholder-message">
-        <p>指考共有十個科目，不適合小手機查詢，請以電腦開啟此頁面，或將手機畫面打橫著用</p>
-        <p>抱歉造成您的不便，Sean 在這邊感謝您的體諒</p><br><a href=".">回到首頁</a>
-      </div>
-    </section>
     <header class="ts fluid vertically padded heading slate">
       <div class="ts narrow container">
         <div class="header">指考分發</div>
@@ -90,90 +84,20 @@
       </div>
     </header>
     <div class="ts container" name="main">
-      <center style="color: red;">注意：此為今年初 108 學年度資料，109 學年度資料請參見 <a href="apply109">個人申請</a>、<a href="star109">繁星推薦</a> 頁面</center>
-      <details class="ts accordion filter">
-        <summary><i class="icon dropdown"></i>學測級分篩選</summary>
-        <div id="filterGsat">
-          <div class="ts dropdown labeled icon button"><i class="book icon"></i><span class="text">國文</span>
-                  <div class="menu">
-                    <div class="item best mark" data-subject="國文" data-mark="5">頂標</div>
-                    <div class="item good mark" data-subject="國文" data-mark="4">前標</div>
-                    <div class="item average mark" data-subject="國文" data-mark="3">均標</div>
-                    <div class="item bad mark" data-subject="國文" data-mark="2">後標</div>
-                    <div class="item worst mark" data-subject="國文" data-mark="1">底標</div>
-                    <div class="item" data-subject="國文" data-mark="0">未選考</div>
-                    <div class="item" data-subject="國文" data-mark="6">清除</div>
-                  </div>
-          </div>
-          <div class="ts dropdown labeled icon button"><i class="globe icon"></i><span class="text">英文</span>
-                  <div class="menu">
-                    <div class="item best mark" data-subject="英文" data-mark="5">頂標</div>
-                    <div class="item good mark" data-subject="英文" data-mark="4">前標</div>
-                    <div class="item average mark" data-subject="英文" data-mark="3">均標</div>
-                    <div class="item bad mark" data-subject="英文" data-mark="2">後標</div>
-                    <div class="item worst mark" data-subject="英文" data-mark="1">底標</div>
-                    <div class="item" data-subject="英文" data-mark="0">未選考</div>
-                    <div class="item" data-subject="英文" data-mark="6">清除</div>
-                  </div>
-          </div>
-          <div class="ts dropdown labeled icon button"><i class="calculator icon"></i><span class="text">數學</span>
-                  <div class="menu">
-                    <div class="item best mark" data-subject="數學" data-mark="5">頂標</div>
-                    <div class="item good mark" data-subject="數學" data-mark="4">前標</div>
-                    <div class="item average mark" data-subject="數學" data-mark="3">均標</div>
-                    <div class="item bad mark" data-subject="數學" data-mark="2">後標</div>
-                    <div class="item worst mark" data-subject="數學" data-mark="1">底標</div>
-                    <div class="item" data-subject="數學" data-mark="0">未選考</div>
-                    <div class="item" data-subject="數學" data-mark="6">清除</div>
-                  </div>
-          </div>
-          <div class="ts dropdown labeled icon button"><i class="newspaper icon"></i><span class="text">社會</span>
-                  <div class="menu">
-                    <div class="item best mark" data-subject="社會" data-mark="5">頂標</div>
-                    <div class="item good mark" data-subject="社會" data-mark="4">前標</div>
-                    <div class="item average mark" data-subject="社會" data-mark="3">均標</div>
-                    <div class="item bad mark" data-subject="社會" data-mark="2">後標</div>
-                    <div class="item worst mark" data-subject="社會" data-mark="1">底標</div>
-                    <div class="item" data-subject="社會" data-mark="0">未選考</div>
-                    <div class="item" data-subject="社會" data-mark="6">清除</div>
-                  </div>
-          </div>
-          <div class="ts dropdown labeled icon button"><i class="idea icon"></i><span class="text">自然</span>
-                  <div class="menu">
-                    <div class="item best mark" data-subject="自然" data-mark="5">頂標</div>
-                    <div class="item good mark" data-subject="自然" data-mark="4">前標</div>
-                    <div class="item average mark" data-subject="自然" data-mark="3">均標</div>
-                    <div class="item bad mark" data-subject="自然" data-mark="2">後標</div>
-                    <div class="item worst mark" data-subject="自然" data-mark="1">底標</div>
-                    <div class="item" data-subject="自然" data-mark="0">未選考</div>
-                    <div class="item" data-subject="自然" data-mark="6">清除</div>
-                  </div>
-          </div>
-        </div><br>
-      </details>
-      <div class="autocomplete">
-        <div class="inner-btn">
-          <input id="dep" type="text" placeholder="輸入您感興趣的科系..." oninput="adjustSuggestion();"><i class="clear hidden1 hidden2" id="clear" onclick="input.value = ''; adjustSuggestion();"></i>
-        </div>
-        <div class="autocomplete-items" id="dep-list"></div>
-      </div>
-      <div id="stone" style="display: none;"><a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Stone');"><img class="ts poyon" src="https://sitcon.org/2017/favicon.ico"></a>
-        <p style="display: inline-block;">小石看到你正在查詢資訊相關科系<br>不妨來 <a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Textlink');">SITCON 學生計算機年會</a> 看看吧owo</p>
-      </div>
-      <div id="loading">
-        <h3 class="ts header">資料讀取中...</h3>
-        <p>自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 109 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利</p>
-        <p>本站為您整理了個人申請、繁星推薦、指考分發的參採科目，讓您在五選四的時代快速得到簡章重點</p>
-      </div>
-      <center id="count" style="display: none;">
-        <h5 class="ts header">共&nbsp;<span id="count-num">0</span>&nbsp;筆結果</h5>
-        <button class="ts primary basic button" id="share" onclick="saveConfig();">分享我的最愛給朋友</button>
-      </center>
-      <table class="ts very basic table" id="list"></table>
-      <div class="ts padded basic slate" id="no-data" style="display: none;"><i class="search icon"></i><span class="header">無符合條件之結果</span></div>
-      <div id="show-more" style="display: none;">
-        <button class="ts secondary basic button" onclick="max_result *= 2; updateTable();">檢視更多結果</button>
-      </div>
+      <h3 class="ts header" id="year109">109 學年度</h3>
+      <p>官方尚未釋出資料</p>
+      <h3 class="ts header" id="year108">108 學年度</h3>
+      <big>請 <a href="advanced108">點我打開</a> 歷史資料頁面</big>
+      <p>今年已考上大一的這屆使用，可作為參考</p><i>資料日期：2019/02/19</i>
+      <h3 class="ts header" id="faq">常見問題</h3>
+      <h4>Q1: 各科系的 <span class="mark mark0 x1-00">x1.00</span>、<span class="mark mark2 x1-50">x1.50</span>、<span class="mark mark4 x2-00">x2.00</span> 是什麼意思？</h4>
+      <p>指考的計算方式是各科分數乘上權重後加總，例如國文 60 分 <span class="mark mark0 x1-00">x1.00</span> + 數甲 80 分 <span class="mark mark2 x1-50">x1.50</span> + 物理 70 分 <span class="mark mark4 x2-00">x2.00</span> = 60 + 120 + 140 = 320</p>
+      <h4>Q2: 我化學比較不擅長，可以過濾掉嗎</h4>
+      <p>只要在「化學」的按鈕點兩下，變成紅色 ❌ 後，就會過濾掉參採此科的學校囉</p>
+      <h4>Q3: 如果有人同分怎麼辦</h4>
+      <p>這種狀況比較少見，可以點右邊編號打開詳細簡章，裡面就會寫到同分參酌方式囉</p>
+      <h4>Q4: 為什麼打開看不到查詢介面</h4>
+      <p>抱歉造成您的困擾，但指考共有十個科目，用小手機查詢的效果實在不好，請以電腦開啟，或將手機畫面打橫著用</p>
     </div>
     <footer class="ts fluid slate" style="margin-top:10px">
       <div class="ts container">
@@ -188,8 +112,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
     <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7"></script>
     <script>ts('.ts.dropdown:not(.basic)').dropdown();</script>
-    <script src="js/utils.js?v=1018"></script>
-    <script src="js/advanced.js?v=1014"></script>
-    <script src="js/common.js?v=0902"></script>
   </body>
 </html>

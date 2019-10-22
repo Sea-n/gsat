@@ -61,9 +61,18 @@
       			"position": 3,
       			"item": {
       				"@type":"WebPage",
+      				"@id": "https://sean.cat/gsat/apply",
+      				"url":"https://sean.cat/gsat/apply",
+      				"name": "個人申請"
+      			}
+      		}, {
+      			"@type": "ListItem",
+      			"position": 4,
+      			"item": {
+      				"@type":"WebPage",
       				"@id": "https://sean.cat/gsat/apply109",
       				"url":"https://sean.cat/gsat/apply109",
-      				"name": "個人申請 109 學年度"
+      				"name": "109 學年度"
       			}
       		}
       	]
@@ -73,7 +82,7 @@
   </head>
   <body>
     <nav class="ts basic fluid borderless menu horizontally scrollable">
-      <div class="ts container"><a class="item" href=".">首頁</a><b class="item active hide1">個人申請</b><a class="item hide1" href="star109">繁星推薦</a>
+      <div class="ts container"><a class="item" href=".">首頁</a><a class="item active hide1" href="apply">個人申請</a><a class="item hide1" href="star109">繁星推薦</a>
         <div class="right fitted item"><b class="item cd">學測倒數&nbsp;<span id="countdown">87</span>&nbsp天</b></div>
       </div>
     </nav>
@@ -84,7 +93,7 @@
       </div>
     </header>
     <div class="ts container" name="main">
-      <center style="color: red;">注意：目前僅公告參採科目簡表，將於 11/1 釋出完整版後更新</center>
+      <center style="color: red;">注意：目前僅公告參採科目簡表，完整簡章將於 11/1 釋出</center>
       <details class="ts accordion filter">
         <summary><i class="icon dropdown"></i>學測級分篩選</summary>
         <div id="filterGsat">
@@ -182,8 +191,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
     <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b230f9a3c1fd5f7"></script>
     <script>ts('.ts.dropdown:not(.basic)').dropdown();</script>
+    <script>
+      var gsatType = "apply";
+      var gsatYear = "109";
+      function getDetailLink(id) {
+      	return 'https://sean.cat/gsat';
+      }
+    </script>
     <script src="js/utils.js?v=1018"></script>
-    <script src="js/apply109.js?v=1022"></script>
     <script src="js/common.js?v=1022"></script>
   </body>
 </html>
