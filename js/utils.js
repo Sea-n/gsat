@@ -193,10 +193,17 @@ function updateTable(search) {
 
 	for (var i = 0; i < 5; i++) {
 		var s = subjectsAdv[i];
+		if (filterAdv[s] !== 0) {
+			if (href === "")
+				href = "#";
+			else
+				href += ";";
+		}
+
 		if (filterAdv[s] === 1)
-			href += ";y=" + s;
+			href += "y=" + s;
 		else if (filterAdv[s] === -1)
-			href += ";n=" + s;
+			href += "n=" + s;
 	}
     history.pushState("", document.title, window.location.pathname+href);
 
