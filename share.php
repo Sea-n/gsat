@@ -54,7 +54,7 @@ if (!preg_match("#^[A-Za-z0-9_]{5,32}\-(10[89])(apply|star|advanced)\-[0-9a-f]{2
 <?php } else { ?>
 		<div id="loading">
 			<h3 class="ts header">資料讀取中...</h3>
-			<p>自 108 年開始，學測最多參採四科，到了 109 年有可能調整為五選三，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利</p>
+			<p>自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 109 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利</p>
 			<p>本站為您整理了個人申請、繁星推薦、指考分發的參採科目，讓您在五選四的時代快速得到簡章重點</p>
 		</div>
 		<h5 class="ts center aligned header" id="count" style="display: none;">共&nbsp;<span id="count-num">0</span>&nbsp;筆結果</h5>
