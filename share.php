@@ -30,8 +30,8 @@ if (!preg_match("#^[A-Za-z0-9_]{5,32}\-(10[89])(apply|star|advanced)\-[0-9a-f]{2
 	<nav class="ts basic fluid borderless menu horizontally scrollable">
 		<div class="ts container">
 			<a class="item" href=".">首頁</a>
-			<a class="item hide1" href="apply109">個人申請</a>
-			<a class="item hide1" href="star109">繁星推薦</a>
+			<a class="item hide1" href="apply">個人申請</a>
+			<a class="item hide1" href="star">繁星推薦</a>
 			<a class="item hide1" href="advanced">指考分發</a>
 			<div class="right fitted item">
 				<img class="ts mini circular image" src="<?= $data['photo_url'] ?>">
@@ -78,9 +78,8 @@ if (!preg_match("#^[A-Za-z0-9_]{5,32}\-(10[89])(apply|star|advanced)\-[0-9a-f]{2
 		function getDetailLink(id) {
 			return 'https://sean.cat/gsat/<?= $type . $year ?>';
 		}
-		var favStorageName = sharedKey;
 		var data = loadConfig(sharedKey);
-		localStorage.setItem(favStorageName, JSON.stringify(data.favs));
+		localStorage.setItem(sharedKey, JSON.stringify(data.favs));
 	</script>
 	<script src="js/common.js?v=1014"></script>
 <?php } ?>

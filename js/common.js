@@ -128,6 +128,8 @@ if (localStorage.getItem("favoritesAdv")) {
 
 
 var favStorageName = "favs" + gsatYear + gsatType; // e.g. favs108apply
+if (typeof sharedKey !== "undefined")
+	favStorageName = sharedKey;
 
 initGsatFilter();
 

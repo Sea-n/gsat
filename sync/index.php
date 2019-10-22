@@ -48,6 +48,7 @@ if (!isset($tg_user)) {
 	echo <<<EOF
 	<h3>請登入以繼續</h3>
 	<script async src="https://telegram.org/js/telegram-widget.js?5" data-telegram-login="Sean_Bot" data-size="medium" data-auth-url="https://sean.cat/gsat/sync/auth" data-request-access="write"></script>
+	<p>測試階段僅支援 <a href="https://telegram.org/">Telegram</a> 登入</p>
 	</div>
 </body>
 </html>
