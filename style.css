@@ -374,3 +374,8 @@ i.hidden2 {
 .at-expanding-share-button-toggle {
 	text-align: right;
 }
+
+.cd {
+	background-color: #FF0000B3;
+	color: white !important;
+}
