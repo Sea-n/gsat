@@ -205,7 +205,7 @@ function updateTable(search) {
 		else if (filterAdv[s] === -1)
 			href += "n=" + s;
 	}
-    history.pushState("", document.title, window.location.pathname+href);
+	history.pushState("", document.title, window.location.pathname+href);
 
 	ga('send', 'pageview', {
 		'page': location.pathname + location.search + location.hash
@@ -258,6 +258,93 @@ function updateTable(search) {
 	adjustTableHeader();
 }
 
+
+function getStarResults(dep) {
+	depData = starResult[dep];
+
+	table = document.getElementById('starResult');
+	table.innerHTML = '';
+
+	var tr = document.createElement('tr');
+	for (var i = 0; i < 6; i++)
+		tr.appendChild(document.createElement('th'));
+
+	tr.cells[0].classList.add('title');
+	tr.cells[1].appendChild(document.createTextNode('104'));
+	tr.cells[1].classList.add('data');
+	tr.cells[2].appendChild(document.createTextNode('105'));
+	tr.cells[2].classList.add('data');
+	tr.cells[3].appendChild(document.createTextNode('106'));
+	tr.cells[3].classList.add('data');
+	tr.cells[4].appendChild(document.createTextNode('107'));
+	tr.cells[4].classList.add('data');
+	tr.cells[5].appendChild(document.createTextNode('108'));
+	tr.cells[5].classList.add('data');
+
+	table.appendChild(tr);
+
+	var columns = [
+		'招生名額',
+		'一階錄取人數',
+		'一階錄取百分比',
+		'二階錄取人數',
+		'二階錄取百分比'
+	];
+	var values = [
+		'recruit',
+		'firstEnroll',
+		'firstPercentage',
+		'secondEnroll',
+		'secondPercentage'
+	];
+
+	for (var i = 0; i<columns.length; i++) {
+		var tr = document.createElement('tr');
+		for (var j = 0; j < 6; j++)
+			tr.appendChild(document.createElement('td'));
+		tr.cells[0].appendChild(document.createTextNode(columns[i]));
+
+		if (depData[104] === undefined)
+			tr.cells[1].appendChild(document.createTextNode('--'));
+		else
+			tr.cells[1].appendChild(document.createTextNode(depData[104][values[i]]));
+
+		if (depData[105] === undefined)
+			tr.cells[2].appendChild(document.createTextNode('--'));
+		else
+			tr.cells[2].appendChild(document.createTextNode(depData[105][values[i]]));
+
+		if (depData[106] === undefined)
+			tr.cells[3].appendChild(document.createTextNode('--'));
+		else
+			tr.cells[3].appendChild(document.createTextNode(depData[106][values[i]]));
+
+		if (depData[107] === undefined)
+			tr.cells[4].appendChild(document.createTextNode('--'));
+		else
+			tr.cells[4].appendChild(document.createTextNode(depData[107][values[i]]));
+
+		if (depData[108] === undefined)
+			tr.cells[5].appendChild(document.createTextNode('--'));
+		else
+			tr.cells[5].appendChild(document.createTextNode(depData[108][values[i]]));
+
+		table.appendChild(tr);
+	}
+
+	document.getElementById('starFloat').style.display = "none";
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == floatWindow) {
+		floatWindow.style.display = "none";
+	  }
+	}
+}
+
 function showFilterDepartments(table, search) {
 	var count = 0;
 
@@ -298,7 +385,23 @@ function showFilterDepartments(table, search) {
 				tr.cells[0].appendChild(button);
 
 				tr.cells[1].appendChild(document.createTextNode(data[idx].school));
-				tr.cells[2].appendChild(document.createTextNode(data[idx].name));
+				if (gsatType === 'star' && !(starResult[data[idx].school + data[idx].name] === undefined)) {
+					var starLink = document.createElement('a');
+					starLink.setAttribute('id', 'myBtn');
+					starLink.text = data[idx].name;
+					starLink.school = data[idx].school;
+					starLink.dep = data[idx].name;
+					starLink.onclick = function () {
+						getStarResults(this.school + this.dep);
+						document.getElementById('starFloat').style.display = 'block';
+						document.getElementById('starTitle').innerHTML =
+							this.school + ' - ' + this.dep + '<br>' +
+							'近五年錄取標準';
+					}
+					tr.cells[2].appendChild(starLink);
+				} else {
+					tr.cells[2].appendChild(document.createTextNode(data[idx].name));
+				}
 
 				var link = document.createElement('a');
 				link.text = id;
@@ -479,4 +582,11 @@ function loadConfig(key) {
 		console.error(resp.msg);
 
 	return resp.data;
+}
+
+var floatWindow = document.getElementById('starFloat');
+window.onclick = function(event) {
+	if (event.target == floatWindow) {
+		floatWindow.style.display = "none";
+	}
 }

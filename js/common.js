@@ -80,6 +80,36 @@ for (var i=0; i<lines.length; i++) {
 	data.push(datum);
 }
 
+/* Get star history data */
+var starResult = [];
+if (gsatType === 'star') {
+	for (var y=104; y<=108; y++) {
+		xhr.open('GET', 'data/star_results/' + y + '/star_result', false);
+		xhr.send(null);
+		var lines = xhr.response.split('\n');
+
+		for (var i=0; i<lines.length; i++) {
+			if (lines[i].length == 0)
+				continue;
+
+			var line = lines[i].split('\t');
+			var dep = line[6] + line[7];
+			datum = {
+				recruit: line[1],
+				firstPercentage: line[2],
+				firstEnroll: line[3],
+				secondPercentage: line[4],
+				secondEnroll: line[5],
+			};
+
+			if (! (dep in starResult))
+				starResult[dep] = {};
+
+			starResult[dep][y] = datum;
+		}
+	}
+}
+
 /* Count Frequency */
 var suggestionList = Object.keys(lc).sort(function(a, b) {
 	return lc[a] < lc[b];

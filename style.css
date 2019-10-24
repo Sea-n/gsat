@@ -198,6 +198,43 @@ span.underline {
 	font-size: smaller;
 }
 
+#starResult {
+	width: 100%;
+}
+
+#starResult th {
+	line-height: 25px;
+	padding: .78571em .78571em;
+}
+
+#starResult td:first-child {
+    text-align: left;
+    padding: unset;
+}
+
+#starResult td {
+    padding: .78571em;
+}
+
+#starResult tr {
+	text-align: center;
+	line-height: 25px;
+	padding: .78571em .78571em;
+}
+
+#starResult .title {
+	width: 120px;
+}
+
+#starResult .data {
+	text-align: center;
+}
+
+#starTitle {
+    font-size: 18px;
+    font-weight: 600;
+}
+
 @media screen and (max-width: 330px) {
 	header.ts.fluid.vertically.padded.heading.slate {
 			padding-left: 1em !important;
@@ -207,7 +244,7 @@ span.underline {
 
 @media screen and (max-width: 375px) {
 	#list th.sub {
-		width: 23px;
+		width: 30px;
 	}
 
 	#list th.school {
@@ -217,6 +254,27 @@ span.underline {
 	#list .multiple {
 		font-size: 10px;
 	}
+
+    #starResult .title {
+        width: 30px;
+    }
+
+    #starResult .data {
+        width: 15px;
+    }
+
+    #starTitle {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    #starResult tr th {
+        font-size: 11px;
+    }
+
+    #starResult tr td {
+        font-size: 11px;
+    }
 }
 
 @media screen and (min-width: 375px) and (max-width: 640px) {
@@ -227,6 +285,14 @@ span.underline {
 	#list th.school {
 		width: 80px;
 	}
+
+    #starResult .title {
+        width: 65px;
+    }
+
+    #starResult .data {
+        width: 30px;
+    }
 }
 
 @media screen and (max-width: 520px) {
@@ -468,4 +534,27 @@ section.placeholder {
 #list .x2-00 {
 	color: hsl(var(--hue), 100%, 25%);
 	background-color: hsl(var(--hue), 100%, 82%);
+}
+
+.float {
+  display: none;
+  position: fixed;
+  z-index: 30;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.float-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width:700px;
+  border-radius: 10px;
 }

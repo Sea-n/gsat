@@ -73,6 +73,10 @@ html
 				.description 學測五選四 109 學年度
 		div.ts.container(name="main")
 			include includes/search.pug
+		div.ts.float#starFloat
+			div.float-content
+				p#starTitle
+				table#starResult.ts.very.basic.table
 		include includes/footer.pug
 		script.
 			var gsatType = "star";
@@ -80,5 +84,5 @@ html
 			function getDetailLink(id) {
 				return 'https://sean.cat/gsat';
 			}
-		script(src="js/utils.js?v=1023")
-		script(src="js/common.js?v=1022")
+		script(src="js/utils.js?v=1024")
+		script(src="js/common.js?v=1024")
