@@ -1,2 +1,2 @@
 <?php
-header('Location: /gsat/apply');
+header('Location: /gsat/');
