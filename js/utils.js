@@ -205,7 +205,10 @@ function updateTable(search) {
 		else if (filterAdv[s] === -1)
 			href += "n=" + s;
 	}
-    history.pushState("", document.title, window.location.pathname+href);
+
+	var newUrl = window.location.pathname + window.location.search + href;
+	if (newUrl != location.href)
+	    history.pushState("", document.title, newUrl);
 
 	ga('send', 'pageview', {
 		'page': location.pathname + location.search + location.hash
