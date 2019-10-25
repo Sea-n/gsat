@@ -336,16 +336,6 @@ function getStarResults(dep) {
 	}
 
 	document.getElementById('starFloat').style.display = "none";
-
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];
-
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-	  if (event.target == floatWindow) {
-		floatWindow.style.display = "none";
-	  }
-	}
 }
 
 function showFilterDepartments(table, search) {
@@ -587,9 +577,3 @@ function loadConfig(key) {
 	return resp.data;
 }
 
-var floatWindow = document.getElementById('starFloat');
-window.onclick = function(event) {
-	if (event.target == floatWindow) {
-		floatWindow.style.display = "none";
-	}
-}
