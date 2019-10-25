@@ -282,21 +282,24 @@ function showFilterDepartments(table, search) {
 
 				tr.cells[0].classList.add("favorites");
 				var button = document.createElement('button');
-				button.onclick = function(e) {
-					t = e.target;
-					id = t.parentNode.parentNode.dataset.id;
-					index = favs.indexOf(id);
-					t.classList.remove("not-fav", "favorited");
-					if (index == -1) {
-						favs.push(id);
-						favs.sort();
-						t.classList.add("favorited");
-					} else {
-						favs.splice(index, 1);
-						t.classList.add("not-fav");
+
+				if (typeof sharedKey === "undefined")
+					button.onclick = function(e) {
+						t = e.target;
+						id = t.parentNode.parentNode.dataset.id;
+						index = favs.indexOf(id);
+						t.classList.remove("not-fav", "favorited");
+						if (index == -1) {
+							favs.push(id);
+							favs.sort();
+							t.classList.add("favorited");
+						} else {
+							favs.splice(index, 1);
+							t.classList.add("not-fav");
+						}
+						localStorage.setItem(favStorageName, JSON.stringify(favs)); // save
 					}
-					localStorage.setItem(favStorageName, JSON.stringify(favs)); // save
-				}
+
 				button.classList.add(showFav ? "favorited" : "not-fav"); // determined by getDepartmentFilterStatus
 				tr.cells[0].appendChild(button);
 
