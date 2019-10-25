@@ -230,15 +230,21 @@ if (input !== null) {
 /* star float table */
 var floatWindow = document.getElementById('starFloat');
 window.addEventListener('click', function(event) {
-	if (event.target == floatWindow)
+	if (event.target == floatWindow) {
 		floatWindow.style.display = 'none';
+		document.body.style.overflow = 'auto';
+	}
 });
+
 window.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape' || event.keyCode === 27)
-        floatWindow.style.display = 'none';
+	if (event.key === 'Escape' || event.keyCode === 27) {
+		floatWindow.style.display = 'none';
+		document.body.style.overflow = 'auto';
+	}
 });
 
 var span = document.getElementsByClassName("close")[0];
 span.onclick = function() {
-    floatWindow.style.display = 'none';
+	floatWindow.style.display = 'none';
+	document.body.style.overflow = 'auto';
 }

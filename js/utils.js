@@ -208,7 +208,7 @@ function updateTable(search) {
 
 	var newUrl = window.location.pathname + window.location.search + href;
 	if (newUrl != location.href)
-	    history.pushState("", document.title, newUrl);
+		history.pushState("", document.title, newUrl);
 
 	ga('send', 'pageview', {
 		'page': location.pathname + location.search + location.hash
@@ -335,7 +335,8 @@ function getStarResults(dep) {
 		table.appendChild(tr);
 	}
 
-	document.getElementById('starFloat').style.display = "none";
+	document.getElementById('starFloat').style.display = 'vsc-initializednone';
+	document.body.style.overflow = 'hidden';
 }
 
 function showFilterDepartments(table, search) {
