@@ -41,7 +41,7 @@ if (!preg_match("#^[A-Za-z0-9_]{5,32}\-(10[89])(apply|star|advanced)\-[0-9a-f]{2
 	</nav>
 	<header class="ts fluid vertically padded heading slate">
 		<div class="ts narrow container">
-			<h1 class="header">分享資料（<?= $year ?> 年<?= $typeText ?>）</h1>
+			<h1 class="header">分享資料</h1>
 			<div class="description">讓您跨平台分享「我的最愛」，也能即時分享給老師、同學們</div>
 		</div>
 	</header>
@@ -61,6 +61,7 @@ if (!preg_match("#^[A-Za-z0-9_]{5,32}\-(10[89])(apply|star|advanced)\-[0-9a-f]{2
 			<p>本站為您整理了個人申請、繁星推薦、指考分發的參採科目，讓您在五選四的時代快速得到簡章重點</p>
 		</div>
 		<center id="count" style="display: none;">
+			<center style="color: red;">注意：此為「<?= $data['name'] ?>」的分享頁面，完整 2,000 校系請見 <a href="<?= $type . $year ?>"><?= $year ?> 年<?= $typeText ?></a> 連結</center>
 			<h5 class="ts header">共&nbsp;<span id="count-num">0</span>&nbsp;筆紀錄</h5>
 		</center>
 		<table class="ts very basic table" id="list"></table>
