@@ -233,6 +233,7 @@ span.underline {
 #starTitle {
     font-size: 18px;
     font-weight: 600;
+    display: inline-block;
 }
 
 @media screen and (max-width: 330px) {
@@ -557,4 +558,22 @@ section.placeholder {
   width: 80%;
   max-width:700px;
   border-radius: 10px;
+}
+
+.close {
+  font-family: arial;
+  color: #aaa;
+  font-size: 35px;
+  font-weight: bold;
+  line-height: 1;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
