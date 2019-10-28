@@ -2,7 +2,7 @@
 
 /* Check Input */
 $key = $_POST['key'];
-if (!preg_match("#^[A-Za-z0-9_]{5,32}\-[0-9]+[a-z]+\-[0-9a-f]{3,}$#", $key))
+if (!preg_match("#^[A-Za-z0-9_@.]{5,32}\-[0-9]+[a-z]+\-[0-9a-f]{3,}$#", $key))
 	exit(json_encode([
 		'ok' => false,
 		'msg' => "Key $key invalid."

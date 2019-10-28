@@ -1,12 +1,44 @@
 <?php
 require('tg-login.php');
-try {
-	$auth_data_json = urldecode($_COOKIE['tg_user'] ?? '[]');
-	$auth_data = json_decode($auth_data_json, true);
 
-	$tg_user = checkTelegramAuthorization($auth_data);
-} catch (Exception $e) {
-	unset($tg_user);
+/* Duplicated with sync/save.php */
+if (isset($_COOKIE['tg_user'])) {
+	try {
+		$auth_data_json = urldecode($_COOKIE['tg_user']);
+		$auth_data = json_decode($auth_data_json, true);
+
+		$tg_user = checkTelegramAuthorization($auth_data);
+	} catch (Exception $e) {
+		unset($tg_user);
+	}
+
+
+	$username = $tg_user['username'];
+
+	$name = $tg_user['first_name'];
+	if (isset($tg_user['last_name']))
+		$name .= " " . $tg_user['last_name'];
+
+	$photo = $tg_user['photo_url'] ?? '';
+} else if (isset($_COOKIE['google_token'])) {
+	$token = $_COOKIE['google_token'];
+
+	$resp = file_get_contents('https://oauth2.googleapis.com/tokeninfo?id_token=' . urlencode($token));
+	$userinfo = json_decode($resp, true);
+
+	if (!isset($userinfo['email']))
+		exit(json_encode([
+			'ok' => false,
+			'redirect' => "sync/",
+			'error' => 'Google OAuth API unauthorized.'
+		]));
+
+
+	$username = preg_replace("#[^a-zA-Z0-9@.]#", "_", $userinfo['email']);
+
+	$name = $userinfo['name'];
+
+	$photo = $userinfo['picture'] ?? '';
 }
 ?>
 <html>
@@ -17,6 +49,8 @@ try {
 	<link href="https://www.sean.taipei/assets/css/tocas-ui/tocas.css" rel="stylesheet">
 	<link href="//cdn.rawgit.com/gnehs/Tocas-UI-Xiaoan/master/ts.xiaoan.min.css" rel="stylesheet">
 	<link href="../style.css?v=1017" rel="stylesheet">
+	<meta name="google-signin-scope" content="profile email">
+	<meta name="google-signin-client_id" content="956286706085-euk5bqo0ricl4ns1obve4p51q1ajjocd.apps.googleusercontent.com">
 </head>
 <body>
 	<nav class="ts basic fluid borderless menu horizontally scrollable">
@@ -26,9 +60,9 @@ try {
 			<a class="item hide1" href="../star">繁星推薦</a>
 			<a class="item hide1" href="../advanced">指考分發</a>
 			<div class="right fitted item">
-<?php if (isset($tg_user)) { ?>
-				<img class="ts mini circular image" src="<?= $tg_user['photo_url'] ?>">
-				<b class="item"><?= $tg_user['first_name'] ?></b>
+<?php if (isset($name)) { ?>
+				<img class="ts mini circular image" src="<?= $photo ?>">
+				<b class="item"><?= $name ?></b>
 <?php } else { ?>
 				<img class="ts mini circular image" src="https://c.disquscdn.com/uploads/users/20967/622/avatar128.jpg">
 				<b class="item">Guest</b>
@@ -44,19 +78,33 @@ try {
 	</header>
 	<div class="ts container" name="main">
 <?php
-if (!isset($tg_user)) {
+/* Not login */
+if (!isset($name)) {
 	echo <<<EOF
-	<h3>請登入以繼續</h3>
-	<script async src="https://telegram.org/js/telegram-widget.js?5" data-telegram-login="Sean_Bot" data-size="medium" data-auth-url="https://sean.cat/gsat/sync/auth" data-request-access="write"></script>
-	<p>測試階段僅支援 <a href="https://telegram.org/">Telegram</a> 登入</p>
+		<h3>請登入以繼續</h3>
+		<h4>Telegram 登入</h4>
+		<script async src="https://telegram.org/js/telegram-widget.js?5" data-telegram-login="Sean_Bot" data-size="medium" data-auth-url="https://sean.cat/gsat/sync/auth" data-request-access="write"></script>
+
+		<h4>Google 登入</h4>
+		<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
 	</div>
+
+	<script>
+		function onSignIn(googleUser) {
+			var profile = googleUser.getBasicProfile();
+			var id_token = googleUser.getAuthResponse().id_token;
+			document.cookie = "google_token=" + id_token + "; expire=Fri, 31 Dec 9999 12:00:00 GMT; domain=sean.cat; path=/gsat/";
+			location.href = ".";
+		}
+	</script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
 </html>
 EOF;
 	exit;
 }
 
-$username = $tg_user['username'];
+/* No user identity */
 if (empty($username)) {
 	echo <<<EOF
 <big style='color:red;'>您尚未設定 Telegram Username</big>
@@ -67,6 +115,7 @@ EOF;
 	exit;
 }
 
+/* New User */
 $dir = "storage/$username";
 if (!file_exists($dir)) {
 	echo <<<EOF
@@ -78,6 +127,7 @@ EOF;
 	exit;
 }
 
+/* Show Records */
 echo <<<EOF
 <h3>您的紀錄</h3>
 <table class="ts very basic table">
@@ -100,7 +150,7 @@ foreach ($list as $item) {
 	$key = "$username-$year$type-$hash"; // Before change type to human text
 
 	$time = date("Y/m/d H:i", $time);
-	
+
 	$types = [
 		"apply" => "個人申請",
 		"star" => "繁星推薦",
@@ -119,9 +169,9 @@ foreach ($list as $item) {
 </tr>
 EOF;
 }
-echo "</table>";
 
 echo <<<EOF
+</table>
 </div>
 </body>
 </html>

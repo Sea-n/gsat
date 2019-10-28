@@ -1,6 +1,6 @@
 <?php
 $key = $_GET['key'] ?? '';
-if (!preg_match("#^[A-Za-z0-9_]{5,32}\-(10[89])(apply|star|advanced)\-[0-9a-f]{2,5}$#", $key)) {
+if (!preg_match("#^[A-Za-z0-9_@.]{5,32}\-(10[89])(apply|star|advanced)\-[0-9a-f]{2,5}$#", $key)) {
 	$error = '網址格式錯誤，即將導向首頁';
 } else {
 	[$username, $year_type, $hash] = explode("-", $key, 3);

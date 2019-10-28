@@ -1,17 +1,53 @@
 <?php
 require('tg-login.php');
 
-/* Auth */
-try {
-	$auth_data_json = urldecode($_COOKIE['tg_user'] ?? '[]');
-	$auth_data = json_decode($auth_data_json, true);
+/* Duplicated with sync/index.php */
+if (isset($_COOKIE['tg_user'])) {
+	try {
+		$auth_data_json = urldecode($_COOKIE['tg_user']);
+		$auth_data = json_decode($auth_data_json, true);
 
-	$tg_user = checkTelegramAuthorization($auth_data);
-} catch (Exception $e) {
+		$tg_user = checkTelegramAuthorization($auth_data);
+	} catch (Exception $e) {
+		exit(json_encode([
+			'ok' => false,
+			'redirect' => "sync/",
+			'error' => $e->getMessage()
+		]));
+	}
+
+
+	$username = $tg_user['username'];
+
+	$name = $tg_user['first_name'];
+	if (isset($tg_user['last_name']))
+		$name .= " " . $tg_user['last_name'];
+
+	$photo = $tg_user['photo_url'] ?? '';
+} else if (isset($_COOKIE['google_token'])) {
+	$token = $_COOKIE['google_token'];
+
+	$resp = file_get_contents('https://oauth2.googleapis.com/tokeninfo?id_token=' . urlencode($token));
+	$userinfo = json_decode($resp, true);
+
+	if (!isset($userinfo['email']))
+		exit(json_encode([
+			'ok' => false,
+			'redirect' => "sync/",
+			'error' => 'Google OAuth API unauthorized.'
+		]));
+
+
+	$username = preg_replace("#[^a-zA-Z0-9@.]#", "_", $userinfo['email']);
+
+	$name = $userinfo['name'];
+
+	$photo = $userinfo['picture'] ?? '';
+} else {
 	exit(json_encode([
 		'ok' => false,
 		'redirect' => "sync/",
-		'error' => $e->getMessage()
+		'error' => 'Please login first.'
 	]));
 }
 
@@ -90,14 +126,10 @@ if ($count === 0)
 		'error' => "您尚未將任何校系新增至我的最愛喔！"
 	]));
 
-$name = $tg_user['first_name'];
-if (isset($tg_user['last_name']))
-	$name .= " " . $tg_user['last_name'];
-
 $json = json_encode([
 	'name' => $name,
 	'username' => $username,
-	'photo_url' => $tg_user['photo_url'] ?? '',
+	'photo_url' => $photo,
 	'year' => $year,
 	'type' => $type,
 	'favs' => $favs
@@ -105,7 +137,6 @@ $json = json_encode([
 
 
 /* Check user directory */
-$username = $tg_user['username'];
 $dir = "storage/$username";
 
 if (!file_exists($dir))
