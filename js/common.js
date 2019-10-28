@@ -89,7 +89,7 @@ for (var i=0; i<lines.length; i++) {
 /* Get star history data */
 var starResult = [];
 if (gsatType === 'star') {
-	for (var y=104; y<=108; y++) {
+	for (var y = gsatYear - 5; y <= gsatYear - 1; y++) {
 		xhr.open('GET', 'data/star_results/' + y + '/star_result', false);
 		xhr.send(null);
 		var lines = xhr.response.split('\n');
@@ -228,23 +228,25 @@ if (input !== null) {
 }
 
 /* star float table */
-var floatWindow = document.getElementById('starFloat');
-window.addEventListener('click', function(event) {
-	if (event.target == floatWindow) {
+if (gsatType === 'star') {
+	var floatWindow = document.getElementById('starFloat');
+	window.addEventListener('click', function(event) {
+		if (event.target == floatWindow) {
+			floatWindow.style.display = 'none';
+			document.body.style.overflow = 'auto';
+		}
+	});
+
+	window.addEventListener('keydown', function(event) {
+		if (event.key === 'Escape' || event.keyCode === 27) {
+			floatWindow.style.display = 'none';
+			document.body.style.overflow = 'auto';
+		}
+	});
+
+	var span = document.getElementsByClassName("close")[0];
+	span.onclick = function() {
 		floatWindow.style.display = 'none';
 		document.body.style.overflow = 'auto';
 	}
-});
-
-window.addEventListener('keydown', function(event) {
-	if (event.key === 'Escape' || event.keyCode === 27) {
-		floatWindow.style.display = 'none';
-		document.body.style.overflow = 'auto';
-	}
-});
-
-var span = document.getElementsByClassName("close")[0];
-span.onclick = function() {
-	floatWindow.style.display = 'none';
-	document.body.style.overflow = 'auto';
 }

@@ -72,12 +72,8 @@ html
 					sup Preview
 				.description 學測五選四 109 學年度
 		div.ts.container(name="main")
+			- var star = true
 			include includes/search.pug
-		div.ts.float#starFloat
-			div.float-content
-				span.close &times;
-				p#starTitle
-				table#starResult.ts.very.basic.table
 		include includes/footer.pug
 		script.
 			var gsatType = "star";

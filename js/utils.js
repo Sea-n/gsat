@@ -273,16 +273,10 @@ function getStarResults(dep) {
 		tr.appendChild(document.createElement('th'));
 
 	tr.cells[0].classList.add('title');
-	tr.cells[1].appendChild(document.createTextNode('104'));
-	tr.cells[1].classList.add('data');
-	tr.cells[2].appendChild(document.createTextNode('105'));
-	tr.cells[2].classList.add('data');
-	tr.cells[3].appendChild(document.createTextNode('106'));
-	tr.cells[3].classList.add('data');
-	tr.cells[4].appendChild(document.createTextNode('107'));
-	tr.cells[4].classList.add('data');
-	tr.cells[5].appendChild(document.createTextNode('108'));
-	tr.cells[5].classList.add('data');
+	for (var i = 1; i < 6; i++) {
+		tr.cells[i].appendChild(document.createTextNode(gsatYear - 6 + i));
+		tr.cells[i].classList.add('data');
+	}
 
 	table.appendChild(tr);
 
@@ -307,30 +301,12 @@ function getStarResults(dep) {
 			tr.appendChild(document.createElement('td'));
 		tr.cells[0].appendChild(document.createTextNode(columns[i]));
 
-		if (depData[104] === undefined)
-			tr.cells[1].appendChild(document.createTextNode('--'));
-		else
-			tr.cells[1].appendChild(document.createTextNode(depData[104][values[i]]));
-
-		if (depData[105] === undefined)
-			tr.cells[2].appendChild(document.createTextNode('--'));
-		else
-			tr.cells[2].appendChild(document.createTextNode(depData[105][values[i]]));
-
-		if (depData[106] === undefined)
-			tr.cells[3].appendChild(document.createTextNode('--'));
-		else
-			tr.cells[3].appendChild(document.createTextNode(depData[106][values[i]]));
-
-		if (depData[107] === undefined)
-			tr.cells[4].appendChild(document.createTextNode('--'));
-		else
-			tr.cells[4].appendChild(document.createTextNode(depData[107][values[i]]));
-
-		if (depData[108] === undefined)
-			tr.cells[5].appendChild(document.createTextNode('--'));
-		else
-			tr.cells[5].appendChild(document.createTextNode(depData[108][values[i]]));
+		for (var k = 1; k < 6; k++) {
+			if (depData[gsatYear - 6 + k] === undefined)
+				tr.cells[k].appendChild(document.createTextNode('--'));
+			else
+				tr.cells[k].appendChild(document.createTextNode(depData[gsatYear - 6 + k][values[i]]));
+		}
 
 		table.appendChild(tr);
 	}
