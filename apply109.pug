@@ -53,7 +53,6 @@ html
 					}
 				]
 			}
-		style .id { display: none; }
 	body
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container
@@ -69,7 +68,6 @@ html
 			.ts.narrow.container
 				h1.header
 					| 個人申請 
-					sup Preview
 				.description 學測五選四 109 學年度
 		div.ts.container(name="main")
 			include includes/search.pug
@@ -78,7 +76,7 @@ html
 			var gsatType = "apply";
 			var gsatYear = "109";
 			function getDetailLink(id) {
-				return 'https://sean.cat/gsat';
+				return 'https://www.cac.edu.tw/apply109/system/109ColQrytk4p_forapply_os92k5w/html/109_' + id + '.htm';
 			}
 		script(src="js/utils.js?v=1024")
 		script(src="js/common.js?v=1024")

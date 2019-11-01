@@ -78,7 +78,6 @@
       	]
       }
     </script>
-    <style>.id { display: none; }</style>
   </head>
   <body>
     <nav class="ts basic fluid borderless menu horizontally scrollable">
@@ -88,12 +87,11 @@
     </nav>
     <header class="ts fluid vertically padded heading slate">
       <div class="ts narrow container">
-        <h1 class="header">繁星推薦 <sup>Preview</sup></h1>
+        <h1 class="header">繁星推薦 </h1>
         <div class="description">學測五選四 109 學年度</div>
       </div>
     </header>
     <div class="ts container" name="main">
-      <center style="color: red;">注意：目前僅公告參採科目簡表，完整簡章將於 11/1 釋出</center>
       <details class="ts accordion filter">
         <summary><i class="icon dropdown"></i>學測級分篩選</summary>
         <div id="filterGsat">
@@ -196,7 +194,7 @@
       var gsatType = "star";
       var gsatYear = "109";
       function getDetailLink(id) {
-      	return 'https://sean.cat/gsat';
+      	return 'https://www.cac.edu.tw/star109/system/109ColQry6d3k_forstar_583vd/html/109_' + id + '.htm';
       }
     </script>
     <script src="js/utils.js?v=1024"></script>
