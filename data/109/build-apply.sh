@@ -2,9 +2,9 @@
 
 path="www.cac.edu.tw/apply109/system/109ColQrytk4p_forapply_os92k5w"
 
-rm "$path/ShowSchGsd.php"* || :
+# rm "$path/ShowSchGsd.php"*
 
-wget -r -nc --header "User-Agent: Sean" "https://$path/TotalGsdShow.htm"
+# wget -r -nc -R pdf --header "User-Agent: Sean" "https://$path/TotalGsdShow.htm"
 
 rm new-apply
 
@@ -49,7 +49,14 @@ for id in `ls $path/html`; do
 
 	echo -ne "\t`head -n32 $file |tail -n1 |grep -a -oP '>\K[^<>]+(?=<)'`" |tee -a new-apply
 
-	echo -e "\t`head -n33 $file |tail -n1 |grep -a -oP ' +\K[^<>]+(?=<)' |sed -e 's/\s*(/（/g' -e 's/\s*)/）/g'`" |tee -a new-apply
+	echo -e "\t`head -n33 $file \
+		|tail -n1 \
+		|grep -a -oP ' +\K[^<>]+(?=<)' \
+		|sed -e 's/\s*(/（/g' -e 's/\s*)/）/g' \
+		|perl -pe 's#(學系|學程|學士班)\-?((?!(（|）)).*)組$#\1（\2組）#' \
+		|perl -pe 's#系\-?((?!(（|）)).*)組$#系（\1組）#' \
+		|perl -pe 's#\-((?!(（|）)).*)組$#（\1組）#' \
+		`" |tee -a new-apply
 done
 
 echo "Done!"
