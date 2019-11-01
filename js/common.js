@@ -144,6 +144,12 @@ if (gsatType === 'star') {
 if (localStorage.getItem("gsatMarks"))
 	filterGsat = JSON.parse(localStorage.getItem("gsatMarks"));
 
+for (var subj in filterGsat)
+	if (filterGsat[subj] !== 6) {
+		document.getElementById("filterGsat").parentNode.open = true;
+		break;
+	}
+
 
 /* Backward Compatibility before 13 Oct 2019 */
 if (localStorage.getItem("favoritesApply")) {
