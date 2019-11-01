@@ -466,7 +466,12 @@ function getDepartmentFilterStatus(idx, search, isFav, fuzz) {
 
 /* Fetch Star Data */
 function fetchStarResults(year) {
-	fetch('data/star_results/' + year, {})
+    if (gsatYear == 108) {
+        var path = 'data/star_results/old/'
+    } else {
+        var path = 'data/star_results/'
+    }
+	fetch(path + year, {})
 		.then((resp) => {
 			return resp.text();
 		})

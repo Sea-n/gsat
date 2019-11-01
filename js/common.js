@@ -110,7 +110,7 @@ var suggestionList = depList.filter(dep => lc[dep] > 1);
 
 /* Get star history data */
 if (gsatType === 'star') {
-	for (var y = 103; y <= 108; y++) {
+	for (var y = gsatYear - 5; y <= gsatYear - 1; y++) {
 		fetchStarResults(y);
 	}
 }
