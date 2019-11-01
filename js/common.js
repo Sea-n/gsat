@@ -99,9 +99,13 @@ for (var line of lines) {
 }
 
 /* Count Frequency */
-var suggestionList = Object.keys(lc).sort(function(a, b) {
+var depList = Object.keys(lc);
+
+depList.sort(function(a, b) {
 	return lc[a] < lc[b];
 });
+
+var suggestionList = depList.filter(dep => lc[dep] > 1);
 
 
 /* Get star history data */
