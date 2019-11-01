@@ -66,6 +66,15 @@ center#count(style="display: none;")
 		| &nbsp;筆結果
 	button.ts.primary.basic.button#share(onclick="saveConfig();") 分享我的最愛給朋友
 table#list.ts.very.basic.table
+if star
+	.ts.float#starFloat(style="display: none;")
+		.float-content
+			span.close &times;
+			.starTitle
+				span#starTitle
+				br
+				span 近五年錄取標準
+			table#starResult.ts.very.basic.table
 #no-data.ts.padded.basic.slate(style="display: none;")
 	i.search.icon
 	span.header 無符合條件之結果

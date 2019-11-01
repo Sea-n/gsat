@@ -304,7 +304,20 @@ function showFilterDepartments(table, search) {
 				tr.cells[0].appendChild(button);
 
 				tr.cells[1].appendChild(document.createTextNode(data[idx].school));
-				tr.cells[2].appendChild(document.createTextNode(data[idx].name));
+
+				if (gsatType === 'star' && starResults[data[idx].school][data[idx].name] !== undefined) {
+					var starLink = document.createElement('a');
+					starLink.text = data[idx].name;
+					starLink.school = data[idx].school;
+					starLink.dep = data[idx].name;
+					starLink.onclick = function () {
+						getStarResults(this.school, this.dep);
+					}
+					tr.cells[2].appendChild(starLink);
+				} else {
+					tr.cells[2].appendChild(document.createTextNode(data[idx].name));
+				}
+
 
 				var link = document.createElement('a');
 				link.text = id;
@@ -449,6 +462,56 @@ function getDepartmentFilterStatus(idx, search, isFav, fuzz) {
 	}
 
 	return true;
+}
+
+/* Star Results */
+function getStarResults(school, dep) {
+	depData = starResults[school][dep];
+
+	var title = school + ' - ' + dep;
+	document.getElementById('starTitle').innerHTML = title;
+
+	table = document.getElementById('starResult');
+	table.innerHTML = '';
+
+	var tr = document.createElement('tr');
+	for (var i = 0; i < 6; i++)
+		tr.appendChild(document.createElement('th'));
+
+	tr.cells[0].classList.add('title');
+	for (var i = 1; i <= 5; i++) {
+		tr.cells[i].appendChild(document.createTextNode(gsatYear - i));
+		tr.cells[i].classList.add('data');
+	}
+
+	table.appendChild(tr);
+
+	var columns = {
+		recruit: '招生名額',
+		firstEnroll: '一階錄取人數',
+		firstPercentage: '一階錄取百分比',
+		secondEnroll: '二階錄取人數',
+		secondPercentage: '二階錄取百分比'
+	};
+
+	for (var i in columns) {
+		var tr = document.createElement('tr');
+		for (var j = 0; j < 6; j++)
+			tr.appendChild(document.createElement('td'));
+		tr.cells[0].appendChild(document.createTextNode(columns[i]));
+
+		for (var k = 1; k <= 5; k++) {
+			if (depData[gsatYear - k] !== undefined)
+				tr.cells[k].appendChild(document.createTextNode(depData[gsatYear - k][i]));
+			else
+				tr.cells[k].appendChild(document.createTextNode('--'));
+		}
+
+		table.appendChild(tr);
+	}
+
+	document.getElementById('starFloat').style.display = 'block';
+	document.body.style.overflow = 'hidden';
 }
 
 /* Sync Config */

@@ -92,6 +92,65 @@ var suggestionList = Object.keys(lc).sort(function(a, b) {
 });
 
 
+/* Get star history data */
+var starResults = {};
+if (gsatType === 'star') {
+	for (var y = 103; y <= 108; y++) {
+		xhr.open('GET', 'data/star_results/' + y, false);
+		xhr.send(null);
+		var lines = xhr.response.split('\n');
+
+		for (var i=0; i<lines.length; i++) {
+			if (lines[i].length == 0)
+				continue;
+
+			var line = lines[i].split('\t');
+			var school = line[6];
+			var dep = line[7];
+			datum = {
+				recruit: line[1],
+				firstPercentage: line[2],
+				firstEnroll: line[3],
+				secondPercentage: line[4],
+				secondEnroll: line[5],
+			};
+
+			if (! (school in starResults))
+				starResults[school] = {};
+
+			if (! (dep in starResults[school]))
+				starResults[school][dep] = {};
+
+			starResults[school][dep][y] = datum;
+		}
+	}
+}
+
+/* star float table */
+if (gsatType === 'star') {
+	var floatWindow = document.getElementById('starFloat');
+	window.addEventListener('click', function(event) {
+		if (event.target == floatWindow) {
+			floatWindow.style.display = 'none';
+			document.body.style.overflow = 'auto';
+		}
+	});
+
+	window.addEventListener('keydown', function(event) {
+		if (event.key === 'Escape' || event.keyCode === 27) {
+			floatWindow.style.display = 'none';
+			document.body.style.overflow = 'auto';
+		}
+	});
+
+	var span = document.getElementsByClassName("close")[0];
+	span.onclick = function() {
+		floatWindow.style.display = 'none';
+		document.body.style.overflow = 'auto';
+	}
+}
+
+
 
 if (localStorage.getItem("gsatMarks"))
 	filterGsat = JSON.parse(localStorage.getItem("gsatMarks"));

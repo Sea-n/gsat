@@ -173,6 +173,12 @@
         <button class="ts primary basic button" id="share" onclick="saveConfig();">分享我的最愛給朋友</button>
       </center>
       <table class="ts very basic table" id="list"></table>
+      <div class="ts float" id="starFloat" style="display: none;">
+        <div class="float-content"><span class="close">&times;</span>
+          <div class="starTitle"><span id="starTitle"></span><br><span>近五年錄取標準</span></div>
+          <table class="ts very basic table" id="starResult"></table>
+        </div>
+      </div>
       <div class="ts padded basic slate" id="no-data" style="display: none;"><i class="search icon"></i><span class="header">無符合條件之結果</span></div>
       <div id="show-more" style="display: none;">
         <button class="ts secondary basic button" onclick="max_result *= 2; updateTable();">檢視更多結果</button>
