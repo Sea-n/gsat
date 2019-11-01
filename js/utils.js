@@ -16,11 +16,11 @@ function adjustSuggestion() {
 
 	var count = 0;
 	for (var fuzz = 0; fuzz <= 1; fuzz++) { // fuzz search = {false, true}
-		for (i = 0; i < suggestionList.length; i++) {
+		for (var suggestion of suggestionList) {
 			if (count >= 5)
 				break;
 
-			var item = suggestionList[i].toUpperCase();
+			var item = suggestion.toUpperCase();
 			pos = item.indexOf(search);
 			if (pos !== -1) { // exactly match
 				if (fuzz)
@@ -40,13 +40,13 @@ function adjustSuggestion() {
 			b = document.createElement("div");
 			b.id = "sug" + count;
 			if (fuzz == 0) {
-				b.innerHTML = suggestionList[i].substr(0, pos);
-				b.innerHTML += "<strong>" + suggestionList[i].substr(pos, search.length) + "</strong>";
-				b.innerHTML += suggestionList[i].substr(pos + search.length);
+				b.innerHTML = suggestion.substr(0, pos);
+				b.innerHTML += "<strong>" + suggestion.substr(pos, search.length) + "</strong>";
+				b.innerHTML += suggestion.substr(pos + search.length);
 			} else {
-				b.innerHTML = suggestionList[i];
+				b.innerHTML = suggestion;
 			}
-			b.innerHTML += "<input type='hidden' value='" + suggestionList[i] + "'>";
+			b.innerHTML += "<input type='hidden' value='" + suggestion + "'>";
 
 			b.addEventListener("click", function(e) {
 				input.value = this.getElementsByTagName("input")[0].value;
@@ -75,8 +75,8 @@ function addActive(x) {
 }
 
 function removeActive(x) {
-	for (var i = 0; i < x.length; i++)
-		x[i].classList.remove("autocomplete-active");
+	for (var item of x)
+		item.classList.remove("autocomplete-active");
 }
 
 /* Initial Page */
@@ -91,8 +91,8 @@ function parseHash() {
 		return;
 	}
 	var queries = decodeURIComponent(window.location.hash).substr(1).split(';');
-	for (var i = 0; i < queries.length; i++) {
-		var query = queries[i].split('=', 2);
+	for (var query of queries) {
+		query = query.split('=', 2);
 		if (query[0] === 'q') {
 			input.value = query[1];
 		} else if (query[0] === 'y') {
@@ -305,7 +305,7 @@ function showFilterDepartments(table, search) {
 
 				tr.cells[1].appendChild(document.createTextNode(data[idx].school));
 
-				if (gsatType === 'star' && starResults[data[idx].school][data[idx].name] !== undefined) {
+				if (gsatType === 'star' && starResults[data[idx].school][data[idx].name].count > 0) {
 					var starLink = document.createElement('a');
 					starLink.text = data[idx].name;
 					starLink.school = data[idx].school;
@@ -462,6 +462,47 @@ function getDepartmentFilterStatus(idx, search, isFav, fuzz) {
 	}
 
 	return true;
+}
+
+/* Fetch Star Data */
+function fetchStarResults(year) {
+	fetch('data/star_results/' + year, {})
+		.then((resp) => {
+			return resp.text();
+		})
+		.then((resp) => {
+			var lines = resp.split('\n');
+
+			for (var line of lines) {
+				if (line.length == 0)
+					continue;
+
+				line = line.split('\t');
+				var school = line[6];
+				var dep = line[7];
+				datum = {
+				recruit: line[1],
+					firstPercentage: line[2],
+					firstEnroll: line[3],
+					secondPercentage: line[4],
+					secondEnroll: line[5],
+				};
+
+				if (! (school in starResults))
+					starResults[school] = {};
+
+				if (! (dep in starResults[school]))
+					starResults[school][dep] = {
+						count: 0
+					};
+
+				starResults[school][dep][year] = datum;
+				starResults[school][dep].count++;
+			}
+		})
+		.then(() => {
+			updateTable();
+		})
 }
 
 /* Star Results */

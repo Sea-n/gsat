@@ -45,6 +45,8 @@ if (gsatType == "advanced")
 
 var subjectsAdv = Object.keys(filterAdv);
 
+var starResults = {};
+
 
 /* Countdown */
 var countdown = document.getElementById("countdown");
@@ -63,10 +65,10 @@ var lines = xhr.response.split('\n');
 
 var data = [];
 var lc = {};
-for (var i=0; i<lines.length; i++) {
-	if (lines[i].length == 0)
+for (var line of lines) {
+	if (line.length == 0)
 		continue;
-	var line = lines[i].split('\t');
+	line = line.split('\t');
 	datum = {
 		id: line[0],
 		gsat: line[1].split(""),
@@ -83,6 +85,16 @@ for (var i=0; i<lines.length; i++) {
 	else
 		lc[datum.name]++;
 
+	if (gsatType == 'star') {
+		if (! (datum.school in starResults))
+			starResults[datum.school] = {};
+
+		if (! (datum.name in starResults[datum.school]))
+			starResults[datum.school][datum.name] = {
+				count: 0
+			};
+	}
+
 	data.push(datum);
 }
 
@@ -93,36 +105,9 @@ var suggestionList = Object.keys(lc).sort(function(a, b) {
 
 
 /* Get star history data */
-var starResults = {};
 if (gsatType === 'star') {
 	for (var y = 103; y <= 108; y++) {
-		xhr.open('GET', 'data/star_results/' + y, false);
-		xhr.send(null);
-		var lines = xhr.response.split('\n');
-
-		for (var i=0; i<lines.length; i++) {
-			if (lines[i].length == 0)
-				continue;
-
-			var line = lines[i].split('\t');
-			var school = line[6];
-			var dep = line[7];
-			datum = {
-				recruit: line[1],
-				firstPercentage: line[2],
-				firstEnroll: line[3],
-				secondPercentage: line[4],
-				secondEnroll: line[5],
-			};
-
-			if (! (school in starResults))
-				starResults[school] = {};
-
-			if (! (dep in starResults[school]))
-				starResults[school][dep] = {};
-
-			starResults[school][dep][y] = datum;
-		}
+		fetchStarResults(y);
 	}
 }
 
