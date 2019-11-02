@@ -297,7 +297,18 @@ span.underline {
 	}
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 560px) {
+	#list th.id {
+		width: 40px;
+		font-size: x-small;
+	}
+
+	#list td.id {
+		font-size: xx-small;
+	}
+}
+
+@media screen and (max-width: 359px) {
 	#list .id {
 		display: none;
 	}
@@ -313,11 +324,6 @@ span.underline {
 	th.sub:first-letter,
 	#list .mark:first-letter {
 		font-size: 14px;
-	}
-
-	#list .favorites,
-	#share {
-		display: none;
 	}
 }
 
