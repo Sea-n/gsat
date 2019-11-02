@@ -38,7 +38,11 @@ cat ../school | while read n s; do
             dep=$dep`echo $line | cut -d, -f2`
             read line; read line
         else
-            dep=`echo $line | cut -d, -f2`
+            dep=`echo $line \
+                | cut -d, -f2 \
+                | perl -pe 's#(學系|學程|學士班)\-?((?!(（|）)).*)組$#\1（\2組）#' \
+                | perl -pe 's#系\-?((?!(（|）)).*)組$#系（\1組）#' \
+                | perl -pe 's#\-((?!(（|）)).*)組$#（\1組）#'`
             recruit=`echo $line | cut -d, -f3`
             first_ppl=`echo $line | cut -d, -f12`
             second_ppl=`echo $line | cut -d, -f14 | tr -d '\r'`
