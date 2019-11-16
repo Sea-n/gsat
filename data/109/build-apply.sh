@@ -2,9 +2,9 @@
 
 path="www.cac.edu.tw/apply109/system/109ColQrytk4p_forapply_os92k5w"
 
-# rm "$path/ShowSchGsd.php"*
+rm "$path/ShowSchGsd.php"*
 
-# wget -r -nc -R pdf --header "User-Agent: Sean" "https://$path/TotalGsdShow.htm"
+wget -r -nc -R pdf --header "User-Agent: Sean" "https://$path/TotalGsdShow.htm"
 
 rm new-apply
 

@@ -2,9 +2,9 @@
 
 path="www.cac.edu.tw/star109/system/109ColQry6d3k_forstar_583vd"
 
-# rm "$path/ShowSchGsd.php"*
+rm "$path/ShowSchGsd.php"*
 
-# wget -r -nc -R pdf --header "User-Agent: Sean" "https://$path/TotalGsdShow.htm"
+wget -r -nc -R pdf --header "User-Agent: Sean" "https://$path/TotalGsdShow.htm"
 
 rm new-star
 
