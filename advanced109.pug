@@ -1,14 +1,15 @@
 doctype html
 html
 	head
-		title 繁星推薦 - 學測五選四 109 年
-		meta(name="keywords" content="學測五選四,繁星推薦,109 學年度,學測五選三")
+		title 指考分發 - 學測五選四 109 年
+		meta(name="keywords" content="學測五選四,指考分發,學測五選三")
 		meta(name="description" content="自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 109 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利")
-		meta(property="og:title" content="學測五選四 - 繁星推薦 109 年")
-		meta(property="og:url" content="https://sean.cat/gsat/star")
+		meta(property="og:title" content="學測五選四 - 指考分發 109 年")
+		meta(property="og:url" content="https://sean.cat/gsat/advanced109")
 		meta(property="og:description" content="自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 109 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利")
-		meta(property="og:image" content="https://img.sean.taipei/2019/02/gsat.jpg")
+		meta(property="og:image" content="https://img.sean.taipei/2019/02/gsat-advanced.jpg")
 		include includes/head.pug
+		link(href="./style.advanced.css?v=1022" rel="stylesheet")
 		script(type="application/ld+json").
 			{
 				"@context": "http://schema.org",
@@ -37,17 +38,17 @@ html
 						"position": 3,
 						"item": {
 							"@type":"WebPage",
-							"@id": "https://sean.cat/gsat/star",
-							"url":"https://sean.cat/gsat/star",
-							"name": "繁星推薦"
+							"@id": "https://sean.cat/gsat/advanced",
+							"url":"https://sean.cat/gsat/advanced",
+							"name": "指考分發"
 						}
 					}, {
 						"@type": "ListItem",
 						"position": 4,
 						"item": {
 							"@type":"WebPage",
-							"@id": "https://sean.cat/gsat/star109",
-							"url":"https://sean.cat/gsat/star109",
+							"@id": "https://sean.cat/gsat/advanced109",
+							"url":"https://sean.cat/gsat/advanced109",
 							"name": "109 學年度"
 						}
 					}
@@ -58,27 +59,28 @@ html
 			.ts.container
 				a.item(href=".") 首頁
 				a.item.hide1(href="apply109") 個人申請
-				a.item.active.hide1(href="star") 繁星推薦
-				a.item.hide1(href="advanced109") 指考分發
+				a.item.hide1(href="star109") 繁星推薦
+				a.item.hide1.active(href="advanced") 指考分發
 				.right.fitted.item
-					b.item.cd
-						| 學測倒數&nbsp;
-						span#countdown 87
-						| &nbsp天
+					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
+		section.placeholder
+			.placeholder-message
+				p 指考共有十個科目，不適合小手機查詢，請以電腦開啟此頁面，或將手機畫面打橫著用
+				p 抱歉造成您的不便，Sean 在這邊感謝您的體諒
+				br
+				a(href=".") 回到首頁
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
-				h1.header
-					| 繁星推薦 
+				.header 指考分發
 				.description 學測五選四 109 學年度
 		div.ts.container(name="main")
-			- var star = true
 			include includes/search.pug
 		include includes/footer.pug
 		script.
-			var gsatType = "star";
+			var gsatType = "advanced";
 			var gsatYear = "109";
 			function getDetailLink(id) {
-				return 'https://www.cac.edu.tw/star109/system/109ColQry6d3k_forstar_583vd/html/109_' + id + '.htm';
+				return 'https://campus4.ncku.edu.tw/uac/cross_search/dept_info/' + id + '.html';
 			}
-		script(src="js/utils.js?v=1024")
-		script(src="js/common.js?v=1024")
+		script(src="js/utils.js?v=1116")
+		script(src="js/common.js?v=1116")

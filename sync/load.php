@@ -17,6 +17,7 @@ if (!in_array($type, [
 	'108advanced',
 	'109apply',
 	'109star',
+	'109advanced',
 ]))
 	exit(json_encode([
 		'ok' => false,
