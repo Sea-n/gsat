@@ -81,12 +81,14 @@ if (isset($_COOKIE['tg_user'])) {
 /* Not login */
 if (!isset($name)) {
 	echo <<<EOF
-		<h3>請登入以繼續</h3>
-		<h4>Telegram 登入</h4>
-		<script async src="https://telegram.org/js/telegram-widget.js?5" data-telegram-login="Sean_Bot" data-size="medium" data-auth-url="https://sean.cat/gsat/sync/auth" data-request-access="write"></script>
+		<h1 class="ts center aligned header">請登入以繼續</h1>
+		<div class="ts centered secondary segment" style="max-width: 300px;">
+			<h4>Telegram 登入</h4>
+			<script async src="https://telegram.org/js/telegram-widget.js?5" data-telegram-login="Sean_Bot" data-size="medium" data-auth-url="https://sean.cat/gsat/sync/auth" data-request-access="write"></script>
 
-		<h4>Google 登入</h4>
-		<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+			<h4>Google 登入</h4>
+			<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+		</div>
 	</div>
 
 	<script>
@@ -107,7 +109,9 @@ EOF;
 /* No user identity */
 if (empty($username)) {
 	echo <<<EOF
-<big style='color:red;'>您尚未設定 Telegram Username</big>
+<h3 class="ts center aligned icon header">
+<i class="caution sign icon"></i>您尚未設定 Telegram Username
+</h3>
 </div>
 </body>
 </html>
@@ -119,7 +123,9 @@ EOF;
 $dir = "storage/$username";
 if (!file_exists($dir)) {
 	echo <<<EOF
-<big style='color:red;'>您尚未保存任何紀錄</big>
+<h3 class="ts center aligned icon header">
+<i class="file text outline icon"></i>您尚未保存任何紀錄
+</h3>
 </div>
 </body>
 </html>
