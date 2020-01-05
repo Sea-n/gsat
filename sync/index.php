@@ -9,6 +9,7 @@ if (isset($_COOKIE['tg_user'])) {
 
 		$tg_user = checkTelegramAuthorization($auth_data);
 	} catch (Exception $e) {
+		setcookie('tg_user', '', time()-87, '/gsat/', 'sean.cat');
 		unset($tg_user);
 	}
 
@@ -26,12 +27,14 @@ if (isset($_COOKIE['tg_user'])) {
 	$resp = file_get_contents('https://oauth2.googleapis.com/tokeninfo?id_token=' . urlencode($token));
 	$userinfo = json_decode($resp, true);
 
-	if (!isset($userinfo['email']))
+	if (!isset($userinfo['email'])) {
+		setcookie('google_token', '', time()-87, '/gsat/', 'sean.cat');
 		exit(json_encode([
 			'ok' => false,
 			'redirect' => "sync/",
 			'error' => 'Google OAuth API unauthorized.'
 		]));
+	}
 
 
 	$username = preg_replace("#[^a-zA-Z0-9@.]#", "_", $userinfo['email']);
