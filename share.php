@@ -34,8 +34,8 @@ if (!preg_match("#^[A-Za-z0-9_@.]{5,32}\-(10[89])(apply|star|advanced)\-[0-9a-f]
 			<a class="item hide1" href="star">繁星推薦</a>
 			<a class="item hide1" href="advanced">指考分發</a>
 			<div class="right fitted item">
-				<img class="ts mini circular image" src="<?= $data['photo_url'] ?>">
-				<b class="item"><?= $data['name'] ?></b>
+				<img class="ts mini circular image" src="<?= $data['photo_url'] ?? '' ?>">
+				<b class="item"><?= $data['name'] ?? '' ?></b>
 			</div>
 		</div>
 	</nav>
