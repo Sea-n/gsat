@@ -42,6 +42,9 @@ details.ts.accordion.filter
 		input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjustSuggestion();")
 		i#clear.clear.hidden1.hidden2(onclick="input.value = ''; adjustSuggestion();")
 	#dep-list.autocomplete-items
+#apac
+	a.ts.link.image(href="javascript:;" onclick="ts('#modal').modal('show');")
+		img(src="img/apac.jpg")
 #stone(style="display: none;")
 	a(target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Stone');")
 		img.ts.poyon(src="https://sitcon.org/2017/favicon.ico")
@@ -80,3 +83,26 @@ if star
 	span.header 無符合條件之結果
 #show-more(style="display: none;")
 	button.ts.secondary.basic.button(onclick="max_result *= 2; updateTable();") 檢視更多結果
+
+.ts.modals.dimmer(style="margin-top: 40px;")
+	dialog#modal.ts.basic.fullscreen.closable.modal(open)
+		i.close.icon
+		.ts.icon.header
+		.content
+			a(target="_blank" href="https://lihi1.cc/Yr70f" onclick="ga('send', 'event', 'Outgoing', 'APAC', 'APAC Banner');")
+				img.ts.fluid.image(src="img/apac.png")
+			p 各位學弟妹安安，我是五選四的開發者 Sean
+				br
+				| 大家還記得去年 48 級分正取交大資工的新聞嗎 XD
+			p 當時協助我其中一位的學長，今年特別發起了一個 Instagram 專案，
+				br
+				| 製作了教你做好備審的懶人包，並免費提供給大家。
+				br
+				| 裡面內容都是去年對我非常有幫助的觀念，
+				br
+				| 在這邊推薦給大家追蹤！
+			p 👉 
+				a(target="_blank" href="https://lihi1.cc/Yr70f" onclick="ga('send', 'event', 'Outgoing', 'APAC', 'APAC Textlink');") @apac.2020 備審航艦
+		.actions
+			button.ts.positive.button(onclick="ga('send', 'event', 'Outgoing', 'APAC', 'APAC Button'); window.open('https://lihi1.cc/Yr70f')") 馬上追蹤
+			button.ts.inverted.basic.cancel.button 關閉

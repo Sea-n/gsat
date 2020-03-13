@@ -406,8 +406,17 @@ i.hidden2 {
 	margin-bottom: 30px;
 }
 
+#apac {
+	margin-bottom: 12px;
+}
+
+#apac img {
+	width: 100%;
+}
+
 @media screen and (max-width: 360px) {
 	.filter,
+	#apac,
 	#stone,
 	.autocomplete {
 		width: 100%;
@@ -416,6 +425,7 @@ i.hidden2 {
 
 @media screen and (min-width: 360px) and (max-width: 512px) {
 	.filter,
+	#apac,
 	#stone,
 	.autocomplete {
 		margin-left: 5%;
@@ -425,6 +435,7 @@ i.hidden2 {
 
 @media screen and (min-width: 512px) and (max-width: 768px) {
 	.filter,
+	#apac,
 	#stone,
 	.autocomplete {
 		margin-left: 10%;
@@ -434,6 +445,7 @@ i.hidden2 {
 
 @media screen and (min-width: 768px) and (max-width: 1400px) {
 	.filter,
+	#apac,
 	#stone,
 	.autocomplete {
 		margin-left: 20%;
@@ -443,6 +455,7 @@ i.hidden2 {
 
 @media screen and (min-width: 1400px) {
 	.filter,
+	#apac,
 	#stone,
 	.autocomplete {
 		margin-left: 30%;
