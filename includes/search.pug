@@ -43,7 +43,7 @@ details.ts.accordion.filter
 		i#clear.clear.hidden1.hidden2(onclick="input.value = ''; adjustSuggestion();")
 	#dep-list.autocomplete-items
 #apac
-	a.ts.link.image(href="javascript:;" onclick="ts('#modal').modal('show');")
+	a.ts.link.image(href="javascript:;" onclick="ga('send', 'event', 'Outgoing', 'APAC', 'APAC Modal'); ts('#modal').modal('show');")
 		img(src="img/apac.jpg")
 #stone(style="display: none;")
 	a(target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Stone');")
