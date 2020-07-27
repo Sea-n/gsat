@@ -7,7 +7,7 @@ function adjustSuggestion() {
 		return;
 	}
 
-	var a, b, i;
+	var a, b;
 	var search = input.value.toUpperCase();
 	currentFocus = -1;
 
@@ -21,7 +21,7 @@ function adjustSuggestion() {
 				break;
 
 			var item = suggestion.toUpperCase();
-			pos = item.indexOf(search);
+			var pos = item.indexOf(search);
 			if (pos !== -1) { // exactly match
 				if (fuzz)
 					continue;
@@ -114,8 +114,6 @@ function initGsatFilter() {
 	fG = fG.children;
 
 	for (var k = 0; k < 5; k++) {
-		var s = subjectsGsat[k];
-
 		var fGm = fG[k].getElementsByClassName("menu")[0];
 		for (var i = 0; i < 7; i++) {
 			fGm.children[i].onclick = (e) => {
@@ -143,7 +141,7 @@ function adjustGsatFilter() {
 		var s = subjectsGsat[k];
 		var fGb = fG[k];
 		var fGt = fGb.getElementsByClassName("text")[0];
-		fGb.classList.remove("negative", "info", "primary", "positive")
+		fGb.classList.remove("negative", "info", "primary", "positive");
 		if (filterGsat[s] == 6) {
 			fGt.innerText = s;
 		} else {
@@ -236,7 +234,7 @@ function updateTable(search) {
 				filterAdv[s]++;
 				if (filterAdv[s] > 1) filterAdv[s] = -1;
 				updateTable();
-			}
+			};
 
 			button.id = s;
 			if (filterAdv[s] === 1) {
@@ -274,10 +272,10 @@ function showFilterDepartments(table, search) {
 					continue;
 
 				var tr = document.createElement('tr');
-				id = data[idx].id;
+				var id = data[idx].id;
 				tr.dataset.id = id;
 
-				for (_ = 0; _ < subjectsAdv.length + 4; _++)
+				for (var _ = 0; _ < subjectsAdv.length + 4; _++)
 					tr.appendChild(document.createElement('td'));
 
 				tr.cells[0].classList.add("favorites");
@@ -285,9 +283,9 @@ function showFilterDepartments(table, search) {
 
 				if (typeof sharedKey === "undefined")
 					button.onclick = function(e) {
-						t = e.target;
-						id = t.parentNode.parentNode.dataset.id;
-						index = favs.indexOf(id);
+						var t = e.target;
+						var id = t.parentNode.parentNode.dataset.id;
+						var index = favs.indexOf(id);
 						t.classList.remove("not-fav", "favorited");
 						if (index == -1) {
 							favs.push(id);
@@ -298,7 +296,7 @@ function showFilterDepartments(table, search) {
 							t.classList.add("not-fav");
 						}
 						localStorage.setItem(favStorageName, JSON.stringify(favs)); // save
-					}
+					};
 
 				button.classList.add(showFav ? "favorited" : "not-fav"); // determined by getDepartmentFilterStatus
 				tr.cells[0].appendChild(button);
@@ -312,7 +310,7 @@ function showFilterDepartments(table, search) {
 					starLink.dep = data[idx].name;
 					starLink.onclick = function () {
 						getStarResults(this.school, this.dep);
-					}
+					};
 					tr.cells[2].appendChild(starLink);
 				} else {
 					tr.cells[2].appendChild(document.createTextNode(data[idx].name));
@@ -401,7 +399,7 @@ function adjustTableHeader() {
 	fH.classList.add("fixed-header")
 	var oH = table.childNodes[1];
 	oH.classList.add("ordinary-header")
-	for (i = 0; i < fH.childElementCount; i++)
+	for (var i = 0; i < fH.childElementCount; i++)
 		fH.childNodes[i].style.width = oH.childNodes[i].getBoundingClientRect().width + "px";
 
 	var y = table.getBoundingClientRect().y;
@@ -417,7 +415,7 @@ function getDepartmentFilterStatus(idx, search, isFav, fuzz) {
 		if (fuzz)
 			return false;
 	} else if (fuzz) { // try fuzz mode
-		ori = search;
+		var ori = search;
 		search = ori[0];
 		for (var i=1; i<ori.length; i++) {
 			if (CJK.test(ori[i-1]) && CJK.test(ori[i]))
@@ -429,7 +427,7 @@ function getDepartmentFilterStatus(idx, search, isFav, fuzz) {
 	} else
 		return false; // not matched
 
-	id = data[idx].id;
+	var id = data[idx].id;
 	if (favs.includes(id) != isFav)
 		return false;
 
@@ -480,7 +478,7 @@ function fetchStarResults(year) {
 				line = line.split('\t');
 				var school = line[6];
 				var dep = line[7];
-				datum = {
+				var datum = {
 				recruit: line[1],
 					firstPercentage: line[2],
 					firstEnroll: line[3],
@@ -507,12 +505,12 @@ function fetchStarResults(year) {
 
 /* Star Results */
 function getStarResults(school, dep) {
-	depData = starResults[school][dep];
+	var depData = starResults[school][dep];
 
 	var title = school + ' - ' + dep;
 	document.getElementById('starTitle').innerHTML = title;
 
-	table = document.getElementById('starResult');
+	var table = document.getElementById('starResult');
 	table.innerHTML = '';
 
 	var tr = document.createElement('tr');

@@ -19,7 +19,7 @@ var filterGsat = {
 	"數學": 6,
 	"社會": 6,
 	"自然": 6,
-}
+};
 var subjectsGsat = Object.keys(filterGsat);
 
 var filterAdv = {
@@ -141,7 +141,7 @@ if (gsatType === 'star') {
 	span.onclick = function() {
 		floatWindow.style.display = 'none';
 		document.body.style.overflow = 'auto';
-	}
+	};
 }
 
 
@@ -231,7 +231,7 @@ window.addEventListener("scroll", function () {
 
 window.addEventListener("resize", () => {
 	adjustTableHeader();
-})
+});
 
 
 
