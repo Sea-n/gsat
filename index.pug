@@ -2,11 +2,11 @@ doctype html
 html
 	head
 		title 學測五選四
-		meta(name="keywords" content="學測五選四,參採科目,個人申請,繁星推薦,指考分發,108學測,109學測,新制度,學測五選三,飛天喵喵神教")
-		meta(name="description" content="自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 109 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利")
+		meta(name="keywords" content="學測五選四,參採科目,個人申請,繁星推薦,指考分發,108學測,109學測,110學測,新制度,學測五選三,飛天喵喵神教")
+		meta(name="description" content="自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 110 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利")
 		meta(property="og:title" content="學測五選四")
 		meta(property="og:url" content="https://sean.cat/gsat/")
-		meta(property="og:description" content="自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 109 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利")
+		meta(property="og:description" content="自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 110 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利")
 		meta(property="og:image" content="https://img.sean.taipei/2019/02/gsat.jpg")
 		link(href="sitemap.xml" rel="sitemap")
 		include includes/head.pug
@@ -40,47 +40,55 @@ html
 		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
 			.ts.container
 				b.item.active 首頁
-				a.item(href="apply109") 個人申請
-				a.item(href="star109") 繁星推薦
+				a.item(href="apply110") 個人申請
+				a.item(href="star110") 繁星推薦
 				a.item(href="advanced109") 指考分發
 				.right.fitted.item.hide0
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
 				h1.header 學測五選四
-				.description 自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 109 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利
+				.description 自 108 年開始，學測最多參採四科，學測五選四網站受到全台師生廣大好評迴響，到了 110 學年度繼續更新資料，旨在提供學弟妹們好用的查詢介面，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利
 		.ts.container(name="main")
 			h3#dev.ts.header 作者資訊
 			p
 				| 網站本體由
 				u 交大資工
-				| 
+				|
 				a(target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'GSAT');") 韋詠祥
 				|  於高三時整理、製作
 			p
-				| 繁星歷年資料由 
+				| 繁星歷年資料由
 				u 中央資工
-				| 
+				|
 				a(target="_blank" href="http://jerryh.su/") 許家維
 				|  彙整、設計介面
 			p
 				| 前端頁面由
 				u 斗六家商
-				| 
+				|
 				a(target="_blank" href="https://gnehs.net/") 廖群勝
 				|  設計
 			p
-				| 網站係採用 
+				| 網站係採用
 				a(target="_blank" rel="license" href="http://creativecommons.org/licenses/by/3.0/tw/" onclick="ga('send', 'event', 'Outgoing', 'cc', 'GSAT');") 創用 CC 姓名標示
 				|  條款授權
 				br
-				| 程式部分全於 
+				| 程式部分全於
 				a(target="_blank" href="https://git.io/gsat" onclick="ga('send', 'event', 'Outgoing', 'GitHub', 'GSAT');") GitHub
-				|  開放原始碼，採 
+				|  開放原始碼，採
 				a(target="_blank" href="https://github.com/Sea-n/gsat/blob/master/LICENSE" onclick="ga('send', 'event', 'Outgoing', 'MIT', 'GSAT');") MIT
 				|  授權
 			h3#data.ts.header 涵蓋資料範圍
 			p
-				| 109 學年度 
+				| 110 學年度
+				a(href="apply110") 個人申請
+				| 、
+				a(href="star110") 繁星推薦
+				|  資料已於 12/15 更新
+			i 資料最後確認：2020/12/15
+			h4#data108.ts.header 109 學年度
+			p
+				| 109 學年度
 				a(href="apply109") 個人申請
 				| 、
 				a(href="star109") 繁星推薦
@@ -97,23 +105,23 @@ html
 				| 、
 				a(href="advanced") 指考分發
 				|  頁面找到
-			p 目前已升級至 
+			p 目前已升級至
 				a(target="_blank" href="https://www.cac.edu.tw/cacportal/index.php" onclick="ga('send', 'event', 'Outgoing', 'cac', 'GSAT');") 大學甄選委員會
-				|  2018 年底公佈之 108 學年度 
+				|  2018 年底公佈之 108 學年度
 				b 個人申請
 				| 、
 				b 繁星推薦
 				|  校系分則資料
-			p 以及 
+			p 以及
 				a(target="_blank" href="https://www.uac.edu.tw/colleges.htm" onclick="ga('send', 'event', 'Outgoing', 'uac', 'GSAT');") 大學考試入學分發委員會
 				b  指考分發
 				|  校系分則資料
 			i 資料最後確認：2019/02/25
 			h3#bugs.ts.header 已知問題
-			p 目前僅列出單科檢定、篩選，像是 
+			p 目前僅列出單科檢定、篩選，像是
 				a(target="_blank" href="https://www.cac.edu.tw/apply109/system/109ColQrytk4p_forapply_os92k5w/html/109_013082.htm") 交大材料
 				|  採計「國英自」，但在此系統中就少了「國文」
-			p 可以搭配其他工具（如 
+			p 可以搭配其他工具（如
 				a(target="_blank" href="https://apply.nctu.me" onclick="ga('send', 'event', 'Outgoing', 'apply.nctu.me', 'GSAT');") 採計科目查詢
 				| 、
 				a(target="_blank" href="https://university-tw.ldkrsi.men/" onclick="ga('send', 'event', 'Outgoing', 'university-tw.ldkrsi.men')") University TW
@@ -138,13 +146,13 @@ html
 			p 點進各科系右側校系編號，就是官方「校系分則詳細資料」囉！
 			h4 Q2: 這讓我省了點開幾十份文件的時間，可以怎麼抖內作者
 			p 您的謝意我心領了，但目前尚無收受贊助的打算喔 owo
-			p 覺得實用的話，還要請 
+			p 覺得實用的話，還要請
 				a(href="#posts") 多多推薦
 				|  給需要的人了
 			h4 Q3: 要怎麼進一步篩選呀
-			p 點開查詢結果上方的 
+			p 點開查詢結果上方的
 				b 學測級分篩選
-				|  即可以五標來過濾，如果您有任何想法，也歡迎 
+				|  即可以五標來過濾，如果您有任何想法，也歡迎
 				a(href="#suggestion") 讓我知道
 				|  :)
 			h3#posts.ts.header 社群媒體貼文
@@ -159,7 +167,7 @@ html
 					a(target="_blank" href="https://forum.gamer.com.tw/C.php?bsn=60076&snA=5387926" onclick="ga('send', 'event', 'Outgoing', 'Bahamut', 'GSAT');") 巴哈姆特
 		footer.ts.fluid.slate
 			.ts.container
-				p 由 
+				p 由
 					a(target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'GSAT');") Sean 韋詠祥
 					| 、
 					a(target="_blank" href="http://jerryh.su/") Jerry 許家維
@@ -167,6 +175,6 @@ html
 					a(target="_blank" href="https://gnehs.net/") 廖群勝
 					|  整理、設計
 					br
-					| 感謝 
+					| 感謝
 					a(target="_blank" href="https://csy.教我.tw/") CSY
 					|  提供精神糧食
