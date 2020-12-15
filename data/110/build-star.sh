@@ -1,45 +1,62 @@
 #!/bin/bash
 
-path="www.cac.edu.tw/star109/system/109ColQry6d3k_forstar_583vd"
-
-rm "$path/ShowSchGsd.php"*
-
-wget -r -nc -R pdf --header "User-Agent: Sean" "https://$path/TotalGsdShow.htm"
+path="www.cac.edu.tw/star110/system/110_aColQry_forstar_5pd98yr"
+# wget -r -nc -R pdf --header "User-Agent: Sean" "https://$path/TotalGsdShow.htm"
 
 rm new-star
 
-for id in `ls $path/html`; do
-	file="$path/html/$id"
-	id=${id/109_/}
-	id=${id/.htm/}
+parse () {
+	local file
+	local line
+	local mark
 
-	echo -ne "$id\t" |tee -a new-star
+	id=$1
+	file="$path/html/$id"
+	id=${id/110_/}
+	id=${id/.htm?v=1.0/}
+
+	line="$id	"
 
 	for s in "國文" "英文" "數學" "社會" "自然"; do
-		mark=`grep -a -A1 ">$s<" $file |tail -n1 |grep -oP '>\K[^<]*(?=標<)'`
+		mark=`ggrep -a -A1 ">$s<" $file |tail -n1 |ggrep -oP '>\K[^<]*(?=標<)'`
 		if [ $? -ne 0 ]; then
 			mark="無"
 		fi
-		echo -n $mark |tee -a new-star
+		line+="$mark"
 	done
 
-	echo -ne "\t" |tee -a new-star
+	line+="	"
 
 	for s in "國文" "英文" "數學" "社會" "自然"; do
-		mark=`grep -a -A1 ">$s<" $file |tail -n1 |grep -oP '>\K[^<]*(?=<)'`
-		echo -n "$mark " |tee -a new-star
+		mark=`ggrep -a -A1 ">$s<" $file |tail -n1 |ggrep -oP '>\K[^<]*(?=<)'`
+		line+="$mark "
 	done
 
-	echo -ne "\t` grep -a -oP '<b>\K[^<>]+(?=<br>)' $file |head -n1`" |tee -a new-star
-
-	echo -e "\t`grep -a -oP '<br>\K[^<>]+(?=<)' $file \
+	line+="	"
+	line+="` ggrep -a -oP '<b>\K[^<>]+(?=<br>)' $file |head -n1`"
+	line+="	"
+	line+="`ggrep -a -oP '<br>\K[^<>]+(?=<)' $file \
 		|head -n1 \
 		|sed -e 's/\s*(/（/g' -e 's/\s*)/）/g' \
 		|perl -pe 's#(學系|學程|學士班)\-?((?!(（|）)).*)組$#\1（\2組）#' \
 		|perl -pe 's#系\-?((?!(（|）)).*)組$#系（\1組）#' \
 		|perl -pe 's#\-((?!(（|）)).*)組$#（\1組）#' \
-		`" |tee -a new-star
+		`"
+
+	echo $line | tee -a new-star
+}
+
+for id in `ls $path/html`; do
+	parse $id &
+	sleep 0.1
 done
+
+for job in `jobs -p`; do
+    wait $job
+done
+sleep 5
+
+sort -o new-star new-star
 
 echo "Done!"
 wc new-star
