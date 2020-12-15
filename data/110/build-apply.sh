@@ -53,9 +53,9 @@ parse () {
 	done
 
 	line+="\t"
-	line+="`head -n32 $file |tail -n1 |ggrep -a -oP '>\K[^<>]+(?=<)'`"
+	line+="`head -n10 $file |tail -n1 |ggrep -a -oP '>\K[^<>]+(?=<)'`"
 	line+="\t"
-	line+="`head -n33 $file \
+	line+="`head -n11 $file \
 		|tail -n1 \
 		|ggrep -a -oP ' +\K[^<>]+(?=<)' \
 		|sed -e 's/\s*(/（/g' -e 's/\s*)/）/g' \
