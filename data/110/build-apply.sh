@@ -18,7 +18,7 @@ parse () {
 	id=${id/110_/}
 	id=${id/.htm?v=1.0/}
 
-	line="$id	"
+	line="$id\t"
 
 	for s in "國文" "英文" "數學" "社會" "自然"; do
 		mark=`ggrep -a -A3 "  <font size=\"2\"><b>$s</b></font>" $file |tail -n1 |ggrep -oP '>\K[^<]*(?=標<)'`
@@ -28,7 +28,7 @@ parse () {
 		line+="$mark"
 	done
 
-	line+="	"
+	line+="\t"
 
 	for s in "國文" "英文" "數學" "社會" "自然"; do
 		mark=`ggrep -a -A3 "  <font size=\"2\"><b>$s</b></font>" $file |tail -n1 |ggrep -oP '>\K[^<]*標(?=<)'`
@@ -52,9 +52,10 @@ parse () {
 		line+="-- "
 	done
 
-	line+="	`head -n32 $file |tail -n1 |ggrep -a -oP '>\K[^<>]+(?=<)'`"
-
-	line+="	`head -n33 $file \
+	line+="\t"
+	line+="`head -n32 $file |tail -n1 |ggrep -a -oP '>\K[^<>]+(?=<)'`"
+	line+="\t"
+	line+="`head -n33 $file \
 		|tail -n1 \
 		|ggrep -a -oP ' +\K[^<>]+(?=<)' \
 		|sed -e 's/\s*(/（/g' -e 's/\s*)/）/g' \
@@ -63,7 +64,7 @@ parse () {
 		|perl -pe 's#\-((?!(（|）)).*)組$#（\1組）#' \
 		`"
 
-	echo $line | tee -a new-apply
+	echo -e "$line" | tee -a new-apply
 }
 
 for id in `ls $path/html`; do

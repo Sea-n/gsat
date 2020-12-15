@@ -15,7 +15,7 @@ parse () {
 	id=${id/110_/}
 	id=${id/.htm?v=1.0/}
 
-	line="$id	"
+	line="$id\t"
 
 	for s in "國文" "英文" "數學" "社會" "自然"; do
 		mark=`ggrep -a -A1 ">$s<" $file |tail -n1 |ggrep -oP '>\K[^<]*(?=標<)'`
@@ -25,16 +25,16 @@ parse () {
 		line+="$mark"
 	done
 
-	line+="	"
+	line+="\t"
 
 	for s in "國文" "英文" "數學" "社會" "自然"; do
 		mark=`ggrep -a -A1 ">$s<" $file |tail -n1 |ggrep -oP '>\K[^<]*(?=<)'`
 		line+="$mark "
 	done
 
-	line+="	"
+	line+="\t"
 	line+="` ggrep -a -oP '<b>\K[^<>]+(?=<br>)' $file |head -n1`"
-	line+="	"
+	line+="\t"
 	line+="`ggrep -a -oP '<br>\K[^<>]+(?=<)' $file \
 		|head -n1 \
 		|sed -e 's/\s*(/（/g' -e 's/\s*)/）/g' \
@@ -43,7 +43,7 @@ parse () {
 		|perl -pe 's#\-((?!(（|）)).*)組$#（\1組）#' \
 		`"
 
-	echo $line | tee -a new-star
+	echo -e "$line" | tee -a new-star
 }
 
 for id in `ls $path/html`; do
