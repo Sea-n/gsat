@@ -1,63 +1,81 @@
 #!/bin/bash
 
-path="www.cac.edu.tw/apply109/system/109ColQrytk4p_forapply_os92k5w"
-
-rm "$path/ShowSchGsd.php"*
-
-wget -r -nc -R pdf --header "User-Agent: Sean" "https://$path/TotalGsdShow.htm"
+path="www.cac.edu.tw/apply110/system/110_aColQry4qy_forapply_o5wp6ju"
+# wget -r -nc -R pdf --header "User-Agent: Sean" "https://$path/TotalGsdShow.htm"
 
 rm new-apply
 
-for id in `ls $path/html`; do
-	file="$path/html/$id"
-	id=${id/109_/}
-	id=${id/.htm/}
+parse () {
+	local id
+	local file
+	local line
+	local mark
+	local multiple
+	local weighted
 
-	echo -ne "$id\t" |tee -a new-apply
+	id=$1
+	file="$path/html/$id"
+	id=${id/110_/}
+	id=${id/.htm?v=1.0/}
+
+	line="$id	"
 
 	for s in "國文" "英文" "數學" "社會" "自然"; do
-		mark=`grep -a -A3 "  <font size=\"2\"><b>$s</b></font>" $file |tail -n1 |grep -oP '>\K[^<]*(?=標<)'`
+		mark=`ggrep -a -A3 "  <font size=\"2\"><b>$s</b></font>" $file |tail -n1 |ggrep -oP '>\K[^<]*(?=標<)'`
 		if [ $? -ne 0 ]; then
 			mark="無"
 		fi
-		echo -n $mark |tee -a new-apply
+		line+="$mark"
 	done
 
-	echo -ne "\t" |tee -a new-apply
+	line+="	"
 
 	for s in "國文" "英文" "數學" "社會" "自然"; do
-		mark=`grep -a -A3 "  <font size=\"2\"><b>$s</b></font>" $file |tail -n1 |grep -oP '>\K[^<]*標(?=<)'`
+		mark=`ggrep -a -A3 "  <font size=\"2\"><b>$s</b></font>" $file |tail -n1 |ggrep -oP '>\K[^<]*標(?=<)'`
 		if [ $? -eq 0 ]; then
-			echo -n "$mark " |tee -a new-apply
+			line+="$mark "
 			continue
 		fi
 
-		multiple=`grep -a -A6 "  <font size=\"2\"><b>$s</b></font>" $file |tail -n1 |grep -oP '>\K.*?(?=<)'`
+		multiple=`ggrep -a -A6 "  <font size=\"2\"><b>$s</b></font>" $file |tail -n1 |ggrep -oP '>\K.*?(?=<)'`
 		if [ "$multiple" != "--" ]; then
-			echo -n "x$multiple " |tee -a new-apply
+			line+="$multiple "
 			continue
 		fi
 
-		weighted=`grep -a -A9 "  <font size=\"2\"><b>$s</b></font>" $file |tail -n1 |grep -oP '>\K.*?(?=<)'`
+		weighted=`ggrep -a -A9 "  <font size=\"2\"><b>$s</b></font>" $file |tail -n1 |ggrep -oP '>\K.*?(?=<)'`
 		if [ "$weighted" != "--"  ]; then
-			echo -n "採計 " |tee -a new-apply
+			line+="採計 "
 			continue
 		fi
 
-		echo -n "-- " |tee -a new-apply
+		line+="-- "
 	done
 
-	echo -ne "\t`head -n32 $file |tail -n1 |grep -a -oP '>\K[^<>]+(?=<)'`" |tee -a new-apply
+	line+="	`head -n32 $file |tail -n1 |ggrep -a -oP '>\K[^<>]+(?=<)'`"
 
-	echo -e "\t`head -n33 $file \
+	line+="	`head -n33 $file \
 		|tail -n1 \
-		|grep -a -oP ' +\K[^<>]+(?=<)' \
+		|ggrep -a -oP ' +\K[^<>]+(?=<)' \
 		|sed -e 's/\s*(/（/g' -e 's/\s*)/）/g' \
 		|perl -pe 's#(學系|學程|學士班)\-?((?!(（|）)).*)組$#\1（\2組）#' \
 		|perl -pe 's#系\-?((?!(（|）)).*)組$#系（\1組）#' \
 		|perl -pe 's#\-((?!(（|）)).*)組$#（\1組）#' \
-		`" |tee -a new-apply
+		`"
+
+	echo $line | tee -a new-apply
+}
+
+for id in `ls $path/html`; do
+	parse $id &
+	sleep 0.2
 done
+
+for job in `jobs -p`; do
+    wait $job
+done
+
+sort -o new-apply new-apply
 
 echo "Done!"
 wc new-apply
