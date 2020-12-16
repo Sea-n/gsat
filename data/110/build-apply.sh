@@ -39,7 +39,7 @@ parse () {
 
 		multiple=`ggrep -a -A6 "  <font size=\"2\"><b>$s</b></font>" $file |tail -n1 |ggrep -oP '>\K.*?(?=<)'`
 		if [ "$multiple" != "--" ]; then
-			line+="$multiple "
+			line+="x$multiple "
 			continue
 		fi
 
