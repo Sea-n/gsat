@@ -63,7 +63,8 @@ $year = $_POST['year'];
 
 if (!in_array($year, [
 	'108',
-	'109'
+	'109',
+	'110'
 ]))
 	exit(json_encode([
 		'ok' => false,
