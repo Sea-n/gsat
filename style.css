@@ -9,6 +9,7 @@ body {
 
 header.ts.fluid.vertically.padded.heading.slate {
 	font-size: 1.7em !important;
+	line-height: 1.4em;
 	color: #646464 !important;
 	padding: 1.8em 2em 3em !important;
 }
