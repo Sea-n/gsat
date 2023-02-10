@@ -263,9 +263,6 @@ function showFilterDepartments(table, search) {
 	var count = 0;
 
 	for (var showFav = 1; showFav >= 0; showFav--) { // show favorites = {true, false}
-		if (!showFav && typeof sharedKey !== "undefined")
-			continue;
-
 		for (var fuzz = 0; fuzz <= 1; fuzz++) { // fuzz search = {false, true}
 			for (var idx = 0; idx < data.length; idx++) {
 				if (!getDepartmentFilterStatus(idx, search, showFav, fuzz))
@@ -281,22 +278,21 @@ function showFilterDepartments(table, search) {
 				tr.cells[0].classList.add("favorites");
 				var button = document.createElement('button');
 
-				if (typeof sharedKey === "undefined")
-					button.onclick = function(e) {
-						var t = e.target;
-						var id = t.parentNode.parentNode.dataset.id;
-						var index = favs.indexOf(id);
-						t.classList.remove("not-fav", "favorited");
-						if (index == -1) {
-							favs.push(id);
-							favs.sort();
-							t.classList.add("favorited");
-						} else {
-							favs.splice(index, 1);
-							t.classList.add("not-fav");
-						}
-						localStorage.setItem(favStorageName, JSON.stringify(favs)); // save
-					};
+				button.onclick = function(e) {
+					var t = e.target;
+					var id = t.parentNode.parentNode.dataset.id;
+					var index = favs.indexOf(id);
+					t.classList.remove("not-fav", "favorited");
+					if (index == -1) {
+						favs.push(id);
+						favs.sort();
+						t.classList.add("favorited");
+					} else {
+						favs.splice(index, 1);
+						t.classList.add("not-fav");
+					}
+					localStorage.setItem(favStorageName, JSON.stringify(favs)); // save
+				};
 
 				button.classList.add(showFav ? "favorited" : "not-fav"); // determined by getDepartmentFilterStatus
 				tr.cells[0].appendChild(button);
@@ -551,40 +547,4 @@ function getStarResults(school, dep) {
 
 	document.getElementById('starFloat').style.display = 'block';
 	document.body.style.overflow = 'hidden';
-}
-
-/* Sync Config */
-function saveConfig() {
-	var btn = document.getElementById("share");
-	btn.textContent = "上傳中...";
-	var data = new FormData();
-	data.append("year", gsatYear);
-	data.append("type", gsatType);
-	data.append("favs", localStorage.getItem(favStorageName));
-
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "sync/save", false);
-	xhr.send(data);
-	var resp = JSON.parse(xhr.response);
-
-	console.log(resp);
-	if (resp.error)
-		alert(resp.error);
-	if (resp.redirect)
-		location.href = resp.redirect;
-}
-
-function loadConfig(key) {
-	var data = new FormData();
-	data.append("key", key);
-
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "sync/load", false);
-	xhr.send(data);
-	var resp = JSON.parse(xhr.response);
-
-	if (!resp.ok)
-		console.error(resp.msg);
-
-	return resp.data;
 }
