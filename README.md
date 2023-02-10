@@ -21,4 +21,3 @@
 
 * [PTT 高中板](https://www.ptt.cc/bbs/SENIORHIGH/M.1572582012.A.D02.html)
 * [Meteor](https://meteor.today/article/rPucBU)
-* [巴哈姆特](https://forum.gamer.com.tw/C.php?bsn=60076&snA=5387926)
