@@ -24,9 +24,17 @@ details.ts.accordion.filter
 				i.globe.icon
 				+marks("英文")
 
-			.ts.dropdown.labeled.icon.button
-				i.calculator.icon
-				+marks("數學")
+			if gsatYear <= 110
+				.ts.dropdown.labeled.icon.button
+					i.calculator.icon
+					+marks("數學")
+			else
+				.ts.dropdown.labeled.icon.button
+					i.calculator.icon
+					+marks("數A")
+				.ts.dropdown.labeled.icon.button
+					i.calculator.icon
+					+marks("數B")
 
 			.ts.dropdown.labeled.icon.button
 				i.newspaper.icon

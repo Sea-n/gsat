@@ -13,22 +13,18 @@ var max_result = default_max_result; // max count for result
 /* GSAT Filters */
 var markLables = [ "未選考", "底標", "後標", "均標", "前標", "頂標", "未設定" ];
 var markClasses = [ "negative", "info", "info", "primary", "positive", "positive", "" ];
-var filterGsat = {
-	"國文": 6,
-	"英文": 6,
-	"數學": 6,
-	"社會": 6,
-	"自然": 6,
-};
-var subjectsGsat = Object.keys(filterGsat);
 
-var filterAdv = {
-	"國文": 0,
-	"英文": 0,
-	"數學": 0,
-	"社會": 0,
-	"自然": 0
-};
+var subjectsGsat = ["國文", "英文", "數A", "數B", "社會", "自然"];
+if (gsatYear <= 110)
+	subjectsGsat = ["國文", "英文", "數學", "社會", "自然"];
+
+var filterGsat = {};
+var filterAdv = {};
+for (subject of subjectsGsat) {
+	filterGsat[subject] = 6;
+	filterAdv[subject] = 0;
+}
+
 if (gsatType == "advanced")
 	var filterAdv = {
 		"國文": 0,
