@@ -548,3 +548,24 @@ function getStarResults(school, dep) {
 	document.getElementById('starFloat').style.display = 'block';
 	document.body.style.overflow = 'hidden';
 }
+
+function getDetailLink(id) {
+	if (gsatType == 'advanced')
+		return 'https://campus4.ncku.edu.tw/uac/cross_search/dept_info/' + id + '.html';
+	const urls = [
+		'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_ID.htm',
+		'https://www.cac.edu.tw/apply109/system/109ColQrytk4p_forapply_os92k5w/html/109_ID.htm',
+		'https://www.cac.edu.tw/apply110/system/110_aColQry4qy_forapply_o5wp6ju/html/110_ID.htm',
+		'https://www.cac.edu.tw/apply111/system/0ColQry_for111apply_8fr51gfw/html/111_ID.htm',
+		'https://www.cac.edu.tw/apply112/system/6ColQry_forh112apply_8wzk94tv/html/112_ID.htm',
+		'https://www.cac.edu.tw/star108/system/108ColQry_forstar_5d3o9a/html/108_ID.htm',
+		'https://www.cac.edu.tw/star109/system/109ColQry6d3k_forstar_583vd/html/109_ID.htm',
+		'https://www.cac.edu.tw/star110/system/110_aColQry_forstar_5pd98yr/html/110_ID.htm',
+		'https://www.cac.edu.tw/star111/system/0ColQry_for111star_5f9g8t4q/html/111_ID.htm',
+		'https://www.cac.edu.tw/star112/system/8ColQry_xfor112Star_Z84eH3ep/html/112_ID.htm',
+	];
+	for (url of urls) {
+		if (url.search(gsatType + gsatYear) != -1)
+			return url.replace('ID', id);
+	}
+}
