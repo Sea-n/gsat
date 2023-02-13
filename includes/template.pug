@@ -2,9 +2,9 @@ doctype html
 html
 	head
 		title #{gsatTypeName} - 學測五選四 #{gsatYear} 年度
-		meta(name="keywords" content="學測五選四," + gsatTypeName + ",學測五選三")
 		meta(property="og:url" content="https://sean.cat/gsat/" + gsatType + gsatYear)
 		meta(property="og:title" content="學測五選四 - " + gsatTypeName + " " + gsatYear + " 年度")
+		meta(name="keywords" content="學測五選四," + gsatTypeName)
 		include head
 		if gsatType == "advanced"
 			link(href="./style.advanced.css?v=1022" rel="stylesheet")
