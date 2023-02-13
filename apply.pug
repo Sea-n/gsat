@@ -1,68 +1,8 @@
-doctype html
-if gsatYear
-	- var old = true
-else
+- var gsatType = "apply"
+- var gsatTypeName = "個人申請"
+if ! gsatYear
 	- var gsatYear = 111
-html
-	head
-		title 個人申請 - 學測五選四 #{gsatYear} 年度
-		meta(name="keywords" content="學測五選四,個人申請,學測五選三")
-		meta(property="og:url" content="https://sean.cat/gsat/apply" + gsatYear)
-		meta(property="og:title" content="學測五選四 - 個人申請 " + gsatYear + " 年度")
-		include includes/head.pug
-		script(type="application/ld+json").
-			{
-				"@context": "http://schema.org",
-				"@type": "BreadcrumbList",
-				"itemListElement": [
-					{
-						"@type": "ListItem",
-						"position": 1,
-						"item": {
-							"@type":"WebPage",
-							"@id": "https://sean.cat/",
-							"url":"https://sean.cat/",
-							"name": "Sean's Website"
-						}
-					}, {
-						"@type": "ListItem",
-						"position": 2,
-						"item": {
-							"@type":"WebPage",
-							"@id": "https://sean.cat/gsat/",
-							"url":"https://sean.cat/gsat/",
-							"name": "學測五選四"
-						}
-					}, {
-						"@type": "ListItem",
-						"position": 3,
-						"item": {
-							"@type":"WebPage",
-							"@id": "https://sean.cat/gsat/apply" + gsatYear,
-							"url":"https://sean.cat/gsat/apply" + gsatYear,
-							"name": "個人申請 " + gsatYear + " 年度"
-						}
-					}
-				]
-			}
-	body
-		nav.ts.basic.fluid.borderless.menu.horizontally.scrollable
-			.ts.container
-				a.item(href=".") 首頁
-				b.item.active.hide1 個人申請
-				a.item.hide1(href="star") 繁星推薦
-				a.item.hide1(href="advanced") 指考分發
-				.right.fitted.item
-					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
-		header.ts.fluid.vertically.padded.heading.slate
-			.ts.narrow.container
-				h1.header 個人申請
-				.description 學測五選四 #{gsatYear} 學年度
-		div.ts.container(name="main")
-			include includes/search.pug
-		include includes/footer.pug
-		script.
-			var gsatType = "apply";
-			var gsatYear = "#{gsatYear}";
-		script(src="js/utils.js?v=0213")
-		script(src="js/common.js?v=0213")
+if gsatYear != 111
+	- var old = true
+
+include includes/template

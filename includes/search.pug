@@ -50,9 +50,10 @@ details.ts.accordion.filter
 		input#dep(type="text" placeholder="輸入您感興趣的科系..." oninput="adjustSuggestion();")
 		i#clear.clear.hidden1.hidden2(onclick="input.value = ''; adjustSuggestion();")
 	#dep-list.autocomplete-items
-#apac
-	a.ts.link.image(href="javascript:;" onclick="ga('send', 'event', 'Outgoing', 'APAC', 'APAC Modal'); ts('#modal').modal('show');")
-		img(src="img/apac.jpg")
+if gsatType == "apply"
+	#apac
+		a.ts.link.image(href="javascript:;" onclick="ga('send', 'event', 'Outgoing', 'APAC', 'APAC Modal'); ts('#modal').modal('show');")
+			img(src="img/apac.jpg")
 #stone(style="display: none;")
 	a(target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Stone');")
 		img.ts.poyon(src="https://sitcon.org/2017/favicon.ico")
@@ -76,7 +77,7 @@ center#count(style="display: none;")
 		span#count-num 0
 		| &nbsp;筆結果
 table#list.ts.very.basic.table
-if star
+if gsatType == "star"
 	.ts.float#starFloat(style="display: none;")
 		.float-content
 			span.close &times;

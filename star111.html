@@ -4,7 +4,7 @@
     <title>繁星推薦 - 學測五選四 111 年度</title>
     <meta name="keywords" content="學測五選四,繁星推薦,學測五選三">
     <meta property="og:url" content="https://sean.cat/gsat/star111">
-    <meta property="og:title" content="學測五選四 - 繁星推薦">
+    <meta property="og:title" content="學測五選四 - 繁星推薦 111 年度">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="icon" href="https://www.sean.taipei/favicon.ico" sizes="32x32">
     <link rel="icon" href="https://www.sean.taipei/icon-192.jpg" sizes="192x192">
@@ -56,9 +56,9 @@
       			"position": 3,
       			"item": {
       				"@type":"WebPage",
-      				"@id": "https://sean.cat/gsat/star" + gsatYear,
-      				"url":"https://sean.cat/gsat/star" + gsatYear,
-      				"name": "繁星推薦 " + gsatYear + " 年度"
+      				"@id": "https://sean.cat/gsat/star111",
+      				"url":"https://sean.cat/gsat/star111",
+      				"name": "繁星推薦 111 年度"
       			}
       		}
       	]
@@ -67,7 +67,7 @@
   </head>
   <body>
     <nav class="ts basic fluid borderless menu horizontally scrollable">
-      <div class="ts container"><a class="item" href=".">首頁</a><a class="item hide1" href="apply">個人申請</a><b class="item active hide1">繁星推薦</b><a class="item hide1" href="advanced">指考分發</a>
+      <div class="ts container"><a class="item" href=".">首頁</a><a class="item hide1" href="apply">個人申請</a><a class="item hide1" href="star">繁星推薦</a><a class="item hide1" href="advanced">指考分發</a>
         <div class="right fitted item"><a class="item" target="_blank" href="https://www.sean.taipei/">關於作者</a></div>
       </div>
     </nav>
@@ -78,7 +78,6 @@
       </div>
     </header>
     <div class="ts container" name="main">
-      <center style="color: red;">注意：此為歷年舊資料，僅可做為參考</center>
       <details class="ts accordion filter">
         <summary><i class="icon dropdown"></i>學測級分篩選</summary>
         <div id="filterGsat">
@@ -156,7 +155,6 @@
         </div>
         <div class="autocomplete-items" id="dep-list"></div>
       </div>
-      <div id="apac"><a class="ts link image" href="javascript:;" onclick="ga('send', 'event', 'Outgoing', 'APAC', 'APAC Modal'); ts('#modal').modal('show');"><img src="img/apac.jpg"></a></div>
       <div id="stone" style="display: none;"><a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Stone');"><img class="ts poyon" src="https://sitcon.org/2017/favicon.ico"></a>
         <p style="display: inline-block;">小石看到你正在查詢資訊相關科系<br>不妨來 <a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Textlink');">SITCON 學生計算機年會</a> 看看吧owo</p>
       </div>
@@ -170,6 +168,12 @@
         <h5 class="ts header">共&nbsp;<span id="count-num">0</span>&nbsp;筆結果</h5>
       </center>
       <table class="ts very basic table" id="list"></table>
+      <div class="ts float" id="starFloat" style="display: none;">
+        <div class="float-content"><span class="close">&times;</span>
+          <div class="starTitle"><span id="starTitle"></span><br><span>近五年錄取標準</span></div>
+          <table class="ts very basic table" id="starResult"></table>
+        </div>
+      </div>
       <div class="ts padded basic slate" id="no-data" style="display: none;"><i class="search icon"></i><span class="header">無符合條件之結果</span></div>
       <div id="show-more" style="display: none;">
         <button class="ts secondary basic button" onclick="max_result *= 2; updateTable();">檢視更多結果</button>
@@ -200,8 +204,7 @@
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
     <script>ts('.ts.dropdown:not(.basic)').dropdown();</script>
-    <script>
-      var gsatType = "star";
+    <script>var gsatType = "star";
       var gsatYear = "111";
     </script>
     <script src="js/utils.js?v=0213"></script>

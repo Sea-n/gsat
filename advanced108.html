@@ -57,9 +57,9 @@
       			"position": 3,
       			"item": {
       				"@type":"WebPage",
-      				"@id": "https://sean.cat/gsat/advanced" + gsatYear,
-      				"url":"https://sean.cat/gsat/advanced" + gsatYear,
-      				"name": "指考分發 " + gsatYear + " 年度"
+      				"@id": "https://sean.cat/gsat/advanced108",
+      				"url":"https://sean.cat/gsat/advanced108",
+      				"name": "指考分發 108 年度"
       			}
       		}
       	]
@@ -68,7 +68,7 @@
   </head>
   <body>
     <nav class="ts basic fluid borderless menu horizontally scrollable">
-      <div class="ts container"><a class="item" href=".">首頁</a><a class="item hide1" href="apply">個人申請</a><a class="item hide1" href="star">繁星推薦</a><b class="item hide1 active">指考分發</b>
+      <div class="ts container"><a class="item" href=".">首頁</a><a class="item hide1" href="apply">個人申請</a><a class="item hide1" href="star">繁星推薦</a><a class="item hide1" href="advanced">指考分發</a>
         <div class="right fitted item"><a class="item" target="_blank" href="https://www.sean.taipei/">關於作者</a></div>
       </div>
     </nav>
@@ -80,7 +80,7 @@
     </section>
     <header class="ts fluid vertically padded heading slate">
       <div class="ts narrow container">
-        <div class="header">指考分發</div>
+        <h1 class="header">指考分發</h1>
         <div class="description">學測五選四 108 學年度</div>
       </div>
     </header>
@@ -152,7 +152,6 @@
         </div>
         <div class="autocomplete-items" id="dep-list"></div>
       </div>
-      <div id="apac"><a class="ts link image" href="javascript:;" onclick="ga('send', 'event', 'Outgoing', 'APAC', 'APAC Modal'); ts('#modal').modal('show');"><img src="img/apac.jpg"></a></div>
       <div id="stone" style="display: none;"><a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Stone');"><img class="ts poyon" src="https://sitcon.org/2017/favicon.ico"></a>
         <p style="display: inline-block;">小石看到你正在查詢資訊相關科系<br>不妨來 <a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Textlink');">SITCON 學生計算機年會</a> 看看吧owo</p>
       </div>
@@ -196,8 +195,7 @@
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
     <script>ts('.ts.dropdown:not(.basic)').dropdown();</script>
-    <script>
-      var gsatType = "advanced";
+    <script>var gsatType = "advanced";
       var gsatYear = "108";
     </script>
     <script src="js/utils.js?v=0213"></script>
