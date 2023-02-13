@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>繁星推薦 - 學測五選四</title>
+    <title>繁星推薦 - 學測五選四 111 年度</title>
     <meta name="keywords" content="學測五選四,繁星推薦,學測五選三">
+    <meta property="og:url" content="https://sean.cat/gsat/star111">
     <meta property="og:title" content="學測五選四 - 繁星推薦">
-    <meta property="og:url" content="https://sean.cat/gsat/star">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="icon" href="https://www.sean.taipei/favicon.ico" sizes="32x32">
     <link rel="icon" href="https://www.sean.taipei/icon-192.jpg" sizes="192x192">
@@ -56,9 +56,9 @@
       			"position": 3,
       			"item": {
       				"@type":"WebPage",
-      				"@id": "https://sean.cat/gsat/star",
-      				"url":"https://sean.cat/gsat/star",
-      				"name": "繁星推薦"
+      				"@id": "https://sean.cat/gsat/star" + gsatYear,
+      				"url":"https://sean.cat/gsat/star" + gsatYear,
+      				"name": "繁星推薦 " + gsatYear + " 年度"
       			}
       		}
       	]
@@ -74,28 +74,119 @@
     <header class="ts fluid vertically padded heading slate">
       <div class="ts narrow container">
         <h1 class="header">繁星推薦</h1>
-        <div class="description">學測五選四</div>
+        <div class="description">學測五選四 111 學年度</div>
       </div>
     </header>
     <div class="ts container" name="main">
-      <h3 class="ts header" id="year110">110 學年度</h3>
-      <big>請 <a href="star110">點我打開</a> 最新資料頁面</big>
-      <p>目前已將詳細簡章放上網站</p><i>資料最後確認日期：2020/12/15</i>
-      <h3 class="ts header" id="year109">109 學年度</h3>
-      <big>請 <a href="star109">點我打開</a> 最新資料頁面</big>
-      <p>目前已將詳細簡章放上網站</p><i>資料最後確認日期：2019/11/16</i>
-      <h3 class="ts header" id="year108">108 學年度</h3>
-      <big>請 <a href="star108">點我打開</a> 歷史資料頁面</big>
-      <p>今年已考上大一的這屆使用，可作為參考</p><i>資料最後確認日期：2019/02/25</i>
-      <h3 class="ts header" id="faq">常見問題</h3>
-      <h4>Q1: 各科系的 <span class="mark best">頂標</span>、<span class="mark good">前標</span>、<span class="mark worst">底標</span> 是什麼意思？</h4>
-      <p><span class="mark best">頂標</span>、<span class="mark good">前標</span>、<span class="mark average">均標</span>、<span class="mark bad">後標</span>、<span class="mark worst">底標</span> 代表繁星推薦時最低門檻，未達到則無法送出志願序</p>
-      <h4>Q2: 我看到社會就頭痛，可以過濾掉嗎</h4>
-      <p>這就是此工具的主要功能</p>
-      <p>只要在「社會」的按鈕點兩下，變成紅色 ❌ 後，就會過濾掉參採此科的學校囉</p>
-      <h4>Q3: 怎麼知道哪些科系會檢定英聽呢？</h4>
-      <p>108 學年度僅 3% 科系檢定英聽，故為了介面簡潔，未將此列入本工具篩選條件</p>
-      <p>打開詳細資料後，就知道檢定哪級了哦</p>
+      <details class="ts accordion filter">
+        <summary><i class="icon dropdown"></i>學測級分篩選</summary>
+        <div id="filterGsat">
+          <div class="ts dropdown labeled icon button"><i class="book icon"></i><span class="text">國文</span>
+                  <div class="menu">
+                    <div class="item best mark" data-subject="國文" data-mark="5">頂標</div>
+                    <div class="item good mark" data-subject="國文" data-mark="4">前標</div>
+                    <div class="item average mark" data-subject="國文" data-mark="3">均標</div>
+                    <div class="item bad mark" data-subject="國文" data-mark="2">後標</div>
+                    <div class="item worst mark" data-subject="國文" data-mark="1">底標</div>
+                    <div class="item" data-subject="國文" data-mark="0">未選考</div>
+                    <div class="item" data-subject="國文" data-mark="6">清除</div>
+                  </div>
+          </div>
+          <div class="ts dropdown labeled icon button"><i class="globe icon"></i><span class="text">英文</span>
+                  <div class="menu">
+                    <div class="item best mark" data-subject="英文" data-mark="5">頂標</div>
+                    <div class="item good mark" data-subject="英文" data-mark="4">前標</div>
+                    <div class="item average mark" data-subject="英文" data-mark="3">均標</div>
+                    <div class="item bad mark" data-subject="英文" data-mark="2">後標</div>
+                    <div class="item worst mark" data-subject="英文" data-mark="1">底標</div>
+                    <div class="item" data-subject="英文" data-mark="0">未選考</div>
+                    <div class="item" data-subject="英文" data-mark="6">清除</div>
+                  </div>
+          </div>
+          <div class="ts dropdown labeled icon button"><i class="calculator icon"></i><span class="text">數A</span>
+                  <div class="menu">
+                    <div class="item best mark" data-subject="數A" data-mark="5">頂標</div>
+                    <div class="item good mark" data-subject="數A" data-mark="4">前標</div>
+                    <div class="item average mark" data-subject="數A" data-mark="3">均標</div>
+                    <div class="item bad mark" data-subject="數A" data-mark="2">後標</div>
+                    <div class="item worst mark" data-subject="數A" data-mark="1">底標</div>
+                    <div class="item" data-subject="數A" data-mark="0">未選考</div>
+                    <div class="item" data-subject="數A" data-mark="6">清除</div>
+                  </div>
+          </div>
+          <div class="ts dropdown labeled icon button"><i class="calculator icon"></i><span class="text">數B</span>
+                  <div class="menu">
+                    <div class="item best mark" data-subject="數B" data-mark="5">頂標</div>
+                    <div class="item good mark" data-subject="數B" data-mark="4">前標</div>
+                    <div class="item average mark" data-subject="數B" data-mark="3">均標</div>
+                    <div class="item bad mark" data-subject="數B" data-mark="2">後標</div>
+                    <div class="item worst mark" data-subject="數B" data-mark="1">底標</div>
+                    <div class="item" data-subject="數B" data-mark="0">未選考</div>
+                    <div class="item" data-subject="數B" data-mark="6">清除</div>
+                  </div>
+          </div>
+          <div class="ts dropdown labeled icon button"><i class="newspaper icon"></i><span class="text">社會</span>
+                  <div class="menu">
+                    <div class="item best mark" data-subject="社會" data-mark="5">頂標</div>
+                    <div class="item good mark" data-subject="社會" data-mark="4">前標</div>
+                    <div class="item average mark" data-subject="社會" data-mark="3">均標</div>
+                    <div class="item bad mark" data-subject="社會" data-mark="2">後標</div>
+                    <div class="item worst mark" data-subject="社會" data-mark="1">底標</div>
+                    <div class="item" data-subject="社會" data-mark="0">未選考</div>
+                    <div class="item" data-subject="社會" data-mark="6">清除</div>
+                  </div>
+          </div>
+          <div class="ts dropdown labeled icon button"><i class="idea icon"></i><span class="text">自然</span>
+                  <div class="menu">
+                    <div class="item best mark" data-subject="自然" data-mark="5">頂標</div>
+                    <div class="item good mark" data-subject="自然" data-mark="4">前標</div>
+                    <div class="item average mark" data-subject="自然" data-mark="3">均標</div>
+                    <div class="item bad mark" data-subject="自然" data-mark="2">後標</div>
+                    <div class="item worst mark" data-subject="自然" data-mark="1">底標</div>
+                    <div class="item" data-subject="自然" data-mark="0">未選考</div>
+                    <div class="item" data-subject="自然" data-mark="6">清除</div>
+                  </div>
+          </div>
+        </div><br>
+      </details>
+      <div class="autocomplete">
+        <div class="inner-btn">
+          <input id="dep" type="text" placeholder="輸入您感興趣的科系..." oninput="adjustSuggestion();"><i class="clear hidden1 hidden2" id="clear" onclick="input.value = ''; adjustSuggestion();"></i>
+        </div>
+        <div class="autocomplete-items" id="dep-list"></div>
+      </div>
+      <div id="apac"><a class="ts link image" href="javascript:;" onclick="ga('send', 'event', 'Outgoing', 'APAC', 'APAC Modal'); ts('#modal').modal('show');"><img src="img/apac.jpg"></a></div>
+      <div id="stone" style="display: none;"><a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Stone');"><img class="ts poyon" src="https://sitcon.org/2017/favicon.ico"></a>
+        <p style="display: inline-block;">小石看到你正在查詢資訊相關科系<br>不妨來 <a target="_blank" href="https://sitcon.org/" onclick="ga('send', 'event', 'Outgoing', 'SITCON', 'Search Textlink');">SITCON 學生計算機年會</a> 看看吧owo</p>
+      </div>
+      <div id="loading">
+        <h3 class="ts header">資料讀取中...</h3>
+        <p>學測自 108 年開始最多參採四科，學測五選四網站旨在提供學弟妹們好用的查詢介面，受到全台師生廣大好評迴響，來看看您心目中的科系用了何種組合，該將準備心力放在哪些考科最有利</p>
+        <p>本站為您整理了個人申請、繁星推薦、指考分發的參採科目，讓您在五選四的時代快速得到簡章重點</p>
+        <div id="preload"><img src="img/star-on.png" style="height: 0px;"><img src="img/star-off.png" style="height: 0px;"><img src="img/star-off-hover.png" style="height: 0px;"></div>
+      </div>
+      <center id="count" style="display: none;">
+        <h5 class="ts header">共&nbsp;<span id="count-num">0</span>&nbsp;筆結果</h5>
+      </center>
+      <table class="ts very basic table" id="list"></table>
+      <div class="ts padded basic slate" id="no-data" style="display: none;"><i class="search icon"></i><span class="header">無符合條件之結果</span></div>
+      <div id="show-more" style="display: none;">
+        <button class="ts secondary basic button" onclick="max_result *= 2; updateTable();">檢視更多結果</button>
+      </div>
+      <div class="ts modals dimmer" style="margin-top: 40px;">
+        <dialog class="ts basic fullscreen closable modal" id="modal" open><i class="close icon"></i>
+          <div class="ts icon header"></div>
+          <div class="content"><a target="_blank" href="https://lihi1.cc/Yr70f" onclick="ga('send', 'event', 'Outgoing', 'APAC', 'APAC Banner');"><img class="ts fluid image" src="img/apac.png"></a>
+            <p>各位學弟妹安安，我是五選四的開發者 Sean<br>大家還記得去年 48 級分正取交大資工的新聞嗎 XD</p>
+            <p>當時協助我其中一位的學長，今年特別發起了一個 Instagram 專案，<br>製作了教你做好備審的懶人包，並免費提供給大家。<br>裡面內容都是去年對我非常有幫助的觀念，<br>在這邊推薦給大家追蹤！</p>
+            <p>👉 <a target="_blank" href="https://lihi1.cc/Yr70f" onclick="ga('send', 'event', 'Outgoing', 'APAC', 'APAC Textlink');">@apac.2020 備審航艦</a></p>
+          </div>
+          <div class="actions">
+            <button class="ts positive button" onclick="ga('send', 'event', 'Outgoing', 'APAC', 'APAC Button'); window.open('https://lihi1.cc/Yr70f')">馬上追蹤</button>
+            <button class="ts inverted basic cancel button">關閉</button>
+          </div>
+        </dialog>
+      </div>
     </div>
     <footer class="ts fluid slate" style="margin-top:10px">
       <div class="ts container">
@@ -108,5 +199,11 @@
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
     <script>ts('.ts.dropdown:not(.basic)').dropdown();</script>
+    <script>
+      var gsatType = "star";
+      var gsatYear = "111";
+    </script>
+    <script src="js/utils.js?v=0213"></script>
+    <script src="js/common.js?v=0213"></script>
   </body>
 </html>

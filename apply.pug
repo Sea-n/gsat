@@ -1,11 +1,14 @@
 doctype html
-- var gsatYear = 111
+if gsatYear
+	- var old = true
+else
+	- var gsatYear = 111
 html
 	head
-		title 個人申請 - 學測五選四 #{gsatYear} 年
+		title 個人申請 - 學測五選四 #{gsatYear} 年度
 		meta(name="keywords" content="學測五選四,個人申請,學測五選三")
-		meta(property="og:url" content="https://sean.cat/gsat/apply")
-		meta(property="og:title" content="學測五選四 - 個人申請")
+		meta(property="og:url" content="https://sean.cat/gsat/apply" + gsatYear)
+		meta(property="og:title" content="學測五選四 - 個人申請 " + gsatYear + " 年度")
 		include includes/head.pug
 		script(type="application/ld+json").
 			{
@@ -35,9 +38,9 @@ html
 						"position": 3,
 						"item": {
 							"@type":"WebPage",
-							"@id": "https://sean.cat/gsat/apply",
-							"url":"https://sean.cat/gsat/apply",
-							"name": "個人申請"
+							"@id": "https://sean.cat/gsat/apply" + gsatYear,
+							"url":"https://sean.cat/gsat/apply" + gsatYear,
+							"name": "個人申請 " + gsatYear + " 年度"
 						}
 					}
 				]
@@ -53,8 +56,7 @@ html
 					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
-				h1.header
-					| 個人申請
+				h1.header 個人申請
 				.description 學測五選四 #{gsatYear} 學年度
 		div.ts.container(name="main")
 			include includes/search.pug
@@ -62,5 +64,5 @@ html
 		script.
 			var gsatType = "apply";
 			var gsatYear = "#{gsatYear}";
-		script(src="js/utils.js?v=0212")
-		script(src="js/common.js?v=0212")
+		script(src="js/utils.js?v=0213")
+		script(src="js/common.js?v=0213")

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>個人申請 - 學測五選四 110 年</title>
-    <meta name="keywords" content="學測五選四,個人申請,110學年度,學測五選三">
-    <meta property="og:url" content="https://sean.cat/gsat/apply">
-    <meta property="og:title" content="學測五選四 - 個人申請 110 年">
+    <title>個人申請 - 學測五選四 110 年度</title>
+    <meta name="keywords" content="學測五選四,個人申請,學測五選三">
+    <meta property="og:url" content="https://sean.cat/gsat/apply110">
+    <meta property="og:title" content="學測五選四 - 個人申請 110 年度">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="icon" href="https://www.sean.taipei/favicon.ico" sizes="32x32">
     <link rel="icon" href="https://www.sean.taipei/icon-192.jpg" sizes="192x192">
@@ -56,18 +56,9 @@
       			"position": 3,
       			"item": {
       				"@type":"WebPage",
-      				"@id": "https://sean.cat/gsat/apply",
-      				"url":"https://sean.cat/gsat/apply",
-      				"name": "個人申請"
-      			}
-      		}, {
-      			"@type": "ListItem",
-      			"position": 4,
-      			"item": {
-      				"@type":"WebPage",
-      				"@id": "https://sean.cat/gsat/apply110",
-      				"url":"https://sean.cat/gsat/apply110",
-      				"name": "110 學年度"
+      				"@id": "https://sean.cat/gsat/apply" + gsatYear,
+      				"url":"https://sean.cat/gsat/apply" + gsatYear,
+      				"name": "個人申請 " + gsatYear + " 年度"
       			}
       		}
       	]
@@ -76,7 +67,7 @@
   </head>
   <body>
     <nav class="ts basic fluid borderless menu horizontally scrollable">
-      <div class="ts container"><a class="item" href=".">首頁</a><a class="item active hide1" href="apply">個人申請</a><a class="item hide1" href="star110">繁星推薦</a><a class="item hide1" href="advanced109">指考分發</a>
+      <div class="ts container"><a class="item" href=".">首頁</a><b class="item active hide1">個人申請</b><a class="item hide1" href="star">繁星推薦</a><a class="item hide1" href="advanced">指考分發</a>
         <div class="right fitted item"><a class="item" target="_blank" href="https://www.sean.taipei/">關於作者</a></div>
       </div>
     </nav>
@@ -87,6 +78,7 @@
       </div>
     </header>
     <div class="ts container" name="main">
+      <center style="color: red;">注意：此為歷年舊資料，僅可做為參考</center>
       <details class="ts accordion filter">
         <summary><i class="icon dropdown"></i>學測級分篩選</summary>
         <div id="filterGsat">
@@ -201,7 +193,7 @@
       var gsatType = "apply";
       var gsatYear = "110";
     </script>
-    <script src="js/utils.js?v=1024"></script>
-    <script src="js/common.js?v=1116"></script>
+    <script src="js/utils.js?v=0213"></script>
+    <script src="js/common.js?v=0213"></script>
   </body>
 </html>

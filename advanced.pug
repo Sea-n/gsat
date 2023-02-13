@@ -1,12 +1,16 @@
 doctype html
+if gsatYear
+	- var old = true
+else
+	- var gsatYear = 109
 html
 	head
-		title 指考分發 - 學測五選四
+		title 指考分發 - 學測五選四 #{gsatYear} 年度
 		meta(name="keywords" content="學測五選四,指考分發,學測五選三")
-		meta(property="og:title" content="學測五選四 - 指考分發")
-		meta(property="og:url" content="https://sean.cat/gsat/advanced")
+		meta(property="og:url" content="https://sean.cat/gsat/advanced" + gsatYear)
+		meta(property="og:title" content="學測五選四 - 指考分發 " + gsatYear + " 年度")
 		include includes/head.pug
-		link(href="./style.advanced.css" rel="stylesheet")
+		link(href="./style.advanced.css?v=1022" rel="stylesheet")
 		script(type="application/ld+json").
 			{
 				"@context": "http://schema.org",
@@ -35,9 +39,9 @@ html
 						"position": 3,
 						"item": {
 							"@type":"WebPage",
-							"@id": "https://sean.cat/gsat/advanced",
-							"url":"https://sean.cat/gsat/advanced",
-							"name": "指考分發"
+							"@id": "https://sean.cat/gsat/advanced" + gsatYear,
+							"url":"https://sean.cat/gsat/advanced" + gsatYear,
+							"name": "指考分發 " + gsatYear + " 年度"
 						}
 					}
 				]
@@ -51,41 +55,21 @@ html
 				b.item.hide1.active 指考分發
 				.right.fitted.item
 					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
+		section.placeholder
+			.placeholder-message
+				p 指考共有十個科目，不適合小手機查詢，請以電腦開啟此頁面，或將手機畫面打橫著用
+				p 抱歉造成您的不便，Sean 在這邊感謝您的體諒
+				br
+				a(href=".") 回到首頁
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
 				.header 指考分發
-				.description 學測五選四
+				.description 學測五選四 #{gsatYear} 學年度
 		div.ts.container(name="main")
-			h3.ts.header#year109 109 學年度
-			big 請 
-				a(href="advanced109") 點我打開
-			p 已於 11/16 放上最新資料
-			i 資料最後確認日期：2019/11/16
-			h3.ts.header#year108 108 學年度
-			big 請 
-				a(href="advanced108") 點我打開
-				|  歷史資料頁面
-			p 今年已考上大一的這屆使用，可作為參考
-			i 資料最後確認日期：2019/02/19
-			h3#faq.ts.header 常見問題
-			h4 Q1: 各科系的 
-				span.mark.mark0.x1-00 x1.00
-				| 、
-				span.mark.mark2.x1-50 x1.50
-				| 、
-				span.mark.mark4.x2-00 x2.00
-				|  是什麼意思？
-			p 指考的計算方式是各科分數乘上權重後加總，例如國文 60 分 
-				span.mark.mark0.x1-00 x1.00
-				|  + 數甲 80 分 
-				span.mark.mark2.x1-50 x1.50
-				|  + 物理 70 分 
-				span.mark.mark4.x2-00 x2.00
-				|  = 60 + 120 + 140 = 320
-			h4 Q2: 我化學比較不擅長，可以過濾掉嗎
-			p 只要在「化學」的按鈕點兩下，變成紅色 ❌ 後，就會過濾掉參採此科的學校囉
-			h4 Q3: 如果有人同分怎麼辦
-			p 這種狀況比較少見，可以點右邊編號打開詳細簡章，裡面就會寫到同分參酌方式囉
-			h4 Q4: 為什麼打開看不到查詢介面
-			p 抱歉造成您的困擾，但指考共有十個科目，用小手機查詢的效果實在不好，請以電腦開啟，或將手機畫面打橫著用
+			include includes/search.pug
 		include includes/footer.pug
+		script.
+			var gsatType = "advanced";
+			var gsatYear = "#{gsatYear}";
+		script(src="js/utils.js?v=0213")
+		script(src="js/common.js?v=0213")
