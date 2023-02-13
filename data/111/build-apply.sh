@@ -22,7 +22,7 @@ parse () {
 
 	for s in "國文" "英文" "數學A" "數學B" "社會" "自然"; do
 		mark="$(ggrep -a -A3 "  <font size=\"2\"><b>$s</b></font>" "$file" |tail -n1 |ggrep -oP '>\K[^<]*(?=標<)')"
-		if [ $? -ne 0 ]; then
+		if [[ -z "$mark" ]]; then
 			mark="無"
 		fi
 		line+="$mark"
@@ -31,8 +31,11 @@ parse () {
 	line+="\t"
 
 	for s in "國文" "英文" "數學A" "數學B" "社會" "自然"; do
+		ggrep -qa "  <font size=\"2\"><b>$s</b></font>" "$file" \
+			|| { line+="-- "; continue; }
+
 		mark="$(ggrep -a -A3 "  <font size=\"2\"><b>$s</b></font>" "$file" |tail -n1 |ggrep -oP '>\K[^<]*標(?=<)')"
-		if [ $? -eq 0 ]; then
+		if [[ -n "$mark" ]]; then
 			line+="$mark "
 			continue
 		fi
