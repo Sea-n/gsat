@@ -40,7 +40,8 @@ html
 				a.item(href="apply") 個人申請
 				a.item(href="star") 繁星推薦
 				a.item(href="advanced") 指考分發
-				.right.fitted.item.hide0
+				.right.fitted.item
+					a.item(target="_blank" href="https://www.sean.taipei/") 關於作者
 		header.ts.fluid.vertically.padded.heading.slate
 			.ts.narrow.container
 				h1.header 學測五選四
@@ -48,20 +49,17 @@ html
 		.ts.container(name="main")
 			h3#dev.ts.header 作者資訊
 			p
-				| 網站本體由
-				u 交大資工
+				| 網站本體由交大資工
 				| 
 				a(target="_blank" href="https://www.sean.taipei/" onclick="ga('send', 'event', 'Outgoing', 'About', 'GSAT');") 韋詠祥
 				|  於高三時整理、製作
 			p
-				| 繁星歷年資料由 
-				u 中央資工
+				| 繁星歷年資料由中央資工
 				| 
 				a(target="_blank" href="http://jerryh.su/") 許家維
 				|  彙整、設計介面
 			p
-				| 前端頁面由
-				u 斗六家商
+				| 前端頁面由斗六家商
 				| 
 				a(target="_blank" href="https://gnehs.net/") 廖群勝
 				|  設計
@@ -75,7 +73,7 @@ html
 				|  修正分享校系功能
 			p
 				| 網站係採用 
-				a(target="_blank" rel="license" href="http://creativecommons.org/licenses/by/3.0/tw/" onclick="ga('send', 'event', 'Outgoing', 'cc', 'GSAT');") 創用 CC 姓名標示
+				a(target="_blank" rel="license" href="http://creativecommons.org/licenses/by/4.0/deed.zh_TW" onclick="ga('send', 'event', 'Outgoing', 'cc', 'GSAT');") 創用 CC 姓名標示
 				|  條款授權
 				br
 				| 程式部分全於 
