@@ -7,8 +7,8 @@ import re
 # wget -r -nc -R pdf --header "User-Agent: Sean" \
 # "https://$htmldir/../TotalGsdShow.htm"
 def main():
-    html_dir = 'www.cac.edu.tw/apply112/system' \
-             + '/6ColQry_forh112apply_8wzk94tv/html'
+    html_dir = 'www.cac.edu.tw/star112/system' \
+             + '/8ColQry_xfor112Star_Z84eH3ep/html'
     for ent in os.scandir(html_dir):
         if '.htm?v=1.0' not in ent.name:
             continue
@@ -22,33 +22,21 @@ def main():
 
             while 'class="gsdname"' not in content[ln]:
                 ln = ln + 1
-            gsdname = re.search('class="gsdname">(.*?)<', content[ln]).group(1)
+            gsdname = re.search('class="gsdname" .*?>(.*?)<',
+                                content[ln]).group(1)
 
             while '>校系代碼<' not in content[ln]:
                 ln = ln + 1
-            depid = content[ln + 1].strip(' \t\n')[59:-5]
+            depid = content[ln + 1].strip(' \t\n')[56:-5]
             print(depid, end='\t')
 
-            subj = content[ln + 2].strip(' \t\n')[82:-5].split('<br>')
-            mark = content[ln + 3].strip(' \t\n')[70:-5].split('<br>')
-            multi = content[ln + 4].strip(' \t\n')[71:-5].split('<br>')
-            weighted = content[ln + 5].strip(' \t\n')[60:-5].split('<br>')
-
-            table = {}
-            for k in range(len(subj)):
-                table[subj[k]] = (mark[k] if mark[k] != '--' else
-                                  ('x' + multi[k] if multi[k] != '--' else
-                                   ('採計' if weighted[k] != '--' else '--')))
-
-            for s in ['國文', '英文', '數學A', '數學B', '社會', '自然']:
-                if s in table and table[s][1] == '標':
-                    print(table[s][0], end='')
-                else:
-                    print('無', end='')
+            mark = content[ln + 3].strip(' \t\n')[42:-5].split('<br>')
+            for i in range(6):
+                print(mark[i][0] if mark[i][1] == '標' else '無', end='')
             print('', end='\t')
 
-            for s in ['國文', '英文', '數學A', '數學B', '社會', '自然']:
-                print(table[s] if s in table else '--', end=' ')
+            for i in range(6):
+                print(mark[i], end=' ')
             print('', end='\t')
 
             gsdname = gsdname.replace('(', '（').replace(')', '）')
