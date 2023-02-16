@@ -1,8 +1,11 @@
 - var gsatType = "advanced"
-- var gsatTypeName = "指考分發"
+- var gsatTypeName = "分科測驗"
 if ! gsatYear
-	- var gsatYear = 109
-if gsatYear != 109
+	- var gsatYear = 112
+if gsatYear != 112
 	- var old = true
 
 include includes/template
+form#adv-uac(target="_blank" method="POST"
+	action="https://uac2.ncku.edu.tw/cross_search/index.php?c=search&m=detail")
+		input#adv-dep-id(name="dep_id")

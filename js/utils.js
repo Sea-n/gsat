@@ -315,8 +315,12 @@ function showFilterDepartments(table, search) {
 
 				var link = document.createElement('a');
 				link.text = id;
-				link.href = getDetailLink(id);
-				link.target = '_blank';
+				if (gsatType == 'advanced' && gsatYear >= 110) {
+					link.href = 'javascript:getDetailLink("' + id + '")';
+				} else {
+					link.href = getDetailLink(id);
+					link.target = '_blank';
+				}
 				link.classList.add('id');
 				tr.cells[subjectsAdv.length + 3].appendChild(link);
 				tr.cells[subjectsAdv.length + 3].classList.add("id");
@@ -550,8 +554,16 @@ function getStarResults(school, dep) {
 }
 
 function getDetailLink(id) {
-	if (gsatType == 'advanced')
-		return 'https://campus4.ncku.edu.tw/uac/cross_search/dept_info/' + id + '.html';
+	if (gsatType == 'advanced') {
+		if (gsatYear <= 109)
+			return 'https://campus4.ncku.edu.tw/uac/cross_search/dept_info/' + id + '.html';
+
+		// Exception: run js rather than static link
+		document.getElementById('adv-dep-id').value = id;
+		document.getElementById('adv-uac').submit();
+		return;
+	}
+
 	const urls = [
 		'https://www.cac.edu.tw/apply108/system/108ColQry_forapply_3r5k9d/html/108_ID.htm',
 		'https://www.cac.edu.tw/apply109/system/109ColQrytk4p_forapply_os92k5w/html/109_ID.htm',
