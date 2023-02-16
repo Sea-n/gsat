@@ -65,6 +65,15 @@ html
 				.description 學測五選四 #{gsatYear} 學年度
 		div.ts.container(name="main")
 			include search
+			h3 歷年資料
+			p
+				each year in [108, 109, 110, 111, 112]
+					if year == gsatYear
+						b #{year} 年
+					else
+						a(href=gsatType + year) #{year} 年
+					| 、
+				a(href=gsatType) 最新版本
 		include footer
 		script.
 			var gsatType = "#{gsatType}";
