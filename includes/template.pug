@@ -64,6 +64,12 @@ html
 				h1.header #{gsatTypeName}
 				.description 學測五選四 #{gsatYear} 學年度
 		div.ts.container(name="main")
+			if old
+				h5(style="color: red; justify-content: center;") 注意：此為歷年舊資料，僅可做為參考
+				center
+					| 最新資料請 
+					a(href=gsatType) 點擊這裡
+					|  前往
 			include search
 			h3 歷年資料
 			p
