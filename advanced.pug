@@ -1,9 +1,7 @@
 - var gsatType = "advanced"
 - var gsatTypeName = "分科測驗"
-if ! gsatYear
-	- var gsatYear = 112
-if gsatYear != 112
-	- var old = true
+- var latestYear = 112
+- var years = [108, 109, 112]
 
 include includes/template
 form#adv-uac(target="_blank" method="POST"
