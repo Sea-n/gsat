@@ -1,7 +1,7 @@
 <?php
 $uri = $_SERVER['REQUEST_URI'];
 $path = str_replace('/gsat/', '', $uri);
-if (!preg_match("#^(apply|star|advanced)(1[01][0-9])$#", $path)) {
+if (!preg_match("#^(apply|star|advanced)(1[01][0-9])?$#", $path)) {
 	http_response_code(404);
 	exit("No static page for crawler.");
 }
