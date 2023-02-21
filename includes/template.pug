@@ -1,6 +1,8 @@
 if ! gsatYear
 	- var gsatYear = latestYear
 	- var isLatest = true
+if ! years
+	- var years = []
 
 doctype html
 html
@@ -93,5 +95,4 @@ html
 		script.
 			var gsatType = "#{gsatType}";
 			var gsatYear = "#{gsatYear}";
-		script(src="js/utils.js?v=0216")
-		script(src="js/common.js?v=0216")
+		script(src="js/gsat.js?v=0221")
