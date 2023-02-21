@@ -606,27 +606,22 @@ if (gsatYear <= 110)
 	subjectsGsat = ["國文", "英文", "數學", "社會", "自然"];
 
 var filterGsat = {};
-var filterAdv = {};
-for (subject of subjectsGsat) {
+for (subject of subjectsGsat)
 	filterGsat[subject] = 6;
-	filterAdv[subject] = 0;
+
+var subjectsAdv = subjectsGsat;
+if (gsatType == "advanced") {
+	subjectsAdv = ["國文", "英文", "數學", "數甲",
+		"物理", "化學", "生物", "歷史", "地理", "公民"];
+	if (gsatYear < 112) {
+		subjectsAdv[2] = "數甲";
+		subjectsAdv[3] = "數乙";
+	}
 }
 
-if (gsatType == "advanced")
-	var filterAdv = {
-		"國文": 0,
-		"英文": 0,
-		"數甲": 0,
-		"數乙": 0,
-		"物理": 0,
-		"化學": 0,
-		"生物": 0,
-		"歷史": 0,
-		"地理": 0,
-		"公民": 0
-	};
-
-var subjectsAdv = Object.keys(filterAdv);
+var filterAdv = {};
+for (subject of subjectsAdv)
+	filterAdv[subject] = 0;
 
 var starResults = {};
 
