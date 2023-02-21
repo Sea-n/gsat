@@ -22,18 +22,17 @@ def main():
                                              line).groups()
                     marks[subj.replace('\u3000', '')] = mark
 
-                if '&nbsp; x ' in line:
-                    [subj, cat, n] = re.search(r'(.+)\((.+)\).* ([0-9.]{4,})',
-                                               line).groups()
-                    if cat == '分科':
-                        multi[subj.replace('\u3000', '')] = f'x{n}'
+                if ' x ' in line:
+                    [subj, n] = re.search(r'(.+?)(?: [AB])?\(.* ([0-9.]{4,})',
+                                          line).groups()
+                    multi[subj.replace('\u3000', '')] = f'x{n}'
 
             for s in ['國文', '英文', '數學A', '數學B', '社會', '自然']:
                 print(marks[s][0] if s in marks else '無', end='')
             print('', end='\t')
 
-            for s in ['國文', '英文', '數學甲', '數學乙', '物理',
-                      '化學', '生物', '歷史', '地理', '公民']:
+            for s in ['國文', '英文', '數學', '數學甲', '物理',
+                      '化學', '生物', '歷史', '地理', '公民與社會']:
                 print(multi[s] if s in multi else '--', end=' ')
             print('', end='\t')
 
