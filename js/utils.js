@@ -113,7 +113,7 @@ function initGsatFilter() {
 
 	fG = fG.children;
 
-	for (var k = 0; k < 5; k++) {
+	for (var k = 0; k < subjectsGsat.length; k++) {
 		var fGm = fG[k].getElementsByClassName("menu")[0];
 		for (var i = 0; i < 7; i++) {
 			fGm.children[i].onclick = (e) => {
@@ -137,7 +137,7 @@ function adjustGsatFilter() {
 
 	fG = fG.children;
 
-	for (var k = 0; k < 5; k++) {
+	for (var k = 0; k < subjectsGsat.length; k++) {
 		var s = subjectsGsat[k];
 		var fGb = fG[k];
 		var fGt = fGb.getElementsByClassName("text")[0];
@@ -189,7 +189,7 @@ function updateTable(search) {
 	if (search == "")
 		href = "";
 
-	for (var i = 0; i < 5; i++) {
+	for (var i = 0; i < subjectsAdv.length; i++) {
 		var s = subjectsAdv[i];
 		if (filterAdv[s] !== 0) {
 			if (href === "")

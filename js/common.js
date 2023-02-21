@@ -111,7 +111,7 @@ var suggestionList = depList.filter(dep => lc[dep] > 1);
 
 /* Get star history data */
 if (gsatType === 'star') {
-	for (var y = 103; y <= 108; y++) {
+	for (var y = 103; y <= 112; y++) {
 		fetchStarResults(y);
 	}
 }
@@ -150,42 +150,6 @@ for (var subj in filterGsat)
 		document.getElementById("filterGsat").parentNode.open = true;
 		break;
 	}
-
-
-/* Backward Compatibility before 13 Oct 2019 */
-if (localStorage.getItem("favoritesApply")) {
-	old = JSON.parse(localStorage.getItem("favoritesApply"));
-	localStorage.removeItem("favoritesApply");
-
-	old.sort();
-	var favs = old.filter((val, idx, arr) => {
-		return val !== 0;
-	});
-	localStorage.setItem("favs108apply", JSON.stringify(favs));
-}
-
-if (localStorage.getItem("favoritesStar")) {
-	old = JSON.parse(localStorage.getItem("favoritesStar"));
-	localStorage.removeItem("favoritesStar");
-
-	old.sort();
-	var favs = old.filter((val, idx, arr) => {
-		return val !== 0;
-	});
-	localStorage.setItem("favs108star", JSON.stringify(favs));
-}
-
-if (localStorage.getItem("favoritesAdv")) {
-	old = JSON.parse(localStorage.getItem("favoritesAdv"));
-	localStorage.removeItem("favoritesAdv");
-
-	old.sort();
-	var favs = old.filter((val, idx, arr) => {
-		return val !== 0;
-	});
-	localStorage.setItem("favs108advanced", JSON.stringify(favs));
-}
-/* End: Backward Compatibility */
 
 
 var favStorageName = "favs" + gsatYear + gsatType; // e.g. favs108apply
